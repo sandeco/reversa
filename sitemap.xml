@@ -5,6 +5,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/"/>
     </url>
     <url>
@@ -12,6 +13,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/cli/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/cli/"/>
     </url>
     <url>
@@ -19,6 +21,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/configuracao/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/configuracao/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/configuracao/"/>
     </url>
     <url>
@@ -26,6 +29,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/contribuindo/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/contribuindo/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/contribuindo/"/>
     </url>
     <url>
@@ -33,6 +37,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/engines/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/engines/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/engines/"/>
     </url>
     <url>
@@ -40,6 +45,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/escala-confianca/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/escala-confianca/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/escala-confianca/"/>
     </url>
     <url>
@@ -47,6 +53,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/instalacao/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/instalacao/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/instalacao/"/>
     </url>
     <url>
@@ -54,6 +61,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/pipeline/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/pipeline/"/>
     </url>
     <url>
@@ -61,6 +69,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/por-que-reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/por-que-reversa/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/por-que-reversa/"/>
     </url>
     <url>
@@ -68,6 +77,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/uso/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/uso/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/uso/"/>
     </url>
     <url>
@@ -75,6 +85,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/"/>
     </url>
     <url>
@@ -82,6 +93,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/agents-help/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/agents-help/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/agents-help/"/>
     </url>
     <url>
@@ -89,6 +101,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arqueologo/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arqueologo/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arqueologo/"/>
     </url>
     <url>
@@ -96,6 +109,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arquiteto/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arquiteto/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arquiteto/"/>
     </url>
     <url>
@@ -103,6 +117,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/chronicler/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/chronicler/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/chronicler/"/>
     </url>
     <url>
@@ -110,6 +125,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/data-master/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/data-master/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/data-master/"/>
     </url>
     <url>
@@ -117,6 +133,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/design-system/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/design-system/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/design-system/"/>
     </url>
     <url>
@@ -124,6 +141,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/detetive/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/detetive/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/detetive/"/>
     </url>
     <url>
@@ -131,6 +149,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/redator/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/redator/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/redator/"/>
     </url>
     <url>
@@ -138,6 +157,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/reversa/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/reversa/"/>
     </url>
     <url>
@@ -145,6 +165,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/revisor/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/revisor/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/revisor/"/>
     </url>
     <url>
@@ -152,6 +173,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/scout/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/scout/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/scout/"/>
     </url>
     <url>
@@ -159,6 +181,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/tracer/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/tracer/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/tracer/"/>
     </url>
     <url>
@@ -166,6 +189,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/visor/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/visor/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/visor/"/>
     </url>
     <url>
@@ -173,6 +197,7 @@
         <lastmod>2026-04-27</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/saidas/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/saidas/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/saidas/"/>
     </url>
     <url>
@@ -181,6 +206,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/cli/</loc>
@@ -188,6 +214,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/cli/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/cli/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/configuracao/</loc>
@@ -195,6 +222,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/configuracao/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/configuracao/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/configuracao/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/contribuindo/</loc>
@@ -202,6 +230,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/contribuindo/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/contribuindo/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/contribuindo/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/engines/</loc>
@@ -209,6 +238,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/engines/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/engines/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/engines/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/escala-confianca/</loc>
@@ -216,6 +246,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/escala-confianca/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/escala-confianca/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/escala-confianca/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/instalacao/</loc>
@@ -223,6 +254,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/instalacao/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/instalacao/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/instalacao/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/pipeline/</loc>
@@ -230,6 +262,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/pipeline/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/pipeline/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/por-que-reversa/</loc>
@@ -237,6 +270,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/por-que-reversa/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/por-que-reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/por-que-reversa/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/uso/</loc>
@@ -244,6 +278,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/uso/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/uso/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/uso/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/</loc>
@@ -251,6 +286,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/agents-help/</loc>
@@ -258,6 +294,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/agents-help/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/agents-help/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/agents-help/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/arqueologo/</loc>
@@ -265,6 +302,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arqueologo/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arqueologo/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arqueologo/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/arquiteto/</loc>
@@ -272,6 +310,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arquiteto/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arquiteto/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arquiteto/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/chronicler/</loc>
@@ -279,6 +318,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/chronicler/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/chronicler/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/chronicler/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/data-master/</loc>
@@ -286,6 +326,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/data-master/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/data-master/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/data-master/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/design-system/</loc>
@@ -293,6 +334,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/design-system/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/design-system/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/design-system/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/detetive/</loc>
@@ -300,6 +342,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/detetive/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/detetive/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/detetive/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/redator/</loc>
@@ -307,6 +350,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/redator/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/redator/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/redator/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/reversa/</loc>
@@ -314,6 +358,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/reversa/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/reversa/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/revisor/</loc>
@@ -321,6 +366,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/revisor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/revisor/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/revisor/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/scout/</loc>
@@ -328,6 +374,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/scout/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/scout/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/scout/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/tracer/</loc>
@@ -335,6 +382,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/tracer/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/tracer/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/tracer/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/agentes/visor/</loc>
@@ -342,6 +390,7 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/visor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/visor/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/visor/"/>
     </url>
     <url>
         <loc>https://sandeco.github.io/reversa/pt/saidas/</loc>
@@ -349,5 +398,206 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/saidas/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/saidas/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/saidas/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/cli/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/cli/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/cli/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/configuracao/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/configuracao/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/configuracao/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/configuracao/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/contribuindo/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/contribuindo/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/contribuindo/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/contribuindo/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/engines/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/engines/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/engines/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/engines/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/escala-confianca/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/escala-confianca/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/escala-confianca/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/escala-confianca/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/instalacao/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/instalacao/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/instalacao/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/instalacao/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/pipeline/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/pipeline/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/por-que-reversa/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/por-que-reversa/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/por-que-reversa/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/por-que-reversa/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/uso/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/uso/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/uso/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/uso/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/agents-help/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/agents-help/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/agents-help/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/agents-help/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/arqueologo/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arqueologo/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arqueologo/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arqueologo/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/arquiteto/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/arquiteto/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/arquiteto/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/arquiteto/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/chronicler/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/chronicler/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/chronicler/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/chronicler/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/data-master/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/data-master/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/data-master/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/data-master/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/design-system/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/design-system/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/design-system/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/design-system/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/detetive/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/detetive/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/detetive/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/detetive/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/redator/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/redator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/redator/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/redator/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/reversa/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/reversa/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/reversa/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/revisor/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/revisor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/revisor/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/revisor/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/scout/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/scout/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/scout/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/scout/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/tracer/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/tracer/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/tracer/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/tracer/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/agentes/visor/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/agentes/visor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/agentes/visor/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/agentes/visor/"/>
+    </url>
+    <url>
+        <loc>https://sandeco.github.io/reversa/es/saidas/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://sandeco.github.io/reversa/es/saidas/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://sandeco.github.io/reversa/saidas/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://sandeco.github.io/reversa/pt/saidas/"/>
     </url>
 </urlset>
