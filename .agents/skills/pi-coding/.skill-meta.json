@@ -1,0 +1,166 @@
+{
+  "source": "/home/diogo/dev/library-docs/pi-coding",
+  "source_kind": "copy",
+  "generated_at": "2026-04-29",
+  "generator_version": "create-skill-docs@v2",
+  "library_commit": "66dae864a95e9788da0a0ae46bfa1f703c4716a7",
+  "skill_args": "/home/diogo/dev/library-docs/pi-coding",
+  "mode": "new",
+  "stats": {
+    "total_docs": 26,
+    "tasks": 7,
+    "keywords_top": 12
+  },
+  "files": [
+    {
+      "path": "references/003-development.md",
+      "sha256": "23c2d50ca45783c5972b4a31c686c8a177c1a4888291a23f07e0ad95f98421f6",
+      "size": 1921
+    },
+    {
+      "path": "references/011-compaction.md",
+      "sha256": "4035241ef999f6fc46883395a2b501f695fd8a3f2cb922718e056e720e50c5e3",
+      "size": 14644
+    },
+    {
+      "path": "references/002-custom-provider.md",
+      "sha256": "08d9ad46cf342badf57591480a640786286024f55e6c1db6c62e5ddcc7bc508c",
+      "size": 19144
+    },
+    {
+      "path": "references/021-keybindings.md",
+      "sha256": "58d595caf7356a0845e56003bc42f07bfa39b423247709d41ede04f18c287081",
+      "size": 9440
+    },
+    {
+      "path": "references/004-extensions.md",
+      "sha256": "be4692fcaafc5e2e54f2bfa0111068b1bbc9b8430ecee3ca57f6a781b1fb7a55",
+      "size": 56368
+    },
+    {
+      "path": "references/014-models.md",
+      "sha256": "8be6332097c7a90fb2ca4765d778d85627012b85ad816f7d63ba663fb7d145f5",
+      "size": 12337
+    },
+    {
+      "path": "references/022-pi-documentation.md",
+      "sha256": "8309b833a4433cffde8464dae917a0b92e925bc342c7507a5ace45299dfda4ef",
+      "size": 3112
+    },
+    {
+      "path": "references/020-json.md",
+      "sha256": "fdfee1aab310a00be414266516710b6eed40433a8bfd9aba8a3e743d8c5d7b9a",
+      "size": 3643
+    },
+    {
+      "path": "references/001-quickstart.md",
+      "sha256": "dba382b98697cd09a53180b51a23fb8927d068c6f65c4e17658057e8789865ba",
+      "size": 3826
+    },
+    {
+      "path": "references/015-providers.md",
+      "sha256": "021ca1c240c4d4c6552f7fafad16b536dcc9840a4281bb7cbfce148b4b345106",
+      "size": 7352
+    },
+    {
+      "path": "references/005-packages.md",
+      "sha256": "56cf0ae614dbb7f60bb74827372248e257b26cf4f1b3f54fe35fd54d86ef7de2",
+      "size": 6252
+    },
+    {
+      "path": "references/023-rpc.md",
+      "sha256": "0dc0ffaf3ac683135c43d290adce72c984dca9cc4784000b8787e31ccfe25e2b",
+      "size": 25701
+    },
+    {
+      "path": "references/006-prompt-templates.md",
+      "sha256": "7e337a7709db5d010c3dcfdb9226815ac95145e0c09a71b42b9fe7c3ce53f516",
+      "size": 2453
+    },
+    {
+      "path": "references/025-session-format.md",
+      "sha256": "b723ff3f1d9ce7befcf9b211f84fc19345fc636860ac887ad2d9019352c753a7",
+      "size": 13512
+    },
+    {
+      "path": "references/017-shell-aliases.md",
+      "sha256": "e58274201cfcb4bc316b02a0c11e52ed45bd7021c3ccf33f772543d446b5c6f2",
+      "size": 808
+    },
+    {
+      "path": "references/012-skills.md",
+      "sha256": "691b5cfa2d2b4b60ab1511a0cd1c521ff3180046d699553b1b9851ceef95d396",
+      "size": 6400
+    },
+    {
+      "path": "references/013-terminal-setup.md",
+      "sha256": "8a72a75c0e2862a5e3dea48cbf3f7ce2270d53454ae383bf0e1028f09b12854d",
+      "size": 3018
+    },
+    {
+      "path": "references/008-termux.md",
+      "sha256": "dc4252206b3032fec9b54bd4c8094b4a95583a3f59c6b90dad319c47beade121",
+      "size": 3318
+    },
+    {
+      "path": "references/009-themes.md",
+      "sha256": "6e7a0fabef0aa54a25cf0f11d1557a33396a58caf0e611e2306ec719fccf502a",
+      "size": 7888
+    },
+    {
+      "path": "references/026-tui.md",
+      "sha256": "d8b1b5bbf4693bb2a1eb04b846336a361d66e241dce55490d06625735136c4d0",
+      "size": 25517
+    },
+    {
+      "path": "references/018-tmux.md",
+      "sha256": "69149782812bcea45d4ec99889144b4f8015d8edfd2f4f53be6d0cdcbf131050",
+      "size": 1881
+    },
+    {
+      "path": "references/007-sessions.md",
+      "sha256": "9eb98bae68f41afaa0fbf2fd74b4986fc32ec37f86c196daa215b52a9a0f6e55",
+      "size": 5512
+    },
+    {
+      "path": "references/010-usage.md",
+      "sha256": "1e435d4bcf933d74b0f7bfbc90088db6feb5be993d6242e01622bdb4aaba1883",
+      "size": 10670
+    },
+    {
+      "path": "references/024-sdk.md",
+      "sha256": "97923d529470a0d9664d7e93481047ea015dfe85850db9a700939c10225e0b14",
+      "size": 29946
+    },
+    {
+      "path": "references/019-windows.md",
+      "sha256": "94957ffd623536bfa730e8e64beb8489266a8250877872a670df562bc1b96e41",
+      "size": 846
+    },
+    {
+      "path": "references/016-settings.md",
+      "sha256": "5e5cec0991b1e7aef162f0fef748dc60b97b56d9c9af2d71b90b7c18a7968362",
+      "size": 9330
+    },
+    {
+      "path": "references/000-index.md",
+      "sha256": "92121672e7208321501a24ad22d8205207ac7a03b285e0871221b25dcded699b",
+      "size": 2170
+    },
+    {
+      "path": "references/metadata.json",
+      "sha256": "586dc5a04a3b7c1587621d21a8b9f15e897084425ee0e89fd0a8badbae72bd30",
+      "size": 20699
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ff0188ca90cc8dfe881eeef5f89580f767dacad97ee946228bda8e236f81fa20",
+      "size": 8186
+    },
+    {
+      "path": "regenerate.sh",
+      "sha256": "76308bc22bf02008f27be83498bc6de8b942988278a57c0e044d52e03793fa14",
+      "size": 147
+    }
+  ]
+}

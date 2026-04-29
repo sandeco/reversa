@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "pi-coding": {
+      "source": "/home/diogo/dev/skills/pi-coding",
+      "sourceType": "local",
+      "computedHash": "9e917c1f3b23762ed50113d10b03629365ab14c182a9883c1630b19df1f8a94b"
+    }
+  }
+}
