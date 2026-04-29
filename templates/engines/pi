@@ -1,0 +1,11 @@
+---
+description: Ativa o Reversa — Framework de Engenharia Reversa
+---
+# Reversa
+
+Leia `.agents/skills/reversa/SKILL.md` na íntegra e siga exatamente as instruções para iniciar ou retomar a análise do projeto.
+
+## Regra não-negociável
+
+Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto legado.
+O Reversa escreve **apenas** em `.reversa/` e `_reversa_sdd/`.
