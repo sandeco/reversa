@@ -3,7 +3,7 @@
 Não sabe qual agente chamar? Ativa o guia:
 
 ```
-/agents_help
+/reversa-agents-help
 ```
 
 Ele explica cada agente com uma analogia do mundo real. Mas já que você está aqui, aqui vai o resumo completo:

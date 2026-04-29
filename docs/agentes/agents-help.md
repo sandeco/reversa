@@ -3,7 +3,7 @@
 Not sure which agent to call? Activate the guide:
 
 ```
-/agents_help
+/reversa-agents-help
 ```
 
 It explains each agent with a real-world analogy. But since you're already here, here's the full rundown:

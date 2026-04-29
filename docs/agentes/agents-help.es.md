@@ -3,7 +3,7 @@
 ¿No sabes qué agente llamar? Activa la guía:
 
 ```
-/agents_help
+/reversa-agents-help
 ```
 
 ---
