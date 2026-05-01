@@ -92,6 +92,9 @@ plugins:
             Generated outputs: Saídas geradas
             Developing from specs: Desenvolvendo com as specs
             Contributing: Contribuindo
+            Drift loop: Ciclo de drift
+            Hooks (auto Chronicler): Hooks (Chronicler automático)
+            drift-check (CI gate): drift-check (CI gate)
         - locale: es
           name: Español
           build: true
@@ -112,6 +115,9 @@ plugins:
             Generated outputs: Salidas generadas
             Developing from specs: Desarrollando con las specs
             Contributing: Contribuir
+            Drift loop: Ciclo de drift
+            Hooks (auto Chronicler): Hooks (Chronicler automático)
+            drift-check (CI gate): drift-check (CI gate)
 
 nav:
   - Home: index.md
@@ -136,6 +142,10 @@ nav:
     - Visor: agentes/visor.md
     - Data Master: agentes/data-master.md
     - Design System: agentes/design-system.md
+    - Chronicler: agentes/cronista.md
+  - Drift loop:
+    - Hooks (auto Chronicler): hooks.md
+    - drift-check (CI gate): drift-check.md
   - Generated outputs: saidas/index.md
   - Developing from specs: desenvolvendo-com-specs.md
   - Contributing: contribuindo.md

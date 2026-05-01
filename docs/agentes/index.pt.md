@@ -31,6 +31,7 @@ Instalados por padrão, mas podem ser acionados de forma independente em qualque
 | [Visor](visor.md) | O ilustrador forense | Quando tiver screenshots do sistema disponíveis |
 | [Data Master](data-master.md) | O geólogo | Quando houver DDL, migrations ou modelos ORM para analisar |
 | [Design System](design-system.md) | O estilista | Quando houver arquivos CSS, temas ou screenshots de interface |
+| [Chronicler](cronista.md) | O tabelião ao lado | Após cada mudança de código — mantém specs sincronizadas com o código |
 
 ---
 

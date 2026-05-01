@@ -71,4 +71,37 @@ npx reversa uninstall
 Elimina Reversa del proyecto: borra los archivos creados por la instalación.
 
 !!! info "Tus archivos quedan intactos"
-    `uninstall` elimina **solo** lo que Reversa creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `_reversa_sdd/` también se conservan por defecto.
+    `uninstall` elimina **solo** lo que Reversa creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `_reversa_sdd/` también se conservan por defecto. Los hooks instalados vía `add-hooks` también son eliminados.
+
+---
+
+### `add-hooks`
+
+```bash
+npx reversa add-hooks --engine claude-code
+```
+
+Instala hooks del Chronicler en la config de la engine para que corra automáticamente tras cada edición. Muestra preview, pide confirmación, escribe.
+
+Engines: `claude-code`, `cursor`, `kimi-cli`, `codex`, `opencode`. Ver [Hooks](hooks.es.md).
+
+---
+
+### `remove-hooks`
+
+```bash
+npx reversa remove-hooks --engine claude-code
+npx reversa remove-hooks --all
+```
+
+Elimina hooks del Chronicler. Otros hooks añadidos manualmente se preservan.
+
+---
+
+### `drift-check`
+
+```bash
+npx reversa drift-check
+```
+
+CI gate. Lee `_reversa_sdd/drift.md` y exit 1 si hay specs pendientes. Ver [drift-check](drift-check.es.md).

@@ -98,7 +98,9 @@ Reconnaissance  Excavation  Interpretation  Generation  Review
                                 Architect
 ```
 
-Independent agents (run at any phase): **Visor**, **Data Master**, **Design System**, **Tracer**
+Independent agents (run at any phase): **Visor**, **Data Master**, **Design System**
+
+Continuous loop (after the initial pipeline): **Chronicler** keeps specs synchronized as the code evolves — see [Drift loop](#drift-loop) below.
 
 ---
 
@@ -120,11 +122,11 @@ Independent agents (run at any phase): **Visor**, **Data Master**, **Design Syst
 | Agent | Role |
 |-------|------|
 | **Reviewer** | Reviews specs, finds inconsistencies, and validates gaps with the user |
-| **Tracer** | Dynamic analysis: resolves gaps via logs, tracing, and real data (read-only) |
 | **Visor** | Documents the interface from screenshots — without needing the system to be running |
 | **Data Master** | Complete database analysis: DDL, migrations, ORM, ERD, triggers, procedures |
 | **Design System** | Extracts design tokens: colors, typography, spacing, themes, and components |
-| **Chronicler** | Documents code changes during development sessions |
+| **Reconstructor** | Generates a bottom-up rebuild plan from the specs and executes one task at a time |
+| **Chronicler** | Keeps specs synchronized with code changes — drift detection, changelog, dashboard |
 
 ---
 
@@ -147,7 +149,8 @@ _reversa_sdd/
 ├── confidence-report.md      # Confidence report 🟢🟡🔴
 ├── gaps.md                   # Identified gaps
 ├── questions.md              # Questions for human validation
-├── dynamic.md                # Dynamic analysis findings (Tracer)
+├── changelog/                # Code change log (Chronicler — by date)
+├── drift.md                  # Spec ↔ code drift dashboard (Chronicler)
 ├── sdd/                      # Specs per component
 │   └── [component].md
 ├── openapi/                  # API specs (if applicable)
@@ -199,16 +202,46 @@ Every statement in the specs is marked with:
 ## CLI commands
 
 ```bash
-npx reversa install      # Install Reversa in the project
-npx reversa status       # Show current analysis state
-npx reversa update       # Update agents to the latest version
-npx reversa add-agent    # Add an agent to the project
-npx reversa add-engine   # Add support for a new engine
-npx reversa uninstall    # Remove Reversa from the project
+npx reversa install                        # Install Reversa in the project
+npx reversa status                         # Show current analysis state
+npx reversa update                         # Update agents to the latest version
+npx reversa add-agent                      # Add an agent to the project
+npx reversa add-engine                     # Add support for a new engine
+npx reversa add-hooks --engine <id>        # Install Chronicler hooks (auto drift loop)
+npx reversa remove-hooks --engine <id>     # Remove Chronicler hooks
+npx reversa drift-check                    # CI gate — exit 1 if drift pending
+npx reversa uninstall                      # Remove Reversa from the project
 ```
 
 The `update` command detects files you modified via SHA-256 and never overwrites customizations.
 The `uninstall` command removes only files created by Reversa — nothing from the legacy project is touched.
+
+---
+
+## Drift loop
+
+The Chronicler closes the cycle between spec and code so new code does not become legacy:
+
+```
+[Edit a file]                 → engine hook → .reversa/chronicler-queue.json
+                                            → stub in changelog/YYYY-MM-DD.md
+                                            → marks spec as 🔴 pending in drift.md
+
+[/reversa-chronicler after]   → asks 3 questions (why / breaking / context)
+                              → updates impacted specs in-place
+                              → reclassifies confidence 🟢🟡🔴
+                              → marks specs as 🟢 resolved
+
+[npx reversa drift-check]     → exit 1 if any 🔴 pending → CI blocks merge
+```
+
+Three layers, each opt-in:
+
+1. **Manual** — run `/reversa-chronicler after` whenever you want
+2. **Automatic** — install hooks: `npx reversa add-hooks --engine <claude-code|cursor|kimi-cli|codex|opencode>`
+3. **Enforced** — add `npx reversa drift-check` to CI
+
+See [docs/agentes/cronista.md](docs/agentes/cronista.md), [docs/hooks.md](docs/hooks.md), [docs/drift-check.md](docs/drift-check.md).
 
 ---
 
