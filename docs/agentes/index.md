@@ -31,6 +31,7 @@ Installed by default, but can be triggered independently at any time.
 | [Visor](visor.md) | The forensic illustrator | When screenshots of the system are available |
 | [Data Master](data-master.md) | The geologist | When DDL, migrations, or ORM models are available |
 | [Design System](design-system.md) | The stylist | When CSS files, themes, or interface screenshots are available |
+| [Chronicler](cronista.md) | The notary at your shoulder | After every code change — keeps specs synchronized with the code |
 
 ---
 

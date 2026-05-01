@@ -25,6 +25,7 @@ Reversa coordina un equipo de 14 especialistas. Cada agente hace una cosa y la h
 | [Visor](visor.md) | El ilustrador forense | Cuando tengas screenshots del sistema disponibles |
 | [Data Master](data-master.md) | El geólogo | Cuando haya DDL, migrations o modelos ORM disponibles |
 | [Design System](design-system.md) | El estilista | Cuando haya archivos CSS, temas o screenshots de interfaz |
+| [Chronicler](cronista.md) | El notario al lado | Después de cada cambio — mantiene specs sincronizadas con el código |
 
 ---
 

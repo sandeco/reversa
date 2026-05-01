@@ -68,7 +68,41 @@ Adds support for an AI engine that wasn't present when you installed. For exampl
 npx reversa uninstall
 ```
 
-Removes Reversa from the project: deletes the files created by the installation (`.reversa/`, `.agents/skills/reversa-*/`, engine entry files).
+Removes Reversa from the project: deletes the files created by the installation (`.reversa/`, `.agents/skills/reversa-*/`, engine entry files). Hooks installed by `add-hooks` are also stripped.
 
 !!! info "Your files stay intact"
     `uninstall` removes **only** what Reversa created. No original project file is touched. Specifications generated in `_reversa_sdd/` are also preserved by default.
+
+---
+
+### `add-hooks`
+
+```bash
+npx reversa add-hooks --engine claude-code
+```
+
+Installs Chronicler hooks in your engine's config so the agent runs automatically after every file edit. Shows a preview, asks confirmation, then writes.
+
+Supported engines: `claude-code`, `cursor`, `kimi-cli`, `codex`, `opencode`. See [Hooks](hooks.md) for the full reference.
+
+---
+
+### `remove-hooks`
+
+```bash
+npx reversa remove-hooks --engine claude-code
+npx reversa remove-hooks --all
+```
+
+Strips Chronicler hooks from the engine config. Other hooks you added manually are preserved.
+
+---
+
+### `drift-check`
+
+```bash
+npx reversa drift-check
+npx reversa drift-check --severity medium --format json
+```
+
+CI gate. Reads `_reversa_sdd/drift.md` and exits 1 if there are pending specs at the chosen severity. Engine-agnostic — no agent code is loaded. See [drift-check](drift-check.md) for the full reference.

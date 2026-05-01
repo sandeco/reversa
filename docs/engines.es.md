@@ -16,6 +16,7 @@ Reversa funciona con los principales motores de IA del mercado. El instalador de
 | **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Kiro** | `.kiro/steering/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| **Kimi CLI** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 
 ---
 

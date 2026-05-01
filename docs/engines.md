@@ -16,6 +16,7 @@ Reversa works with the leading AI engines on the market. The installer automatic
 | **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Kiro** | `.kiro/steering/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| **Kimi CLI** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 
 ---
 
@@ -58,6 +59,12 @@ Amazon's agentic IDE. Uses steering documents in `.kiro/steering/` to instruct t
 ## Opencode
 
 Open source coding agent for the terminal (SST). Reads `AGENTS.md` natively, same convention as Codex. CLI command: `opencode`. Like Codex, activation is by agent name: `reversa`.
+
+---
+
+## Kimi CLI
+
+Moonshot AI's terminal coding agent. Reads `AGENTS.md` natively (merged from project root to working directory) — same convention as Codex/Opencode. If any of those is already installed, the existing `AGENTS.md` is reused without duplication. Skills are auto-discovered from `.agents/skills/` and `.kimi/skills/`. CLI command: `kimi`. Activation is by agent name: `reversa`.
 
 ---
 
