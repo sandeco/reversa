@@ -4,3 +4,10 @@ node_modules/
 dist/
 .claude/
 site/
+
+# Reversa
+.reversa/
+.agents/
+_reversa_sdd/
+_reversa_test/
+AGENTS.md

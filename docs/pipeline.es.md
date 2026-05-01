@@ -2,6 +2,8 @@
 
 Reversa transforma un sistema heredado en especificaciones ejecutables en 5 fases.
 
+Para consultas rápidas durante el desarrollo, Reversa también expone un servidor MCP (`npx reversa mcp`) que permite a los agentes verificar el estado del análisis y leer informes sin salir de la sesión de codificación. El pipeline de 5 fases y el servidor MCP son complementarios: MCP lee resultados, el pipeline los crea.
+
 ---
 
 ## Visión general

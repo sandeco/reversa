@@ -65,3 +65,14 @@ Depois que o Scout termina, o Reversa lê o `surface.json` gerado e personaliza 
     ```
 
 Para retomar uma análise interrompida, basta ativar novamente. O estado salvo é lido automaticamente.
+
+---
+
+## Integração MCP
+
+O Reversa também pode ser consultado via MCP (`npx reversa mcp`). O servidor MCP oferece:
+- **Ferramentas:** `reversa_status`, `reversa_analyze`, `reversa_confidence`
+- **Recursos:** `reversa://state`, `reversa://inventory`
+- **Prompt:** `reversa-new-analysis`
+
+Use estas ferramentas para consultar estado e relatórios sem sair do chat do agente. O pipeline em si continua sendo executado através deste skill — o MCP serve apenas para leitura de resultados.
