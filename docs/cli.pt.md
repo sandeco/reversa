@@ -16,6 +16,17 @@ Instala o Reversa no projeto legado atual. Detecta as engines presentes, pergunt
 
 Use uma vez, na raiz do projeto que você quer analisar.
 
+**Modo não-interativo (CI/headless):**
+
+```bash
+npx reversa install --yes \
+  --project meu-app \
+  --engines opencode,claude-code \
+  --user Desenvolvedor
+```
+
+Flags disponíveis: `--project`, `--engines`, `--user`, `--chat-language`, `--doc-language`, `--output`, `--git-strategy`, `--answer-mode`, `--agents`, `--reinstall=yes`.
+
 ---
 
 ### `status`
@@ -72,3 +83,32 @@ Remove o Reversa do projeto: apaga os arquivos criados pela instalação (`.reve
 
 !!! info "Seus arquivos continuam intactos"
     O `uninstall` remove **apenas** o que o Reversa criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `_reversa_sdd/` também são preservadas por padrão.
+
+---
+
+### `mcp`
+
+```bash
+npx reversa mcp
+```
+
+Inicia o servidor MCP do Reversa via stdio. Oferece 3 ferramentas, 2 recursos e 1 prompt para integração com agentes de IA:
+
+- **Ferramentas:** `reversa_status(path)`, `reversa_analyze(path, level?)`, `reversa_confidence(path)`
+- **Recursos:** `reversa://state`, `reversa://inventory`
+- **Prompt:** `reversa-new-analysis`
+
+Configure em qualquer cliente MCP:
+
+```json
+{
+  "mcpServers": {
+    "reversa": {
+      "command": "npx",
+      "args": ["reversa", "mcp"]
+    }
+  }
+}
+```
+
+Use para consultar estado e relatórios sem sair do chat do agente. O pipeline em si roda quando o agente digita `reversa` ou `/reversa`.

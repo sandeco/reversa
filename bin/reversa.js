@@ -18,6 +18,7 @@ const commands = {
   'add-agent':        () => import('../lib/commands/add-agent.js'),
   'add-engine':       () => import('../lib/commands/add-engine.js'),
   'export-diagrams':  () => import('../lib/commands/export-diagrams.js'),
+  mcp:                () => import('../lib/mcp/server.js'),
 };
 
 const green = chalk.hex('#ffa203');
@@ -45,6 +46,15 @@ ______
     export-diagrams    Exporta diagramas Mermaid como imagens SVG/PNG
                        Opções: --format=svg|png  --output=<pasta>
                        Requer: npm install -g @mermaid-js/mermaid-cli
+    mcp                Inicia o servidor MCP para integração com agentes de IA
+                       Compatível com Claude Code, Cursor, OpenCode e outros
+
+  Opções globais:
+    --yes              Modo não-interativo (instalação com valores padrão)
+    --project=<nome>   Nome do projeto (modo --yes)
+    --engines=<lista>  Engines separadas por vírgula (modo --yes)
+    --user=<nome>      Nome do usuário (modo --yes)
+    --output=<pasta>   Pasta de saída (modo --yes)
 
   Documentação: https://github.com/sandeco/reversa
   `);

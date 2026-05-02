@@ -2,6 +2,8 @@
 
 Reversa transforms a legacy system into executable specifications in 5 phases. Each phase has specific agents, and the central orchestrator coordinates everything to happen in the right order.
 
+For quick queries during development, Reversa also exposes an MCP server (`npx reversa mcp`) that lets agents check analysis status and read reports without leaving the coding session. The 5-phase pipeline and MCP server are complementary: MCP reads results, the pipeline creates them.
+
 ---
 
 ## Overview
