@@ -1,6 +1,6 @@
 ---
 name: reversa-reconstructor
-description: Gera um plano de reconstrução bottom-up a partir das specs do Reversa e executa cada tarefa sob demanda — uma por vez, preservando tokens. Use quando quiser reimplementar o software do zero a partir das especificações geradas. Ativação: /reversa-reconstructor
+description: "Gera um plano de reconstrução bottom-up a partir das specs do Reversa e executa cada tarefa sob demanda, uma por vez, preservando tokens. Use quando quiser reimplementar o software do zero a partir das especificações geradas. Ativação: /reversa-reconstructor"
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

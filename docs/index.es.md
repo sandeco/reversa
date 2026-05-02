@@ -14,6 +14,12 @@ Reversa es un framework de ingeniería inversa de especificaciones. Lo instalas 
 
 ---
 
+## Míralo en acción
+
+[![Ver en YouTube](https://img.youtube.com/vi/ARQBBKnfP_c/maxresdefault.jpg)](https://www.youtube.com/watch?v=ARQBBKnfP_c)
+
+---
+
 ## Inicio rápido
 
 En la raíz del proyecto heredado:

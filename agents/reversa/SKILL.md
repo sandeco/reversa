@@ -99,13 +99,18 @@ Apresente ao usuário um resumo do que o Scout encontrou e as três opções de 
 >
 > Qual nível de documentação você quer para este projeto?
 >
-> 1. **Essencial** — artefatos principais (code-analysis, domain, architecture, specs SDD). Ideal para projetos simples.
-> 2. **Completo** — documentação completa com diagramas C4, ERD, ADRs, OpenAPI e matrizes de rastreabilidade. Recomendado para a maioria dos projetos.
-> 3. **Detalhado** — máxima profundidade: flowcharts por função, ADRs expandidos, deployment, revisão cruzada obrigatória. Para sistemas enterprise.
+> ◉ **1. Essencial** ← padrão
+> &nbsp;&nbsp;&nbsp;&nbsp;Artefatos principais (code-analysis, domain, architecture, specs SDD). Ideal para projetos simples.
 >
-> Digite 1, 2 ou 3."
+> ○ **2. Completo**
+> &nbsp;&nbsp;&nbsp;&nbsp;Documentação completa com diagramas C4, ERD, ADRs, OpenAPI e matrizes de rastreabilidade. Recomendado para a maioria dos projetos.
+>
+> ○ **3. Detalhado**
+> &nbsp;&nbsp;&nbsp;&nbsp;Máxima profundidade: flowcharts por função, ADRs expandidos, deployment, revisão cruzada obrigatória. Para sistemas enterprise.
+>
+> Digite 1, 2 ou 3 — ou pressione Enter para confirmar **Essencial**."
 
-Aguarde a resposta do usuário. Não invente padrão, não assuma valor, não prossiga sem confirmação explícita (1, 2, 3 ou o nome `essencial`/`completo`/`detalhado`).
+Aguarde a resposta do usuário. Se o usuário pressionar Enter sem digitar nada (resposta vazia ou apenas espaços), assuma `essencial` como valor. Aceite também o nome por extenso: `essencial`/`completo`/`detalhado`.
 
 Após receber a resposta, salve em `.reversa/state.json` → campo `doc_level` e só então ative o Archaeologist.
 

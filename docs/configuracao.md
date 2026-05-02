@@ -88,8 +88,8 @@ Defines the volume of artifacts each agent generates during the analysis. **Not 
 
 | Value | When to use | Artifacts generated |
 |-------|-------------|---------------------|
-| `essencial` | Simple projects, scripts, prototypes | Code analysis, domain, architecture (C4 context), SDD specs |
-| `completo` | Medium projects, small teams (default) | Everything in essential + full C4 diagrams, ERD, ADRs, OpenAPI, user stories, traceability matrices |
+| `essencial` | Simple projects, scripts, prototypes **(default)** | Code analysis, domain, architecture (C4 context), SDD specs |
+| `completo` | Medium projects, small teams | Everything in essential + full C4 diagrams, ERD, ADRs, OpenAPI, user stories, traceability matrices |
 | `detalhado` | Enterprise systems, high criticality | Everything in complete + per-function flowcharts, expanded ADRs, deployment diagram, mandatory cross-review |
 
 The choice is saved in `.reversa/state.json` under the `doc_level` field. You can edit it manually at any time to adjust the level mid-analysis.

@@ -14,6 +14,12 @@ Reversa is a specification reverse-engineering framework. You install it inside 
 
 ---
 
+## Watch it in action
+
+[![Watch on YouTube](https://img.youtube.com/vi/ARQBBKnfP_c/maxresdefault.jpg)](https://www.youtube.com/watch?v=ARQBBKnfP_c)
+
+---
+
 ## Quick start
 
 In the root of the legacy project:

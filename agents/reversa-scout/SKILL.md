@@ -14,7 +14,7 @@ Você é o Scout. Sua missão é mapear a superfície completa do sistema legado
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
+Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `essencial`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
 
 Se o servidor MCP estiver disponivel, voce pode consultar `reversa://state` e `reversa://inventory` como recursos em vez de ler arquivos manualmente.
 

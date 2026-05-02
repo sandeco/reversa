@@ -14,6 +14,12 @@ O Reversa é um framework de engenharia reversa de especificações. Você o ins
 
 ---
 
+## Veja em ação
+
+[![Assistir no YouTube](https://img.youtube.com/vi/ARQBBKnfP_c/maxresdefault.jpg)](https://www.youtube.com/watch?v=ARQBBKnfP_c)
+
+---
+
 ## Começo rápido
 
 Na raiz do projeto legado:

@@ -1,6 +1,6 @@
 ---
-name: agents_help
-description: Explica com analogias o que cada agente do Reversa faz e quando usá-lo. Ative com /agents_help.
+name: reversa-agents-help
+description: Explica com analogias o que cada agente do Reversa faz e quando usá-lo. Ative com /reversa-agents-help.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

@@ -70,8 +70,8 @@ Define el volumen de artefactos que cada agente genera durante el análisis. **N
 
 | Valor | Cuándo usar | Artefactos generados |
 |-------|-------------|----------------------|
-| `essencial` | Proyectos simples, scripts, prototipos | Análisis de código, dominio, arquitectura (C4 contexto), specs SDD |
-| `completo` | Proyectos medianos, equipos pequeños (por defecto) | Todo lo esencial + diagramas C4 completos, ERD, ADRs, OpenAPI, user stories, matrices de trazabilidad |
+| `essencial` | Proyectos simples, scripts, prototipos **(por defecto)** | Análisis de código, dominio, arquitectura (C4 contexto), specs SDD |
+| `completo` | Proyectos medianos, equipos pequeños | Todo lo esencial + diagramas C4 completos, ERD, ADRs, OpenAPI, user stories, matrices de trazabilidad |
 | `detalhado` | Sistemas enterprise, alta criticidad | Todo lo completo + flowcharts por función, ADRs expandidos, diagrama de deployment, revisión cruzada obligatoria |
 
 La elección se guarda en `.reversa/state.json` en el campo `doc_level`. Puedes editarlo manualmente en cualquier momento para ajustar el nivel durante un análisis en curso.
