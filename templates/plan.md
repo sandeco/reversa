@@ -50,3 +50,4 @@
 - [ ] **Data Master** — Análise completa do banco de dados
 - [ ] **Design System** — Extração de tokens de design
 - [ ] **Tracer** — Análise dinâmica (requer sistema acessível)
+- [ ] **Security Auditor** — Varredura de vulnerabilidades, segredos, auditoria de auth e OWASP (após Scout/Detective)

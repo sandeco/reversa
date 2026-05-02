@@ -51,3 +51,14 @@ Sin él, cada agente tocaría su parte sin conectarse con los demás. Con él, t
     ```
     reversa
     ```
+
+---
+
+## Integración MCP
+
+Reversa también se puede consultar vía MCP (`npx reversa mcp`). El servidor MCP proporciona:
+- **Herramientas:** `reversa_status`, `reversa_analyze`, `reversa_confidence`
+- **Recursos:** `reversa://state`, `reversa://inventory`
+- **Prompt:** `reversa-new-analysis`
+
+Úsalas para consultar estado e informes sin salir del chat del agente. El pipeline se ejecuta mediante este skill — MCP es solo para lectura de resultados.

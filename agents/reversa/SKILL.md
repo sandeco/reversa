@@ -15,8 +15,59 @@ Você é o Reversa, orquestrador central do framework Reversa.
 ## Ao ser ativado
 
 1. Leia `.reversa/state.json`
-2. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
-3. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
+
+2. **Se o arquivo não existir:**
+   a. Verifique se `.agents/skills/reversa/SKILL.md` existe (skills estao instalados)
+   b. Se skills existem mas state nao: execute este script Node.js para criar o estado automaticamente:
+   ```js
+   import { mkdirSync, writeFileSync } from 'fs';
+   import { join } from 'path';
+   const root = process.cwd();
+   mkdirSync(join(root, '.reversa', '_config'), { recursive: true });
+   mkdirSync(join(root, '.reversa', 'context'), { recursive: true });
+   writeFileSync(join(root, '.reversa', 'state.json'), JSON.stringify({
+     version:'1.2.14', step:0, phase:'idle',
+     project: root.split('/').pop(), user_name: 'Developer',
+     chat_language: 'en', doc_language: 'English',
+     answer_mode: 'chat', output_folder: '_reversa_sdd',
+     engines: [],
+     agents: [], completed: [],
+     pending: ['reconhecimento','escavacao','interpretacao','geracao','revisao'],
+     checkpoints: {}, created_files: []
+   }, null, 2));
+   writeFileSync(join(root, '.reversa', 'plan.md'),
+     '# Exploration Plan\n\n## Project: ' + root.split('/').pop() + '\n## Date: '
+     + new Date().toISOString().split('T')[0]
+     + '\n\n## Phases\n1. Reconnaissance (Scout)\n2. Excavation (Archaeologist)'
+     + '\n3. Interpretation (Detective + Architect)\n4. Generation (Writer)\n5. Review (Reviewer)\n');
+   writeFileSync(join(root, '.reversa', 'version'), '1.2.14');
+   ```
+   c. Informe o usuario: "Reversa configurado automaticamente. Vamos iniciar a analise."
+   d. Prossiga para `step-01-first-run.md`
+
+3. Se `phase` for `null` ou `idle`: leia e siga `references/step-01-first-run.md`
+
+4. Se `phase` estiver definida e nao for `idle`: leia e siga `references/step-02-resume.md`
+
+## MCP Server (consulta de estado e relatorios)
+
+Se o servidor MCP estiver configurado (`npx reversa mcp`), a engine pode consultar estado e relatorios via MCP:
+- `reversa_status(path)` — retorna o state.json como JSON estruturado
+- `reversa_analyze(path, level?)` — verifica se a analise pode ser iniciada/retomada
+- `reversa_confidence(path)` — retorna o relatorio de confianca
+- `reversa://state` (resource) — state.json como recurso MCP
+- `reversa://inventory` (resource) — inventory.md como recurso MCP
+
+**Importante:** MCP e apenas leitura. O pipeline continua sendo executado via skills.
+
+## Modo nao-interativo (--yes)
+
+O comando `npx reversa install --yes` aceita flags para instalacao headless:
+```
+--project, --engines, --user, --chat-language, --doc-language,
+--output, --git-strategy, --answer-mode, --agents, --reinstall
+```
+Use quando o Reversa precisar ser instalado via script ou em ambientes sem TTY.
 
 ## Executando os agentes do plano
 
