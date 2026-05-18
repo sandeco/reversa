@@ -1,19 +1,21 @@
 # Agents
 
-Reversa coordinates **5 specialized Teams** of agents. Each agent does one thing and does it well; each Team groups agents around a phase of the work.
+Reversa coordinates **6 specialized Teams** of agents. Each agent does one thing and does it well; each Team groups agents around a phase of the work.
 
 The central orchestrator (Reversa itself) coordinates who enters when, in what order, and at what pace. But you can also trigger any agent directly when you need to.
 
 ---
 
-## The 5 Teams
+## The 6 Teams
 
 | Team | Role | In the installer |
 |------|------|------------------|
 | **Reversa Agents Core** | Discovery and orchestration of the legacy: maps, excavates, interprets and documents. Detailed in the tables below. | Always installed |
+| **Code New Project Agents** | Greenfield pipeline from a one-line idea to SDD specs. See [Code New Project Agents](../newproject/index.md). | Pre-checked |
+| **Code Forward Agents** | Drive forward delivery from the specs: requirements, plan, to-do, audit, quality, coding. See [Code Forward Agents](../forward/index.md). | Pre-checked |
 | **Migration Agents** | Turn legacy specs into a rebuild plan for a modern stack. See [Migration](../migracao/index.md). | Pre-checked |
-| **Code Forward Agents** | Drive forward delivery from the specs: requirements, plan, to-do, audit, quality, coding. | Pre-checked |
-| **Pricing and Size Agents** | Estimate effort, size and pricing on top of the specs. | Pre-checked |
+| **Pricing and Size Agents** | Estimate effort, size and pricing on top of the specs. See [Pricing](../pricing/index.md). | Pre-checked |
+| **Documentation Team** | Render the extracted knowledge as a self-contained HTML mini-site. See [Documentation Team](../documentation/index.md). | Pre-checked |
 | **Translators N8N->Specs->Python** | Adapters that turn structured artifacts (e.g. an N8N workflow) into specs. See [N8N Translator](n8n.md). | Unchecked |
 
 The tables below detail the agents that make up the **Reversa Agents Core** Team.

@@ -90,11 +90,24 @@ reversa
 
 Reversa will introduce itself, create a personalized exploration plan, and coordinate the entire analysis. Progress is saved in `.reversa/state.json` at each checkpoint — if the session is interrupted, just type `reversa` to resume where you left off.
 
+For other workflows, use the matching entry command:
+
+| Goal | Command |
+|------|---------|
+| Analyze an existing legacy and produce specs | `/reversa` |
+| Start a brand new project from a one-line idea | `/reversa-new` |
+| Evolve the system one feature at a time, from spec to code | `/reversa-forward` |
+| Rebuild the legacy on a modern stack | `/reversa-migrate` |
+| Render the extracted knowledge as an HTML mini-site | `/reversa-docs` |
+| Estimate effort and pricing on top of the specs | `/reversa-pricing-profile`, `/reversa-pricing-size`, `/reversa-pricing-estimate` |
+
+Each orchestrator pauses between agents and asks for `CONTINUAR` before advancing, so you stay in control of every step.
+
 ---
 
 ## How it works
 
-Reversa uses a 5-phase pipeline orchestrated by the **Reversa** agent:
+The Discovery pipeline (`/reversa`) is the heart of the framework: a 5-phase sequence orchestrated by the **Reversa** agent.
 
 ```
 Reconnaissance  Excavation  Interpretation  Generation  Review
@@ -102,13 +115,38 @@ Reconnaissance  Excavation  Interpretation  Generation  Review
                                 Architect
 ```
 
-Independent agents (run at any phase): **Visor**, **Data Master**, **Design System**, **Tracer**
+Independent agents (run at any phase): **Visor**, **Data Master**, **Design System**, **Soul Extractor**, **Tracer**, **Chronicler**.
+
+Once the specs exist, you can move forward in three directions, depending on the goal:
+
+```
+Discovery (/reversa)
+        │
+        ├── /reversa-forward    Evolve the system from specs to code
+        ├── /reversa-migrate    Rebuild the legacy on a modern stack
+        └── /reversa-docs       Render specs as an HTML mini-site
+```
+
+For a **greenfield** project (no legacy to extract), start with `/reversa-new` instead. It walks from a one-line idea to SDD specs and then hands off to `/reversa-forward`.
 
 ---
 
 ## Agents
 
-### Required
+Reversa organizes its agents in **six specialized Teams**. The Discovery Team (Reversa Agents Core) is always installed; the other five Teams are pre-checked in the installer and you can opt out of any of them.
+
+| Team | Purpose | Entry command |
+|------|---------|---------------|
+| **Reversa Agents Core** (Discovery) | Analyze the existing legacy and produce specs | `/reversa` |
+| **Code New Project Agents** | Start a new project (greenfield) from a one-line idea and produce specs | `/reversa-new` |
+| **Code Forward Agents** | Evolve the system from specs to running code, one feature at a time | `/reversa-forward` |
+| **Migration Agents** | Turn legacy specs into a rebuild plan for a modern stack | `/reversa-migrate` |
+| **Pricing and Size Agents** | Estimate effort, size and pricing on top of the specs | `/reversa-pricing-*` |
+| **Documentation Team** | Render the extracted knowledge as a self-contained HTML mini-site | `/reversa-docs` |
+
+### Discovery Team, required
+
+These run the main `/reversa` pipeline.
 
 | Agent | Role |
 |-------|------|
@@ -119,16 +157,54 @@ Independent agents (run at any phase): **Visor**, **Data Master**, **Design Syst
 | **Architect** | Synthesizes everything into C4 diagrams, full ERD, integration map, and technical debt |
 | **Writer** | Generates specifications as operational contracts with code traceability |
 
-### Optional (installed by default)
+### Discovery Team, optional (installed by default)
 
 | Agent | Role |
 |-------|------|
 | **Reviewer** | Reviews specs, finds inconsistencies, and validates gaps with the user |
 | **Tracer** | Dynamic analysis: resolves gaps via logs, tracing, and real data (read-only) |
-| **Visor** | Documents the interface from screenshots — without needing the system to be running |
+| **Visor** | Documents the interface from screenshots, without needing the system to be running |
 | **Data Master** | Complete database analysis: DDL, migrations, ORM, ERD, triggers, procedures |
 | **Design System** | Extracts design tokens: colors, typography, spacing, themes, and components |
+| **Soul Extractor** | Produces a single executive Spec (`soul.md`) with purpose, core entities and founding decisions, useful right after Scout |
 | **Chronicler** | Documents code changes during development sessions |
+
+### Code New Project Agents (greenfield)
+
+For projects that do not exist yet. Activate with `/reversa-new` and the orchestrator drives the pipeline `Ideator → Researcher → Drafter → Spec SDD`, with a `CONTINUAR` checkpoint between agents. Final handoff suggests `/reversa-forward` to take the specs to code.
+
+| Agent | Role |
+|-------|------|
+| **Reversa New** | Orchestrator. Reads the initial brief, walks the pipeline, saves `newproject_progress` in `state.json` |
+| **Ideator** | Structured brainstorm with 6 divergent questions (root problem, value, alternatives, audience, success metrics, dangerous assumptions). Produces `_reversa_sdd/ideation.md` |
+| **Researcher** | Turns the raw audience into 1 to 3 structured personas with journeys. Produces `_reversa_sdd/personas.md` |
+| **Drafter** | Synthesizes ideation and personas into a complete PRD (problem, metrics, scope, non-goals, constraints, risks). Produces `_reversa_sdd/prd.md` |
+| **Spec SDD** | Decomposes the PRD into logical components and writes one SDD spec per component, with an automatic quality score. Vendored from the global `sdd-spec` skill. Produces `_reversa_sdd/sdd/*.md` |
+
+### Code Forward Agents (evolution)
+
+The bridge from specs to running code. Pipeline: `requirements → clarify → quality → plan → to-do → audit → coding`. Use `/reversa-forward` as the entry point: it detects the **physical stage** of the active feature (by inspecting the artifacts on disk, not metadata) and suggests the next agent.
+
+| Agent | Role |
+|-------|------|
+| **Reversa Forward** | Orchestrator. Detects the physical stage and suggests the next skill. Never executes code itself |
+| **Requirements** | Turns a free-form idea into `requirements.md` anchored to the legacy, with `[DOUBT]` markers, gaps and glossary |
+| **Clarify** | Up to 5 targeted questions to resolve `[DOUBT]` markers in place |
+| **Quality** | Read-only auditor of writing clarity. Produces `requirements-audit.md` |
+| **Plan** | Translates requirements into a technical proposal expressed as a **delta over the legacy**. Produces `roadmap.md`, `investigation.md`, `data-delta.md`, `onboarding.md`, `interfaces/` |
+| **To-Do** | Decomposes the roadmap into atomic actions across five phases with stable IDs, dependencies and parallelism markers. Produces `actions.md` |
+| **Audit** | Read-only cross-check between requirements, roadmap and actions. Produces `audit/cross-check.md` |
+| **Coding** | Executes `actions.md`, flips checkboxes, writes `progress.jsonl`, `legacy-impact.md` and `regression-watch.md` |
+| **Principles** | Manages durable project rules (`principles.md`) and emits impact reports when they change |
+| **Resume** | Swaps the active feature with one from the `paused-features` queue |
+
+### Migration Team
+
+Use after `/reversa` when the goal is to rebuild the legacy on a modern stack. Activate with `/reversa-migrate`. Pipeline: `Paradigm Advisor → Curator → Strategist → Designer → Inspector`, with a human review pause between agents. Every artifact lands in `_reversa_sdd/migration/`.
+
+### Pricing and Size Team
+
+Three agents on top of the specs to estimate effort, size and price. Activate with `/reversa-pricing-profile`, `/reversa-pricing-size` and `/reversa-pricing-estimate`.
 
 ### Translators (input adapters)
 
@@ -188,6 +264,40 @@ _reversa_sdd/
     ├── spec-impact-matrix.md # Which spec impacts which
     └── code-spec-matrix.md   # Code file to corresponding spec
 ```
+
+In a greenfield run, `/reversa-new` adds the following on top of `_reversa_sdd/`:
+
+```
+_reversa_sdd/
+├── newproject-brief.md      # Initial brief (Reversa New)
+├── ideation.md              # Structured brainstorm (Ideator)
+├── personas.md              # Personas with journeys (Researcher)
+├── prd.md                   # Product Requirements Document (Drafter)
+└── sdd/
+    └── [component].md       # SDD specs with quality score (Spec SDD)
+```
+
+Forward features land in a separate folder, `_reversa_forward/` by default:
+
+```
+_reversa_forward/
+└── <NNN>-<short-name>/      # One folder per feature
+    ├── requirements.md
+    ├── roadmap.md
+    ├── investigation.md
+    ├── data-delta.md
+    ├── onboarding.md
+    ├── interfaces/
+    ├── actions.md
+    ├── progress.jsonl
+    ├── legacy-impact.md
+    ├── regression-watch.md
+    └── audit/
+        ├── requirements-audit.md
+        └── cross-check.md
+```
+
+The Documentation Team writes only inside `.reversa/documentation/` (HTML mini-site, fully offline).
 
 ### Confidence scale
 

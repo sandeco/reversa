@@ -99,6 +99,36 @@ plugins:
             Strategies: Estratégias
             Brief schema: Schema do brief
             Contributing: Contribuindo
+            Code New Project Agents: Code New Project Agents
+            The greenfield agents: Os agentes do greenfield
+            Code Forward Agents: Code Forward Agents
+            The Forward agents: Os agentes do Forward
+            Migration Agents: Agentes de Migração
+            Pricing and Size Agents: Pricing and Size Agents
+            Translators N8N->Specs->Python: Tradutores N8N->Specs->Python
+            Documentation Team: Time de Documentação
+            The 4 visual agents: Os 4 agentes visuais
+            Forward orchestrator: Orquestrador Forward
+            Requirements: Requirements
+            Clarify: Clarify
+            Quality: Quality
+            Plan: Plan
+            To-Do: To-Do
+            Audit: Audit
+            Coding: Coding
+            Principles: Principles
+            Resume: Resume
+            Ideator: Ideator
+            Researcher: Researcher
+            Drafter: Drafter
+            Spec SDD: Spec SDD
+            Mapper: Mapper
+            Analyst: Analyst
+            Storyteller: Storyteller
+            Publisher: Publisher
+            Reversa Docs: Reversa Docs
+            Reversa New: Reversa New
+            Reversa Forward: Reversa Forward
         - locale: es
           name: Español
           build: true
@@ -127,6 +157,36 @@ plugins:
             Strategies: Estrategias
             Brief schema: Schema del brief
             Contributing: Contribuir
+            Code New Project Agents: Code New Project Agents
+            The greenfield agents: Los agentes del greenfield
+            Code Forward Agents: Code Forward Agents
+            The Forward agents: Los agentes del Forward
+            Migration Agents: Agentes de Migración
+            Pricing and Size Agents: Pricing and Size Agents
+            Translators N8N->Specs->Python: Traductores N8N->Specs->Python
+            Documentation Team: Equipo de Documentación
+            The 4 visual agents: Los 4 agentes visuales
+            Forward orchestrator: Orquestador Forward
+            Requirements: Requirements
+            Clarify: Clarify
+            Quality: Quality
+            Plan: Plan
+            To-Do: To-Do
+            Audit: Audit
+            Coding: Coding
+            Principles: Principles
+            Resume: Resume
+            Ideator: Ideator
+            Researcher: Researcher
+            Drafter: Drafter
+            Spec SDD: Spec SDD
+            Mapper: Mapper
+            Analyst: Analyst
+            Storyteller: Storyteller
+            Publisher: Publisher
+            Reversa Docs: Reversa Docs
+            Reversa New: Reversa New
+            Reversa Forward: Reversa Forward
 
 nav:
   - Home: index.md
@@ -153,16 +213,23 @@ nav:
       - Visor: agentes/visor.md
       - Data Master: agentes/data-master.md
       - Design System: agentes/design-system.md
+    - Code New Project Agents:
+      - Overview: newproject/index.md
+      - The greenfield agents: newproject/agentes.md
+    - Code Forward Agents:
+      - Overview: forward/index.md
+      - The Forward agents: forward/agentes.md
     - Migration Agents:
       - Overview: migracao/index.md
       - The 5 agents: migracao/agentes.md
       - Paradigm shift: migracao/paradigma.md
       - Strategies: migracao/estrategias.md
       - Brief schema: migracao/brief.md
-    - Code Forward Agents:
-      - Overview: forward/index.md
     - Pricing and Size Agents:
       - Overview: pricing/index.md
+    - Documentation Team:
+      - Overview: documentation/index.md
+      - The 4 visual agents: documentation/agentes.md
     - Translators N8N->Specs->Python:
       - N8N Translator: agentes/n8n.md
   - Generated outputs: saidas/index.md

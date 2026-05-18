@@ -1,19 +1,21 @@
 # Agentes
 
-O Reversa coordena **5 Teams especializados** de agentes. Cada agente faz uma coisa só e faz bem; cada Team agrupa os agentes em torno de uma fase do trabalho.
+O Reversa coordena **6 Teams especializados** de agentes. Cada agente faz uma coisa só e faz bem; cada Team agrupa os agentes em torno de uma fase do trabalho.
 
 O orquestrador central (o próprio Reversa) coordena quem entra quando, em que ordem e em que ritmo. Mas você também pode acionar qualquer agente diretamente quando precisar.
 
 ---
 
-## Os 5 Teams
+## Os 6 Teams
 
 | Team | Função | No instalador |
 |------|--------|---------------|
 | **Reversa Agents Core** | Descoberta e orquestração do legado: mapeia, escava, interpreta e documenta. Detalhado nas tabelas abaixo. | Sempre instalado |
+| **Code New Project Agents** | Pipeline greenfield, da ideia em uma linha até specs SDD. Veja [Code New Project Agents](../newproject/index.md). | Marcado por padrão |
+| **Code Forward Agents** | Conduzem a evolução a partir das specs: requirements, plan, to-do, audit, quality, coding. Veja [Code Forward Agents](../forward/index.md). | Marcado por padrão |
 | **Migration Agents** | Transformam as specs do legado em um plano de reconstrução em stack moderna. Veja [Migração](../migracao/index.md). | Marcado por padrão |
-| **Code Forward Agents** | Conduzem a evolução a partir das specs: requirements, plan, to-do, audit, quality, coding. | Marcado por padrão |
-| **Pricing and Size Agents** | Estimam esforço, tamanho e precificação a partir das specs. | Marcado por padrão |
+| **Pricing and Size Agents** | Estimam esforço, tamanho e precificação a partir das specs. Veja [Pricing](../pricing/index.md). | Marcado por padrão |
+| **Documentation Team** | Renderiza o conhecimento extraído como mini-site HTML autocontido. Veja [Time de Documentação](../documentation/index.md). | Marcado por padrão |
 | **Translators N8N->Specs->Python** | Adaptadores que transformam artefatos estruturados (ex.: workflow N8N) em specs. Veja [N8N Translator](n8n.md). | Desmarcado |
 
 As tabelas abaixo detalham os agentes que compõem o Team **Reversa Agents Core**.
