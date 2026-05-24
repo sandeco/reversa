@@ -1,77 +1,77 @@
 # Reconstruction Plan — {{PROJECT_NAME}}
 
 **Stack:** {{STACK}}
-**Gerado em:** {{DATE}}
-**Status:** {{TOTAL}} tarefas | {{DONE}} concluídas | {{PENDING}} pendentes
+**Generated on:** {{DATE}}
+**Status:** {{TOTAL}} tasks | {{DONE}} completed | {{PENDING}} pending
 
 ---
 
-## Alertas de pré-voo
+## Pre-flight Alerts
 
-> Revise estes pontos antes de iniciar. Gaps marcados com ⚠️ bloqueiam a tarefa associada.
+> Review these points before starting. Gaps marked with ⚠️ block the associated task.
 
 {{#each PREFLIGHT_ALERTS}}
-- ⚠️ **{{this.gap}}** — bloqueia Tarefa {{this.task_number}} ({{this.task_name}})
+- ⚠️ **{{this.gap}}** — blocks Task {{this.task_number}} ({{this.task_name}})
 {{/each}}
 
 {{#if NO_ALERTS}}
-Nenhum gap crítico identificado. Pode iniciar com segurança.
+No critical gaps identified. You can start safely.
 {{/if}}
 
 ---
 
-## Tarefas
+## Tasks
 
-### Tarefa 01 — Schema do Banco de Dados
+### Task 01 — Database Schema
 **Status:** pending
-**Lê:** `_reversa_sdd/erd-complete.md`, `_reversa_sdd/data-dictionary.md`
-**Constrói:** migrations, schema, modelos ORM (conforme stack detectada)
-**Pronto quando:** Todas as tabelas do ERD existem com tipos, constraints e foreign keys corretos
+**Reads:** `_reversa_sdd/erd-complete.md`, `_reversa_sdd/data-dictionary.md`
+**Builds:** migrations, schema, ORM models (according to detected stack)
+**Done when:** All ERD tables exist with correct types, constraints, and foreign keys
 
 ---
 
-### Tarefa 02 — Entidades de Domínio
+### Task 02 — Domain Entities
 **Status:** pending
-**Lê:** `_reversa_sdd/domain.md`, `_reversa_sdd/data-dictionary.md`
-**Constrói:** entidades, value objects, validações de domínio
-**Pronto quando:** Todas as entidades implementadas com as regras de negócio descritas
+**Reads:** `_reversa_sdd/domain.md`, `_reversa_sdd/data-dictionary.md`
+**Builds:** entities, value objects, domain validations
+**Done when:** All entities implemented with described business rules
 
 ---
 
-### Tarefa 03 — Máquinas de Estado
+### Task 03 — State Machines
 **Status:** pending
-**Lê:** `_reversa_sdd/state-machines.md`
-**Constrói:** implementação dos fluxos de estado de cada entidade
-**Pronto quando:** Todos os estados e transições documentados estão implementados
-**Obs:** Pular esta tarefa se `_reversa_sdd/state-machines.md` não existir
+**Reads:** `_reversa_sdd/state-machines.md`
+**Builds:** implementation of state flows for each entity
+**Done when:** All documented states and transitions are implemented
+**Note:** Skip this task if `_reversa_sdd/state-machines.md` does not exist
 
 ---
 
 <!-- COMPONENT_TASKS_START -->
-<!-- O Reconstructor insere aqui uma tarefa por unit, na ordem bottom-up determinada pelo dependencies.md -->
-<!-- Exemplo de tarefa de unit: -->
+<!-- The Reconstructor inserts one task per unit here, in bottom-up order determined by dependencies.md -->
+<!-- Example unit task: -->
 
-### Tarefa 04 — [Nome da Unit]
+### Task 04 — [Unit Name]
 **Status:** pending
-**Lê:** `_reversa_sdd/[unit]/requirements.md`, `_reversa_sdd/[unit]/design.md`, `_reversa_sdd/[unit]/tasks.md`, `_reversa_sdd/dependencies.md`
-**Constrói:** [caminho do módulo conforme stack]
-**Pronto quando:** [critério de aceitação extraído de requirements.md, campo "Dado/Quando/Então"]
-**Alerta:** [se houver gap associado, descreva aqui]
+**Reads:** `_reversa_sdd/[unit]/requirements.md`, `_reversa_sdd/[unit]/design.md`, `_reversa_sdd/[unit]/tasks.md`, `_reversa_sdd/dependencies.md`
+**Builds:** [module path according to stack]
+**Done when:** [acceptance criterion extracted from requirements.md, "Given/When/Then" field]
+**Alert:** [if a gap exists, describe it here]
 
 <!-- COMPONENT_TASKS_END -->
 
 ---
 
-### Tarefa {{API_N}} — Camada de API
+### Task {{API_N}} — API Layer
 **Status:** pending
-**Lê:** `_reversa_sdd/openapi/[lista de arquivos]`
-**Constrói:** endpoints, controllers, middlewares, autenticação
-**Pronto quando:** Todos os endpoints respondem conforme os contratos OpenAPI
+**Reads:** `_reversa_sdd/openapi/[file list]`
+**Builds:** endpoints, controllers, middlewares, authentication
+**Done when:** All endpoints respond according to OpenAPI contracts
 
 ---
 
-### Tarefa {{STORIES_N}} — Fluxos de Usuário
+### Task {{STORIES_N}} — User Flows
 **Status:** pending
-**Lê:** `_reversa_sdd/user-stories/[lista de arquivos]`
-**Constrói:** integração end-to-end, fluxos completos de usuário
-**Pronto quando:** Todos os critérios de aceitação das user stories estão satisfeitos
+**Reads:** `_reversa_sdd/user-stories/[file list]`
+**Builds:** end-to-end integration, complete user flows
+**Done when:** All user story acceptance criteria are met
