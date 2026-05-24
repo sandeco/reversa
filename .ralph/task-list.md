@@ -6,8 +6,8 @@
 
 ## Progress
 
-**Current Phase:** 1.3 Migration team agents (8 remaining)
-**Overall:** 44/134 files completed
+**Current Phase:** 1.3 Migration team agents (7 remaining)
+**Overall:** 45/134 files completed
 
 ---
 
@@ -39,7 +39,7 @@
 - [x] `agents/reversa-paradigm-advisor/SKILL.md`
 - [x] `agents/reversa-paradigm-advisor/references/paradigm-catalog.md`
 - [x] `agents/reversa-curator/SKILL.md`
-- [ ] `agents/reversa-curator/references/decision-rubric.md`
+- [x] `agents/reversa-curator/references/decision-rubric.md`
 - [ ] `agents/reversa-strategist/SKILL.md`
 - [ ] `agents/reversa-strategist/references/migration-strategies.md`
 - [ ] `agents/reversa-designer/SKILL.md`
