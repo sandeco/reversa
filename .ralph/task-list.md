@@ -6,8 +6,8 @@
 
 ## Progress
 
-**Current Phase:** 1.3 Migration team agents (2 remaining)
-**Overall:** 50/134 files completed
+**Current Phase:** 1.3 Migration team agents (1 remaining)
+**Overall:** 51/134 files completed
 
 ---
 
@@ -45,7 +45,7 @@
 - [x] `agents/reversa-designer/SKILL.md`
 - [x] `agents/reversa-designer/references/paradigm-checklist.md`
 - [x] `agents/reversa-screen-translator/SKILL.md`
-- [ ] `agents/reversa-screen-translator/references/adapter-pairs.md`
+- [x] `agents/reversa-screen-translator/references/adapter-pairs.md`
 - [ ] `agents/reversa-screen-translator/references/platform-detection.md`
 - [ ] `agents/reversa-inspector/SKILL.md`
 - [ ] `agents/reversa-inspector/references/parity-coverage-matrix.md`
