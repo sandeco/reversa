@@ -6,8 +6,8 @@
 
 ## Progress
 
-**Current Phase:** 1.2 Forward cycle agents (8 remaining)
-**Overall:** 31/134 files completed
+**Current Phase:** 1.2 Forward cycle agents (7 remaining)
+**Overall:** 32/134 files completed
 
 ---
 
@@ -23,7 +23,7 @@
 - [x] `agents/reversa-requirements/SKILL.md`
 - [x] `agents/reversa-clarify/SKILL.md`
 - [x] `agents/reversa-plan/SKILL.md`
-- [ ] `agents/reversa-to-do/SKILL.md`
+- [x] `agents/reversa-to-do/SKILL.md`
 - [ ] `agents/reversa-coding/SKILL.md`
 - [ ] `agents/reversa-audit/SKILL.md`
 - [ ] `agents/reversa-quality/SKILL.md`
