@@ -1,88 +1,88 @@
-# Passo 2 — Retomada de sessão
+# Step 2 — Session Resume
 
-## 0. Verificação de migração em andamento
+## 0. Check for In-Progress Migration
 
-Antes de tudo, leia `.reversa/state.json` apenas para resolver `output_folder` (padrão `_reversa_sdd`).
+Before anything, read `.reversa/state.json` only to resolve `output_folder` (default `_reversa_sdd`).
 
-Verifique se `<output_folder>/migration/.state.json` existe. Se não existir, pule esta seção e siga para a seção 1.
+Check if `<output_folder>/migration/.state.json` exists. If it does not exist, skip this section and proceed to section 1.
 
-Se existir, leia o arquivo e classifique o estado da migração:
+If it exists, read the file and classify the migration state:
 
-| Condição | Estado |
-|----------|--------|
-| `pendingAgents.length > 0` ou `currentAgent.agent` diferente de `null` | em andamento |
-| `currentAgent.status == "awaiting_user_approval"` | pausa intra-agente pendente |
-| `pendingAgents.length == 0`, `currentAgent.agent == null` e `<output_folder>/migration/handoff.md` existe | concluída |
+| Condition | State |
+|-----------|-------|
+| `pendingAgents.length > 0` or `currentAgent.agent` is not `null` | in progress |
+| `currentAgent.status == "awaiting_user_approval"` | pending intra-agent pause |
+| `pendingAgents.length == 0`, `currentAgent.agent == null` and `<output_folder>/migration/handoff.md` exists | completed |
 
-Se o estado for **concluída**, pule esta seção (a migração já terminou, nada a perguntar) e siga para a seção 1.
+If the state is **completed**, skip this section (the migration is already finished, nothing to ask) and proceed to section 1.
 
-Se o estado for **em andamento** ou **pausa intra-agente pendente**, apresente a pergunta ao usuário antes de qualquer outra coisa:
+If the state is **in progress** or **pending intra-agent pause**, present the question to the user before anything else:
 
-> "[Nome], encontrei uma **migração em andamento** em `<output_folder>/migration/`.
+> "[Name], I found a **migration in progress** in `<output_folder>/migration/`.
 >
-> - Concluído: <N> de 6 agentes (<lista de completedAgents>)
-> - Pendente: <lista de pendingAgents>
-> - Estado atual: <currentAgent.agent ou \"aguardando aprovação humana\">
+> - Completed: <N> of 6 agents (<list of completedAgents>)
+> - Pending: <list of pendingAgents>
+> - Current state: <currentAgent.agent or "awaiting human approval">
 >
-> Como prefere continuar:
+> How would you like to continue:
 >
-> 1. **Retomar a migração**: volta ao Time de Migração de onde parou
-> 2. **Retomar o fluxo do Reversa**: segue descoberta/forward, ignora migração por agora
-> 3. **Cancelar**: encerra esta sessão sem mudar nada
-> 4. **Outro**: descreva o que prefere fazer
+> 1. **Resume the migration**: returns to the Migration Team where it stopped
+> 2. **Resume the Reversa flow**: continues discovery/forward, ignores migration for now
+> 3. **Cancel**: ends this session without changing anything
+> 4. **Other**: describe what you prefer to do
 >
-> Use o mecanismo de menu interativo da engine (no Claude Code, `AskUserQuestion`); em engines sem suporte a menu, peça que o usuário digite o número 1–4 ou texto livre."
+> Use the engine's interactive menu mechanism (in Claude Code, `AskUserQuestion`); in engines without menu support, ask the user to type 1-4 or free text."
 
-Aguarde a resposta. NÃO escolha por conta própria.
+Wait for the response. DO NOT choose on your own.
 
-- Se **1**: encerre o `/reversa` aqui com a instrução final:
-  > "Para retomar a migração, digite `/reversa-migrate`. Ele detecta o estado salvo e oferece as opções de retomada."
+- If **1**: end `/reversa` here with the final instruction:
+  > "To resume the migration, type `/reversa-migrate`. It detects the saved state and offers resume options."
   
-  NÃO ative `reversa-migrate` automaticamente, deixe o usuário digitar (padrão de handoff explícito do Reversa).
-- Se **2**: prossiga com a seção 1 deste passo normalmente.
-- Se **3**: encerre sem fazer nada.
-- Se **4** (texto livre): interprete a intenção do usuário e ofereça a melhor rota possível, sem inventar fluxos novos. Se a intenção for ambígua, refaça a pergunta uma vez antes de decidir.
+  Do NOT activate `reversa-migrate` automatically, let the user type it (Reversa's explicit handoff default).
+- If **2**: proceed with section 1 of this step normally.
+- If **3**: end without doing anything.
+- If **4** (free text): interpret the user's intent and offer the best possible route, without inventing new flows. If the intent is ambiguous, re-ask the question once before deciding.
 
-## 1. Leitura do estado
+## 1. Read State
 
-Leia `.reversa/state.json` e `.reversa/plan.md`.
+Read `.reversa/state.json` and `.reversa/plan.md`.
 
-## 2. Verificação de versão
+## 2. Version Check
 
-Compare `.reversa/version` com o npm registry. Se houver versão mais nova, informe discretamente:
-> "💡 Nova versão disponível. Execute `npx reversa update` quando quiser atualizar."
+Compare `.reversa/version` with the npm registry. If there is a newer version, discreetly inform:
+> "💡 New version available. Run `npx reversa update` when you want to update."
 
-## 3. Saudação
+## 3. Greeting
 
-Diga: "[Nome], bem-vindo de volta ao Reversa! 🎼"
+Say: "[Name], welcome back to Reversa! 🎼"
 
-## 4. Resumo de progresso
+## 4. Progress Summary
 
-Mostre:
-- ✅ Fases concluídas (campo `completed` do state.json)
-- 🔄 Fase atual (campo `phase`) com a última tarefa registrada em `checkpoints`
-- ⏳ Próximas fases (campo `pending`)
+Show:
+- ✅ Completed phases (`completed` field in state.json)
+- 🔄 Current phase (`phase` field) with the last task recorded in `checkpoints`
+- ⏳ Next phases (`pending` field)
 
-Exemplo:
-> "Progresso atual:
-> ✅ Reconhecimento concluído
-> 🔄 Escavação em andamento — módulos `auth` e `orders` analisados, `payments` e `users` pendentes
-> ⏳ Interpretação, Geração, Revisão"
+Example:
+> "Current progress:
+> ✅ Recognition completed
+> 🔄 Excavation in progress — modules `auth` and `orders` analyzed, `payments` and `users` pending
+> ⏳ Interpretation, Generation, Review"
 
-## 5. Modo de resposta a lacunas
+## 5. Gap Answer Mode
 
-Se `answer_mode` for `"file"`:
-> "Lembre-se: suas respostas às perguntas devem ser preenchidas em `_reversa_sdd/questions.md`. Me avise quando terminar."
+If `answer_mode` is `"file"`:
+> "Reminder: your answers to questions should be filled in `_reversa_sdd/questions.md`. Let me know when you're done."
 
-Se `answer_mode` for `"chat"` (padrão):
-> Continue normalmente — farei as perguntas aqui no chat.
+If `answer_mode` is `"chat"` (default):
+> Continue normally — I'll ask the questions here in chat.
 
-## 6. Confirmação
+## 6. Confirmation
 
-Pergunte apenas: "Continuamos de onde paramos? (CONTINUAR para seguir)"
+Ask only: "Shall we continue from where we left off? (CONTINUE to proceed)"
 
-Após confirmação, retome a próxima tarefa pendente no plano (`.reversa/plan.md`).
+After confirmation, resume the next pending task in the plan (`.reversa/plan.md`).
 
-**🚫 Não ofereça `/clear` + `/reversa` neste momento.** O usuário acabou de retomar a sessão; pedir para limpar e reabrir agora é redundante. O prompt de pausa entre etapas (descrito em `SKILL.md`, seção "Checkpoint preventivo entre etapas") só vale **depois** que um agente concluir trabalho dentro desta sessão, nunca na própria saudação de retomada.
+**🚫 Do not offer `/clear` + `/reversa` at this point.** The user just resumed the session; asking to clear and reopen now is redundant. The pause prompt between steps (described in `SKILL.md`, section "Preventive Checkpoint Between Steps") only applies **after** an agent completes work within this session, never in the resume greeting itself.
 
-Consulte `references/checkpoint-guide.md` para as regras de escrita no state.json.
+See `references/checkpoint-guide.md` for the rules for writing to state.json.

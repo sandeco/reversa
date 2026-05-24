@@ -1,49 +1,49 @@
-# [Nome da Unit], Design Técnico
+# [Unit Name], Technical Design
 
-> Template do arquivo `design.md`. Foca no COMO a unit é construída, com base no código legado lido.
+> Template for the `design.md` file. Focuses on HOW the unit is built, based on the legacy code read.
 
 ## Interface
-[Entradas, saídas, parâmetros, tipos de dados]
+[Inputs, outputs, parameters, data types]
 
-Para endpoints HTTP:
+For HTTP endpoints:
 
-| Método | Caminho | Entrada | Saída | Status codes |
-|--------|---------|---------|-------|--------------|
-| GET | `/recurso/:id` | `id: string` | `Recurso` | 200, 404 |
-| POST | `/recurso` | `RecursoCreate` | `Recurso` | 201, 400, 409 |
+| Method | Path | Input | Output | Status codes |
+|--------|------|-------|--------|--------------|
+| GET | `/resource/:id` | `id: string` | `Resource` | 200, 404 |
+| POST | `/resource` | `ResourceCreate` | `Resource` | 201, 400, 409 |
 
-Para classes/funções:
+For classes/functions:
 
-| Símbolo | Assinatura | Retorno | Observação |
-|---------|-----------|---------|------------|
-| `NomeDaClasse.metodo` | `(arg1: T, arg2: U)` | `V` | [Detalhe relevante] |
+| Symbol | Signature | Return | Note |
+|--------|-----------|--------|------|
+| `ClassName.method` | `(arg1: T, arg2: U)` | `V` | [Relevant detail] |
 
-## Fluxo Principal
-1. [Passo 1, com referência ao arquivo legado quando aplicável]
-2. [Passo 2]
-3. [Passo N]
+## Main Flow
+1. [Step 1, with reference to the legacy file when applicable]
+2. [Step 2]
+3. [Step N]
 
-## Fluxos Alternativos
-- **[Condição especial]:** [comportamento]
-- **[Caso de erro]:** [comportamento]
+## Alternative Flows
+- **[Special condition]:** [behavior]
+- **[Error case]:** [behavior]
 
-## Dependências
-- [Componente X], [motivo, como usa]
-- [Serviço Y], [motivo, como usa]
+## Dependencies
+- [Component X], [reason, how it is used]
+- [Service Y], [reason, how it is used]
 
-## Decisões de Design Identificadas
+## Identified Design Decisions
 
-| Decisão | Evidência no código | Confiança |
-|---------|---------------------|-----------|
-| [ex: persistência via Prisma com soft-delete] | `prisma/schema.prisma:42` | 🟢 |
-| [ex: cache em memória com TTL de 5min] | `cache/store.ts:18` | 🟡 |
+| Decision | Code Evidence | Confidence |
+|----------|---------------|------------|
+| [e.g., persistence via Prisma with soft-delete] | `prisma/schema.prisma:42` | 🟢 |
+| [e.g., in-memory cache with 5min TTL] | `cache/store.ts:18` | 🟡 |
 
-## Estado Interno
-[Se a unit mantém estado, descrever quais campos, onde são armazenados, como evoluem]
+## Internal State
+[If the unit maintains state, describe which fields, where they are stored, how they evolve]
 
-## Observabilidade
-[Logs, métricas, traces emitidos pela unit, com referência ao código]
+## Observability
+[Logs, metrics, traces emitted by the unit, with reference to code]
 
-## Riscos e Lacunas
-- 🔴 [Comportamento que não foi possível inferir do código, requer validação humana]
-- 🟡 [Suposição que pode estar errada]
+## Risks and Gaps
+- 🔴 [Behavior that could not be inferred from code, requires human validation]
+- 🟡 [Assumption that may be wrong]

@@ -1,62 +1,62 @@
-# [Nome da Unit]
+# [Unit Name]
 
-> Template do arquivo `requirements.md`. Foca no QUE a unit faz, não no como.
+> Template for the `requirements.md` file. Focuses on WHAT the unit does, not how.
 
-## Visão Geral
-[O que é, qual problema resolve, 2 a 3 linhas]
+## Overview
+[What it is, what problem it solves, 2 to 3 lines]
 
-## Responsabilidades
-- [Responsabilidade 1]
-- [Responsabilidade 2]
+## Responsibilities
+- [Responsibility 1]
+- [Responsibility 2]
 
-## Regras de Negócio
-- [Regra 1] 🟢
-- [Regra 2] 🟡
-- [Comportamento desconhecido] 🔴
+## Business Rules
+- [Rule 1] 🟢
+- [Rule 2] 🟡
+- [Unknown behavior] 🔴
 
-## Requisitos Funcionais
+## Functional Requirements
 
-| ID | Requisito | Prioridade | Critério de Aceite |
-|----|-----------|-----------|-------------------|
-| RF-01 | [Descrição] | Must | [Como validar] |
-| RF-02 | [Descrição] | Should | [Como validar] |
+| ID | Requirement | Priority | Acceptance Criterion |
+|----|-------------|----------|---------------------|
+| FR-01 | [Description] | Must | [How to validate] |
+| FR-02 | [Description] | Should | [How to validate] |
 
-## Requisitos Não Funcionais
+## Non-Functional Requirements
 
-| Tipo | Requisito inferido | Evidência no código | Confiança |
-|------|--------------------|---------------------|-----------|
-| Performance | [ex: timeout de 30s em chamadas externas] | `caminho/arquivo.ext:linha` | 🟢 |
-| Segurança | [ex: autenticação obrigatória na rota] | `caminho/arquivo.ext:linha` | 🟡 |
-| Escalabilidade | [ex: uso de cache Redis] | `caminho/arquivo.ext:linha` | 🟢 |
-| Disponibilidade | [ex: retry automático em falha] | `caminho/arquivo.ext:linha` | 🟡 |
+| Type | Inferred Requirement | Code Evidence | Confidence |
+|------|---------------------|---------------|------------|
+| Performance | [e.g., 30s timeout on external calls] | `path/file.ext:line` | 🟢 |
+| Security | [e.g., mandatory authentication on route] | `path/file.ext:line` | 🟡 |
+| Scalability | [e.g., Redis cache usage] | `path/file.ext:line` | 🟢 |
+| Availability | [e.g., automatic retry on failure] | `path/file.ext:line` | 🟡 |
 
-> Inferido a partir do código. Validar com equipe de operações.
+> Inferred from code. Validate with operations team.
 
-## Critérios de Aceitação
+## Acceptance Criteria
 
 ```gherkin
-Dado [pré-condição]
-Quando [ação]
-Então [resultado esperado]
+Given [precondition]
+When [action]
+Then [expected result]
 
-Dado [condição de erro]
-Quando [ação inválida]
-Então [comportamento de falha esperado]
+Given [error condition]
+When [invalid action]
+Then [expected failure behavior]
 ```
 
-## Prioridade (MoSCoW)
+## Priority (MoSCoW)
 
-| Requisito | MoSCoW | Justificativa |
-|-----------|--------|---------------|
-| [Responsabilidade principal] | Must | Caminho crítico, chamado em todo fluxo |
-| [Regra de negócio central] | Must | Regra de negócio sem fallback |
-| [Funcionalidade secundária] | Should | Importante mas com alternativa |
-| [Caso de borda] | Could | Raramente acionado |
+| Requirement | MoSCoW | Justification |
+|-------------|--------|---------------|
+| [Main responsibility] | Must | Critical path, called in every flow |
+| [Central business rule] | Must | Business rule without fallback |
+| [Secondary feature] | Should | Important but with alternative |
+| [Edge case] | Could | Rarely triggered |
 
-> Prioridade inferida por frequência de chamada e posição na cadeia de dependências.
+> Priority inferred by call frequency and position in the dependency chain.
 
-## Rastreabilidade de Código
+## Code Traceability
 
-| Arquivo | Função / Classe | Cobertura |
-|---------|-----------------|-----------|
-| `caminho/arquivo.ext` | `NomeDaClasse` | 🟢 |
+| File | Function / Class | Coverage |
+|------|-----------------|----------|
+| `path/file.ext` | `ClassName` | 🟢 |
