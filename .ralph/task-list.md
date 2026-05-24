@@ -6,8 +6,8 @@
 
 ## Progress
 
-**Current Phase:** 1.1 Core agents — Reconstrutor (1 remaining)
-**Overall:** 26/134 files completed
+**Current Phase:** 1.1 Core agents — DONE (0 remaining)
+**Overall:** 27/134 files completed
 
 ---
 
@@ -15,7 +15,7 @@
 
 - [x] `agents/reversa-reconstructor/SKILL.md`
 - [x] `agents/reversa-reconstructor/references/reconstruction-plan-template.md`
-- [ ] `agents/reversa-reconstructor/references/reconstruction-plan-migration-template.md`
+- [x] `agents/reversa-reconstructor/references/reconstruction-plan-migration-template.md`
 
 ### Phase 1.2: Forward cycle agents (11 files)
 
