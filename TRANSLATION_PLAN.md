@@ -9,25 +9,24 @@
 
 ## Progress
 
-> **Last updated**: 2026-05-24
-> **Last session**: Ralph loop completed — Phase 1.1 (Core agents) mostly done (24/27 files).
+> **Last updated**: 2026-05-25
+> **Last session**: All tracked document files were translated to English. Phase 4 decision items remain intentionally pending because they are cleanup/renaming decisions, not document translations.
 
 | Phase | Status | Progress |
 |---|---|---|
-| 1.1 Core agents | 🔄 In progress | 24/27 |
-| 1.2 Forward cycle agents | ⏸️ Pending | 0/11 |
-| 1.3 Migration team agents | ⏸️ Pending | 0/14 |
-| 1.4 New project agents | ⏸️ Pending | 0/9 |
-| 1.5 Visualization & specialist agents | ⏸️ Pending | 0/19 |
-| 1.6 Pricing agents | ⏸️ Pending | 0/6 |
-| 1.7 Docs team agents | ⏸️ Pending | 0/10 |
-| 2.1 Forward templates | ⏸️ Pending | 0/8 |
-| 2.2 Migration templates | ⏸️ Pending | 0/21 |
-| 2.3 Engine config files | ⏸️ Pending | 0/5 |
-| 2.4 Documentation templates | ⏸️ Pending | 0/9 |
-| 3. Configuration & Metadata | ⏸️ Pending | 0/5 |
-| 4. Cleanup & Renaming | ⏸️ Pending | 0/5 |
-| **Total** | 🔄 In progress | **24/134** |
+| 1.1 Core agents | ✅ Complete | 27/27 |
+| 1.2 Forward cycle agents | ✅ Complete | 11/11 |
+| 1.3 Migration team agents | ✅ Complete | 16/16 |
+| 1.4 New project agents | ✅ Complete | 9/9 |
+| 1.5 Visualization & specialist agents | ✅ Complete | 22/22 |
+| 1.6 Pricing agents | ✅ Complete | 6/6 |
+| 1.7 Docs team agents | ✅ Complete | 8/8 |
+| 2.1 Forward templates | ✅ Complete | 8/8 |
+| 2.2 Migration templates | ✅ Complete | 18/18 |
+| 2.3 Engine config files | ✅ Complete | 5/5 |
+| 2.4 Documentation templates | ✅ Complete | 9/9 |
+| 3. Configuration & Metadata | ✅ Complete | 5/5 |
+| **Total tracked document files** | ✅ Complete | **144/144** |
 
 ---
 
@@ -77,99 +76,99 @@
 - [x] `agents/reversa-data-master/SKILL.md`
 - [x] `agents/reversa-design-system/SKILL.md`
 - [x] `agents/reversa-agents-help/SKILL.md`
-- [ ] `agents/reversa-reconstructor/SKILL.md`
-- [ ] `agents/reversa-reconstructor/references/reconstruction-plan-template.md`
-- [ ] `agents/reversa-reconstructor/references/reconstruction-plan-migration-template.md`
+- [x] `agents/reversa-reconstructor/SKILL.md`
+- [x] `agents/reversa-reconstructor/references/reconstruction-plan-template.md`
+- [x] `agents/reversa-reconstructor/references/reconstruction-plan-migration-template.md`
 
 ### 1.2. Forward cycle agents
 
-- [ ] `agents/reversa-extract-soul/SKILL.md`
-- [ ] `agents/reversa-requirements/SKILL.md`
-- [ ] `agents/reversa-clarify/SKILL.md`
-- [ ] `agents/reversa-plan/SKILL.md`
-- [ ] `agents/reversa-to-do/SKILL.md`
-- [ ] `agents/reversa-coding/SKILL.md`
-- [ ] `agents/reversa-audit/SKILL.md`
-- [ ] `agents/reversa-quality/SKILL.md`
-- [ ] `agents/reversa-forward/SKILL.md`
-- [ ] `agents/reversa-resume/SKILL.md`
-- [ ] `agents/reversa-principles/SKILL.md`
+- [x] `agents/reversa-extract-soul/SKILL.md`
+- [x] `agents/reversa-requirements/SKILL.md`
+- [x] `agents/reversa-clarify/SKILL.md`
+- [x] `agents/reversa-plan/SKILL.md`
+- [x] `agents/reversa-to-do/SKILL.md`
+- [x] `agents/reversa-coding/SKILL.md`
+- [x] `agents/reversa-audit/SKILL.md`
+- [x] `agents/reversa-quality/SKILL.md`
+- [x] `agents/reversa-forward/SKILL.md`
+- [x] `agents/reversa-resume/SKILL.md`
+- [x] `agents/reversa-principles/SKILL.md`
 
 ### 1.3. Migration team agents
 
-- [ ] `agents/reversa-migrate/SKILL.md`
-- [ ] `agents/reversa-migrate/references/auto-defaults.md`
-- [ ] `agents/reversa-migrate/references/handoff-checklist.md`
-- [ ] `agents/reversa-paradigm-advisor/SKILL.md`
-- [ ] `agents/reversa-paradigm-advisor/references/paradigm-catalog.md`
-- [ ] `agents/reversa-curator/SKILL.md`
-- [ ] `agents/reversa-curator/references/decision-rubric.md`
-- [ ] `agents/reversa-strategist/SKILL.md`
-- [ ] `agents/reversa-strategist/references/migration-strategies.md`
-- [ ] `agents/reversa-designer/SKILL.md`
-- [ ] `agents/reversa-designer/references/paradigm-checklist.md`
-- [ ] `agents/reversa-screen-translator/SKILL.md`
-- [ ] `agents/reversa-screen-translator/references/adapter-pairs.md`
-- [ ] `agents/reversa-screen-translator/references/platform-detection.md`
-- [ ] `agents/reversa-inspector/SKILL.md`
-- [ ] `agents/reversa-inspector/references/parity-coverage-matrix.md`
+- [x] `agents/reversa-migrate/SKILL.md`
+- [x] `agents/reversa-migrate/references/auto-defaults.md`
+- [x] `agents/reversa-migrate/references/handoff-checklist.md`
+- [x] `agents/reversa-paradigm-advisor/SKILL.md`
+- [x] `agents/reversa-paradigm-advisor/references/paradigm-catalog.md`
+- [x] `agents/reversa-curator/SKILL.md`
+- [x] `agents/reversa-curator/references/decision-rubric.md`
+- [x] `agents/reversa-strategist/SKILL.md`
+- [x] `agents/reversa-strategist/references/migration-strategies.md`
+- [x] `agents/reversa-designer/SKILL.md`
+- [x] `agents/reversa-designer/references/paradigm-checklist.md`
+- [x] `agents/reversa-screen-translator/SKILL.md`
+- [x] `agents/reversa-screen-translator/references/adapter-pairs.md`
+- [x] `agents/reversa-screen-translator/references/platform-detection.md`
+- [x] `agents/reversa-inspector/SKILL.md`
+- [x] `agents/reversa-inspector/references/parity-coverage-matrix.md`
 
 ### 1.4. New project agents
 
-- [ ] `agents/reversa-new/SKILL.md`
-- [ ] `agents/reversa-ideator/SKILL.md`
-- [ ] `agents/reversa-researcher/SKILL.md`
-- [ ] `agents/reversa-drafter/SKILL.md`
-- [ ] `agents/reversa-spec-sdd/SKILL.md`
-- [ ] `agents/reversa-spec-sdd/references/sdd_guide.md`
-- [ ] `agents/reversa-spec-sdd/references/evaluation_rubric.md`
-- [ ] `agents/reversa-spec-sdd/references/spec_template.md`
-- [ ] `agents/reversa-spec-sdd/assets/spec_examples.md`
+- [x] `agents/reversa-new/SKILL.md`
+- [x] `agents/reversa-ideator/SKILL.md`
+- [x] `agents/reversa-researcher/SKILL.md`
+- [x] `agents/reversa-drafter/SKILL.md`
+- [x] `agents/reversa-spec-sdd/SKILL.md`
+- [x] `agents/reversa-spec-sdd/references/sdd_guide.md`
+- [x] `agents/reversa-spec-sdd/references/evaluation_rubric.md`
+- [x] `agents/reversa-spec-sdd/references/spec_template.md`
+- [x] `agents/reversa-spec-sdd/assets/spec_examples.md`
 
 ### 1.5. Visualization & specialist agents
 
-- [ ] `agents/reversa-arquitetura-3d/SKILL.md`
-- [ ] `agents/reversa-arquitetura-3d/references/ARCH_TOUR.md`
-- [ ] `agents/reversa-arquitetura-3d/references/CALL_GRAPH_3D.md`
-- [ ] `agents/reversa-arquitetura-3d/references/CODE_CITY.md`
-- [ ] `agents/reversa-arquitetura-3d/references/DEPENDENCY_GRAPH_3D.md`
-- [ ] `agents/reversa-arquitetura-3d/references/ERRORS.md`
-- [ ] `agents/reversa-arquitetura-3d/references/LAYER_STACK.md`
-- [ ] `agents/reversa-arquitetura-3d/references/THREE_PATTERNS.md`
-- [ ] `agents/reversa-especialista-d3/SKILL.md`
-- [ ] `agents/reversa-especialista-d3/references/api-core.md`
-- [ ] `agents/reversa-especialista-d3/references/interatividade.md`
-- [ ] `agents/reversa-especialista-d3/references/layouts-complexos.md`
-- [ ] `agents/reversa-highcharts-visualizer/SKILL.md`
-- [ ] `agents/reversa-highcharts-visualizer/references/CHART_CATALOG.md`
-- [ ] `agents/reversa-highcharts-visualizer/references/ERRORS.md`
-- [ ] `agents/reversa-highcharts-visualizer/references/HIGHCHARTS_PATTERNS.md`
-- [ ] `agents/reversa-selo-generativo/SKILL.md`
-- [ ] `agents/reversa-selo-generativo/references/ERRORS.md`
-- [ ] `agents/reversa-selo-generativo/references/GENERATIVE_PATTERNS.md`
-- [ ] `agents/reversa-selo-generativo/references/PALETTE_BY_STYLE.md`
-- [ ] `agents/reversa-image-prompt-json/SKILL.md`
-- [ ] `agents/reversa-image-prompt-json/references/Examples.md`
+- [x] `agents/reversa-arquitetura-3d/SKILL.md`
+- [x] `agents/reversa-arquitetura-3d/references/ARCH_TOUR.md`
+- [x] `agents/reversa-arquitetura-3d/references/CALL_GRAPH_3D.md`
+- [x] `agents/reversa-arquitetura-3d/references/CODE_CITY.md`
+- [x] `agents/reversa-arquitetura-3d/references/DEPENDENCY_GRAPH_3D.md`
+- [x] `agents/reversa-arquitetura-3d/references/ERRORS.md`
+- [x] `agents/reversa-arquitetura-3d/references/LAYER_STACK.md`
+- [x] `agents/reversa-arquitetura-3d/references/THREE_PATTERNS.md`
+- [x] `agents/reversa-especialista-d3/SKILL.md`
+- [x] `agents/reversa-especialista-d3/references/api-core.md`
+- [x] `agents/reversa-especialista-d3/references/interatividade.md`
+- [x] `agents/reversa-especialista-d3/references/layouts-complexos.md`
+- [x] `agents/reversa-highcharts-visualizer/SKILL.md`
+- [x] `agents/reversa-highcharts-visualizer/references/CHART_CATALOG.md`
+- [x] `agents/reversa-highcharts-visualizer/references/ERRORS.md`
+- [x] `agents/reversa-highcharts-visualizer/references/HIGHCHARTS_PATTERNS.md`
+- [x] `agents/reversa-selo-generativo/SKILL.md`
+- [x] `agents/reversa-selo-generativo/references/ERRORS.md`
+- [x] `agents/reversa-selo-generativo/references/GENERATIVE_PATTERNS.md`
+- [x] `agents/reversa-selo-generativo/references/PALETTE_BY_STYLE.md`
+- [x] `agents/reversa-image-prompt-json/SKILL.md`
+- [x] `agents/reversa-image-prompt-json/references/Examples.md`
 
 ### 1.6. Pricing agents
 
-- [ ] `agents/reversa-pricing-profile/SKILL.md`
-- [ ] `agents/reversa-pricing-size/SKILL.md`
-- [ ] `agents/reversa-pricing-estimate/SKILL.md`
-- [ ] `agents/reversa-pricing-estimate/references/effort-formula.md`
-- [ ] `agents/reversa-pricing-estimate/references/market-benchmarks.md`
-- [ ] `agents/reversa-pricing-estimate/references/value-formula.md`
+- [x] `agents/reversa-pricing-profile/SKILL.md`
+- [x] `agents/reversa-pricing-size/SKILL.md`
+- [x] `agents/reversa-pricing-estimate/SKILL.md`
+- [x] `agents/reversa-pricing-estimate/references/effort-formula.md`
+- [x] `agents/reversa-pricing-estimate/references/market-benchmarks.md`
+- [x] `agents/reversa-pricing-estimate/references/value-formula.md`
 
 ### 1.7. Docs team agents
 
-- [ ] `agents/reversa-docs/SKILL.md`
-- [ ] `agents/reversa-docs-analyst/SKILL.md`
-- [ ] `agents/reversa-docs-mapper/SKILL.md`
-- [ ] `agents/reversa-docs-mapper/references/extraction-policy.md`
-- [ ] `agents/reversa-docs-publisher/SKILL.md`
-- [ ] `agents/reversa-docs-storyteller/SKILL.md`
-- [ ] `agents/reversa-n8n/SKILL.md`
-- [ ] `agents/reversa-n8n/references/node-catalog.md`
+- [x] `agents/reversa-docs/SKILL.md`
+- [x] `agents/reversa-docs-analyst/SKILL.md`
+- [x] `agents/reversa-docs-mapper/SKILL.md`
+- [x] `agents/reversa-docs-mapper/references/extraction-policy.md`
+- [x] `agents/reversa-docs-publisher/SKILL.md`
+- [x] `agents/reversa-docs-storyteller/SKILL.md`
+- [x] `agents/reversa-n8n/SKILL.md`
+- [x] `agents/reversa-n8n/references/node-catalog.md`
 
 ---
 
@@ -177,65 +176,65 @@
 
 ### 2.1. Forward templates
 
-- [ ] `templates/forward/body/requirements-template.md`
-- [ ] `templates/forward/body/actions-template.md`
-- [ ] `templates/forward/body/roadmap-template.md`
-- [ ] `templates/forward/body/principles-template.md`
-- [ ] `templates/forward/body/quality-template.md`
-- [ ] `templates/forward/scripts/sh/bind-to-extraction.sh`
-- [ ] `templates/forward/scripts/sh/prepare-roadmap.sh`
-- [ ] `templates/forward/scripts/sh/verify-prerequisites.sh`
+- [x] `templates/forward/body/requirements-template.md`
+- [x] `templates/forward/body/actions-template.md`
+- [x] `templates/forward/body/roadmap-template.md`
+- [x] `templates/forward/body/principles-template.md`
+- [x] `templates/forward/body/quality-template.md`
+- [x] `templates/forward/scripts/sh/bind-to-extraction.sh`
+- [x] `templates/forward/scripts/sh/prepare-roadmap.sh`
+- [x] `templates/forward/scripts/sh/verify-prerequisites.sh`
 
 ### 2.2. Migration templates
 
-- [ ] `templates/migration/artifacts/ambiguity_log.md`
-- [ ] `templates/migration/artifacts/cutover_plan.md`
-- [ ] `templates/migration/artifacts/data_migration_plan.md`
-- [ ] `templates/migration/artifacts/discard_log.md`
-- [ ] `templates/migration/artifacts/handoff.md`
-- [ ] `templates/migration/artifacts/migration_brief.md`
-- [ ] `templates/migration/artifacts/migration_strategy.md`
-- [ ] `templates/migration/artifacts/paradigm_decision.md`
-- [ ] `templates/migration/artifacts/parity_specs.md`
-- [ ] `templates/migration/artifacts/pending_decisions.md`
-- [ ] `templates/migration/artifacts/risk_register.md`
-- [ ] `templates/migration/artifacts/target_architecture.md`
-- [ ] `templates/migration/artifacts/target_business_rules.md`
-- [ ] `templates/migration/artifacts/target_data_model.md`
-- [ ] `templates/migration/artifacts/target_domain_model.md`
-- [ ] `templates/migration/catalogs/migration_strategies.md`
-- [ ] `templates/migration/catalogs/paradigm_catalog.md`
-- [ ] `templates/plan.md`
+- [x] `templates/migration/artifacts/ambiguity_log.md`
+- [x] `templates/migration/artifacts/cutover_plan.md`
+- [x] `templates/migration/artifacts/data_migration_plan.md`
+- [x] `templates/migration/artifacts/discard_log.md`
+- [x] `templates/migration/artifacts/handoff.md`
+- [x] `templates/migration/artifacts/migration_brief.md`
+- [x] `templates/migration/artifacts/migration_strategy.md`
+- [x] `templates/migration/artifacts/paradigm_decision.md`
+- [x] `templates/migration/artifacts/parity_specs.md`
+- [x] `templates/migration/artifacts/pending_decisions.md`
+- [x] `templates/migration/artifacts/risk_register.md`
+- [x] `templates/migration/artifacts/target_architecture.md`
+- [x] `templates/migration/artifacts/target_business_rules.md`
+- [x] `templates/migration/artifacts/target_data_model.md`
+- [x] `templates/migration/artifacts/target_domain_model.md`
+- [x] `templates/migration/catalogs/migration_strategies.md`
+- [x] `templates/migration/catalogs/paradigm_catalog.md`
+- [x] `templates/plan.md`
 
 ### 2.3. Engine config files
 
-- [ ] `templates/engines/amazonq`
-- [ ] `templates/engines/clinerules`
-- [ ] `templates/engines/cursorrules`
-- [ ] `templates/engines/roorules`
-- [ ] `templates/engines/windsurf`
+- [x] `templates/engines/amazonq`
+- [x] `templates/engines/clinerules`
+- [x] `templates/engines/cursorrules`
+- [x] `templates/engines/roorules`
+- [x] `templates/engines/windsurf`
 
 ### 2.4. Documentation templates (HTML/TPL)
 
-- [ ] `templates/documentation/pages/index.html.tpl`
-- [ ] `templates/documentation/pages/arquitetura.html.tpl`
-- [ ] `templates/documentation/pages/modulos.html.tpl`
-- [ ] `templates/documentation/pages/glossario.html.tpl`
-- [ ] `templates/documentation/pages/metricas.html.tpl`
-- [ ] `templates/documentation/pages/timeline.html.tpl`
-- [ ] `templates/documentation/pages/topologia.html.tpl`
-- [ ] `templates/documentation/pages/deck.html.tpl`
-- [ ] `templates/documentation/pages/features/feature.html.tpl`
+- [x] `templates/documentation/pages/index.html.tpl`
+- [x] `templates/documentation/pages/arquitetura.html.tpl`
+- [x] `templates/documentation/pages/modulos.html.tpl`
+- [x] `templates/documentation/pages/glossario.html.tpl`
+- [x] `templates/documentation/pages/metricas.html.tpl`
+- [x] `templates/documentation/pages/timeline.html.tpl`
+- [x] `templates/documentation/pages/topologia.html.tpl`
+- [x] `templates/documentation/pages/deck.html.tpl`
+- [x] `templates/documentation/pages/features/feature.html.tpl`
 
 ---
 
 ## Phase 3: Configuration & Metadata
 
-- [ ] `mkdocs.yml` — check for Portuguese config values
-- [ ] `README.md` — translate Portuguese content
-- [ ] `package.json` — check descriptions
-- [ ] `templates/config.toml` — check for Portuguese comments
-- [ ] `templates/config.user.toml` — check for Portuguese comments
+- [x] `mkdocs.yml` — check for Portuguese config values
+- [x] `README.md` — translate Portuguese content
+- [x] `package.json` — check descriptions
+- [x] `templates/config.toml` — check for Portuguese comments
+- [x] `templates/config.user.toml` — check for Portuguese comments
 
 ---
 
