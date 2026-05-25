@@ -1,35 +1,35 @@
-# Tratamento de Erros — Highcharts Visualizer
+# Error Handling — Highcharts Visualizer
 
-## Dados insuficientes ou vazios
+## Insufficient or empty data
 
-**Sintoma:** Gráfico renderiza vazio ou com mensagem "No data to display".
+**Symptom:** Chart renders empty or with the message "No data to display".
 
-**Ação:** Configurar `noData` module ou verificar os dados antes de criar o gráfico:
+**Action:** Configure the `noData` module or verify the data before creating the chart:
 ```javascript
-// Incluir: modules/no-data-to-display.js
-lang: { noData: 'Nenhum dado disponível para exibir' },
+// Include: modules/no-data-to-display.js
+lang: { noData: 'No data available to display' },
 noData: { style: { fontWeight: 'bold', fontSize: '16px', color: '#666' } }
 ```
 
-Avisar o usuário:
-> "Os dados fornecidos parecem estar vazios ou não foram processados corretamente. Poderia verificar?"
+Warn the user:
+> "The provided data seems to be empty or was not processed correctly. Could you check it?"
 
-## Formato de dados incompatível
+## Incompatible data format
 
-**Sintoma:** Erro no console ou gráfico com valores NaN/undefined.
+**Symptom:** Console error or chart with NaN/undefined values.
 
-**Ação:** Validar dados com `scripts/parse_data.py` antes de embutir. O script converte automaticamente
-strings numéricas ("1.234,56" → 1234.56) e datas em múltiplos formatos.
+**Action:** Validate data with `scripts/parse_data.py` before embedding. The script automatically converts
+numeric strings (`"1.234,56" → 1234.56`) and dates in multiple formats.
 
-## Módulo CDN não carrega
+## CDN module does not load
 
-**Sintoma:** Erro "Highcharts is not defined" ou tipo de gráfico não reconhecido.
+**Symptom:** Error "Highcharts is not defined" or chart type not recognized.
 
-**Ação:** Verificar ordem dos scripts. O core `highcharts.js` deve vir primeiro, depois os módulos.
-Para Stock/Maps/Gantt, usar o respectivo script principal (highstock.js, highmaps.js, highcharts-gantt.js)
-**no lugar de** highcharts.js, não junto.
+**Action:** Verify script order. Core `highcharts.js` must come first, then modules.
+For Stock/Maps/Gantt, use the respective main script (`highstock.js`, `highmaps.js`, `highcharts-gantt.js`)
+**instead of** highcharts.js, not alongside it.
 
-Ordem correta:
+Correct order:
 ```html
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
@@ -38,62 +38,62 @@ Ordem correta:
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 ```
 
-## Gráfico não responsivo
+## Chart is not responsive
 
-**Sintoma:** Gráfico não redimensiona com a janela, ou fica cortado.
+**Symptom:** Chart does not resize with the window, or gets clipped.
 
-**Ação:** Não definir `chart.width` fixo. Usar container com CSS responsivo.
-Garantir que `chart.reflow` não está desabilitado.
+**Action:** Do not set fixed `chart.width`. Use a responsive CSS container.
+Ensure `chart.reflow` is not disabled.
 
 ```javascript
 chart: { 
-    // NÃO definir width/height fixos
-    // Deixar o Highcharts adaptar ao container
+    // DO NOT define fixed width/height
+    // Let Highcharts adapt to the container
     reflow: true
 }
 ```
 
-## Performance lenta com muitos dados
+## Slow performance with lots of data
 
-**Sintoma:** Gráfico travando ou demorando para renderizar com >10.000 pontos.
+**Symptom:** Chart freezes or takes too long to render with >10,000 points.
 
-**Ação:**
-1. Incluir `modules/boost.js`
-2. Setar `boostThreshold: 5000` na série
-3. Desabilitar animações: `plotOptions: { series: { animation: false } }`
-4. Desabilitar markers: `marker: { enabled: false }`
-5. Considerar agregar dados (downsampling) via `scripts/analyze_data.py`
+**Action:**
+1. Include `modules/boost.js`
+2. Set `boostThreshold: 5000` on the series
+3. Disable animations: `plotOptions: { series: { animation: false } }`
+4. Disable markers: `marker: { enabled: false }`
+5. Consider aggregating data (downsampling) via `scripts/analyze_data.py`
 
-## Tooltips com valores incorretos
+## Tooltips with incorrect values
 
-**Sintoma:** Tooltip mostra "undefined" ou formato errado.
+**Symptom:** Tooltip shows "undefined" or wrong format.
 
-**Ação:** Verificar se os dados estão no formato correto para o tipo de gráfico.
-Usar `tooltip.formatter` customizado para ter controle total sobre o formato.
+**Action:** Verify that the data is in the correct format for the chart type.
+Use custom `tooltip.formatter` to have full control over the format.
 
-## Cores ilegíveis
+## Illegible colors
 
-**Sintoma:** Séries ou labels com contraste insuficiente.
+**Symptom:** Series or labels have insufficient contrast.
 
-**Ação:** Usar `Highcharts.getOptions().colors` para verificar a paleta ativa.
-Para dark mode, garantir que labels/grid/tick tem cores claras.
-O módulo de accessibility alerta sobre problemas de contraste.
+**Action:** Use `Highcharts.getOptions().colors` to inspect the active palette.
+For dark mode, ensure labels/grid/ticks use light colors.
+The accessibility module warns about contrast issues.
 
-## CSV com encoding diferente (UTF-8 BOM, Latin1)
+## CSV with different encoding (UTF-8 BOM, Latin1)
 
-**Sintoma:** Caracteres especiais (acentos) aparecem como "�" ou "Ã©".
+**Symptom:** Special characters (accents) appear as "�" or "Ã©".
 
-**Ação:** O `scripts/parse_data.py` tenta detectar encoding automaticamente.
-Se falhar, forçar encoding:
+**Action:** `scripts/parse_data.py` tries to detect encoding automatically.
+If it fails, force the encoding:
 ```bash
 python scripts/parse_data.py dados.csv --encoding latin1
 ```
 
-## Arquivo Excel com múltiplas abas
+## Excel file with multiple sheets
 
-**Sintoma:** Dados extraídos são de aba errada.
+**Symptom:** Extracted data comes from the wrong sheet.
 
-**Ação:**
+**Action:**
 ```bash
 python scripts/parse_data.py dados.xlsx --sheet "Planilha2"
 ```
