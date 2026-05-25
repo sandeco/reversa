@@ -1,42 +1,42 @@
 <!--
   Template: metricas.html
-  Produtor: reversa-docs-analyst
-  Skill invocada: highcharts-visualizer
+  Producer: reversa-docs-analyst
+  Invoked skill: highcharts-visualizer
   Page ID: metricas
-  Categoria reversa: diagram
-  Dados consumidos: assets/data/metrics.json
+  Reversa category: diagram
+  Data consumed: assets/data/metrics.json
 
-  Marcadores:
+  Markers:
   - HEAD_EXTRAS: <script src="assets/vendor/highcharts.js"></script>
                  + <script src="assets/vendor/highcharts-accessibility.js"></script>
                  + <script src="assets/vendor/highcharts-exporting.js"></script>
                  + <script src="assets/vendor/highcharts-treemap.js"></script>
                  + <script src="assets/vendor/highcharts-sankey.js"></script>
-                 (todos baixados pelo Publisher via vendor-pins.yaml,
+                 (all downloaded by the Publisher via vendor-pins.yaml,
                   highcharts@11.4.8)
-  - CHART_TREEMAP: container do treemap LOC
-  - CHART_COMPLEXITY: container das barras top 20
-  - CHART_HISTOGRAM: container do histograma
-  - CHART_SANKEY: container do sankey de dependências
-  - SCRIPTS: monta os charts a partir de window.RV_DATA.metrics (sem fetch local)
+  - CHART_TREEMAP: LOC treemap container
+  - CHART_COMPLEXITY: top 20 bars container
+  - CHART_HISTOGRAM: histogram container
+  - CHART_SANKEY: dependency sankey container
+  - SCRIPTS: builds the charts from window.RV_DATA.metrics (no local fetch)
 -->
 
 <!-- PAYLOAD_START -->
 <section class="reversa-doc-dashboard" data-layout="grid-2x2">
     <article class="reversa-doc-chart">
-        <h2>LOC por pasta</h2>
+        <h2>LOC by folder</h2>
         <div id="chart-treemap"><!-- CHART_TREEMAP --></div>
     </article>
     <article class="reversa-doc-chart">
-        <h2>Top 20 complexidade</h2>
+        <h2>Top 20 complexity</h2>
         <div id="chart-complexity"><!-- CHART_COMPLEXITY --></div>
     </article>
     <article class="reversa-doc-chart">
-        <h2>Distribuição de tamanho</h2>
+        <h2>Size distribution</h2>
         <div id="chart-histogram"><!-- CHART_HISTOGRAM --></div>
     </article>
     <article class="reversa-doc-chart">
-        <h2>Fluxo de dependências</h2>
+        <h2>Dependency flow</h2>
         <div id="chart-sankey"><!-- CHART_SANKEY --></div>
     </article>
 </section>
