@@ -1,21 +1,21 @@
-# Catálogo de Gráficos Highcharts
+# Highcharts Chart Catalog
 
-Referência completa dos 40+ tipos de gráfico com orientação de uso e exemplos de opções.
+Complete reference of 40+ chart types with usage guidance and option examples.
 
 ---
 
 ## 1. Line & Spline
 
-**Quando usar:** Tendências ao longo do tempo, séries temporais, evolução de métricas.
+**When to use:** Trends over time, time series, metric evolution.
 
-**Variantes:** `line`, `spline` (curvas suaves), `step` (degraus)
+**Variants:** `line`, `spline` (smooth curves), `step` (steps)
 
 ```javascript
 {
     chart: { type: 'line' },
-    title: { text: 'Título do Gráfico' },
-    xAxis: { categories: ['Jan','Fev','Mar','Abr','Mai','Jun'] },
-    yAxis: { title: { text: 'Valores' } },
+    title: { text: 'Chart Title' },
+    xAxis: { categories: ['Jan','Feb','Mar','Apr','May','Jun'] },
+    yAxis: { title: { text: 'Values' } },
     plotOptions: {
         line: {
             dataLabels: { enabled: true },
@@ -23,7 +23,7 @@ Referência completa dos 40+ tipos de gráfico com orientação de uso e exemplo
         }
     },
     series: [{
-        name: 'Série A',
+        name: 'Series A',
         data: [7, 6.9, 9.5, 14.5, 18.2, 21.5]
     }]
 }
@@ -33,9 +33,9 @@ Referência completa dos 40+ tipos de gráfico com orientação de uso e exemplo
 
 ## 2. Area & Areaspline
 
-**Quando usar:** Tendências com volume/magnitude, composição ao longo do tempo (stacked).
+**When to use:** Trends with volume/magnitude, composition over time (stacked).
 
-**Variantes:** `area`, `areaspline`, `arearange`, `areasplinerange`
+**Variants:** `area`, `areaspline`, `arearange`, `areasplinerange`
 
 ```javascript
 {
@@ -46,15 +46,15 @@ Referência completa dos 40+ tipos de gráfico com orientação de uso e exemplo
             marker: { enabled: false }
         }
     },
-    series: [{ name: 'Série', data: [...] }]
+    series: [{ name: 'Series', data: [...] }]
 }
 ```
 
-**Stacked area** para composição:
+**Stacked area** for composition:
 ```javascript
 plotOptions: {
     area: {
-        stacking: 'normal', // ou 'percent' para 100%
+        stacking: 'normal', // or 'percent' for 100%
         lineWidth: 1,
         marker: { enabled: false }
     }
@@ -65,9 +65,9 @@ plotOptions: {
 
 ## 3. Column & Bar
 
-**Quando usar:** Comparação entre categorias discretas. Column = vertical, Bar = horizontal.
+**When to use:** Comparison between discrete categories. Column = vertical, Bar = horizontal.
 
-**Variantes:** `column`, `bar`, `columnrange`, `columnpyramid`
+**Variants:** `column`, `bar`, `columnrange`, `columnpyramid`
 
 ```javascript
 {
@@ -80,8 +80,8 @@ plotOptions: {
         }
     },
     series: [
-        { name: 'Série 1', data: [49, 71, 106, 129] },
-        { name: 'Série 2', data: [83, 78, 98, 93] }
+        { name: 'Series 1', data: [49, 71, 106, 129] },
+        { name: 'Series 2', data: [83, 78, 98, 93] }
     ]
 }
 ```
@@ -90,7 +90,7 @@ plotOptions: {
 ```javascript
 plotOptions: {
     column: {
-        stacking: 'normal', // 'percent' para 100%
+        stacking: 'normal', // 'percent' for 100%
         groupPadding: 0.1,
         pointPadding: 0.05
     }
@@ -101,7 +101,7 @@ plotOptions: {
 
 ## 4. Pie & Donut
 
-**Quando usar:** Composição de um todo, proporções, participação de mercado. Máximo 7-8 fatias.
+**When to use:** Composition of a whole, proportions, market share. Maximum 7-8 slices.
 
 ```javascript
 {
@@ -118,19 +118,19 @@ plotOptions: {
         }
     },
     series: [{
-        name: 'Participação',
+        name: 'Share',
         colorByPoint: true,
         data: [
             { name: 'Item A', y: 45 },
             { name: 'Item B', y: 26.8 },
             { name: 'Item C', y: 12.8, sliced: true, selected: true },
-            { name: 'Outros', y: 15.4 }
+            { name: 'Others', y: 15.4 }
         ]
     }]
 }
 ```
 
-**Donut** (pie com innerSize):
+**Donut** (`pie` with innerSize):
 ```javascript
 plotOptions: { pie: { innerSize: '60%' } }
 ```
@@ -151,15 +151,15 @@ plotOptions: {
 
 ## 5. Scatter & Bubble
 
-**Quando usar:** Correlação entre duas variáveis (scatter), três variáveis (bubble).
+**When to use:** Correlation between two variables (scatter), three variables (bubble).
 
-**Requer:** `highcharts-more.js` para bubble.
+**Requires:** `highcharts-more.js` for bubble.
 
 ```javascript
 // Scatter
 { chart: { type: 'scatter' },
-  xAxis: { title: { text: 'Variável X' } },
-  yAxis: { title: { text: 'Variável Y' } },
+  xAxis: { title: { text: 'Variable X' } },
+  yAxis: { title: { text: 'Variable Y' } },
   series: [{ data: [[1,2],[3,4],[5,1],[7,8]] }]
 }
 
@@ -173,9 +173,9 @@ plotOptions: {
 
 ## 6. Heatmap
 
-**Quando usar:** Matriz de valores, padrões em duas dimensões, calendários de atividade.
+**When to use:** Value matrix, two-dimensional patterns, activity calendars.
 
-**Requer:** `modules/heatmap.js`
+**Requires:** `modules/heatmap.js`
 
 ```javascript
 {
@@ -197,9 +197,9 @@ plotOptions: {
 
 ## 7. Treemap & Sunburst
 
-**Quando usar:** Hierarquias, proporção dentro de categorias, orçamentos.
+**When to use:** Hierarchies, proportion within categories, budgets.
 
-**Requer:** `modules/treemap.js`, `modules/sunburst.js`
+**Requires:** `modules/treemap.js`, `modules/sunburst.js`
 
 ```javascript
 // Treemap
@@ -215,14 +215,14 @@ plotOptions: {
     }]
 }
 
-// Sunburst (hierárquico com parent/id)
+// Sunburst (hierarchical with parent/id)
 {
     chart: { type: 'sunburst' },
     series: [{
         data: [
             { id: '0', name: 'Root' },
-            { id: '1', parent: '0', name: 'Filho A', value: 5 },
-            { id: '2', parent: '0', name: 'Filho B', value: 3 }
+            { id: '1', parent: '0', name: 'Child A', value: 5 },
+            { id: '2', parent: '0', name: 'Child B', value: 3 }
         ]
     }]
 }
@@ -232,12 +232,12 @@ plotOptions: {
 
 ## 8. Gauge & Solid Gauge
 
-**Quando usar:** KPIs, progresso, indicadores de status, velocímetros.
+**When to use:** KPIs, progress, status indicators, speedometer-style displays.
 
-**Requer:** `highcharts-more.js`, `modules/solid-gauge.js`
+**Requires:** `highcharts-more.js`, `modules/solid-gauge.js`
 
 ```javascript
-// Solid Gauge (estilo moderno)
+// Solid Gauge (modern style)
 {
     chart: { type: 'solidgauge' },
     pane: {
@@ -251,7 +251,7 @@ plotOptions: {
     yAxis: { min: 0, max: 100, stops: [
         [0.1, '#55BF3B'], [0.5, '#DDDF0D'], [0.9, '#DF5353']
     ]},
-    series: [{ name: 'Progresso', data: [73], innerRadius: '60%' }]
+    series: [{ name: 'Progress', data: [73], innerRadius: '60%' }]
 }
 ```
 
@@ -259,9 +259,9 @@ plotOptions: {
 
 ## 9. Sankey & Dependency Wheel
 
-**Quando usar:** Fluxos, transferências, relações entre entidades.
+**When to use:** Flows, transfers, relationships between entities.
 
-**Requer:** `modules/sankey.js`, `modules/dependency-wheel.js`
+**Requires:** `modules/sankey.js`, `modules/dependency-wheel.js`
 
 ```javascript
 // Sankey
@@ -270,8 +270,8 @@ plotOptions: {
     series: [{
         keys: ['from', 'to', 'weight'],
         data: [
-            ['Brasil', 'EUA', 5], ['Brasil', 'Europa', 3],
-            ['EUA', 'Ásia', 2], ['Europa', 'Ásia', 1]
+            ['Brazil', 'USA', 5], ['Brazil', 'Europe', 3],
+            ['USA', 'Asia', 2], ['Europe', 'Asia', 1]
         ]
     }]
 }
@@ -281,9 +281,9 @@ plotOptions: {
 
 ## 10. Funnel & Pyramid
 
-**Quando usar:** Funis de conversão, processos sequenciais com perda.
+**When to use:** Conversion funnels, sequential processes with drop-off.
 
-**Requer:** `modules/funnel.js`
+**Requires:** `modules/funnel.js`
 
 ```javascript
 {
@@ -291,8 +291,8 @@ plotOptions: {
     plotOptions: { funnel: { neckWidth: '30%', neckHeight: '25%' } },
     series: [{
         data: [
-            ['Visitantes', 15654], ['Downloads', 4064],
-            ['Signup', 1987], ['Compra', 976], ['Renovação', 846]
+            ['Visitors', 15654], ['Downloads', 4064],
+            ['Signup', 1987], ['Purchase', 976], ['Renewal', 846]
         ]
     }]
 }
@@ -302,9 +302,9 @@ plotOptions: {
 
 ## 11. Wordcloud
 
-**Quando usar:** Frequência de palavras, tags, termos populares.
+**When to use:** Word frequency, tags, popular terms.
 
-**Requer:** `modules/wordcloud.js`
+**Requires:** `modules/wordcloud.js`
 
 ```javascript
 {
@@ -323,9 +323,9 @@ plotOptions: {
 
 ## 12. Network Graph
 
-**Quando usar:** Relações entre entidades, grafos, redes sociais.
+**When to use:** Relationships between entities, graphs, social networks.
 
-**Requer:** `modules/networkgraph.js`
+**Requires:** `modules/networkgraph.js`
 
 ```javascript
 {
@@ -346,9 +346,9 @@ plotOptions: {
 
 ## 13. Box Plot & Histogram
 
-**Quando usar:** Distribuição estatística, quartis, outliers.
+**When to use:** Statistical distribution, quartiles, outliers.
 
-**Requer:** `highcharts-more.js`, `modules/histogram-bellcurve.js`
+**Requires:** `highcharts-more.js`, `modules/histogram-bellcurve.js`
 
 ```javascript
 // Box Plot
@@ -367,9 +367,9 @@ plotOptions: {
 
 ## 14. Stock Charts (Highstock)
 
-**Quando usar:** Dados financeiros, séries temporais com range selector, navigator.
+**When to use:** Financial data, time series with range selector, navigator.
 
-**Requer:** `stock/highstock.js` (substitui highcharts.js)
+**Requires:** `stock/highstock.js` (replaces highcharts.js)
 
 ```javascript
 Highcharts.stockChart('container', {
@@ -386,64 +386,64 @@ Highcharts.stockChart('container', {
 
 ## 15. Maps (Highmaps)
 
-**Quando usar:** Dados geográficos, mapas coropléticos.
+**When to use:** Geographic data, choropleth maps.
 
-**Requer:** `maps/highmaps.js` (substitui highcharts.js) + mapa GeoJSON
+**Requires:** `maps/highmaps.js` (replaces highcharts.js) + GeoJSON map
 
 ---
 
 ## 16. Gantt Chart
 
-**Quando usar:** Planejamento, cronogramas, gestão de projetos.
+**When to use:** Planning, schedules, project management.
 
-**Requer:** `gantt/highcharts-gantt.js` (substitui highcharts.js)
-
----
-
-## 17. Outros Tipos
-
-- **Lollipop**: `modules/lollipop.js` — barras com dot no final
-- **Dumbbell**: `modules/dumbbell.js` — antes/depois, range entre dois pontos
-- **Timeline**: `modules/timeline.js` — eventos ao longo do tempo
-- **Venn**: `modules/venn.js` — diagramas de Venn
-- **Waterfall**: tipo `waterfall` — decomposição de valores
-- **Polar / Spider**: usando `chart: { polar: true }` — comparação multidimensional
-- **3D Charts**: usando `highcharts-3d.js` — versões 3D de column, pie, scatter
+**Requires:** `gantt/highcharts-gantt.js` (replaces highcharts.js)
 
 ---
 
-## Combinando Gráficos (Dual Axis / Mixed)
+## 17. Other Types
+
+- **Lollipop**: `modules/lollipop.js` — bars with a dot at the end
+- **Dumbbell**: `modules/dumbbell.js` — before/after, range between two points
+- **Timeline**: `modules/timeline.js` — events over time
+- **Venn**: `modules/venn.js` — Venn diagrams
+- **Waterfall**: `waterfall` type — value breakdown
+- **Polar / Spider**: using `chart: { polar: true }` — multidimensional comparison
+- **3D Charts**: using `highcharts-3d.js` — 3D versions of column, pie, scatter
+
+---
+
+## Combining Charts (Dual Axis / Mixed)
 
 ```javascript
 {
     yAxis: [
-        { title: { text: 'Receita (R$)' } },
-        { title: { text: 'Unidades' }, opposite: true }
+        { title: { text: 'Revenue (R$)' } },
+        { title: { text: 'Units' }, opposite: true }
     ],
     series: [
-        { type: 'column', name: 'Unidades', data: [...], yAxis: 1 },
-        { type: 'spline', name: 'Receita', data: [...], yAxis: 0 }
+        { type: 'column', name: 'Units', data: [...], yAxis: 1 },
+        { type: 'spline', name: 'Revenue', data: [...], yAxis: 0 }
     ]
 }
 ```
 
 ## Drilldown
 
-**Requer:** `modules/drilldown.js`
+**Requires:** `modules/drilldown.js`
 
 ```javascript
 {
     series: [{
-        name: 'Categorias',
+        name: 'Categories',
         data: [
-            { name: 'Frutas', y: 55, drilldown: 'frutas' },
-            { name: 'Vegetais', y: 25, drilldown: 'vegetais' }
+            { name: 'Fruits', y: 55, drilldown: 'fruits' },
+            { name: 'Vegetables', y: 25, drilldown: 'vegetables' }
         ]
     }],
     drilldown: {
         series: [
-            { id: 'frutas', data: [['Maçã',30],['Banana',15],['Laranja',10]] },
-            { id: 'vegetais', data: [['Cenoura',10],['Tomate',8],['Alface',7]] }
+            { id: 'fruits', data: [['Apple',30],['Banana',15],['Orange',10]] },
+            { id: 'vegetables', data: [['Carrot',10],['Tomato',8],['Lettuce',7]] }
         ]
     }
 }
