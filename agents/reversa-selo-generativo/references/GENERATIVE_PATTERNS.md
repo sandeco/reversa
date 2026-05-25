@@ -1,18 +1,18 @@
-# Padrões Generativos do Selo
+# Generative Seal Patterns
 
-Catálogo dos 5 padrões consagrados que a skill `selo-generativo` produz. Cada padrão tem uma aparência distinta, algoritmo central e parâmetros derivados do seed.
+Catalog of the 5 established patterns produced by the `selo-generativo` skill. Each pattern has a distinct look, central algorithm, and parameters derived from the seed.
 
-Padrão geral de seed: o hash sha256 (64 chars hex) é cortado em fatias de 8 chars, cada fatia vira um `parseInt(slice, 16)` e alimenta um parâmetro distinto. Assim, padrões diferentes do mesmo seed compartilham personalidade visual.
+General seed pattern: the sha256 hash (64 hex chars) is sliced into 8-char chunks, each chunk becomes a `parseInt(slice, 16)` and feeds a different parameter. This way, different patterns from the same seed share a visual personality.
 
 ---
 
 ## 1. flow-field
 
-Campos de fluxo Perlin: milhares de partículas seguem vetores derivados de ruído, deixando rastros orgânicos curvos. Estilo "natural turbulento".
+Perlin flow fields: thousands of particles follow vectors derived from noise, leaving curved organic trails. "Natural turbulence" style.
 
-**Quando combina**: estilos `sober` (versão suave) e `exploratory` (versão luminosa).
+**When it fits**: `sober` style (soft version) and `exploratory` (luminous version).
 
-**Algoritmo**:
+**Algorithm**:
 
 ```javascript
 let particles = [];
@@ -43,7 +43,7 @@ function setup() {
 
 function drawFlowField() {
     particles.forEach((p) => {
-        stroke(p.color + "55"); // semi-transparente
+        stroke(p.color + "55"); // semi-transparent
         let x = p.x, y = p.y;
         for (let step = 0; step < p.life; step++) {
             const angle = noise(x * NOISE_SCALE, y * NOISE_SCALE) * TWO_PI * 4;
@@ -58,22 +58,22 @@ function drawFlowField() {
 }
 ```
 
-**Parâmetros derivados do seed**:
-- `PARTICLE_COUNT`: 300 a 1000 (slice 0 normalizado).
-- `NOISE_SCALE`: 0.002 a 0.008 (slice 1).
-- Centro de gravidade do campo (se houver atrator): coordenada XY (slices 2 e 3).
+**Parameters derived from the seed**:
+- `PARTICLE_COUNT`: 300 to 1000 (normalized slice 0).
+- `NOISE_SCALE`: 0.002 to 0.008 (slice 1).
+- Field center of gravity (if there is an attractor): XY coordinate (slices 2 and 3).
 
-**Performance**: até 1500 partículas em canvas 800x800 sem trava.
+**Performance**: up to 1500 particles on an 800x800 canvas without freezing.
 
 ---
 
 ## 2. particle-orbit
 
-Partículas orbitando um centro com trilhas decrescentes, criando padrão de "constelação rotativa".
+Particles orbiting a center with fading trails, creating a "rotating constellation" pattern.
 
-**Quando combina**: estilos `premium` (dark, dourado) e `exploratory` (pastéis luminosos).
+**When it fits**: `premium` style (dark, golden) and `exploratory` (luminous pastels).
 
-**Algoritmo**:
+**Algorithm**:
 
 ```javascript
 const ORBITS = 6;
@@ -104,42 +104,42 @@ function drawOrbit() {
             const y = cy + sin(angle) * radius * cos(tilt);
             const size = map(noise(angle * 2, o), 0, 1, 1, 6);
 
-            // Trilha
+            // Trail
             stroke(orbitColor + "33");
             strokeWeight(0.4);
             noFill();
             arc(cx, cy, radius * 2, radius * 2 * cos(tilt), phase, angle);
 
-            // Partícula
+            // Particle
             noStroke();
             fill(orbitColor);
             ellipse(x, y, size);
         }
     }
 
-    // Centro
+    // Center
     fill(palette.accent);
     noStroke();
     ellipse(cx, cy, 14);
 }
 ```
 
-**Parâmetros derivados do seed**:
-- Número de órbitas: 3 a 8 (slice 0).
-- Inclinação das órbitas (tilt): -π/4 a π/4 (slice 1).
-- Densidade de partículas por órbita (slice 2).
+**Parameters derived from the seed**:
+- Number of orbits: 3 to 8 (slice 0).
+- Orbit tilt: -π/4 to π/4 (slice 1).
+- Particle density per orbit (slice 2).
 
-**Performance**: trivial, dezenas de elementos.
+**Performance**: trivial, dozens of elements.
 
 ---
 
 ## 3. crystal-lattice
 
-Forma cristalina simétrica derivada de um polígono base, com subdivisões geométricas limpas. Estilo "logotipo arquitetural".
+Symmetric crystalline shape derived from a base polygon, with clean geometric subdivisions. "Architectural logo" style.
 
-**Quando combina**: estilos `dense` (saturado) e `sober` (limpo).
+**When it fits**: `dense` style (saturated) and `sober` (clean).
 
-**Algoritmo**:
+**Algorithm**:
 
 ```javascript
 function setup() {
@@ -154,7 +154,7 @@ function setup() {
 function drawCrystal() {
     const cx = width / 2;
     const cy = height / 2;
-    const sides = floor(random(5, 9)); // 5 a 8 lados
+    const sides = floor(random(5, 9)); // 5 to 8 sides
     const radius = width * 0.35;
     const layers = floor(random(3, 6));
 
@@ -179,7 +179,7 @@ function drawCrystal() {
         endShape(CLOSE);
     }
 
-    // Núcleo central
+    // Central core
     fill(palette.accent);
     noStroke();
     const coreRadius = radius * 0.15;
@@ -194,12 +194,12 @@ function drawCrystal() {
 }
 ```
 
-**Parâmetros derivados do seed**:
-- Número de lados: 5 a 8 (slice 0).
-- Número de camadas concêntricas: 3 a 6 (slice 1).
-- Rotação de offset entre camadas (slice 2).
+**Parameters derived from the seed**:
+- Number of sides: 5 to 8 (slice 0).
+- Number of concentric layers: 3 to 6 (slice 1).
+- Offset rotation between layers (slice 2).
 
-**Exportável como SVG**: este padrão é puramente geométrico, ideal para conversão a SVG real para mini-selos.
+**Exportable as SVG**: this pattern is purely geometric, ideal for conversion to real SVG for mini seals.
 
 **Performance**: trivial.
 
@@ -207,11 +207,11 @@ function drawCrystal() {
 
 ## 4. wave-interference
 
-Padrões de interferência tipo moiré: ondas circulares partindo de múltiplos centros que se cruzam, gerando texturas complexas a partir de regras simples.
+Moiré-like interference patterns: circular waves from multiple centers crossing each other, generating complex textures from simple rules.
 
-**Quando combina**: estilos `premium` (preto + dourado, alta contraste) e `dense`.
+**When it fits**: `premium` style (black + gold, high contrast) and `dense`.
 
-**Algoritmo**:
+**Algorithm**:
 
 ```javascript
 function setup() {
@@ -271,22 +271,22 @@ function hexToRgb(hex) {
 }
 ```
 
-**Parâmetros derivados do seed**:
-- Número de centros: 2 a 4 (slice 0).
-- Frequência das ondas: 0.04 a 0.10 (slice 1).
-- Posição de cada centro (slices 2-N).
+**Parameters derived from the seed**:
+- Number of centers: 2 to 4 (slice 0).
+- Wave frequency: 0.04 to 0.10 (slice 1).
+- Position of each center (slices 2-N).
 
-**Performance**: O(width * height * centers). Em 800x800 com 3 centros, ~ 1.9M operações. Tudo bem para `noLoop()`.
+**Performance**: O(width * height * centers). At 800x800 with 3 centers, ~1.9M operations. Fine for `noLoop()`.
 
 ---
 
 ## 5. noise-strata
 
-Estratos horizontais de ruído, formando "paisagem abstrata" com camadas de Perlin noise.
+Horizontal strata of noise, forming an "abstract landscape" with Perlin noise layers.
 
-**Quando combina**: estilos `sober` (terracota neutro) e `exploratory` (auroral).
+**When it fits**: `sober` styles (neutral terracotta) and `exploratory` (auroral).
 
-**Algoritmo**:
+**Algorithm**:
 
 ```javascript
 function setup() {
@@ -320,7 +320,7 @@ function drawStrata() {
         endShape(CLOSE);
     }
 
-    // Sol/lua decorativa
+    // Decorative sun/moon
     fill(palette.accent);
     noStroke();
     const sunX = random(width * 0.2, width * 0.8);
@@ -330,16 +330,16 @@ function drawStrata() {
 }
 ```
 
-**Parâmetros derivados do seed**:
-- Número de camadas: 4 a 8 (slice 0).
-- Altura base do horizonte: 25% a 40% do canvas (slice 1).
-- Posição do sol/lua decorativo (slices 2 e 3).
+**Parameters derived from the seed**:
+- Number of layers: 4 to 8 (slice 0).
+- Base horizon height: 25% to 40% of canvas (slice 1).
+- Decorative sun/moon position (slices 2 and 3).
 
 **Performance**: trivial.
 
 ---
 
-## Seleção de padrão pelo seed
+## Pattern selection by seed
 
 ```javascript
 const PATTERNS = ["flow-field", "particle-orbit", "crystal-lattice", "wave-interference", "noise-strata"];
@@ -348,7 +348,7 @@ function pickPattern(seedHex, styleHint) {
     const patternIndex = parseInt(seedHex.slice(0, 2), 16) % PATTERNS.length;
     let chosen = PATTERNS[patternIndex];
 
-    // Ajuste suave por estilo (escolhe entre padrões "compatíveis" se houver desconexão)
+    // Soft adjustment by style (choose among "compatible" patterns if there is mismatch)
     if (styleHint && !isStyleCompatible(chosen, styleHint)) {
         chosen = pickCompatible(seedHex, styleHint);
     }
@@ -356,10 +356,10 @@ function pickPattern(seedHex, styleHint) {
 }
 ```
 
-A compatibilidade `padrão x estilo` aparece no início desta referência. Quando há incompatibilidade declarada, a função `pickCompatible` reavalia entre os padrões marcados como apropriados para o estilo.
+The `pattern x style` compatibility appears at the beginning of this reference. When there is declared incompatibility, the `pickCompatible` function reevaluates among the patterns marked as appropriate for the style.
 
 ---
 
-## Override manual
+## Manual override
 
-A skill aceita parâmetro `forcePattern` para ignorar a derivação por seed e escolher o padrão manualmente, útil quando o usuário quer um selo específico em estilo diferente do default.
+The skill accepts parameter `forcePattern` to ignore seed derivation and choose the pattern manually, useful when the user wants a specific seal in a style different from the default.
