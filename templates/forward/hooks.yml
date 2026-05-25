@@ -1,48 +1,48 @@
 # hooks.yml
-# Ganchos opcionais executados antes ou depois dos skills forward do Reversa.
+# Optional hooks executed before or after Reversa's forward skills.
 #
-# Esquema por gancho:
-#   command:     comando que será sugerido (optional: true) ou exigido (optional: false)
-#   description: texto curto exibido ao usuário
-#   enabled:     true | false. Sem esse campo, vale como true.
-#   optional:    true (apresenta link clicável) | false (executa automaticamente e aguarda)
+# Per-hook schema:
+#   command:     command to suggest (optional: true) or require (optional: false)
+#   description: short text shown to the user
+#   enabled:     true | false. If omitted, it defaults to true.
+#   optional:    true (shows a clickable link) | false (runs automatically and waits)
 #
-# Regras:
-#   YAML inválido aqui é tolerado: o skill segue normalmente, apenas sem ganchos.
-#   Não há DSL de condição neste arquivo. Se um gancho não deve rodar, use enabled: false.
+# Rules:
+#   Invalid YAML here is tolerated: the skill continues normally, just without hooks.
+#   There is no condition DSL in this file. If a hook should not run, use enabled: false.
 #
-# Por padrão, todos os ganchos chegam vazios. Adicione apenas os que fazem sentido para o seu projeto.
+# By default, all hooks are empty. Add only the ones that make sense for your project.
 
 schema-version: 1
 
-# Ganchos do /reversa-requirements
+# Hooks for /reversa-requirements
 before-requirements: []
 after-requirements: []
 
-# Ganchos do /reversa-clarify
+# Hooks for /reversa-clarify
 before-clarify: []
 after-clarify: []
 
-# Ganchos do /reversa-plan
+# Hooks for /reversa-plan
 before-plan: []
 after-plan: []
 
-# Ganchos do /reversa-to-do
+# Hooks for /reversa-to-do
 before-to-do: []
 after-to-do: []
 
-# Ganchos do /reversa-audit
+# Hooks for /reversa-audit
 before-audit: []
 after-audit: []
 
-# Ganchos do /reversa-quality
+# Hooks for /reversa-quality
 before-quality: []
 after-quality: []
 
-# Ganchos do /reversa-coding
+# Hooks for /reversa-coding
 before-coding: []
 after-coding: []
 
-# Ganchos do /reversa-principles
+# Hooks for /reversa-principles
 before-principles: []
 after-principles: []

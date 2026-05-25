@@ -5,33 +5,33 @@ reversa:
   version: "x.y.z"
 kind: discard_log
 producedBy: curator
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Discard Log
 
-> Registro completo do que foi descartado da migração e por quê. Cada item tem rastreabilidade para a origem no legado.
+> Full record of what was discarded from the migration and why. Each item is traceable back to its legacy origin.
 
-## Itens descartados
+## Discarded items
 
 ### BR-DESCARTAR-001
-- **Origem**: `_reversa_sdd/<unit>/{requirements,design}.md` § <seção>
-- **Descrição**: <regra ou comportamento descartado>
-- **Justificativa**: <texto>
-- **Vinculado a paradigma**: sim | não
-  - Se sim: <qual paradigma e como o paradigma alvo absorve o caso>
-- **Reposição no sistema novo**: <none | substituído por X>
-- **Risco de descartar**: baixo | médio | alto, com nota explicativa
+- **Source**: `_reversa_sdd/<unit>/{requirements,design}.md` § <section>
+- **Description**: <discarded rule or behavior>
+- **Rationale**: <text>
+- **Linked to paradigm**: yes | no
+  - If yes: <which paradigm and how the target paradigm absorbs the case>
+- **Replacement in the new system**: <none | replaced by X>
+- **Risk of discarding**: low | medium | high, with explanatory note
 
-<repetir por item>
+<repeat for each item>
 
-## Itens descartados por mudança de paradigma (subseção dedicada)
+## Items discarded because of paradigm change (dedicated subsection)
 
-> Lista apenas dos itens cujo `Vinculado a paradigma = sim`. Auditoria explícita para o agente de codificação.
+> Lists only items whose `Linked to paradigm = yes`. Explicit audit trail for the coding agent.
 
-| ID | Origem | Paradigma legado | Substituto no paradigma alvo |
+| ID | Source | Legacy paradigm | Replacement in the target paradigm |
 |---|---|---|---|
-| BR-DESCARTAR-XXX | <ref> | <ex: lock pessimista síncrono> | <ex: idempotência via event ID> |
+| BR-DESCARTAR-XXX | <ref> | <e.g. synchronous pessimistic lock> | <e.g. idempotency via event ID> |
 
-## Notas
-<Observações finais do Curator sobre o conjunto descartado.>
+## Notes
+<Final observations from the Curator about the discarded set.>

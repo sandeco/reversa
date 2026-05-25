@@ -6,61 +6,61 @@ reversa:
 kind: screen_deviation_log
 producedBy: screen-translator
 mode: append-only
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Screen Deviation Log
 
-> Registro de toda divergência entre o legado e a spec gerada em `target_screens.md`. Append-only. Deviations pendentes bloqueiam o handoff ao Inspector.
-> Deviations aprovadas são propagadas para `parity_specs.md § Exceções` quando o Inspector rodar.
+> Record of every divergence between the legacy system and the spec generated in `target_screens.md`. Append-only. Pending deviations block handoff to Inspector.
+> Approved deviations are propagated to `parity_specs.md § Exceptions` when Inspector runs.
 
-## Convenções
+## Conventions
 
-- **ID**: `DEV-NNN` (sequencial, três dígitos).
-- **Tipo**:
-  - `tecnica`: limitação técnica do alvo (ex: terminal Windows sem UTF-8 sem `chcp 65201`).
-  - `modernizacao`: divergência intencional decorrente do modo modernizado.
-  - `plataforma`: divergência forçada por incompatibilidade de plataforma (ex: Win16 → web).
-  - `correcao`: bug visual do legado que o alvo corrige (ex: typo em label).
-- **Aprovação**: `pendente` | `aprovado` | `rejeitado`.
-- Deviation `aprovado` → também listada em `parity_specs.md § Exceções`.
-- Deviation `pendente` → bloqueia handoff ao Inspector.
-- Deviation `rejeitado` → arquivada com nota explícita; agente regenera a tela em modo conformante.
+- **ID**: `DEV-NNN` (sequential, three digits).
+- **Type**:
+  - `technical`: technical limitation of the target (e.g. Windows terminal without UTF-8 without `chcp 65201`).
+  - `modernization`: intentional divergence caused by modernized mode.
+  - `platform`: divergence forced by platform incompatibility (e.g. Win16 → web).
+  - `correction`: visual bug in the legacy system that the target fixes (e.g. typo in a label).
+- **Approval**: `pending` | `approved` | `rejected`.
+- Deviation `approved` → also listed in `parity_specs.md § Exceptions`.
+- Deviation `pending` → blocks handoff to Inspector.
+- Deviation `rejected` → archived with an explicit note; the agent regenerates the screen in a conforming mode.
 
-## Resumo
+## Summary
 
 - **Total**: <N>
-- **Pendentes**: <N>
-- **Aprovadas**: <N>
-- **Rejeitadas**: <N>
+- **Pending**: <N>
+- **Approved**: <N>
+- **Rejected**: <N>
 
-## Entradas
+## Entries
 
 ### DEV-001
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Tela afetada | <nome-canonical> |
-| Tipo | `tecnica` \| `modernizacao` \| `plataforma` \| `correcao` |
-| Descrição | <o que diverge entre legado e novo> |
-| Motivo | <por que a divergência é necessária ou aceitável> |
-| Origem no legado | <arquivo:linha> |
-| Implicação para parity tests | <ex: comparação byte-a-byte falsa, usar comparação semântica> |
-| Aprovação | `pendente` \| `aprovado` \| `rejeitado` |
-| Aprovado por | <nome ou identificador, quando aprovado> |
-| Aprovado em | <ISO-8601, quando aprovado> |
-| Propaga para `parity_specs.md § Exceções` | sim \| não |
+| Affected screen | <canonical-name> |
+| Type | `technical` \| `modernization` \| `platform` \| `correction` |
+| Description | <what differs between legacy and new> |
+| Reason | <why the divergence is necessary or acceptable> |
+| Legacy origin | <file:line> |
+| Implication for parity tests | <e.g. false byte-for-byte comparison, use semantic comparison> |
+| Approval | `pending` \| `approved` \| `rejected` |
+| Approved by | <name or identifier, when approved> |
+| Approved on | <ISO-8601, when approved> |
+| Propagates to `parity_specs.md § Exceptions` | yes \| no |
 
 ### DEV-002
 
-(repetir o bloco acima para cada deviation)
+(repeat the block above for each deviation)
 
-## Telas com mais de uma deviation
+## Screens with more than one deviation
 
-| Tela | IDs |
+| Screen | IDs |
 |---|---|
-| <tela X> | DEV-001, DEV-007 |
+| <screen X> | DEV-001, DEV-007 |
 
-## Notas
+## Notes
 
-<Observações gerais sobre o conjunto de deviations: padrões, aprendizados que valem para futuras migrações no mesmo par origem→alvo, sugestões de adapter melhorado para v2.>
+<General observations about the set of deviations: patterns, lessons that apply to future migrations for the same source→target pair, suggestions for an improved adapter in v2.>

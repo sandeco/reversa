@@ -1,33 +1,33 @@
-# Formula de dimensionamento (sizing-formula.md)
+# Sizing formula (`sizing-formula.md`)
 
-**Versao da formula:** 2.0
-**Versao do schema do size.json:** 1.1
+**Formula version:** 2.0  
+**size.json schema version:** 1.1
 
-Documenta o calculo deterministico que o agente `reversa-pricing-size` aplica para transformar os artefatos do ciclo forward em uma classe de complexidade (`S/M/L/XL/XXL`). A formula v2 abandona a soma linear de pesos arbitrarios e passa a usar T-shirt sizing baseado em tasks, com ajuste separado de risco.
+Documents the deterministic calculation used by the `reversa-pricing-size` agent to transform forward-cycle artifacts into a complexity class (`S/M/L/XL/XXL`). Formula v2 abandons the linear sum of arbitrary weights and adopts task-based T-shirt sizing, with risk handled as a separate adjustment.
 
-## Fonte e criterio
+## Source and criterion
 
-O Reversa v1 precisa de uma medida compreensivel para usuario leigo, multi-engine e derivada dos arquivos ja produzidos em `_reversa_sdd/forward/<feature>/`.
+Reversa v1 needs a sizing measure that is understandable to non-expert users, works across engines, and is derived from files already produced in `_reversa_sdd/forward/<feature>/`.
 
-Function Points (IFPUG, ISO/IEC 20926) e COSMIC (ISO/IEC 19761) sao padroes formais de medicao funcional, mas exigem classificacao especializada. Para a UX do Reversa, a melhor base e estimativa agil aproximada, inspirada em Story Points e T-shirt sizing. Mike Cohn, em *Agile Estimating and Planning* (Addison-Wesley, 2005), descreve estimativas relativas e tamanhos aproximados como praticas de planejamento agil.
+Function Points (IFPUG, ISO/IEC 20926) and COSMIC (ISO/IEC 19761) are formal functional-sizing standards, but they require specialized classification. For Reversa's UX, the best basis is approximate agile estimation inspired by Story Points and T-shirt sizing. Mike Cohn, in *Agile Estimating and Planning* (Addison-Wesley, 2005), describes relative estimates and approximate sizing as agile planning practices.
 
-Esta formula nao afirma que as faixas sao padrao universal. Ela documenta uma heuristica simples do Reversa, com base em T-shirt sizing, e mantem os fatores de risco separados para evitar falsa precisao.
+This formula does not claim the ranges are a universal standard. It documents a simple Reversa heuristic, based on T-shirt sizing, and keeps risk factors separate to avoid false precision.
 
-## Entradas
+## Inputs
 
-As entradas continuam vindo de `metrics`:
+Inputs continue to come from `metrics`:
 
 - `tasks.total`
 - `doubts.high`, `doubts.medium`, `doubts.low`, `doubts.total`
 - `plan_depth`
 - `principles_touched`
-- `requirements.total`, usado apenas como alerta de consistencia, nao como driver primario
+- `requirements.total`, used only as a consistency warning, not as a primary driver
 
-## Passo 1: classe base por quantidade de tasks
+## Step 1: base class by number of tasks
 
-`tasks.total` e a melhor proxy de tamanho porque o ciclo forward ja quebrou a feature em unidades de trabalho.
+`tasks.total` is the best size proxy because the forward cycle has already broken the feature into work units.
 
-```
+```python
 if tasks.total <= 0:       base_complexity_class = "S"
 elif tasks.total <= 3:     base_complexity_class = "S"
 elif tasks.total <= 7:     base_complexity_class = "M"
@@ -36,11 +36,11 @@ elif tasks.total <= 30:    base_complexity_class = "XL"
 else:                      base_complexity_class = "XXL"
 ```
 
-## Passo 2: pontos de risco
+## Step 2: risk points
 
-Risco nao e tamanho. Ele ajusta a classe para cima quando a feature tem incerteza, profundidade ou impacto transversal.
+Risk is not size. It pushes the class upward when the feature has uncertainty, depth, or cross-cutting impact.
 
-```
+```python
 unclassified_doubts =
   max(0, doubts.total - doubts.high - doubts.medium - doubts.low)
 
@@ -52,34 +52,34 @@ risk_points =
   floor(len(principles_touched) / 3)
 ```
 
-`doubts.low` nao sobe risco na v2. Duvida baixa e ruido esperado de refinamento.
+`doubts.low` does not increase risk in v2. Low doubt is expected refinement noise.
 
-## Passo 3: ajuste de risco
+## Step 3: risk adjustment
 
-```
+```python
 if risk_points <= 2:       risk_adjustment_classes = 0
 elif risk_points <= 5:     risk_adjustment_classes = 1
 else:                      risk_adjustment_classes = 2
 ```
 
-## Passo 4: classe final
+## Step 4: final class
 
-Classes sao ordenadas assim:
+Classes are ordered as follows:
 
-```
+```python
 S=0, M=1, L=2, XL=3, XXL=4
 ```
 
-```
+```python
 complexity_class =
   class_from_index(min(4, index(base_complexity_class) + risk_adjustment_classes))
 ```
 
-## Passo 5: size_score auxiliar
+## Step 5: auxiliary `size_score`
 
-`size_score` fica apenas para compatibilidade e leitura rapida. Ele nao deve mais dirigir horas diretamente.
+`size_score` exists only for compatibility and quick reading. It should no longer drive hours directly.
 
-```
+```yaml
 size_score_by_class:
   S:   15
   M:   35
@@ -88,23 +88,23 @@ size_score_by_class:
   XXL: 95
 ```
 
-## Campos recomendados no size.json
+## Recommended fields in `size.json`
 
-O agente deve gravar estes campos alem dos campos antigos:
+The agent should write these fields in addition to the older ones:
 
-```
+```text
 sizing_method = "task_tshirt_with_risk_adjustment"
-base_complexity_class = <classe antes do risco>
-risk_points = <inteiro>
-risk_adjustment_classes = <0, 1 ou 2>
-size_score = <midpoint auxiliar da classe final>
+base_complexity_class = <class before risk>
+risk_points = <integer>
+risk_adjustment_classes = <0, 1, or 2>
+size_score = <auxiliary midpoint of the final class>
 ```
 
-## Exemplos de calculo
+## Calculation examples
 
-### Exemplo 1: feature pequena (S)
+### Example 1: small feature (S)
 
-```
+```python
 tasks.total = 3
 doubts.high = 0
 doubts.medium = 0
@@ -120,9 +120,9 @@ complexity_class = S
 size_score = 15
 ```
 
-### Exemplo 2: feature media que sobe para L por risco
+### Example 2: medium feature that rises to L because of risk
 
-```
+```python
 tasks.total = 7
 doubts.total = 3 (high=1, medium=2, low=0)
 plan_depth = 3
@@ -135,9 +135,9 @@ complexity_class = L
 size_score = 60
 ```
 
-### Exemplo 3: feature grande (XL)
+### Example 3: large feature (L)
 
-```
+```python
 tasks.total = 12
 doubts.total = 1 (high=0, medium=1, low=0)
 plan_depth = 4
@@ -150,9 +150,9 @@ complexity_class = L
 size_score = 60
 ```
 
-### Exemplo 4: feature gigante (XXL)
+### Example 4: huge feature (XXL)
 
-```
+```python
 tasks.total = 31
 doubts.total = 6 (high=2, medium=3, low=1)
 plan_depth = 6
@@ -165,19 +165,19 @@ complexity_class = XXL
 size_score = 95
 ```
 
-## Alertas de consistencia
+## Consistency warnings
 
-Requisitos nao entram no calculo primario, mas podem gerar nota:
+Requirements do not enter the primary calculation, but may generate a note:
 
-```
+```python
 if requirements.total >= 12 and tasks.total <= 3:
-  notes += "Muitos requisitos para poucas tasks. Verifique se tasks.md esta granular o bastante."
+  notes += "Too many requirements for too few tasks. Check whether tasks.md is granular enough."
 ```
 
-## Limites e premissas
+## Limits and assumptions
 
-1. A formula mede tamanho estrutural antes do coding, portanto nao usa LOC
-2. Tokens nao sao contados
-3. `size_score` e auxiliar, nao deve ser convertido diretamente em horas
-4. XXL deve gerar recomendacao de quebrar escopo antes de precificar ou codar
-5. Se mudar limite de classe, bump em `formula_version`
+1. The formula measures structural size before coding, so it does not use LOC
+2. Tokens are not counted
+3. `size_score` is auxiliary and should not be converted directly into hours
+4. XXL should trigger a recommendation to split scope before pricing or coding
+5. If class thresholds change, bump `formula_version`

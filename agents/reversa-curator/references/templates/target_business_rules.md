@@ -5,50 +5,50 @@ reversa:
   version: "x.y.z"
 kind: target_business_rules
 producedBy: curator
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Target Business Rules
 
-> Catálogo das regras de negócio do legado com decisão de migração: MIGRAR, DESCARTAR ou DECISÃO HUMANA.
-> Cada item rastreia para a origem em `_reversa_sdd/` e respeita o `paradigm_decision.md`.
+> Catalog of legacy business rules with a migration decision: MIGRATE, DISCARD, or HUMAN DECISION.
+> Each item traces back to its origin in `_reversa_sdd/` and respects `paradigm_decision.md`.
 
-## Resumo
-- Total de regras analisadas: <N>
-- MIGRAR: <n>
-- DESCARTAR: <n> (detalhe em `discard_log.md`)
-- DECISÃO HUMANA: <n>
+## Summary
+- Total rules analyzed: <N>
+- MIGRATE: <n>
+- DISCARD: <n> (details in `discard_log.md`)
+- HUMAN DECISION: <n>
 
-## Regras MIGRAR
+## MIGRATE rules
 
 ### BR-MIGRAR-001
-- **Origem**: `_reversa_sdd/<unit>/{requirements,design}.md` § <seção>
-- **Confiança original**: 🟢 | 🟡 | 🔴 | ⚠️
-- **Descrição**: <regra>
-- **Justificativa de migração**: <por que migra>
-- **Compatibilidade com paradigma alvo**: <nota; ex: precisará ser expressa como evento>
+- **Source**: `_reversa_sdd/<unit>/{requirements,design}.md` § <section>
+- **Original confidence**: 🟢 | 🟡 | 🔴 | ⚠️
+- **Description**: <rule>
+- **Migration rationale**: <why it migrates>
+- **Compatibility with the target paradigm**: <note; e.g. it will need to be expressed as an event>
 
-<repetir por regra>
+<repeat for each rule>
 
-## Regras DESCARTAR (resumo)
+## DISCARD rules (summary)
 
-| ID | Origem | Motivo curto | Vínculo a paradigma? |
+| ID | Source | Short reason | Linked to paradigm? |
 |---|---|---|---|
-| BR-DESCARTAR-001 | <ref> | <motivo> | sim/não |
+| BR-DESCARTAR-001 | <ref> | <reason> | yes/no |
 
-> Detalhe completo em `discard_log.md`.
+> Full details in `discard_log.md`.
 
-## Regras DECISÃO HUMANA
+## HUMAN DECISION rules
 
 ### BR-HUMANA-001
-- **Origem**: <ref>
-- **Tipo de ambiguidade**: ⚠️ AMBÍGUA | 🔴 GAP | dependência de stakeholder
-- **Descrição**: <regra>
-- **Opções**: <opções claras>
-- **Recomendação do Curator**: <opção sugerida e por quê>
-- **Status**: PENDENTE | RESOLVIDA (escolha + decisor + data)
+- **Source**: <ref>
+- **Ambiguity type**: ⚠️ AMBIGUOUS | 🔴 GAP | stakeholder dependency
+- **Description**: <rule>
+- **Options**: <clear options>
+- **Curator recommendation**: <suggested option and why>
+- **Status**: PENDING | RESOLVED (choice + decision maker + date)
 
-<repetir por item>
+<repeat for each item>
 
-## Notas
-<Observações gerais do Curator. Itens que serão consolidados em `ambiguity_log.md`.>
+## Notes
+<General observations from the Curator. Items that will be consolidated in `ambiguity_log.md`.>

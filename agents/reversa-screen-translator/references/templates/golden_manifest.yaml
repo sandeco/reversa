@@ -1,13 +1,13 @@
 # golden/manifest.yaml
 #
-# Manifesto dos golden files emitidos pelo Screen Translator. O Inspector consome
-# este arquivo para construir parity tests construtivos quando o oráculo legado
-# está disponível e a captura foi possível.
+# Manifest of golden files emitted by Screen Translator. Inspector consumes this
+# file to build constructive parity tests when the legacy oracle is available
+# and capture was possible.
 #
-# Em v1, captura automatizada via Docker/Wine/emulador é OQ-02 (não implementada).
-# Este manifesto descreve o comando sugerido por tela; usuário roda manualmente.
-# Em projetos sem oráculo executável, este arquivo pode existir vazio (lista de
-# golden files com `present: false`) ou não existir, e o Inspector ignora.
+# In v1, automated capture via Docker/Wine/emulator is OQ-02 (not implemented).
+# This manifest describes the suggested command per screen; the user runs it manually.
+# In projects without an executable oracle, this file may exist empty (with a list of
+# golden files where `present: false`) or may not exist at all, and Inspector ignores it.
 
 schemaVersion: 1
 generatedAt: <ISO-8601>
@@ -17,46 +17,46 @@ producedBy: screen-translator
 sourcePlatform: <slug>
 targetPlatform: <slug>
 oracleAvailable: true | false
-oracleHash: "sha256:<hash do binário ou container do oráculo, quando aplicável>"
-oracleCommand: "<comando base para invocar o oráculo, ex: 'docker run --rm -i legacy-atm:1.0'>"
+oracleHash: "sha256:<hash of the oracle binary or container, when applicable>"
+oracleCommand: "<base command to invoke the oracle, e.g. 'docker run --rm -i legacy-atm:1.0'>"
 
 normalizationRules:
-  # Regras aceitas na comparação byte-a-byte. Tudo fora daqui é divergência real.
-  - lineEndings: "\n"           # converter CRLF → LF antes de comparar
-  - trimTrailingSpaces: false   # padrão: nunca trimmar
-  - stripAnsiColors: false      # padrão: nunca strippar; ANSI faz parte do contrato
-  - normalizeUtf8: true         # converter encoding heterogêneo para UTF-8
-  - injectClock: "2026-01-01T00:00:00Z"  # clock fake para captura determinística
-  - seedRandom: 42              # seed fixo
+  # Rules accepted in byte-for-byte comparison. Anything outside these rules is a real divergence.
+  - lineEndings: "\n"           # convert CRLF → LF before comparing
+  - trimTrailingSpaces: false   # default: never trim
+  - stripAnsiColors: false      # default: never strip; ANSI is part of the contract
+  - normalizeUtf8: true         # convert heterogeneous encoding to UTF-8
+  - injectClock: "2026-01-01T00:00:00Z"  # fake clock for deterministic capture
+  - seedRandom: 42              # fixed seed
 
 screens:
-  - name: <nome-canonical-da-tela>
-    legacyOrigin: "<arquivo:linha>"
+  - name: <canonical-screen-name>
+    legacyOrigin: "<file:line>"
     capture:
-      command: "<comando completo de captura, ex: 'echo -e \"1\\n123456\\n0\\n\" | docker run --rm -i legacy-atm:1.0 > tela_login.txt'>"
+      command: "<full capture command, e.g. 'echo -e \"1\\n123456\\n0\\n\" | docker run --rm -i legacy-atm:1.0 > login_screen.txt'>"
       expectedExitCode: 0
       determinismStrategy: "fake-clock + fixed-seed"
-    file: "tela-login.txt"          # caminho relativo a _reversa_sdd/screens/golden/
+    file: "login-screen.txt"       # path relative to _reversa_sdd/screens/golden/
     format: "ansi-byte-stream"      # ansi-byte-stream | png | html-css-snapshot | raw
-    present: true                   # false quando o usuário ainda não rodou a captura
-    captureBy: "<nome-do-usuario-ou-CI>"
+    present: true                    # false when the user has not yet run the capture
+    captureBy: "<user-name-or-CI>"
     capturedAt: "<ISO-8601>"
-    sha256: "<hash do arquivo capturado, ou null quando present=false>"
-    deviations: [DEV-XXX, DEV-YYY]  # lista de deviations conhecidas para esta tela
-    notes: "<observações específicas, ex: 'oráculo emite trailing space que ignoramos via trimTrailingSpaces na comparação'>"
+    sha256: "<hash of the captured file, or null when present=false>"
+    deviations: [DEV-XXX, DEV-YYY]   # list of known deviations for this screen
+    notes: "<specific observations, e.g. 'oracle emits trailing space that we ignore via trimTrailingSpaces during comparison'>"
 
   - name: <segunda-tela>
     # ...
 
-# Telas para as quais a captura determinística não foi possível.
+# Screens for which deterministic capture was not possible.
 nonDeterministic:
-  - name: <tela-com-relogio-externo>
-    reason: "<descrição da fonte de não-determinismo>"
-    fallback: "amostragem por N execuções; golden file = comum a todas"
+  - name: <screen-with-external-clock>
+    reason: "<description of the non-determinism source>"
+    fallback: "sample over N runs; golden file = content common to all"
     samples: 5
     deviations: [DEV-021]
 
-# Telas em projetos sem UI ou em modo skipped.
+# Screens in projects without a UI or in skipped mode.
 skipped:
-  reason: "<ex: legado é batch puro, agente Screen Translator pulado>"
+  reason: "<e.g. legacy system is pure batch, Screen Translator agent skipped>"
   emittedAt: <ISO-8601>

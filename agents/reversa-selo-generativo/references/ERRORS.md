@@ -1,16 +1,16 @@
-# Cenários de Erro e Tratamento
+# Error Scenarios and Handling
 
-Cenários comuns na skill `selo-generativo` e como tratá-los.
+Common scenarios in the `selo-generativo` skill and how to handle them.
 
 ---
 
-## ERR-01: p5.js indisponível (CDN inacessível)
+## ERR-01: p5.js unavailable (CDN unreachable)
 
-**Causa**: usuário offline na primeira execução, ou CDN bloqueado.
+**Cause**: user offline on first run, or CDN blocked.
 
-**Detecção**: variável `p5` global não definida após o `<script>` do CDN.
+**Detection**: global `p5` variable undefined after the CDN `<script>`.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 window.addEventListener("load", () => {
@@ -19,86 +19,86 @@ window.addEventListener("load", () => {
             <div class="seal-fallback" style="width: ${SIZE}px; height: ${SIZE}px;
                  background: ${palette.bg}; display: flex; align-items: center;
                  justify-content: center; border-radius: 50%; color: ${palette.fg};">
-                <span>Selo indisponível</span>
+                <span>Seal unavailable</span>
             </div>`;
         return;
     }
-    // setup normal aqui
+    // normal setup here
 });
 ```
 
-Fallback: SVG mínimo (círculo + cor de fundo da paleta) inline, sem dependência de p5.
+Fallback: minimal SVG (circle + palette background color) inline, with no p5 dependency.
 
 ---
 
-## ERR-02: Canvas não suportado pelo browser
+## ERR-02: Canvas not supported by the browser
 
-**Causa**: browser muito antigo sem suporte a `<canvas>` (caso raríssimo hoje).
+**Cause**: very old browser without `<canvas>` support (extremely rare today).
 
-**Detecção**: `canvas.getContext("2d")` retorna `null`.
+**Detection**: `canvas.getContext("2d")` returns `null`.
 
-**Tratamento**: cair para SVG inline com `crystal-lattice` (que é o padrão mais compatível com SVG real).
+**Handling**: fall back to inline SVG with `crystal-lattice` (the most compatible pattern with real SVG).
 
 ---
 
-## ERR-03: Seed inválido ou ausente
+## ERR-03: Invalid or missing seed
 
-**Causa**: agente chamou a skill sem seed, ou passou string vazia.
+**Cause**: agent called the skill without a seed, or passed an empty string.
 
-**Detecção**: validação na entrada.
+**Detection**: input validation.
 
-**Tratamento**: fallback seguro.
+**Handling**: safe fallback.
 
 ```javascript
 function resolveSeed(rawSeed) {
     if (!rawSeed || typeof rawSeed !== "string" || rawSeed.length === 0) {
         const timestamp = Date.now().toString();
-        console.warn("Seed ausente, usando timestamp como fallback. Selo não será reprodutível.");
+        console.warn("Missing seed, using timestamp as fallback. Seal will not be reproducible.");
         return timestamp;
     }
     return rawSeed;
 }
 ```
 
-Quando timestamp é usado, exibir aviso no rodapé da página (apenas se for hero grande): "Selo não-reprodutível (sem seed)".
+When timestamp is used, show a warning in the page footer (only for large hero): "Non-reproducible seal (no seed)".
 
 ---
 
-## ERR-04: Tamanho extremo
+## ERR-04: Extreme size
 
-**Causa**: requisição de canvas muito grande (>4096) ou muito pequeno (<16).
+**Cause**: request for a very large canvas (>4096) or very small (<16).
 
-**Detecção**: validação do parâmetro `size`.
+**Detection**: validate `size` parameter.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 function clampSize(requested) {
     const MIN = 16;
     const MAX = 4096;
     if (requested < MIN) {
-        console.warn(`Tamanho ${requested} abaixo do mínimo (${MIN}). Ajustando.`);
+        console.warn(`Size ${requested} below minimum (${MIN}). Adjusting.`);
         return MIN;
     }
     if (requested > MAX) {
-        console.warn(`Tamanho ${requested} acima do máximo (${MAX}). Ajustando.`);
+        console.warn(`Size ${requested} above maximum (${MAX}). Adjusting.`);
         return MAX;
     }
     return requested;
 }
 ```
 
-Acima de 1024, padrões de pixel-loop como `wave-interference` ficam pesados. A skill deve avisar e oferecer `noLoop()` obrigatório com cache do canvas.
+Above 1024, pixel-loop patterns such as `wave-interference` become heavy. The skill should warn and require `noLoop()` with canvas cache.
 
 ---
 
-## ERR-05: Paleta com cores inválidas
+## ERR-05: Palette with invalid colors
 
-**Causa**: paleta recebida com hex malformado ou campo ausente.
+**Cause**: received palette with malformed hex or missing field.
 
-**Detecção**: regex de validação em cada cor.
+**Detection**: validation regex on each color.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 function validatePalette(palette) {
@@ -106,32 +106,32 @@ function validatePalette(palette) {
     const required = ["bg", "foreground", "accent", "fg"];
     for (const field of required) {
         if (!(field in palette)) {
-            throw new Error(`Paleta inválida: campo '${field}' ausente.`);
+            throw new Error(`Invalid palette: missing '${field}' field.`);
         }
     }
     if (!Array.isArray(palette.foreground) || palette.foreground.length === 0) {
-        throw new Error("Paleta inválida: 'foreground' deve ser lista não-vazia.");
+        throw new Error("Invalid palette: 'foreground' must be a non-empty list.");
     }
     [palette.bg, palette.accent, palette.fg].forEach((c) => {
-        if (!HEX_RX.test(c)) throw new Error(`Cor inválida: ${c}`);
+        if (!HEX_RX.test(c)) throw new Error(`Invalid color: ${c}`);
     });
     palette.foreground.forEach((c) => {
-        if (!HEX_RX.test(c)) throw new Error(`Cor inválida em foreground: ${c}`);
+        if (!HEX_RX.test(c)) throw new Error(`Invalid foreground color: ${c}`);
     });
 }
 ```
 
-Se a paleta é inválida, cair para `palettes.sober` (paleta de fallback mais conservadora) e logar a falha.
+If the palette is invalid, fall back to `palettes.sober` (the most conservative fallback palette) and log the failure.
 
 ---
 
-## ERR-06: Contraste insuficiente
+## ERR-06: Insufficient contrast
 
-**Causa**: paleta com `accent` e `bg` muito próximos, gerando elemento central invisível.
+**Cause**: palette with `accent` and `bg` too close, making the central element invisible.
 
-**Detecção**: `contrastRatio(accent, bg) < 4.5` (ver PALETTE_BY_STYLE.md).
+**Detection**: `contrastRatio(accent, bg) < 4.5` (see PALETTE_BY_STYLE.md).
 
-**Tratamento**: derivar `accent` ajustado automaticamente.
+**Handling**: derive adjusted `accent` automatically.
 
 ```javascript
 function ensureContrast(palette) {
@@ -145,13 +145,13 @@ function ensureContrast(palette) {
 
 ---
 
-## ERR-07: Padrão escolhido incompatível com estilo
+## ERR-07: Chosen pattern incompatible with style
 
-**Causa**: derivação por seed resultou em padrão visualmente incompatível com o estilo escolhido (ex: `crystal-lattice` em estilo `exploratory`).
+**Cause**: seed derivation resulted in a pattern visually incompatible with the chosen style (e.g. `crystal-lattice` in `exploratory` style).
 
-**Detecção**: tabela de compatibilidade declarada em `GENERATIVE_PATTERNS.md`.
+**Detection**: compatibility table declared in `GENERATIVE_PATTERNS.md`.
 
-**Tratamento**: re-rolar dentro dos padrões compatíveis.
+**Handling**: re-roll within compatible patterns.
 
 ```javascript
 const STYLE_COMPATIBLE = {
@@ -171,21 +171,21 @@ function pickCompatible(seedHex, styleHint) {
 
 ---
 
-## ERR-08: Performance muito ruim em mini-selo
+## ERR-08: Very poor performance in mini seal
 
-**Causa**: padrão pesado em canvas pequeno consumindo CPU desproporcional.
+**Cause**: heavy pattern on a small canvas consuming disproportionate CPU.
 
-**Detecção**: medir tempo entre `setup` e `draw` final.
+**Detection**: measure time between `setup` and final `draw`.
 
-**Tratamento**: se canvas é mini (<200px) e padrão escolhido é `wave-interference` (pixel loop), trocar automaticamente para `crystal-lattice` (geometria simples) com mensagem no console.
+**Handling**: if canvas is mini (<200px) and chosen pattern is `wave-interference` (pixel loop), automatically switch to `crystal-lattice` (simple geometry) with a console message.
 
 ---
 
-## ERR-09: Múltiplas instâncias do mesmo selo na mesma página
+## ERR-09: Multiple instances of the same seal on the same page
 
-**Causa**: o mini-selo aparece em todas as páginas do mini-site. Recarregar p5.js e gerar canvas em cada uma é desperdício.
+**Cause**: mini seal appears on every page of the mini-site. Reloading p5.js and generating a canvas on each one is wasteful.
 
-**Tratamento**: gerar o selo uma vez como SVG (para `crystal-lattice`) ou PNG dataURI (para outros padrões) e embutir inline em todas as páginas. A skill aceita parâmetro `mode: "svg" | "dataURI" | "html"` para retornar formato apropriado.
+**Handling**: generate the seal once as SVG (for `crystal-lattice`) or PNG dataURI (for other patterns) and embed inline on all pages. The skill accepts parameter `mode: "svg" | "dataURI" | "html"` to return the appropriate format.
 
 ```javascript
 function exportAs(mode) {
@@ -197,16 +197,16 @@ function exportAs(mode) {
 
 ---
 
-## ERR-10: localStorage de seed corrompido
+## ERR-10: Corrupted seed localStorage
 
-Não aplicável diretamente, porque a skill não persiste estado entre execuções. O seed sempre vem do invocador (agente orquestrador), e a reprodutibilidade depende apenas dele.
+Not directly applicable, because the skill does not persist state between runs. The seed always comes from the invoker (orchestrator agent), and reproducibility depends only on it.
 
-Se o invocador perdeu o seed, o agente deve recalcular do soul.md (sha256). Esta skill não é responsável por isso.
+If the invoker lost the seed, the agent should recalculate it from soul.md (sha256). This skill is not responsible for that.
 
 ---
 
-## Princípio geral
+## General principle
 
-O selo é um elemento **decorativo**. Falha de selo nunca deve quebrar a página inteira. Em todos os cenários acima, há fallback que sempre renderiza algo: um círculo colorido, um SVG mínimo, uma versão simplificada. Nada de tela branca.
+The seal is a **decorative** element. Seal failure must never break the whole page. In all scenarios above, there is a fallback that always renders something: a colored circle, a minimal SVG, a simplified version. No blank screen.
 
-Mensagens em pt-br, sem travessão.
+Messages in English, without em dashes.

@@ -1,19 +1,19 @@
 # Reversa
 
-> Framework de Engenharia Reversa instalado neste projeto.
+> Reverse Engineering Framework installed in this project.
 
-## Como usar
+## How to use
 
-Para ativar o Reversa, escreva `reversa` sozinho em uma mensagem.
+To activate Reversa, type `reversa` by itself in a message.
 
-## Comportamento ao ativar
+## Activation behavior
 
-Quando o usuário escrever `reversa` sozinho:
+When the user types `reversa` by itself:
 
-1. Ative o skill `reversa` disponível em `.agents/skills/reversa/SKILL.md`
-2. Leia o SKILL.md na íntegra e siga exatamente as instruções do Reversa
+1. Activate the `reversa` skill available at `.agents/skills/reversa/SKILL.md`
+2. Read SKILL.md in full and follow Reversa's instructions exactly
 
-## Regra não-negociável
+## Non-negotiable rule
 
-Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto legado.
-O Reversa escreve **apenas** em `.reversa/` e `_reversa_sdd/`.
+Never delete, modify, or overwrite pre-existing files from the legacy project.
+Reversa writes **only** to `.reversa/` and `_reversa_sdd/`.

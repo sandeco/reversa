@@ -31,7 +31,7 @@
       "preco_minimo": 4800.0,
       "preco_maximo": 12000.0,
       "preco_total": 8400.0,
-      "explanation_pt_br": "Faixa baseada em 32 a 80h para complexidade L, senioridade senior, custo direto, reserva tributaria de 15% e markup de projeto de 35%."
+      "explanation_pt_br": "Range based on 32 to 80h for complexity L, seniority senior, direct cost, a 15% tax reserve, and a 35% project markup."
     },
     "value": {
       "available": true,
@@ -47,7 +47,7 @@
       "preco_maximo": 7200.0,
       "payback_months_min": 1.2,
       "payback_months_max": 3.6,
-      "explanation_pt_br": "Faixa baseada em captura de 10% a 30% do valor anual declarado, com payback aproximado de 1.2 a 3.6 meses."
+      "explanation_pt_br": "Range based on capturing 10% to 30% of the declared annual value, with approximate payback from 1.2 to 3.6 months."
     },
     "market": {
       "available": true,
@@ -67,8 +67,8 @@
       "preco_minimo": 3200.0,
       "preco_maximo": 16000.0,
       "fallback_applied": false,
-      "explanation_pt_br": "Faixa derivada de benchmark horario BR senior e 32 a 80h para complexidade L."
+      "explanation_pt_br": "Range derived from a BR senior hourly benchmark and 32 to 80h for complexity L."
     }
   },
-  "guidance_pt_br": "O Valor declarado gera uma faixa menor que o Esforco medio. Use Esforco como piso defensavel e Mercado como referencia externa. Para este cliente, cobre abaixo de 4800 BRL apenas se houver motivo estrategico claro."
+  "guidance_pt_br": "The declared Value produces a lower range than the median Effort. Use Effort as the defensible floor and Market as the external reference. For this client, charge below 4800 BRL only if there is a clear strategic reason."
 }

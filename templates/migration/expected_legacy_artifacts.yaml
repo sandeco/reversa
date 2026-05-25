@@ -1,11 +1,11 @@
-# Lista declarativa de artefatos esperados em _reversa_sdd/ antes de iniciar a migração.
-# Atualizar esta lista é uma mudança de configuração; não exige reedição do agente reversa-migrate.
+# Declarative list of artifacts expected in _reversa_sdd/ before starting the migration.
+# Updating this list is a configuration change; it does not require editing the reversa-migrate agent.
 #
-# Cada entrada:
-#   path: caminho relativo dentro de _reversa_sdd/
-#   kind: identificador lógico do artefato (informativo, não estritamente validado contra front-matter)
-#   required: true bloqueia o pipeline se ausente; false apenas loga aviso
-#   minSchemaVersion: versão mínima esperada de schemaVersion (informativo; ausência tolerada hoje)
+# Each entry:
+#   path: relative path inside _reversa_sdd/
+#   kind: logical identifier of the artifact (informational, not strictly validated against front matter)
+#   required: true blocks the pipeline if missing; false only logs a warning
+#   minSchemaVersion: minimum expected schemaVersion (informational; absence is tolerated today)
 
 schemaVersion: 1
 artifacts:
@@ -63,8 +63,8 @@ artifacts:
     minSchemaVersion: 1
 
 # Aliases:
-# Nomes legados aceitos para compatibilidade com versões anteriores do time de descoberta.
-# Cada alias mapeia "nome esperado" → lista de nomes alternativos aceitos.
+# Legacy names accepted for compatibility with older versions of the discovery team.
+# Each alias maps an "expected name" → list of accepted alternative names.
 aliases:
   "domain.md":
     - "domain_model.md"

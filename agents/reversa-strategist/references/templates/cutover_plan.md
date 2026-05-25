@@ -5,56 +5,56 @@ reversa:
   version: "x.y.z"
 kind: cutover_plan
 producedBy: strategist
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Cutover Plan
 
-> Plano de corte do legado para o sistema novo, alinhado à estratégia escolhida em `migration_strategy.md`.
+> Plan for cutting over from the legacy system to the new system, aligned with the strategy chosen in `migration_strategy.md`.
 
-## Estratégia base
-- **Estratégia confirmada**: <referência ao migration_strategy.md>
+## Base strategy
+- **Confirmed strategy**: <reference to migration_strategy.md>
 
-## Pré-requisitos
-- [ ] <pré-requisito 1: ex. paridade comportamental ≥ X% por N dias>
-- [ ] <pré-requisito 2>
-- [ ] <pré-requisito 3>
+## Prerequisites
+- [ ] <prerequisite 1: e.g. behavioral parity ≥ X% for N days>
+- [ ] <prerequisite 2>
+- [ ] <prerequisite 3>
 
-## Janela de cutover
-- **Data alvo**: <ISO-8601 ou janela>
-- **Duração estimada**: <horas>
-- **Ambiente afetado**: <produção / staging / outro>
-- **Comunicação prévia**: <stakeholders avisados, prazo>
+## Cutover window
+- **Target date**: <ISO-8601 or window>
+- **Estimated duration**: <hours>
+- **Affected environment**: <production / staging / other>
+- **Advance communication**: <stakeholders informed, lead time>
 
-## Passos do cutover
+## Cutover steps
 
-| # | Passo | Owner | Duração | Reversível? |
+| # | Step | Owner | Duration | Reversible? |
 |---|---|---|---|---|
-| 1 | <ex: congelar escritas no legado> | | | |
-| 2 | <ex: ETL final dos dados> | | | |
-| 3 | <ex: roteamento DNS> | | | |
-| 4 | <ex: smoke tests no novo> | | | |
+| 1 | <e.g. freeze writes on the legacy system> | | | |
+| 2 | <e.g. final data ETL> | | | |
+| 3 | <e.g. DNS routing> | | | |
+| 4 | <e.g. smoke tests on the new system> | | | |
 
-## Plano de rollback
-- **Critérios de acionamento**: <quando rollback é decidido>
-- **Passos**:
-  1. <passo>
-  2. <passo>
-- **Tempo máximo aceitável até rollback**: <minutos / horas>
-- **Owner do rollback**: <nome / papel>
+## Rollback plan
+- **Trigger criteria**: <when rollback is decided>
+- **Steps**:
+  1. <step>
+  2. <step>
+- **Maximum acceptable time until rollback**: <minutes / hours>
+- **Rollback owner**: <name / role>
 
-## Critérios de go / no-go
+## Go / no-go criteria
 - **Go**:
-  - <critério 1>
-  - <critério 2>
+  - <criterion 1>
+  - <criterion 2>
 - **No-go**:
-  - <critério 1>
-  - <critério 2>
+  - <criterion 1>
+  - <criterion 2>
 
-## Pós-cutover
-- [ ] Monitoramento estendido por <período>
-- [ ] Validação de paridade conforme `parity_specs.md`
-- [ ] Decommission do legado em <data>
+## Post-cutover
+- [ ] Extended monitoring for <period>
+- [ ] Parity validation according to `parity_specs.md`
+- [ ] Legacy decommission on <date>
 
-## Notas
-<Observações adicionais.>
+## Notes
+<Additional observations.>

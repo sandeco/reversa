@@ -1,20 +1,20 @@
 <!--
   Template: timeline.html
-  Produtor: reversa-docs-analyst
-  Skill invocada: highcharts-visualizer (Highcharts Timeline)
+  Producer: reversa-docs-analyst
+  Invoked skill: highcharts-visualizer (Highcharts Timeline)
   Page ID: timeline
-  Categoria reversa: diagram
-  Dados consumidos: assets/data/timeline.json (derivado de .reversa/chronicle.md)
+  Reversa category: diagram
+  Data consumed: assets/data/timeline.json (derived from .reversa/chronicle.md)
 
-  Marcadores:
+  Markers:
   - HEAD_EXTRAS: <script src="assets/vendor/highcharts.js"></script>
                  + <script src="assets/vendor/highcharts-accessibility.js"></script>
                  + <script src="assets/vendor/highcharts-timeline.js"></script>
-                 (todos baixados pelo Publisher via vendor-pins.yaml,
+                 (all downloaded by the Publisher via vendor-pins.yaml,
                   highcharts@11.4.8)
-  - CHART_TIMELINE: container da timeline
-  - EVENT_DETAILS: painel lateral com detalhes do evento clicado
-  - SCRIPTS: monta a timeline a partir de window.RV_DATA.timeline (sem fetch local)
+  - CHART_TIMELINE: timeline container
+  - EVENT_DETAILS: side panel with details of the clicked event
+  - SCRIPTS: builds the timeline from window.RV_DATA.timeline (no local fetch)
 -->
 
 <!-- PAYLOAD_START -->
@@ -23,10 +23,10 @@
         <div id="chart-timeline"><!-- CHART_TIMELINE --></div>
     </div>
     <aside class="reversa-doc-timeline-details" aria-live="polite">
-        <h2>Detalhes do evento</h2>
+        <h2>Event details</h2>
         <div id="event-details">
             <!-- EVENT_DETAILS -->
-            <p class="reversa-doc-empty-hint">Clique em um evento na timeline para ver detalhes.</p>
+            <p class="reversa-doc-empty-hint">Click an event on the timeline to view details.</p>
         </div>
     </aside>
 </section>

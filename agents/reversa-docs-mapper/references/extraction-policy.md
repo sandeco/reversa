@@ -1,20 +1,20 @@
-# Política de extração de dados (Mapper)
+# Data extraction policy (Mapper)
 
-Define quando invocar scripts de extração vs reusar cache em `.reversa/documentation/assets/data/`.
+Defines when to invoke extraction scripts versus reuse cache in `.reversa/documentation/assets/data/`.
 
-## Cache hit (reutilizar)
+## Cache hit (reuse)
 
-Use o JSON existente quando **todas** as condições forem verdadeiras:
+Use the existing JSON when **all** conditions are true:
 
-1. O arquivo existe em `.reversa/documentation/assets/data/<nome>.json`.
-2. `mtime` do JSON é maior que o `mtime` máximo entre todos os arquivos fonte relevantes:
-   - Para `modules.json`: maior `mtime` dentro do código fonte (excluindo `.reversa/`, `_reversa_sdd/`, `node_modules/`, `.git/`).
-   - Para `deps.json`: maior `mtime` do código fonte E do `modules.json`.
-3. O `schemaVersion` do JSON é compatível com a versão atual (1).
+1. The file exists in `.reversa/documentation/assets/data/<name>.json`.
+2. JSON `mtime` is greater than the maximum `mtime` among all relevant source files:
+   - For `modules.json`: highest `mtime` inside source code (excluding `.reversa/`, `_reversa_sdd/`, `node_modules/`, `.git/`).
+   - For `deps.json`: highest `mtime` of source code AND `modules.json`.
+3. JSON `schemaVersion` is compatible with the current version (1).
 
-## Cache miss (regenerar)
+## Cache miss (regenerate)
 
-Em qualquer outro caso, invoque o script Python correspondente:
+In any other case, invoke the corresponding Python script:
 
 ```bash
 python templates/documentation/scripts/extract_modules.py \
@@ -26,19 +26,19 @@ python templates/documentation/scripts/extract_deps.py \
     --out .reversa/documentation/assets/data/deps.json
 ```
 
-## Python indisponível
+## Python unavailable
 
-Faça extração inline na engine de IA:
+Perform inline extraction in the AI engine:
 
-1. Use Glob para listar arquivos por extensão (`*.py`, `*.js`, `*.ts`, `*.go`, `*.java`).
-2. Use Read para contar linhas não-vazias de cada arquivo.
-3. Monte estrutura idêntica ao schema `modules.json` (ver `specs/reversa-docs/design.md`).
-4. Para `deps.json`, na falta de parser AST, comece com `nodes` populado e `edges: []`. Marque em `.config.json.pagesPlanned` que dependencies não foram extraídas.
+1. Use Glob to list files by extension (`*.py`, `*.js`, `*.ts`, `*.go`, `*.java`).
+2. Use Read to count non-empty lines of each file.
+3. Build a structure identical to the `modules.json` schema (see `specs/reversa-docs/design.md`).
+4. For `deps.json`, if there is no AST parser, start with `nodes` populated and `edges: []`. Mark in `.config.json.pagesPlanned` that dependencies were not extracted.
 
-## Forçar regeneração
+## Force regeneration
 
-Se o usuário passar `--force-extract` ao `/reversa-docs-mapper`, ignore o cache e regenere. Backup do JSON anterior em `.backup-<timestamp>/assets/data/`.
+If the user passes `--force-extract` to `/reversa-docs-mapper`, ignore the cache and regenerate. Back up the previous JSON to `.backup-<timestamp>/assets/data/`.
 
-## Quando o Analyst invoca isolado
+## When Analyst runs in isolation
 
-Se o `Analyst` rodar antes do Mapper ou em modo isolado e não encontrar `modules.json`/`deps.json`, ele deve invocar os **mesmos scripts** seguindo esta mesma política. O resultado é compartilhado: Mapper subsequente vai usar o cache.
+If `Analyst` runs before Mapper or in isolated mode and does not find `modules.json`/`deps.json`, it must invoke the **same scripts** following this same policy. The result is shared: a later Mapper will use the cache.

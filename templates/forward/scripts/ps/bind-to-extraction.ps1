@@ -1,17 +1,18 @@
 # bind-to-extraction.ps1
-# Helper que lê _reversa_sdd/ e devolve um JSON com as fontes canônicas que os skills forward devem consultar.
+# Helper that reads _reversa_sdd/ and returns a JSON payload with the canonical sources
+# that Reversa's forward skills should consult.
 #
-# Uso:
-#   bind-to-extraction.ps1 [-Json] [-For <comando>]
+# Usage:
+#   bind-to-extraction.ps1 [-Json] [-For <command>]
 #
 # -For requirements   architecture, domain, inventory
 # -For plan           architecture, c4-context, state-machines, dependencies, code-analysis
 # -For to-do          architecture, code-analysis
 # -For audit          architecture, domain
 # -For coding         architecture, domain, code-analysis
-# sem -For            todos os arquivos do _reversa_sdd
+# without -For        all files from _reversa_sdd
 #
-# Códigos de saída: 0 ok, 1 _reversa_sdd ausente, 2 uso inválido.
+# Exit codes: 0 ok, 1 _reversa_sdd missing, 2 invalid usage.
 
 [CmdletBinding()]
 param(
@@ -26,7 +27,7 @@ $projectRoot = (Resolve-Path (Join-Path $scriptDir '..\..')).Path
 $sddDir      = Join-Path $projectRoot '_reversa_sdd'
 
 if (-not (Test-Path -LiteralPath $sddDir -PathType Container)) {
-  Write-Error "$sddDir nao existe. rode a pipeline reversa antes."
+  Write-Error "$sddDir does not exist. Run the Reversa pipeline first."
   exit 1
 }
 
@@ -62,9 +63,9 @@ $result = [ordered]@{
 if ($Json) {
   $result | ConvertTo-Json -Compress -Depth 4 | Write-Output
 } else {
-  Write-Output 'presentes:'
+  Write-Output 'present:'
   foreach ($p in $present) { Write-Output "  $p" }
-  Write-Output 'ausentes:'
+  Write-Output 'missing:'
   foreach ($a in $absent) { Write-Output "  $a" }
 }
 

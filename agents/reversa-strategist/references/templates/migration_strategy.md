@@ -5,51 +5,51 @@ reversa:
   version: "x.y.z"
 kind: migration_strategy
 producedBy: strategist
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Migration Strategy
 
-> Estratégias de migração avaliadas com trade-offs explícitos. A estratégia recomendada é a sugestão do Strategist; a decisão final é humana.
+> Migration strategies evaluated with explicit trade-offs. The recommended strategy is the Strategist's suggestion; the final decision is human.
 
-## Estratégias avaliadas
+## Evaluated strategies
 
-### Estratégia A: <nome>
-- **Descrição**: <texto curto>
-- **Quando aplica**: <critérios>
-- **Custo**: baixo | médio | alto
-- **Risco**: baixo | médio | alto
-- **Tempo**: curto | médio | longo
-- **Adequação ao apetite derivado** (`<conservative | balanced | transformational>`): <texto>
+### Strategy A: <name>
+- **Description**: <short text>
+- **When it applies**: <criteria>
+- **Cost**: low | medium | high
+- **Risk**: low | medium | high
+- **Time**: short | medium | long
+- **Fit for the derived appetite** (`<conservative | balanced | transformational>`): <text>
 - **Trade-offs**:
-  - Prós: <lista>
-  - Contras: <lista>
+  - Pros: <list>
+  - Cons: <list>
 
-### Estratégia B: <nome>
-<mesma estrutura>
+### Strategy B: <name>
+<same structure>
 
-### Estratégia C: <nome>
-<opcional, se mais de duas forem relevantes>
+### Strategy C: <name>
+<optional, if more than two are relevant>
 
-## Comparativo
+## Comparison
 
-| Critério | A | B | C |
+| Criterion | A | B | C |
 |---|---|---|---|
-| Custo | | | |
-| Risco | | | |
-| Tempo | | | |
-| Aderência ao apetite | | | |
-| Compatibilidade com mudança de paradigma | | | |
+| Cost | | | |
+| Risk | | | |
+| Time | | | |
+| Appetite fit | | | |
+| Compatibility with the paradigm change | | | |
 
-## Recomendação do Strategist
-- **Estratégia recomendada**: <A | B | C>
-- **Justificativa**: <texto baseado em brief + paradigma + apetite>
+## Strategist recommendation
+- **Recommended strategy**: <A | B | C>
+- **Rationale**: <text based on brief + paradigm + appetite>
 
-## Sinais de alerta específicos
-- <ex: mudança grande de paradigma + apetite transformacional → considerar Parallel Run para validação>
+## Specific warning signs
+- <e.g. major paradigm change + transformational appetite → consider a Parallel Run for validation>
 
-## Decisão humana
-- **Estratégia escolhida**: <A | B | C>
-- **Quem decidiu**: <nome>
-- **Quando**: <ISO-8601>
-- **Justificativa do decisor**: <texto livre>
+## Human decision
+- **Chosen strategy**: <A | B | C>
+- **Decision maker**: <name>
+- **When**: <ISO-8601>
+- **Decision rationale**: <free text>

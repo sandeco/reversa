@@ -1,41 +1,41 @@
-> Cópia local do catálogo consultivo. Fonte canônica em `templates/migration/catalogs/migration_strategies.md`.
+> Local copy of the consulting catalog. Canonical source at `templates/migration/catalogs/migration_strategies.md`.
 
-# Migration Strategies (cópia local)
+# Migration Strategies (local copy)
 
-## Estratégias
+## Strategies
 
 ### Strangler Fig
-- **Quando aplica**: sistema em produção, não pode parar; necessidade de incrementalidade; possibilidade de roteamento (proxy / API gateway).
-- **Custo**: médio. **Risco**: baixo. **Tempo**: longo.
-- **Apetite favorecido**: conservative, balanced.
+- **When to apply**: system in production, cannot stop; need for incrementality; routing possibility (proxy / API gateway).
+- **Cost**: medium. **Risk**: low. **Time**: long.
+- **Preferred appetite**: conservative, balanced.
 
 ### Big Bang
-- **Quando aplica**: sistema pequeno; janela tolerada; apetite transformacional; poucas integrações vivas.
-- **Custo**: baixo. **Risco**: alto. **Tempo**: curto.
-- **Apetite favorecido**: transformational (em sistemas pequenos).
+- **When to apply**: small system; tolerable downtime window; transformational appetite; few live integrations.
+- **Cost**: low. **Risk**: high. **Time**: short.
+- **Preferred appetite**: transformational (on small systems).
 
 ### Parallel Run
-- **Quando aplica**: lógica crítica (financeiro / fiscal / regulatório); precisa de prova de equivalência por longo período.
-- **Custo**: alto. **Risco**: médio. **Tempo**: médio.
-- **Apetite favorecido**: balanced.
+- **When to apply**: critical logic (financial / tax / regulatory); needs proof of equivalence over a long period.
+- **Cost**: high. **Risk**: medium. **Time**: medium.
+- **Preferred appetite**: balanced.
 
 ### Branch by Abstraction
-- **Quando aplica**: migração interna (linguagem ou framework muda, domínio fica); apetite conservador.
-- **Custo**: baixo. **Risco**: baixo. **Tempo**: médio.
-- **Apetite favorecido**: conservative.
+- **When to apply**: internal migration (language or framework changes, domain stays); conservative appetite.
+- **Cost**: low. **Risk**: low. **Time**: medium.
+- **Preferred appetite**: conservative.
 
-## Regras de recomendação
+## Recommendation Rules
 
-- apetite `conservative` → Branch by Abstraction + Strangler Fig.
-- apetite `balanced` → Strangler Fig + Parallel Run.
-- apetite `transformational` → Big Bang em sistemas pequenos; Strangler Fig com bordas profundas em maiores.
-- mudança grande de paradigma + apetite transformacional → recomendar Parallel Run para validar paridade.
-- sistema com integrações regulatórias → nunca recomendar Big Bang.
+- `conservative` appetite → Branch by Abstraction + Strangler Fig.
+- `balanced` appetite → Strangler Fig + Parallel Run.
+- `transformational` appetite → Big Bang on small systems; Strangler Fig with deep edges on larger ones.
+- major paradigm shift + transformational appetite → recommend Parallel Run to validate parity.
+- system with regulatory integrations → never recommend Big Bang.
 
-## Pseudo-procedimento
+## Pseudo-Procedure
 
-1. Filtrar estratégias aplicáveis com base em brief.
-2. Pontuar restantes por aderência ao apetite e gap de paradigma.
-3. Selecionar 2 a 3 candidatas.
-4. Marcar uma como recomendada com justificativa.
-5. Para cada outra, listar contras como motivo de não-recomendação.
+1. Filter applicable strategies based on brief.
+2. Score remaining strategies by appetite alignment and paradigm gap.
+3. Select 2 to 3 candidates.
+4. Mark one as recommended with justification.
+5. For each other, list cons as reasons for non-recommendation.

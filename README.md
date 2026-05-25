@@ -8,7 +8,7 @@
 [![Reversa paper](https://raw.githubusercontent.com/sandeco/reversa/main/docs/img/reversa-paper.png)](https://arxiv.org/abs/2605.18684)
 
 [![English Docs](https://img.shields.io/badge/DOCS-English-009c3b?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/)<br>
-[![Português Docs](https://img.shields.io/badge/DOCS-Portugu%C3%AAs-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://sandeco.github.io/reversa/pt/)<br>
+[![Portuguese Docs](https://img.shields.io/badge/DOCS-Portuguese-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://sandeco.github.io/reversa/pt/)<br>
 [![Español Docs](https://img.shields.io/badge/DOCS-Espa%C3%B1ol-c60b1e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/es/)
 
 Reversa is a specification reverse-engineering framework. Install it inside a legacy project and it coordinates a team of specialized AI agents to analyze the existing code and generate complete, traceable specifications ready for use by any coding agent.
@@ -105,7 +105,7 @@ For other workflows, use the matching entry command:
 | Render the extracted knowledge as an HTML mini-site | `/reversa-docs` |
 | Estimate effort and pricing on top of the specs | `/reversa-pricing-profile`, `/reversa-pricing-size`, `/reversa-pricing-estimate` |
 
-Each orchestrator pauses between agents and asks for `CONTINUAR` before advancing, so you stay in control of every step.
+Each orchestrator pauses between agents and asks for `CONTINUE` before advancing, so you stay in control of every step.
 
 ---
 
@@ -175,7 +175,7 @@ These run the main `/reversa` pipeline.
 
 ### Code New Project Agents (greenfield)
 
-For projects that do not exist yet. Activate with `/reversa-new` and the orchestrator drives the pipeline `Ideator → Researcher → Drafter → Spec SDD`, with a `CONTINUAR` checkpoint between agents. Final handoff suggests `/reversa-forward` to take the specs to code.
+For projects that do not exist yet. Activate with `/reversa-new` and the orchestrator drives the pipeline `Ideator → Researcher → Drafter → Spec SDD`, with a `CONTINUE` checkpoint between agents. Final handoff suggests `/reversa-forward` to take the specs to code.
 
 | Agent | Role |
 |-------|------|

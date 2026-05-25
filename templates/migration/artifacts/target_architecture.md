@@ -5,64 +5,64 @@ reversa:
   version: "x.y.z"
 kind: target_architecture
 producedBy: designer
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Target Architecture
 
-> Arquitetura alvo do sistema novo, respeitando o paradigma escolhido em `paradigm_decision.md` e a estratégia confirmada em `migration_strategy.md`.
+> Target architecture of the new system, respecting the paradigm chosen in `paradigm_decision.md` and the strategy confirmed in `migration_strategy.md`.
 
-## Visão geral
-<Resumo em 3 a 6 linhas: o que é o sistema novo, qual paradigma ele segue, quais bordas tem com o legado durante a migração.>
+## Overview
+<3 to 6 line summary: what the new system is, which paradigm it follows, what edges it has with the legacy system during migration.>
 
-## Diagrama (Mermaid)
+## Diagram (Mermaid)
 
 ```mermaid
 flowchart LR
-    %% Substituir pelo diagrama real
-    Cliente -->|HTTP| API
-    API --> Servico
-    Servico --> Banco[(DB)]
-    Servico -.eventos.-> Fila[[Mensageria]]
+    %% Replace with the real diagram
+    Client -->|HTTP| API
+    API --> Service
+    Service --> Database[(DB)]
+    Service -.events.-> Queue[[Messaging]]
 ```
 
-## Componentes
+## Components
 
-| Componente | Tipo | Responsabilidade | Origem (legado / novo / fundido) |
+| Component | Type | Responsibility | Origin (legacy / new / merged) |
 |---|---|---|---|
-| <nome> | API / Serviço / Worker / DB / Fila | <texto> | <ref para legado ou "novo"> |
+| <name> | API / Service / Worker / DB / Queue | <text> | <reference to legacy or "new"> |
 
 ## Bounded contexts
 
-### BC-01: <nome>
-- **Responsabilidade**: <texto>
-- **Justificativa do agrupamento / separação**: <por que esse contexto não foi decomposto 1-para-1 a partir do legado>
-- **Componentes internos**: <lista>
-- **Eventos publicados** (se paradigma event-driven): <lista>
-- **Eventos consumidos**: <lista>
+### BC-01: <name>
+- **Responsibility**: <text>
+- **Justification for grouping / separation**: <why this context was not decomposed 1-to-1 from the legacy system>
+- **Internal components**: <list>
+- **Published events** (if event-driven paradigm): <list>
+- **Consumed events**: <list>
 
-<repetir por contexto>
+<repeat per context>
 
-## Decisões arquiteturais (ADR-style resumido)
+## Architectural decisions (ADR-style summary)
 
-### AD-01: <título>
-- **Decisão**: <texto>
-- **Alternativas descartadas**: <lista>
-- **Justificativa**: <texto, ligando a paradigma, estratégia e apetite>
-- **Rastreabilidade**: <referência ao legado ou ao discard_log>
+### AD-01: <title>
+- **Decision**: <text>
+- **Discarded alternatives**: <list>
+- **Justification**: <text, tying to paradigm, strategy, and appetite>
+- **Traceability**: <reference to the legacy system or discard_log>
 
-## Honra ao paradigma escolhido
+## Honoring the chosen paradigm
 
-> Seção obrigatória quando há mudança de paradigma. Demonstra que a arquitetura honra a decisão de `paradigm_decision.md`.
+> Mandatory section when there is a paradigm change. Demonstrates that the architecture honors the decision in `paradigm_decision.md`.
 
-- **Paradigma alvo**: <do `paradigm_decision.md`>
-- **Como a arquitetura honra esse paradigma**:
-  - <ex: event-driven → eventos explícitos, schemas de mensagem, estratégia de consistência eventual>
-  - <ex: OO com DI → interfaces, container de injeção, bordas claras entre camadas>
-  - <ex: funcional → tipos imutáveis, composição, ausência de side effects no domínio>
+- **Target paradigm**: <from `paradigm_decision.md`>
+- **How the architecture honors this paradigm**:
+  - <e.g. event-driven → explicit events, message schemas, eventual consistency strategy>
+  - <e.g. OO with DI → interfaces, injection container, clear boundaries between layers>
+  - <e.g. functional → immutable types, composition, absence of side effects in the domain>
 
-## Bordas com o legado durante a migração
-- <ex: durante o Strangler Fig, a API nova reroteia chamadas do legado X até a fase Y>
+## Edges with the legacy system during migration
+- <e.g. during Strangler Fig, the new API reroutes calls from legacy X until phase Y>
 
-## Notas
-<Observações de design adicionais.>
+## Notes
+<Additional design observations.>

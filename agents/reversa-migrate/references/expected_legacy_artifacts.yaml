@@ -1,6 +1,6 @@
-# Cópia local da lista de artefatos esperados em _reversa_sdd/.
-# Fonte canônica: templates/migration/expected_legacy_artifacts.yaml
-# Esta cópia é instalada junto com o agente para acesso direto dentro do projeto do usuário.
+# Local copy of the list of artifacts expected in _reversa_sdd/.
+# Canonical source: templates/migration/expected_legacy_artifacts.yaml
+# This copy is installed together with the agent for direct access inside the user's project.
 
 schemaVersion: 1
 artifacts:

@@ -1,24 +1,24 @@
 <!--
   Template: glossario.html
-  Produtor: reversa-docs-storyteller
+  Producer: reversa-docs-storyteller
   Page ID: glossario
-  Categoria reversa: diagram
-  Dados consumidos: assets/data/soul.json (derivado de .reversa/soul.md)
+  Reversa category: diagram
+  Data consumed: assets/data/soul.json (derived from .reversa/soul.md)
 
-  Marcadores:
-  - GLOSSARY_SEARCH: input de busca cliente-side
-  - GLOSSARY_CARDS: cards de conceitos
-  - SCRIPTS: inline JS para busca e filtro
+  Markers:
+  - GLOSSARY_SEARCH: client-side search input
+  - GLOSSARY_CARDS: concept cards
+  - SCRIPTS: inline JS for search and filtering
 -->
 
 <!-- PAYLOAD_START -->
 <section class="reversa-doc-glossary">
     <header class="reversa-doc-glossary-header">
-        <label for="glossary-search" class="visually-hidden">Buscar conceito</label>
+        <label for="glossary-search" class="visually-hidden">Search concept</label>
         <input
             type="search"
             id="glossary-search"
-            placeholder="Buscar conceito..."
+            placeholder="Search concept..."
             autocomplete="off"
         >
         <!-- GLOSSARY_SEARCH -->

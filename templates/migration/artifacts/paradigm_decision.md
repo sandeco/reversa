@@ -5,65 +5,65 @@ reversa:
   version: "x.y.z"
 kind: paradigm_decision
 producedBy: paradigm_advisor
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Paradigm Decision
 
-> Decisão consciente sobre como tratar a mudança (ou ausência) de paradigma entre o legado e a stack alvo.
-> Este artefato é leitura obrigatória primeiro para qualquer agente posterior e para o agente de codificação.
+> Conscious decision about how to treat the change (or absence of change) in paradigm between the legacy system and the target stack.
+> This artifact is mandatory first reading for any later agent and for the coding agent.
 
-## Paradigma do legado detectado
-- **Paradigma principal**: <procedural | OO clássico | OO com DI | funcional | event-driven | actor model | dataflow | híbrido: ...>
-- **Confiança**: 🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA | ⚠️ AMBÍGUO
-- **Evidências**:
-  - <evidência 1, com referência a artefato do `_reversa_sdd/`>
-  - <evidência 2>
-- **Variações observadas** (se híbrido):
-  - <componente A: paradigma X, evidência>
-  - <componente B: paradigma Y, evidência>
+## Detected legacy paradigm
+- **Main paradigm**: <procedural | classic OO | OO with DI | functional | event-driven | actor model | dataflow | hybrid: ...>
+- **Confidence**: 🟢 CONFIRMED | 🟡 INFERRED | 🔴 GAP | ⚠️ AMBIGUOUS
+- **Evidence**:
+  - <evidence 1, with reference to `_reversa_sdd/` artifact>
+  - <evidence 2>
+- **Observed variations** (if hybrid):
+  - <component A: paradigm X, evidence>
+  - <component B: paradigm Y, evidence>
 
-## Stack alvo declarada
-- Linguagem: <do migration_brief.md>
-- Framework: <do migration_brief.md>
-- Infra: <do migration_brief.md>
+## Declared target stack
+- Language: <from migration_brief.md>
+- Framework: <from migration_brief.md>
+- Infra: <from migration_brief.md>
 
-## Paradigma natural inferido
-- **Paradigma**: <inferido via paradigm_catalog>
-- **Justificativa**: <por que essa stack tem esse paradigma natural>
-- **Alternativas viáveis**: <ex: OO com DI também é viável em Node, com custo X>
+## Inferred natural paradigm
+- **Paradigm**: <inferred via paradigm_catalog>
+- **Justification**: <why this stack has this natural paradigm>
+- **Viable alternatives**: <e.g. OO with DI is also viable in Node, with cost X>
 
-## Gap identificado
-- **Severidade**: alto | médio | baixo | nenhum
-- **Implicações concretas** (não em abstrato; com exemplo do próprio sistema legado):
-  - <implicação 1, citando regra/fluxo do legado afetado>
-  - <implicação 2>
-  - <implicação 3>
-  - <implicação 4>
+## Identified gap
+- **Severity**: high | medium | low | none
+- **Concrete implications** (not abstract, use example from the legacy system itself):
+  - <implication 1, citing affected legacy rule/flow>
+  - <implication 2>
+  - <implication 3>
+  - <implication 4>
 
-## Opções apresentadas ao usuário
-1. **Adotar paradigma natural da stack** (transformacional)
-   - Consequências: <lista>
-2. **Forçar paradigma similar ao legado** (conservador)
-   - Consequências: <lista>
-3. **Híbrido** (equilibrado)
-   - Consequências: <lista>
+## Options presented to the user
+1. **Adopt the natural paradigm of the stack** (transformational)
+   - Consequences: <list>
+2. **Force a legacy-like paradigm** (conservative)
+   - Consequences: <list>
+3. **Hybrid** (balanced)
+   - Consequences: <list>
 
-## Decisão do usuário
-- **Escolha**: <1 | 2 | 3>
-- **Justificativa do usuário**: <texto livre>
-- **Decidido em**: <ISO-8601>
+## User decision
+- **Choice**: <1 | 2 | 3>
+- **User justification**: <free text>
+- **Decided on**: <ISO-8601>
 
-## Apetite derivado
+## Derived appetite
 - `derived_appetite`: conservative | balanced | transformational
 
-## Implicações pendentes para próximos agentes
-| Agente | Implicação | Como honrar |
+## Pending implications for next agents
+| Agent | Implication | How to honor it |
 |---|---|---|
-| Curator | <implicação> | <ação esperada> |
-| Strategist | <implicação> | <ação esperada> |
-| Designer | <implicação> | <ação esperada> |
-| Inspector | <implicação> | <ação esperada> |
+| Curator | <implication> | <expected action> |
+| Strategist | <implication> | <expected action> |
+| Designer | <implication> | <expected action> |
+| Inspector | <implication> | <expected action> |
 
-## Notas
-<Qualquer ponto adicional que o agente de codificação precisa saber sobre o paradigma alvo.>
+## Notes
+<Any additional point the coding agent needs to know about the target paradigm.>

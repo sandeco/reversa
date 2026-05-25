@@ -1,15 +1,15 @@
 <!--
   Template: deck.html
-  Produtor: reversa-docs-storyteller
+  Producer: reversa-docs-storyteller
   Page ID: deck
-  Categoria reversa: diagram
-  Dados consumidos: assets/data/soul.json + features-index.json + (opcional) metrics.json
+  Reversa category: diagram
+  Data consumed: assets/data/soul.json + features-index.json + (optional) metrics.json
 
-  Marcadores:
-  - DECK_SLIDES: 6 a 10 slides (capa, conceitos, módulos, métricas, features, encerramento)
-  - SCRIPTS: navegação por setas + fullscreen + indicador
+  Markers:
+  - DECK_SLIDES: 6 to 10 slides (cover, concepts, modules, metrics, features, closing)
+  - SCRIPTS: arrow navigation + fullscreen + indicator
 
-  Mínimo viável (greenfield): 4 slides (capa, glossário, 1 feature destaque, encerramento).
+  Minimum viable version (greenfield): 4 slides (cover, glossary, 1 featured feature, closing).
 -->
 
 <!-- PAYLOAD_START -->
@@ -17,11 +17,11 @@
     <ol class="reversa-doc-deck-slides" id="deck-slides">
         <!-- DECK_SLIDES -->
     </ol>
-    <nav class="reversa-doc-deck-nav" aria-label="Navegação do deck">
-        <button type="button" data-action="prev" aria-label="Slide anterior">&larr;</button>
+    <nav class="reversa-doc-deck-nav" aria-label="Deck navigation">
+        <button type="button" data-action="prev" aria-label="Previous slide">&larr;</button>
         <span class="reversa-doc-deck-counter" data-current="1" data-total="0">1 / 0</span>
-        <button type="button" data-action="next" aria-label="Próximo slide">&rarr;</button>
-        <button type="button" data-action="fullscreen" aria-label="Tela cheia">⛶</button>
+        <button type="button" data-action="next" aria-label="Next slide">&rarr;</button>
+        <button type="button" data-action="fullscreen" aria-label="Fullscreen">⛶</button>
     </nav>
 </section>
 <!-- PAYLOAD_END -->

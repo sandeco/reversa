@@ -1,19 +1,19 @@
 # Architecture Tour
 
-Câmera animada percorrendo a cena em ritmo cinematográfico, com **overlay narrativo** sincronizado. Funciona como um "trailer" do sistema: alguém aperta play e o vídeo se desenrola sozinho, parando em pontos-chave com legendas explicativas.
+Animated camera moving through the scene at a cinematic pace, with synchronized **narrative overlay**. It works like a system "trailer": someone presses play and the video unfolds on its own, stopping at key points with explanatory captions.
 
-## Conceito
+## Concept
 
-Tour não é um modo isolado, é uma **camada animada** que se sobrepõe a qualquer dos outros modos (Code City, Dependency Graph 3D, Layer Stack, Call Graph). A skill recebe uma sequência de waypoints e narrações, e a câmera viaja entre eles.
+The Tour is not an isolated mode; it is an **animated layer** that overlays any of the other modes (Code City, Dependency Graph 3D, Layer Stack, Call Graph). The skill receives a sequence of waypoints and narrations, and the camera travels between them.
 
-## Quando usar
+## When to use
 
-- Apresentações para stakeholders não-técnicos.
-- Onboarding de novos devs ("aperte play e veja como o sistema é").
-- Demonstração executiva curta (1 a 3 minutos).
-- Acompanhamento da `deck.html` do mini-site.
+- Presentations for non-technical stakeholders.
+- Onboarding for new devs ("press play and see what the system is").
+- Short executive demo (1 to 3 minutes).
+- Companion to the mini-site `deck.html`.
 
-## Modelo de dados: a coreografia
+## Data model: the choreography
 
 ```json
 {
@@ -23,38 +23,38 @@ Tour não é um modo isolado, é uma **camada animada** que se sobrepõe a qualq
     {
       "at": 0,
       "camera": { "position": [200, 250, 400], "target": [0, 0, 0] },
-      "overlay": "Esse é o sistema de pagamentos visto de cima."
+      "overlay": "This is the payment system viewed from above."
     },
     {
       "at": 12,
       "camera": { "position": [50, 30, 80], "target": [40, 0, 20] },
-      "overlay": "O distrito mais alto, src/payments, concentra 40% do código."
+      "overlay": "The tallest district, src/payments, contains 40% of the code."
     },
     {
       "at": 24,
       "camera": { "position": [80, 60, 60], "target": [60, 20, 30] },
       "highlight": ["src/payments/charge.ts", "src/payments/refund.ts"],
-      "overlay": "Charge e refund são os arquivos centrais."
+      "overlay": "Charge and refund are the core files."
     },
     {
       "at": 40,
       "camera": { "position": [-100, 80, 200], "target": [-50, 0, 0] },
       "switchMode": "dependency-graph",
-      "overlay": "Agora vamos olhar as dependências dele."
+      "overlay": "Now let’s look at its dependencies."
     }
   ]
 }
 ```
 
-- `at`: segundo da timeline em que o waypoint dispara.
-- `camera`: posição e alvo da câmera ao chegar.
-- `highlight`: lista de IDs de nó/módulo para destacar (outros desfocam).
-- `overlay`: texto da legenda, em pt-br.
-- `switchMode` (opcional): troca o modo base no meio do tour, com transição.
+- `at`: second in the timeline when the waypoint triggers.
+- `camera`: camera position and target upon arrival.
+- `highlight`: list of node/module IDs to highlight (others are blurred).
+- `overlay`: caption text, in en-us.
+- `switchMode` (optional): switches the base mode in the middle of the tour, with transition.
 
-## Algoritmo de interpolação
+## Interpolation algorithm
 
-Entre dois waypoints, a câmera interpola posição e alvo com easing.
+Between two waypoints, the camera interpolates position and target with easing.
 
 ```javascript
 import { CatmullRomCurve3 } from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
@@ -67,7 +67,7 @@ const targetCurve = new CatmullRomCurve3(targets);
 let startTime = null;
 function playTour() {
     startTime = performance.now();
-    controls.enabled = false; // desligar interação manual
+    controls.enabled = false; // disable manual interaction
     animateTour();
 }
 
@@ -94,18 +94,18 @@ function animateTour() {
 }
 ```
 
-## Overlay narrativo
+## Narrative overlay
 
-Caixa de texto posicionada em rodapé ou lateral, com transições suaves entre falas.
+Text box positioned in the footer or side panel, with smooth transitions between lines.
 
 ```html
 <div id="tour-overlay">
     <p id="tour-text"></p>
     <div id="tour-progress"><div id="tour-progress-fill"></div></div>
     <div id="tour-controls">
-        <button id="tour-pause">Pausar</button>
-        <button id="tour-restart">Reiniciar</button>
-        <button id="tour-skip">Pular</button>
+        <button id="tour-pause">Pause</button>
+        <button id="tour-restart">Restart</button>
+        <button id="tour-skip">Skip</button>
     </div>
 </div>
 ```
@@ -128,9 +128,9 @@ function updateOverlay(elapsed) {
 }
 ```
 
-## Destaque de elementos
+## Element highlighting
 
-Durante highlights, os módulos selecionados ganham emissive e os demais reduzem opacidade.
+During highlights, selected modules gain emissive treatment and the others reduce opacity.
 
 ```javascript
 function updateHighlights(elapsed) {
@@ -140,8 +140,8 @@ function updateHighlights(elapsed) {
     modules.forEach((m, i) => {
         const isHighlighted = highlightIds.size === 0 || highlightIds.has(m.name);
         const targetOpacity = isHighlighted ? 1.0 : 0.15;
-        // animar opacity via InstancedMesh é mais trabalhoso;
-        // alternativa: trocar cor para uma versão dessaturada quando opacity baixa
+        // animating opacity via InstancedMesh is more involved;
+        // alternative: switch color to a desaturated version when opacity is low
         const baseColor = colorForModule(m);
         const finalColor = isHighlighted ? baseColor : dim(baseColor, 0.3);
         instanced.setColorAt(i, new THREE.Color(finalColor));
@@ -156,9 +156,9 @@ function dim(hex, factor) {
 }
 ```
 
-## Mudança de modo no meio do tour
+## Mode switch in the middle of the tour
 
-Quando um waypoint tem `switchMode`, fazer fade-out da cena atual, dispose, criar a nova cena, fade-in.
+When a waypoint has `switchMode`, perform fade-out of the current scene, dispose, create the new scene, then fade-in.
 
 ```javascript
 function switchSceneMode(newMode) {
@@ -173,12 +173,12 @@ function switchSceneMode(newMode) {
 }
 ```
 
-## Controles do tour
+## Tour controls
 
-- **Pause**: para `requestAnimationFrame`, congela tempo.
-- **Restart**: volta `startTime` para agora.
-- **Skip**: pula para o próximo waypoint.
-- **Manual takeover**: se usuário arrastar mouse na cena, interrompe tour e habilita OrbitControls.
+- **Pause**: stops `requestAnimationFrame`, freezes time.
+- **Restart**: resets `startTime` to now.
+- **Skip**: jumps to the next waypoint.
+- **Manual takeover**: if the user drags the mouse in the scene, interrupt the tour and enable OrbitControls.
 
 ```javascript
 renderer.domElement.addEventListener("pointerdown", () => {
@@ -190,32 +190,32 @@ renderer.domElement.addEventListener("pointerdown", () => {
 });
 ```
 
-## Trilha sonora opcional
+## Optional soundtrack
 
-Tour pode incluir música ambient sutil via `<audio>` embutido em base64 (curto, ~30s em loop) ou via Web Audio API gerando drones procedurais. Default: sem áudio.
+The tour may include subtle ambient music via embedded base64 `<audio>` (short, ~30s loop) or via Web Audio API generating procedural drones. Default: no audio.
 
-## Geração da coreografia
+## Choreography generation
 
-A skill recebe waypoints prontos OU gera automaticamente a partir de heurísticas:
+The skill receives ready-made waypoints OR automatically generates them from heuristics:
 
-- Iniciar de cima olhando o centro.
-- Mergulhar nos 3 maiores prédios (Code City).
-- Voar pelo grafo de dependências destacando o nó mais central.
-- Terminar mostrando a layer stack das camadas violadoras (se houver).
+- Start from above looking at the center.
+- Dive into the 3 largest buildings (Code City).
+- Fly through the dependency graph highlighting the most central node.
+- Finish by showing the layer stack of violating layers (if any).
 
-Cada heurística pode ser ativada ou desativada via parâmetro.
+Each heuristic can be enabled or disabled via parameter.
 
-## Sidebar do tour
+## Tour sidebar
 
 ```html
 <aside id="sidebar">
     <h3>Architecture Tour</h3>
 
-    <label>Duração total
+    <label>Total duration
         <input type="range" min="30" max="300" value="90" data-param="duration"> s
     </label>
 
-    <label>Modo base
+    <label>Base mode
         <select data-param="baseMode">
             <option value="code-city">Code City</option>
             <option value="dependency-graph">Dependency Graph</option>
@@ -224,19 +224,19 @@ Cada heurística pode ser ativada ou desativada via parâmetro.
     </label>
 
     <label>
-        <input type="checkbox" data-param="autoPlay"> Tocar ao abrir
+        <input type="checkbox" data-param="autoPlay"> Play on open
     </label>
 
     <label>
-        <input type="checkbox" data-param="includeViolationsScene" checked> Incluir cena de violações
+        <input type="checkbox" data-param="includeViolationsScene" checked> Include violations scene
     </label>
 
-    <button id="play-tour">Tocar Tour</button>
-    <button id="pause-tour">Pausar</button>
-    <button id="restart-tour">Reiniciar</button>
+    <button id="play-tour">Play Tour</button>
+    <button id="pause-tour">Pause</button>
+    <button id="restart-tour">Restart</button>
 </aside>
 ```
 
 ## Performance
 
-Tour herda performance do modo base. Adicionar tour custa pouco: apenas interpolação de câmera e animações de opacity. Cuidado com `switchMode` no meio: dispose + rebuild pode causar stutter de 200-500ms.
+The tour inherits performance from the base mode. Adding the tour has low cost: only camera interpolation and opacity animations. Be careful with `switchMode` in the middle: dispose + rebuild may cause 200–500ms stutter.

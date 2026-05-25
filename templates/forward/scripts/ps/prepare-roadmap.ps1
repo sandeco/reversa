@@ -1,11 +1,11 @@
 # prepare-roadmap.ps1
-# Helper específico do skill /reversa-plan.
-# Garante que a pasta da feature ativa exista e devolve caminhos absolutos prontos.
+# Helper specific to the /reversa-plan skill.
+# Ensures the active feature folder exists and returns ready-to-use absolute paths.
 #
-# Uso:
+# Usage:
 #   prepare-roadmap.ps1 [-Json]
 #
-# Códigos de saída: 0 ok, 1 active-requirements ausente/invalido, 2 nao foi possivel criar feature-dir, 3 uso invalido.
+# Exit codes: 0 ok, 1 active-requirements missing/invalid, 2 could not create feature-dir, 3 invalid usage.
 
 [CmdletBinding()]
 param(
@@ -21,20 +21,20 @@ $sddDir      = Join-Path $projectRoot '_reversa_sdd'
 $active      = Join-Path $reversaDir 'active-requirements.json'
 
 if (-not (Test-Path -LiteralPath $active)) {
-  Write-Error "$active nao existe. rode reversa-requirements antes."
+  Write-Error "$active does not exist. Run reversa-requirements first."
   exit 1
 }
 
 try {
   $payload = Get-Content -LiteralPath $active -Raw -Encoding utf8 | ConvertFrom-Json
 } catch {
-  Write-Error "active-requirements.json esta invalido: $($_.Exception.Message)"
+  Write-Error "active-requirements.json is invalid: $($_.Exception.Message)"
   exit 1
 }
 
 $rel = $payload.'feature-dir'
 if (-not $rel) {
-  Write-Error "campo feature-dir ausente em $active"
+  Write-Error "feature-dir field is missing in $active"
   exit 1
 }
 
@@ -44,7 +44,7 @@ $interfacesDir = Join-Path $featureDir 'interfaces'
 try {
   New-Item -ItemType Directory -Force -Path $interfacesDir | Out-Null
 } catch {
-  Write-Error "nao foi possivel criar $interfacesDir: $($_.Exception.Message)"
+  Write-Error "could not create $interfacesDir: $($_.Exception.Message)"
   exit 2
 }
 
@@ -77,8 +77,8 @@ if ($Json) {
   $result | ConvertTo-Json -Compress -Depth 4 | Write-Output
 } else {
   Write-Output "feature-dir: $featureDir"
-  Write-Output "requirements presente: $($result.requirements.present)"
-  Write-Output "roadmap ja existe: $($result.roadmap.'already-exists')"
+  Write-Output "requirements present: $($result.requirements.present)"
+  Write-Output "roadmap already exists: $($result.roadmap.'already-exists')"
 }
 
 exit 0

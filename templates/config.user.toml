@@ -1,8 +1,9 @@
-# Reversa — Configurações Pessoais
-# Este arquivo é para suas customizações pessoais. NÃO commite este arquivo.
-# Adicione .reversa/config.user.toml ao seu .gitignore pessoal.
+# Reversa — Personal Settings
+# This file is for your personal customizations. DO NOT commit this file.
+# Add .reversa/config.user.toml to your personal .gitignore.
 
-# Exemplo de override:
+# Override example:
 # [user]
-# name = "Seu Nome"
-# chat_language = "pt-br"
+# name = "Your Name"
+# chat_language = "en"
+# doc_language = "English"

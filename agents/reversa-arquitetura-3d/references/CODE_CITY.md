@@ -1,29 +1,29 @@
 # Code City
 
-Padrão consagrado de visualização de software em 3D: cada arquivo do projeto é um **prédio**, agrupados em **distritos** que correspondem a pastas. Permite captar tamanho, complexidade e distribuição do código em um único olhar.
+A well-established 3D software visualization pattern: each project file is a **building**, grouped into **districts** that correspond to folders. It lets you grasp code size, complexity, and distribution at a glance.
 
-## Mapeamento de atributos
+## Attribute mapping
 
-| Atributo do código | Atributo visual do prédio |
+| Code attribute | Building visual attribute |
 |---|---|
-| Linhas de código (LOC) | Altura |
-| Complexidade ciclomática | Área da base (largura x profundidade) |
-| Pasta do arquivo | Distrito (posição no plano) |
-| Tipo de arquivo (código, teste, config) | Cor base |
-| Hot path (frequência de mudança ou dependentes) | Cor de destaque (vermelho/amarelo) |
+| Lines of code (LOC) | Height |
+| Cyclomatic complexity | Base area (width x depth) |
+| File folder | District (position on the plane) |
+| File type (code, test, config) | Base color |
+| Hot path (change frequency or dependents) | Highlight color (red/yellow) |
 
-## Quando usar
+## When to use
 
-- Visão geral inicial de um projeto desconhecido.
-- Identificar arquivos muito grandes (prédios altos) ou complexos (prédios largos).
-- Detectar agrupamento por pasta (distritos coesos vs espalhados).
-- Apresentação executiva: visualmente impactante e intuitivo.
+- Initial high-level view of an unfamiliar project.
+- Identify very large files (tall buildings) or complex ones (wide buildings).
+- Detect grouping by folder (cohesive vs scattered districts).
+- Executive presentation: visually impactful and intuitive.
 
-**Quando evitar**: projetos pequenos (< 30 arquivos), onde a metáfora urbana é overkill. Use Dependency Graph 3D ou módulos D3 2D.
+**When to avoid**: small projects (< 30 files), where the urban metaphor is overkill. Use Dependency Graph 3D or 2D D3 modules.
 
-## Algoritmo de layout
+## Layout algorithm
 
-### 1. Agrupar por pasta
+### 1. Group by folder
 
 ```javascript
 const districts = {};
@@ -33,9 +33,9 @@ modules.forEach((m) => {
 });
 ```
 
-### 2. Calcular tamanho de cada distrito
+### 2. Calculate the size of each district
 
-A área do distrito é proporcional ao número de arquivos. Use empacotamento simples (linha por linha) ou squarified treemap.
+The district area is proportional to the number of files. Use simple packing (row by row) or a squarified treemap.
 
 ```javascript
 function packDistrict(modules, padding = 1) {
@@ -46,9 +46,9 @@ function packDistrict(modules, padding = 1) {
 }
 ```
 
-### 3. Posicionar distritos no plano
+### 3. Position districts on the plane
 
-Os distritos formam a cidade. Para até ~20 pastas, empacotar em grid simples. Para mais, usar treemap.
+The districts form the city. For up to ~20 folders, pack them into a simple grid. For more, use a treemap.
 
 ```javascript
 const districtSize = (count) => Math.sqrt(count) * cellSize * 2;
@@ -66,7 +66,7 @@ Object.entries(districts).forEach(([folder, mods], i) => {
 });
 ```
 
-### 4. Posicionar prédios dentro do distrito
+### 4. Position buildings within the district
 
 ```javascript
 modules.forEach((m) => {
@@ -80,10 +80,10 @@ modules.forEach((m) => {
 });
 ```
 
-### 5. Dimensionar cada prédio
+### 5. Size each building
 
 ```javascript
-const LOC_TO_HEIGHT = 0.4;      // 1000 LOC = 400 unidades de altura
+const LOC_TO_HEIGHT = 0.4;      // 1000 LOC = 400 height units
 const COMPLEXITY_TO_WIDTH = 0.8;
 const MIN_W = 2;
 const MIN_H = 1;
@@ -96,13 +96,13 @@ modules.forEach((m) => {
 });
 ```
 
-### 6. Renderizar com InstancedMesh
+### 6. Render with InstancedMesh
 
-Ver `THREE_PATTERNS.md` para o padrão de InstancedMesh. Cada prédio é uma instância da mesma BoxGeometry, com matriz e cor distintas.
+See `THREE_PATTERNS.md` for the InstancedMesh pattern. Each building is an instance of the same BoxGeometry, with a distinct matrix and color.
 
 ```javascript
 const boxGeo = new THREE.BoxGeometry(1, 1, 1);
-boxGeo.translate(0, 0.5, 0); // base no chão
+boxGeo.translate(0, 0.5, 0); // base on the ground
 const mat = new THREE.MeshStandardMaterial({ roughness: 0.6 });
 const buildings = new THREE.InstancedMesh(boxGeo, mat, modules.length);
 buildings.castShadow = true;
@@ -124,9 +124,9 @@ buildings.instanceColor.needsUpdate = true;
 scene.add(buildings);
 ```
 
-### 7. Chão e distritos
+### 7. Ground and districts
 
-Adicionar um plano grande como chão e quadrados coloridos demarcando cada distrito.
+Add a large plane as the ground and colored squares marking each district.
 
 ```javascript
 const ground = new THREE.Mesh(
@@ -148,16 +148,16 @@ Object.entries(districtPositions).forEach(([folder, d]) => {
 });
 ```
 
-## Cores por tipo de arquivo
+## Colors by file type
 
 ```javascript
 const TYPE_COLORS = {
-    code:    0x4a9eff,  // azul
-    test:    0x6cc46c,  // verde
-    config:  0xffc857,  // amarelo
-    doc:     0xb39ddb,  // lilás
-    style:   0xff9aa2,  // rosa
-    asset:   0x999999   // cinza
+    code:    0x4a9eff,  // blue
+    test:    0x6cc46c,  // green
+    config:  0xffc857,  // yellow
+    doc:     0xb39ddb,  // lilac
+    style:   0xff9aa2,  // pink
+    asset:   0x999999   // gray
 };
 
 function colorForModule(m) {
@@ -166,63 +166,63 @@ function colorForModule(m) {
 }
 ```
 
-## Sidebar de controles (Code City)
+## Control sidebar (Code City)
 
 ```html
 <aside id="sidebar">
     <h3>Code City</h3>
 
-    <label>Altura (LOC)
+    <label>Height (LOC)
         <input type="range" min="0.1" max="2.0" step="0.1" value="0.4" data-param="locScale">
     </label>
 
-    <label>Base (complexidade)
+    <label>Base (complexity)
         <input type="range" min="0.2" max="2.0" step="0.1" value="0.8" data-param="complexityScale">
     </label>
 
-    <label>Threshold de hot path
+    <label>Hot path threshold
         <input type="range" min="0" max="100" step="5" value="50" data-param="hotPathThreshold">
     </label>
 
     <label>
-        <input type="checkbox" data-param="showLabels" checked> Labels visíveis
+        <input type="checkbox" data-param="showLabels" checked> Visible labels
     </label>
 
     <label>
-        <input type="checkbox" data-param="showDistricts" checked> Mostrar distritos
+        <input type="checkbox" data-param="showDistricts" checked> Show districts
     </label>
 
-    <label>Filtrar pasta
+    <label>Filter folder
         <select data-param="folderFilter">
-            <option value="all">Todas</option>
+            <option value="all">All</option>
             <!-- POPULATED_FROM_DATA -->
         </select>
     </label>
 
     <button id="reset">Reset</button>
-    <button id="export-png">Exportar PNG</button>
+    <button id="export-png">Export PNG</button>
 </aside>
 ```
 
-Quando um slider muda, recalcular `m.height`, `m.w`, `m.d` e atualizar a `InstancedMesh` com novas matrizes.
+When a slider changes, recalculate `m.height`, `m.w`, `m.d` and update the `InstancedMesh` with new matrices.
 
-## Interação
+## Interaction
 
-- **Hover em prédio**: tooltip mostra nome do arquivo, LOC, complexidade, pasta.
-- **Clique em prédio**: foca câmera no prédio (anima `controls.target` para a posição do prédio).
-- **Drag em distrito**: rotaciona câmera com OrbitControls.
+- **Hover over building**: tooltip shows file name, LOC, complexity, folder.
+- **Click building**: focuses the camera on the building (animate `controls.target` to the building position).
+- **Drag over district**: rotates the camera with OrbitControls.
 - **Scroll**: zoom in/out.
 
 ## Performance
 
-- Até **5.000 prédios** é seguro com InstancedMesh.
-- Acima disso, agrupar arquivos por pasta (um prédio = uma pasta com altura agregada de LOC, área pelo número de arquivos).
-- Desativar sombras se o framerate cair abaixo de 30fps (detectar via `requestAnimationFrame` timer).
+- Up to **5,000 buildings** is safe with InstancedMesh.
+- Above that, group files by folder (one building = one folder with aggregated LOC height, area by number of files).
+- Disable shadows if framerate drops below 30fps (detect via `requestAnimationFrame` timer).
 
-## Variantes opcionais
+## Optional variants
 
-- **Code City temporal**: animar crescimento ao longo do histórico do projeto (cada commit faz prédios crescerem).
-- **Code City colorida por autor**: cores indicam quem é o maintainer principal de cada arquivo.
-- **Code City com chuva**: hot paths recebem efeito de partículas vermelhas caindo, indicando "instabilidade".
+- **Temporal Code City**: animate growth throughout the project history (each commit makes buildings grow).
+- **Code City colored by author**: colors indicate who the primary maintainer of each file is.
+- **Code City with rain**: hot paths receive a falling red particle effect, indicating "instability".
 
-Estas variantes ficam para versões futuras da skill.
+These variants are left for future versions of the skill.

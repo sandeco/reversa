@@ -1,46 +1,46 @@
-# Formula do cenario Valor (value-formula.md)
+# Value scenario formula (value-formula.md)
 
-**Versao da formula:** 2.0
+**Formula version:** 2.0
 
-Documenta o calculo deterministico que o agente `reversa-pricing-estimate` aplica para o cenario Valor. A formula v2 substitui o multiplo fixo de 6 a 12 meses por captura percentual do valor economico anual declarado.
+Documents the deterministic calculation that the `reversa-pricing-estimate` agent applies for the Value scenario. Formula v2 replaces the fixed multiple of 6 to 12 months with percentage capture of declared annual economic value.
 
-## Fonte e criterio
+## Source and criterion
 
-Value-based pricing usa o valor percebido ou economico para o cliente como base de preco, nao apenas custo interno ou preco de concorrentes.
+Value-based pricing uses the perceived or economic value to the client as the basis for price, not only internal cost or competitor pricing.
 
-Referencias:
+References:
 
 - Hinterhuber, A. (2008), *Customer value-based pricing strategies: why companies resist*, Journal of Business Strategy, 29(4), DOI 10.1108/02756660810887079
-- Nagle, Hogan e Zale, *The Strategy and Tactics of Pricing*, 5a ed., Routledge, 2016, especialmente Economic Value to the Customer
+- Nagle, Hogan and Zale, *The Strategy and Tactics of Pricing*, 5th ed., Routledge, 2016, especially Economic Value to the Customer
 
-A faixa de 10% a 30% e uma heuristica comercial do Reversa para B2B/freelance/agencia. Ela deve ser descrita como captura de parte do valor anual, nao como lei academica universal.
+The 10% to 30% range is a Reversa commercial heuristic for B2B/freelance/agency. It must be described as capturing part of the annual value, not as a universal academic law.
 
-## Passo 1: validacao de input
+## Step 1: input validation
 
 ```
 if monthly_return_declared == 0 AND cost_of_not_doing == 0:
   available = false
-  explanation_pt_br = "Cenario Valor nao pode ser calculado: cliente nao declarou retorno mensuravel."
+  explanation_pt_br = "Value scenario cannot be calculated: client did not declare measurable return."
 ```
 
-`users_impacted` e contexto comercial. Ele aparece no estimate.md, mas nao entra no calculo numerico v2.
+`users_impacted` is commercial context. It appears in estimate.md, but does not enter the v2 numeric calculation.
 
-## Passo 2: valor economico anual
+## Step 2: annual economic value
 
 ```
 annual_value =
   max(monthly_return_declared * 12, cost_of_not_doing)
 ```
 
-O cliente pode declarar:
+The client may declare:
 
-- retorno mensal recorrente
-- custo anual de nao fazer
-- ambos
+- recurring monthly return
+- annual cost of not doing it
+- both
 
-Quando ambos existem, a formula usa o maior valor economico defensavel.
+When both exist, the formula uses the highest defensible economic value.
 
-## Passo 3: captura de valor
+## Step 3: value capture
 
 ```
 value_capture_min = 0.10
@@ -52,22 +52,22 @@ preco_recomendado = round_currency(annual_value * value_capture_recommended)
 preco_maximo = round_currency(annual_value * value_capture_max)
 ```
 
-## Passo 4: payback explicativo
+## Step 4: explanatory payback
 
-Se `monthly_return_declared > 0`, calcule payback como explicacao secundaria:
+If `monthly_return_declared > 0`, calculate payback as secondary explanation:
 
 ```
 payback_months_min = preco_minimo / monthly_return_declared
 payback_months_max = preco_maximo / monthly_return_declared
 ```
 
-Se `monthly_return_declared == 0`, grave `payback_months_min = null` e `payback_months_max = null`.
+If `monthly_return_declared == 0`, store `payback_months_min = null` and `payback_months_max = null`.
 
-Payback nao define preco. Ele apenas ajuda o usuario a explicar a proposta.
+Payback does not define price. It only helps the user explain the proposal.
 
-## Exemplos
+## Examples
 
-### Exemplo 1: retorno mensal claro
+### Example 1: clear monthly return
 
 ```
 monthly_return_declared = 2000 BRL
@@ -81,7 +81,7 @@ payback_months_min = 1.2
 payback_months_max = 3.6
 ```
 
-### Exemplo 2: prevencao de perda anual
+### Example 2: annual loss prevention
 
 ```
 monthly_return_declared = 0
@@ -95,7 +95,7 @@ payback_months_min = null
 payback_months_max = null
 ```
 
-### Exemplo 3: sem dado mensuravel
+### Example 3: no measurable data
 
 ```
 monthly_return_declared = 0
@@ -104,9 +104,9 @@ cost_of_not_doing = 0
 available = false
 ```
 
-## Conversao para moeda de cobranca
+## Conversion to billing currency
 
-Identica ao Esforco. Quando `profile.billing_currency` esta preenchido:
+Same as Effort. When `profile.billing_currency` is filled:
 
 ```
 preco_minimo_billing = round_currency(preco_minimo / exchange_rate_to_local)
@@ -114,10 +114,10 @@ preco_recomendado_billing = round_currency(preco_recomendado / exchange_rate_to_
 preco_maximo_billing = round_currency(preco_maximo / exchange_rate_to_local)
 ```
 
-## Limites e premissas
+## Limits and assumptions
 
-1. O retorno declarado pelo cliente nao e validado pelo agente
-2. A faixa de captura 10% a 30% e heuristica documentada
-3. `users_impacted` nao entra no calculo numerico v2
-4. Valores extremos nao sao truncados
-5. A explicacao pode mencionar meses de payback, mas nao deve dizer que o preco e "6 a 12 meses"
+1. The return declared by the client is not validated by the agent
+2. The 10% to 30% capture range is a documented heuristic
+3. `users_impacted` does not enter the v2 numeric calculation
+4. Extreme values are not truncated
+5. The explanation may mention payback months, but should not say the price is "6 to 12 months"

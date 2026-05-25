@@ -5,48 +5,48 @@ reversa:
   version: "x.y.z"
 kind: migration_brief
 producedBy: orchestrator
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Migration Brief
 
-> Documento de critério de migração coletado em entrevista no início do `/reversa-migrate`.
-> Consumido pelos seis agentes do Time de Migração. Não pergunta paradigma (responsabilidade do Paradigm Advisor) nem apetite (derivado em `paradigm_decision.md`).
+> Migration-criteria document collected during the interview at the beginning of `/reversa-migrate`.
+> Consumed by the six Migration Team agents. It does not ask about paradigm (the Paradigm Advisor owns that) or appetite (derived in `paradigm_decision.md`).
 
-## Objetivo da migração
-<Por que esta migração existe? O que muda no negócio se ela acontecer ou não.>
+## Migration objective
+<Why does this migration exist? What changes for the business if it happens or does not happen?>
 
-## Métricas de sucesso
-- <métrica 1, com alvo numérico ou qualitativo claro>
-- <métrica 2>
-- <métrica 3>
+## Success metrics
+- <metric 1, with a clear numeric or qualitative target>
+- <metric 2>
+- <metric 3>
 
-## Restrições
-- **Prazo**: <data ou janela>
-- **Orçamento**: <faixa, time, contratação envolvida>
-- **Técnicas**: <APIs externas que não podem mudar, contratos, regras regulatórias>
-- **Operacionais**: <janelas de manutenção, SLAs durante a migração>
+## Constraints
+- **Timeline**: <date or window>
+- **Budget**: <range, team, hiring involved>
+- **Technical**: <external APIs that cannot change, contracts, regulatory rules>
+- **Operational**: <maintenance windows, SLAs during the migration>
 
-## Fatores de risco conhecidos
-- <risco 1: descrição curta>
-- <risco 2>
+## Known risk factors
+- <risk 1: short description>
+- <risk 2>
 
 ## Stakeholders
-| Nome / papel | Responsabilidade na migração |
+| Name / role | Migration responsibility |
 |---|---|
-| <nome> | <responsabilidade> |
+| <name> | <responsibility> |
 
-## Stack alvo
-- **Linguagem**: <ex: Node.js 20>
-- **Framework**: <ex: Fastify>
-- **Banco**: <ex: PostgreSQL 16>
-- **Mensageria** (se houver): <ex: SQS, Kafka, none>
-- **Infra**: <ex: AWS Lambda, Kubernetes, on-premise>
-- **Outros componentes relevantes**: <cache, observabilidade, gateway>
+## Target stack
+- **Language**: <e.g. Node.js 20>
+- **Framework**: <e.g. Fastify>
+- **Database**: <e.g. PostgreSQL 16>
+- **Messaging** (if any): <e.g. SQS, Kafka, none>
+- **Infrastructure**: <e.g. AWS Lambda, Kubernetes, on-premise>
+- **Other relevant components**: <cache, observability, gateway>
 
-## Escopo declarado
-- **Incluído**: <módulos do legado que entram>
-- **Excluído**: <módulos que ficam de fora ou serão descontinuados>
+## Declared scope
+- **Included**: <legacy modules that are in scope>
+- **Excluded**: <modules that stay out of scope or will be retired>
 
-## Notas livres
-<Qualquer contexto que o usuário queira deixar registrado para os agentes lerem.>
+## Free-form notes
+<Any context the user wants to leave recorded for the agents to read.>

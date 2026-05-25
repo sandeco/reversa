@@ -1,16 +1,16 @@
-# Cenários de Erro e Tratamento
+# Error Scenarios and Handling
 
-Catálogo de erros comuns na skill `arquitetura-3d` e como tratá-los para preservar a experiência do usuário.
+Catalog of common errors in the `arquitetura-3d` skill and how to handle them to preserve the user experience.
 
 ---
 
-## ERR-01: Three.js indisponível (CDN inacessível)
+## ERR-01: Three.js unavailable (CDN unreachable)
 
-**Causa**: usuário está offline na primeira execução, ou CDN bloqueado por firewall corporativo.
+**Cause**: the user is offline on the first run, or the CDN is blocked by a corporate firewall.
 
-**Detecção**: o script `<script type="module">` falha ao importar, ou `THREE` fica `undefined` após o carregamento.
+**Detection**: the `<script type="module">` script fails to import, or `THREE` remains `undefined` after loading.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 try {
@@ -19,48 +19,48 @@ try {
 } catch (e) {
     document.getElementById("loader").innerHTML = `
         <div class="error-panel">
-            <h2>Não foi possível carregar a biblioteca 3D</h2>
-            <p>Esta visualização requer acesso à internet para baixar o Three.js uma vez.
-               Conecte-se à internet e recarregue a página.</p>
-            <p>Detalhe técnico: ${e.message}</p>
+            <h2>Could not load the 3D library</h2>
+            <p>This visualization requires internet access to download Three.js once.
+               Connect to the internet and reload the page.</p>
+            <p>Technical detail: ${e.message}</p>
         </div>`;
     return;
 }
 ```
 
-Texto sempre em pt-br, sem travessão.
+Text always in pt-br, without em dashes.
 
 ---
 
-## ERR-02: WebGL não suportado
+## ERR-02: WebGL not supported
 
-**Causa**: browser sem WebGL (raríssimo hoje, mas possível em VMs antigas ou ambientes corporativos restritos).
+**Cause**: browser without WebGL (very rare today, but possible in old VMs or restricted corporate environments).
 
-**Detecção**: `new THREE.WebGLRenderer()` lança exceção ou retorna `null`.
+**Detection**: `new THREE.WebGLRenderer()` throws an exception or returns `null`.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 let renderer;
 try {
     renderer = new THREE.WebGLRenderer({ antialias: true });
 } catch (e) {
-    showFallback("WebGL não está disponível no seu browser. Use Chrome, Firefox ou Edge atualizados.");
+    showFallback("WebGL is not available in your browser. Use an up-to-date Chrome, Firefox, or Edge.");
     return;
 }
 ```
 
-Fallback exibe uma versão estática da cena (screenshot pré-renderizado se houver, ou ASCII art simbólico) com mensagem clara.
+Fallback displays a static version of the scene (pre-rendered screenshot if available, or symbolic ASCII art) with a clear message.
 
 ---
 
-## ERR-03: JSON malformado
+## ERR-03: Malformed JSON
 
-**Causa**: `modules.json` ou `deps.json` com sintaxe inválida, ou campos esperados ausentes.
+**Cause**: `modules.json` or `deps.json` has invalid syntax, or expected fields are missing.
 
-**Detecção**: `JSON.parse` falha, ou validação de schema indica campos ausentes.
+**Detection**: `JSON.parse` fails, or schema validation indicates missing fields.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 function loadData() {
@@ -69,18 +69,18 @@ function loadData() {
     try {
         data = JSON.parse(raw);
     } catch (e) {
-        showError("Dados de entrada inválidos: arquivo JSON malformado. " + e.message);
+        showError("Invalid input data: malformed JSON file. " + e.message);
         return null;
     }
 
     if (!Array.isArray(data.modules)) {
-        showError("Dados de entrada inválidos: 'modules' deve ser uma lista.");
+        showError("Invalid input data: 'modules' must be a list.");
         return null;
     }
 
     data.modules = data.modules.filter((m) => {
         if (!m.name) {
-            console.warn("Módulo sem 'name' descartado:", m);
+            console.warn("Module without 'name' discarded:", m);
             return false;
         }
         return true;
@@ -90,60 +90,60 @@ function loadData() {
 }
 ```
 
-Erros não-fatais (módulo individual ruim) descartam o item com aviso. Erros fatais (estrutura raiz inválida) mostram mensagem clara.
+Non-fatal errors (a single bad module) discard the item with a warning. Fatal errors (invalid root structure) show a clear message.
 
 ---
 
-## ERR-04: Projeto vazio ou sem dados visualizáveis
+## ERR-04: Empty project or no visualizable data
 
-**Causa**: `modules.json` tem 0 itens, ou `deps.json` tem 0 arestas, ou ambos.
+**Cause**: `modules.json` has 0 items, or `deps.json` has 0 edges, or both.
 
-**Detecção**: após `loadData()`, contagem dos itens.
+**Detection**: item count after `loadData()`.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 if (data.modules.length === 0) {
     showEmptyState({
-        title: "Nada para visualizar ainda",
-        message: "O projeto não tem módulos detectados. Rode `/reversa` para extrair a estrutura primeiro.",
+        title: "Nothing to visualize yet",
+        message: "The project has no detected modules. Run `/reversa` first to extract the structure.",
         actions: [
-            { label: "Voltar à documentação", href: "index.html" }
+            { label: "Back to documentation", href: "index.html" }
         ]
     });
     return;
 }
 ```
 
-Empty state amigável, nunca cena vazia silenciosa.
+Friendly empty state, never a silent blank scene.
 
 ---
 
-## ERR-05: Projeto muito grande (>5.000 módulos sem agrupamento)
+## ERR-05: Project too large (>5,000 modules without grouping)
 
-**Causa**: o usuário força modo Code City sem agrupamento em um projeto enorme.
+**Cause**: the user forces Code City mode without grouping on a huge project.
 
-**Detecção**: `data.modules.length > 5000` e nenhuma estratégia de agrupamento ativada.
+**Detection**: `data.modules.length > 5000` and no grouping strategy enabled.
 
-**Tratamento**: aplicar agrupamento automaticamente e avisar.
+**Handling**: apply grouping automatically and notify the user.
 
 ```javascript
 if (data.modules.length > 5000) {
-    showToast("Projeto grande detectado (" + data.modules.length + " arquivos). Agrupando por pasta para manter performance.");
+    showToast("Large project detected (" + data.modules.length + " files). Grouping by folder to preserve performance.");
     data.modules = groupByFolder(data.modules);
     config.grouped = true;
 }
 ```
 
-O agrupamento e seu impacto aparecem no rodapé permanente da página: "Visualização agrupada por pasta. Cada bloco representa N arquivos."
+The grouping and its impact appear in the page's persistent footer: "Visualization grouped by folder. Each block represents N files."
 
 ---
 
-## ERR-06: Performance degradada (fps < 30)
+## ERR-06: Degraded performance (fps < 30)
 
-**Causa**: hardware fraco, projeto no limite superior, sombras pesadas.
+**Cause**: weak hardware, project at the upper limit, heavy shadows.
 
-**Detecção**: medir `requestAnimationFrame` delta.
+**Detection**: measure `requestAnimationFrame` delta.
 
 ```javascript
 let frameTimes = [];
@@ -159,74 +159,74 @@ function measureFps(time) {
 }
 ```
 
-**Tratamento progressivo** (`degradeQuality`):
+**Progressive handling** (`degradeQuality`):
 
-1. Desativar sombras.
-2. Reduzir pixelRatio para 1.
-3. Reduzir contagem de partículas em tours.
-4. Mostrar toast "Modo de performance ativado".
+1. Disable shadows.
+2. Reduce pixelRatio to 1.
+3. Reduce the number of particles in tours.
+4. Show toast: "Performance mode enabled".
 
 ---
 
-## ERR-07: InstancedMesh limit excedido
+## ERR-07: InstancedMesh limit exceeded
 
-**Causa**: tentativa de criar InstancedMesh com mais instâncias do que o hardware suporta (limite de ~65k em hardwares antigos via Uint16, mas raro).
+**Cause**: attempt to create an InstancedMesh with more instances than the hardware supports (around ~65k on older hardware via Uint16, but rare).
 
-**Detecção**: console error do Three.js após `setMatrixAt` para índices altos.
+**Detection**: Three.js console error after `setMatrixAt` for high indices.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 const MAX_INSTANCES = 32768;
 if (modules.length > MAX_INSTANCES) {
-    showWarning("Limite de instâncias excedido. Mostrando apenas os " + MAX_INSTANCES + " maiores.");
+    showWarning("Instance limit exceeded. Showing only the top " + MAX_INSTANCES + " largest items.");
     modules = modules.sort((a, b) => b.loc - a.loc).slice(0, MAX_INSTANCES);
 }
 ```
 
 ---
 
-## ERR-08: Ciclo de dependências infinito durante layout
+## ERR-08: Infinite dependency cycle during layout
 
-**Causa**: grafo com ciclo fechado e layout iterativo sem critério de parada.
+**Cause**: graph with a closed cycle and iterative layout without a stop criterion.
 
-**Detecção**: medir iterações de simulação; se passar `MAX_SIM_FRAMES` sem convergir, abortar.
+**Detection**: measure simulation iterations; if it exceeds `MAX_SIM_FRAMES` without converging, abort.
 
-**Tratamento**: parar simulação no frame limite, mostrar aviso "Layout não convergiu, posições podem não refletir estabilidade ideal", desenhar mesmo assim.
+**Handling**: stop the simulation at the frame limit, show warning "Layout did not converge, positions may not reflect ideal stability", draw it anyway.
 
 ---
 
 ## ERR-09: WebGL context lost
 
-**Causa**: aba inativa por muito tempo, troca de driver gráfico, GPU sobrecarregada.
+**Cause**: inactive tab for too long, graphics driver switch, overloaded GPU.
 
-**Detecção**: evento `webglcontextlost` no canvas.
+**Detection**: `webglcontextlost` event on the canvas.
 
-**Tratamento**:
+**Handling**:
 
 ```javascript
 renderer.domElement.addEventListener("webglcontextlost", (e) => {
     e.preventDefault();
-    showToast("Contexto 3D foi perdido. Tentando recuperar...");
+    showToast("3D context was lost. Trying to recover...");
 });
 
 renderer.domElement.addEventListener("webglcontextrestored", () => {
     rebuildScene();
-    showToast("Contexto recuperado.");
+    showToast("Context recovered.");
 });
 ```
 
-Em vez de recarregar a página, reconstruir a cena no mesmo canvas. Importante chamar `rebuildScene()` que recria texturas e buffers.
+Instead of reloading the page, rebuild the scene on the same canvas. Important: call `rebuildScene()` to recreate textures and buffers.
 
 ---
 
-## ERR-10: Sidebar localStorage corrompido
+## ERR-10: Corrupted sidebar localStorage
 
-**Causa**: dados antigos de localStorage com formato incompatível após atualização da skill.
+**Cause**: old localStorage data with an incompatible format after a skill update.
 
-**Detecção**: `JSON.parse` falha ao restaurar estado, ou valor está fora do range esperado de um slider.
+**Detection**: `JSON.parse` fails when restoring state, or the value is outside the expected slider range.
 
-**Tratamento**: silencioso, descarta e usa default.
+**Handling**: silent, discard and use the default.
 
 ```javascript
 function loadSliderState(slider) {
@@ -239,20 +239,20 @@ function loadSliderState(slider) {
             }
         }
     } catch (e) {
-        // ignora e mantém valor padrão
+        // ignore and keep default value
     }
 }
 ```
 
 ---
 
-## Função utilitária: showError + showWarning + showToast
+## Utility function: showError + showWarning + showToast
 
 ```javascript
 function showError(message) {
     const panel = document.createElement("div");
     panel.className = "reversa-error-panel";
-    panel.innerHTML = `<h2>Erro</h2><p>${escapeHtml(message)}</p>`;
+    panel.innerHTML = `<h2>Error</h2><p>${escapeHtml(message)}</p>`;
     document.body.appendChild(panel);
 }
 
@@ -277,10 +277,10 @@ function escapeHtml(s) {
 }
 ```
 
-Estilos `reversa-error-panel`, `reversa-warning-banner`, `reversa-toast` ficam no CSS compartilhado do mini-site.
+Styles `reversa-error-panel`, `reversa-warning-banner`, and `reversa-toast` live in the mini-site shared CSS.
 
 ---
 
-## Princípio geral
+## General principle
 
-Nenhum erro deve resultar em **tela branca silenciosa**. Sempre mostrar mensagem clara em pt-br com instrução acionável ou indicação clara de limitação. Mensagens curtas, sem jargão de framework, sem travessão.
+No error should ever result in a **silent blank screen**. Always show a clear message in pt-br with an actionable instruction or a clear indication of the limitation. Messages should be short, without framework jargon, without em dashes.

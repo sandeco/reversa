@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 #
 # bind-to-extraction.sh
-# Helper que lê _reversa_sdd/ e devolve um JSON com as fontes canônicas que os skills forward devem consultar como contexto.
-# Diferencial REVERSA: skills forward jamais partem do zero, sempre amarram raciocínio nos artefatos da pipeline reversa.
+# Helper that reads _reversa_sdd/ and returns a JSON with the canonical sources that forward skills should consult as context.
+# REVERSA difference: forward skills never start from zero, they always tie reasoning to artifacts from the reverse pipeline.
 #
-# Uso:
-#   bind-to-extraction.sh [--json] [--for <comando>]
+# Usage:
+#   bind-to-extraction.sh [--json] [--for <command>]
 #
-# Argumentos:
-#   --for requirements   Lista architecture, domain, inventory, principles
-#   --for plan           Lista architecture, c4-context, state-machines, dependencies, code-analysis, principles
-#   --for to-do          Lista architecture, code-analysis
-#   --for audit          Lista architecture, domain
-#   --for coding         Lista architecture, domain, code-analysis (para gerar legacy-impact)
-#   sem --for            Lista todos os arquivos presentes em _reversa_sdd/
+# Arguments:
+#   --for requirements   Lists architecture, domain, inventory, principles
+#   --for plan           Lists architecture, c4-context, state-machines, dependencies, code-analysis, principles
+#   --for to-do          Lists architecture, code-analysis
+#   --for audit          Lists architecture, domain
+#   --for coding         Lists architecture, domain, code-analysis (to generate legacy-impact)
+#   without --for        Lists all files present in _reversa_sdd/
 #
-# Códigos de saída:
-#   0 = sucesso
-#   1 = _reversa_sdd ausente
-#   2 = uso inválido
+# Exit codes:
+#   0 = success
+#   1 = _reversa_sdd missing
+#   2 = invalid usage
 
 set -u
 
@@ -33,12 +33,12 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --json) JSON_MODE=1; shift ;;
     --for) shift; TARGET="${1:-}"; shift ;;
-    *) echo "uso invalido: $1" >&2; exit 2 ;;
+    *) echo "invalid usage: $1" >&2; exit 2 ;;
   esac
 done
 
 if [ ! -d "$SDD_DIR" ]; then
-  echo "erro: $SDD_DIR nao existe. rode a pipeline reversa antes." >&2
+  echo "error: $SDD_DIR does not exist. run the reverse pipeline first." >&2
   exit 1
 fi
 
@@ -90,11 +90,11 @@ emit_json() {
 if [ $JSON_MODE -eq 1 ]; then
   emit_json
 else
-  echo "presentes:"
+  echo "present:"
   for f in "${present[@]:-}"; do
     [ -n "$f" ] && echo "  $SDD_DIR/$f"
   done
-  echo "ausentes:"
+  echo "absent:"
   for f in "${absent[@]:-}"; do
     [ -n "$f" ] && echo "  $f"
   done

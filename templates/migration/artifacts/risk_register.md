@@ -5,40 +5,40 @@ reversa:
   version: "x.y.z"
 kind: risk_register
 producedBy: strategist
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Risk Register
 
-> Registro de riscos da migração com probabilidade, impacto, mitigação e responsável.
+> Migration risk register with probability, impact, mitigation, and owner.
 
-## Riscos
+## Risks
 
 ### RISK-001
-- **Descrição**: <texto>
-- **Categoria**: técnico | operacional | organizacional | regulatório | financeiro
-- **Probabilidade**: baixa | média | alta
-- **Impacto**: baixo | médio | alto | crítico
-- **Severidade combinada**: <calculada a partir dos dois acima>
-- **Trigger / sinal de alerta**: <o que indicaria que o risco está se materializando>
-- **Mitigação**: <ações concretas>
-- **Plano de contingência**: <se mitigação falhar>
-- **Owner**: <nome / papel>
-- **Status**: aberto | mitigando | aceito | encerrado
+- **Description**: <text>
+- **Category**: technical | operational | organizational | regulatory | financial
+- **Probability**: low | medium | high
+- **Impact**: low | medium | high | critical
+- **Combined severity**: <calculated from the two above>
+- **Trigger / warning sign**: <what would indicate that the risk is materializing>
+- **Mitigation**: <concrete actions>
+- **Contingency plan**: <if mitigation fails>
+- **Owner**: <name / role>
+- **Status**: open | mitigating | accepted | closed
 
-<repetir por risco>
+<repeat per risk>
 
-## Resumo por severidade
+## Summary by severity
 
-| Severidade | Quantidade | IDs |
+| Severity | Quantity | IDs |
 |---|---|---|
-| Crítica | | |
-| Alta | | |
-| Média | | |
-| Baixa | | |
+| Critical | | |
+| High | | |
+| Medium | | |
+| Low | | |
 
-## Riscos relacionados ao paradigma alvo
+## Risks related to the target paradigm
 
-> Subseção dedicada quando há mudança de paradigma. Listar apenas riscos cuja origem direta é o gap registrado em `paradigm_decision.md`.
+> Dedicated subsection when there is a paradigm change. List only risks whose direct origin is the gap recorded in `paradigm_decision.md`.
 
-- <RISK-XXX: descrição>
+- <RISK-XXX: description>

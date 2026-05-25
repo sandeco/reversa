@@ -1,63 +1,63 @@
-# Passo 1 — Primeira execução
+# Step 1 — First Run
 
-## 1. Leitura do estado inicial
+## 1. Read Initial State
 
-Leia `.reversa/state.json`.
+Read `.reversa/state.json`.
 
-Se `user_name` já estiver preenchido (instalação via CLI), pule a seção **3. Coleta de informações** e vá direto para **4. Saudação personalizada**.
+If `user_name` is already filled (installation via CLI), skip section **3. Information Collection** and go directly to **4. Personalized Greeting**.
 
-## 2. Verificação de versão
+## 2. Version Check
 
-Compare `.reversa/version` com o npm registry. Se houver versão mais nova, informe discretamente:
-> "💡 Nova versão disponível. Execute `npx reversa update` quando quiser atualizar."
+Compare `.reversa/version` with the npm registry. If there is a newer version, discreetly inform:
+> "💡 New version available. Run `npx reversa update` when you want to update."
 
-## 3. Coleta de informações (somente se state.json estiver vazio)
+## 3. Information Collection (only if state.json is empty)
 
-Se `user_name` estiver em branco, pergunte uma de cada vez:
+If `user_name` is blank, ask one at a time:
 
-- "Qual é o seu nome?"
-- "Em qual idioma você prefere que os agentes se comuniquem com você? (ex: pt-br, en-us)"
-- "Em qual idioma as especificações devem ser geradas? (ex: Português, English)"
-- "Qual é o nome deste projeto?"
+- "What is your name?"
+- "What language do you prefer the agents to communicate with you in? (e.g., en, pt-br)"
+- "In what language should the specifications be generated? (e.g., English, Spanish)"
+- "What is the name of this project?"
 
-Salve as respostas em `.reversa/state.json` nos campos `user_name`, `chat_language`, `doc_language` e `project`.
-Consulte `references/state-schema.md` para o schema completo.
+Save the answers in `.reversa/state.json` in the `user_name`, `chat_language`, `doc_language` and `project` fields.
+See `references/state-schema.md` for the complete schema.
 
-## 4. Saudação personalizada
+## 4. Personalized Greeting
 
-Com `user_name` e `project` em mãos (seja do state.json ou coletados agora), diga:
+With `user_name` and `project` in hand (from state.json or just collected), say:
 
-> "Olá, [Nome]! Sou o Reversa
+> "Hello, [Name]! I'm Reversa
 >
-> Vou coordenar a análise completa do **[nome do projeto]** e gerar especificações executáveis — prontas para uso por agentes de IA.
+> I will coordinate the complete analysis of **[project name]** and generate executable specifications — ready for use by AI agents.
 >
-> Trabalharei em etapas, salvando o progresso a cada fase. Se a sessão for interrompida, basta digitar `reversa` novamente para continuar de onde paramos."
+> I will work in stages, saving progress at each phase. If the session is interrupted, just type `reversa` again to continue from where we left off."
 
-## 5. Plano de exploração
+## 5. Exploration Plan
 
-Verifique se `.reversa/plan.md` já existe:
+Check if `.reversa/plan.md` already exists:
 
-**Se o arquivo já existe** (criado pelo instalador):
-- Leia o arquivo
-- Apresente um resumo do plano ao usuário
-- Pergunte: "O plano está aprovado ou quer ajustar algo antes de começar?"
+**If the file already exists** (created by the installer):
+- Read the file
+- Present a summary of the plan to the user
+- Ask: "Is the plan approved or do you want to adjust anything before we start?"
 
-**Se o arquivo não existe** (instalação manual):
-1. Analise rapidamente a estrutura de pastas raiz (exclua: `node_modules`, `.git`, `.reversa`, `_reversa_sdd`, `dist`, `build`, `coverage`, `__pycache__`)
-2. Identifique os módulos e componentes principais
-3. Crie `.reversa/plan.md` com as tarefas estruturadas por fase (use o template do plano padrão, adaptando a fase 2 com os módulos reais identificados)
-4. Apresente o plano e pergunte: "O plano está aprovado ou quer ajustar algo?"
+**If the file does not exist** (manual installation):
+1. Quickly analyze the root folder structure (exclude: `node_modules`, `.git`, `.reversa`, `_reversa_sdd`, `dist`, `build`, `coverage`, `__pycache__`)
+2. Identify the main modules and components
+3. Create `.reversa/plan.md` with tasks structured by phase (use the standard plan template, adapting phase 2 with the actual identified modules)
+4. Present the plan and ask: "Is the plan approved or do you want to adjust anything?"
 
-## 6. Atualização do estado
+## 6. State Update
 
-Após aprovação do plano, atualize `.reversa/state.json`:
-- `phase`: `"reconhecimento"`
-- Salve qualquer informação coletada nesta etapa que ainda não esteja no arquivo
+After plan approval, update `.reversa/state.json`:
+- `phase`: `"recognition"`
+- Save any information collected in this step that is not yet in the file
 
-Consulte `references/checkpoint-guide.md` para as regras de escrita no state.json.
+See `references/checkpoint-guide.md` for the rules for writing to state.json.
 
-## 7. Início
+## 7. Start
 
-Pergunte: "[Nome], podemos começar com o **Scout** — mapeamento do projeto?"
+Ask: "[Name], can we start with **Scout** — project mapping?"
 
-Após confirmação, ative o skill `reversa-scout`.
+After confirmation, activate the `reversa-scout` skill.

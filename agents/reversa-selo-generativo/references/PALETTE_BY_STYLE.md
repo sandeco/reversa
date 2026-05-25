@@ -1,19 +1,19 @@
-# Paletas por Estilo Visual
+# Palettes by Visual Style
 
-Tabela das paletas usadas pelo selo, derivadas do estilo visual escolhido pelo usuário do `/reversa-documentation`.
+Table of palettes used by the seal, derived from the visual style chosen by the user in `/reversa-documentation`.
 
-Cada paleta tem 4 campos:
+Each palette has 4 fields:
 
-- `bg`: cor de fundo do canvas.
-- `foreground`: lista de cores principais usadas pelo padrão (3 a 5 cores).
-- `accent`: cor de destaque para elementos centrais (1 cor).
-- `fg`: cor do texto do label fora do canvas.
+- `bg`: canvas background color.
+- `foreground`: list of main colors used by the pattern (3 to 5 colors).
+- `accent`: highlight color for central elements (1 color).
+- `fg`: text color for the label outside the canvas.
 
 ---
 
-## Paleta: `sober`
+## Palette: `sober`
 
-Estilo sóbrio, técnico, neutro. Foco em legibilidade e atemporalidade.
+Sober, technical, neutral style. Focus on legibility and timelessness.
 
 ```json
 {
@@ -24,18 +24,18 @@ Estilo sóbrio, técnico, neutro. Foco em legibilidade e atemporalidade.
 }
 ```
 
-Tradução visual:
-- Fundo: papel quebrado.
-- Foreground: azul-petróleo, cinza-pedra, terracota, verde-musgo, areia.
-- Accent: azul-meia-noite profundo.
+Visual translation:
+- Background: off-white paper.
+- Foreground: teal blue, stone gray, terracotta, moss green, sand.
+- Accent: deep midnight blue.
 
-**Variante dark**: para uso em mini-selo sobre header escuro, espelhar (bg ↔ fg).
+**Dark variant**: for use in mini seal on dark header, mirror it (`bg ↔ fg`).
 
 ---
 
-## Paleta: `premium`
+## Palette: `premium`
 
-Estilo cinematográfico, luxuoso, dark. Foco em contraste e brilho.
+Cinematic, luxurious, dark style. Focus on contrast and glow.
 
 ```json
 {
@@ -46,18 +46,18 @@ Estilo cinematográfico, luxuoso, dark. Foco em contraste e brilho.
 }
 ```
 
-Tradução visual:
-- Fundo: preto noite-azulada.
-- Foreground: dourado, vermelho-vinho, prata, azul-meia-noite, cinza-fumaça.
-- Accent: dourado claro (mais brilhante que o dourado base).
+Visual translation:
+- Background: blue-black night.
+- Foreground: gold, wine red, silver, midnight blue, smoke gray.
+- Accent: light gold (brighter than the base gold).
 
-**Uso típico**: hero de apresentação executiva, selo de capa de documentação premium.
+**Typical use**: executive presentation hero, premium documentation cover seal.
 
 ---
 
-## Paleta: `dense`
+## Palette: `dense`
 
-Estilo denso, saturado, alta densidade visual. Foco em distinção entre múltiplas categorias.
+Dense, saturated, high visual density style. Focus on distinction between multiple categories.
 
 ```json
 {
@@ -68,18 +68,18 @@ Estilo denso, saturado, alta densidade visual. Foco em distinção entre múltip
 }
 ```
 
-Tradução visual:
-- Fundo: branco gelo.
-- Foreground: laranja, ciano, magenta, lima, índigo.
-- Accent: preto-azulado.
+Visual translation:
+- Background: ice white.
+- Foreground: orange, cyan, magenta, lime, indigo.
+- Accent: blue-black.
 
-**Uso típico**: documentação de sistema com muitos componentes para distinguir; selo cobre múltiplos hues.
+**Typical use**: documentation for a system with many components to distinguish; the seal covers multiple hues.
 
 ---
 
-## Paleta: `exploratory`
+## Palette: `exploratory`
 
-Estilo exploratório, etéreo, luminoso. Foco em 3D e contemplação.
+Exploratory, ethereal, luminous style. Focus on 3D and contemplation.
 
 ```json
 {
@@ -90,53 +90,53 @@ Estilo exploratório, etéreo, luminoso. Foco em 3D e contemplação.
 }
 ```
 
-Tradução visual:
-- Fundo: preto-violeta profundo.
-- Foreground: rosa-aurora, ciano-glaciar, lilás-névoa, amarelo-suave, verde-aquoso.
-- Accent: branco luz.
+Visual translation:
+- Background: deep violet-black.
+- Foreground: aurora pink, glacier cyan, mist lilac, soft yellow, watery green.
+- Accent: bright white.
 
-**Uso típico**: documentação com forte presença de cenas 3D; o selo dialoga com a estética da `arquitetura.html`.
+**Typical use**: documentation with strong 3D-scene presence; the seal dialogues with the aesthetics of `arquitetura.html`.
 
 ---
 
-## Paleta `other` (fallback)
+## Palette `other` (fallback)
 
-Quando o usuário escolhe "Outro" no menu de estilo e fornece descrição livre, a skill mapeia a descrição para a paleta mais próxima, ou aplica heurística básica:
+When the user chooses "Other" in the style menu and provides a freeform description, the skill maps the description to the closest palette, or applies a basic heuristic:
 
 ```javascript
 function paletteFromFreeform(text) {
     const lower = text.toLowerCase();
-    if (/(luxo|premium|cinematogr|dark)/.test(lower)) return palettes.premium;
-    if (/(t[ée]cnico|s[óo]brio|clean|minimal)/.test(lower)) return palettes.sober;
-    if (/(denso|saturado|colorido|vibra)/.test(lower)) return palettes.dense;
-    if (/(explora|3D|luminoso|et[ée]reo)/.test(lower)) return palettes.exploratory;
-    return palettes.sober; // fallback seguro
+    if (/(luxury|premium|cinematic|dark)/.test(lower)) return palettes.premium;
+    if (/(technical|sober|clean|minimal)/.test(lower)) return palettes.sober;
+    if (/(dense|saturated|colorful|vibrant)/.test(lower)) return palettes.dense;
+    if (/(exploratory|3D|luminous|ethereal)/.test(lower)) return palettes.exploratory;
+    return palettes.sober; // safe fallback
 }
 ```
 
 ---
 
-## Distribuição de cores dentro da paleta
+## Color distribution within the palette
 
-Mesmo com 5 cores em `foreground`, o selo não usa todas igualmente. Regra de proporção visual:
+Even with 5 colors in `foreground`, the seal does not use them all equally. Visual proportion rule:
 
-| Posição na paleta | Proporção visual no selo |
+| Position in palette | Visual proportion in seal |
 |---|---|
-| 1ª cor | 50% (dominante) |
-| 2ª cor | 25% (secundária) |
-| 3ª cor | 15% |
-| 4ª cor | 7% |
-| 5ª cor | 3% (vestígio) |
+| 1st color | 50% (dominant) |
+| 2nd color | 25% (secondary) |
+| 3rd color | 15% |
+| 4th color | 7% |
+| 5th color | 3% (trace) |
 
-Padrões como `flow-field` e `wave-interference` herdam essa distribuição automaticamente (a cor 1 aparece em mais partículas).
+Patterns such as `flow-field` and `wave-interference` inherit this distribution automatically (color 1 appears in more particles).
 
-Padrões como `crystal-lattice` usam cores em camadas distintas, mas as camadas mais visíveis (externas) usam as cores 1 e 2; camadas internas usam 3, 4, 5.
+Patterns such as `crystal-lattice` use colors in distinct layers, but the most visible layers (outer ones) use colors 1 and 2; inner layers use 3, 4, 5.
 
 ---
 
-## Adaptação automática para mini-selo
+## Automatic adaptation for mini seal
 
-Em mini-selos (<200px), a paleta é simplificada para 3 cores apenas:
+In mini seals (<200px), the palette is simplified to only 3 colors:
 
 ```javascript
 function simplifyForMini(palette) {
@@ -147,13 +147,13 @@ function simplifyForMini(palette) {
 }
 ```
 
-Mantém legibilidade e impacto visual mesmo em tamanho reduzido.
+Maintains legibility and visual impact even at reduced size.
 
 ---
 
-## Verificação de contraste
+## Contrast verification
 
-Antes de renderizar, verificar que `accent` tem contraste suficiente com `bg` para padrões que destacam centro (ratio mínimo 4.5:1 conforme WCAG AA).
+Before rendering, verify that `accent` has sufficient contrast with `bg` for patterns that highlight the center (minimum ratio 4.5:1 per WCAG AA).
 
 ```javascript
 function contrastRatio(hex1, hex2) {
@@ -173,4 +173,4 @@ function contrastRatio(hex1, hex2) {
 }
 ```
 
-Se o contraste falhar, substituir `accent` por uma versão mais clara/escura derivada automaticamente.
+If contrast fails, replace `accent` with a lighter/darker version derived automatically.

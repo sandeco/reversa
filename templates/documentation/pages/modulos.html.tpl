@@ -1,33 +1,33 @@
 <!--
   Template: modulos.html
-  Produtor: reversa-docs-mapper
-  Skill invocada: especialista-d3 (modo force-directed)
+  Producer: reversa-docs-mapper
+  Invoked skill: especialista-d3 (force-directed mode)
   Page ID: modulos
-  Categoria reversa: diagram
-  Dados consumidos: assets/data/modules.json, assets/data/deps.json
+  Reversa category: diagram
+  Data consumed: assets/data/modules.json, assets/data/deps.json
 
-  Marcadores:
-  - D3_CANVAS: SVG do force-directed
-  - SIDEBAR: filtros (linguagem, tipo, força)
+  Markers:
+  - D3_CANVAS: force-directed SVG
+  - SIDEBAR: filters (language, type, force)
   - HEAD_EXTRAS: <script src="assets/vendor/d3.v7.min.js"></script>
-                 (baixado pelo Publisher via vendor-pins.yaml, d3@7.8.5 IIFE)
-  - SCRIPTS: monta o force-directed a partir de window.RV_DATA.modules e
-             window.RV_DATA.deps (sem fetch local)
+                 (downloaded by the Publisher via vendor-pins.yaml, d3@7.8.5 IIFE)
+  - SCRIPTS: builds the force-directed graph from window.RV_DATA.modules and
+             window.RV_DATA.deps (no local fetch)
 -->
 
 <!-- PAYLOAD_START -->
 <section class="reversa-doc-graph-stage" data-mode="force-directed">
-    <svg id="d3-canvas" class="reversa-doc-d3-canvas" aria-label="Mapa de módulos">
+    <svg id="d3-canvas" class="reversa-doc-d3-canvas" aria-label="Module map">
         <!-- D3_CANVAS -->
     </svg>
 </section>
 
 <details class="reversa-doc-graph-legend">
-    <summary>Legenda</summary>
+    <summary>Legend</summary>
     <ul>
-        <li>Nó: módulo. Tamanho proporcional ao LOC.</li>
-        <li>Aresta: dependência. Espessura proporcional ao peso.</li>
-        <li>Nó vermelho: faz parte de um ciclo detectado.</li>
+        <li>Node: module. Size proportional to LOC.</li>
+        <li>Edge: dependency. Thickness proportional to weight.</li>
+        <li>Red node: part of a detected cycle.</li>
     </ul>
 </details>
 <!-- PAYLOAD_END -->

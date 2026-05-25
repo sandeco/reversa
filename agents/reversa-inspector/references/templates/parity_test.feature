@@ -1,40 +1,40 @@
-# Template de cenário Gherkin para parity_tests/.
-# Cada arquivo deve cobrir um fluxo crítico identificado em process_flows do legado.
-# Adaptar critérios ao paradigma alvo conforme `parity_specs.md`.
+# Gherkin scenario template for parity_tests/.
+# Each file should cover one critical flow identified in the legacy process_flows.
+# Adapt the criteria to the target paradigm as defined in `parity_specs.md`.
 
-# language: pt
+# language: en
 # spec-id: PT-001
-# rastreabilidade:
-#   process_flows: <ref ao fluxo no _reversa_sdd>
-#   target_architecture: <ref a componente no target_architecture.md>
-#   paradigma_alvo: <do paradigm_decision.md>
+# traceability:
+#   process_flows: <reference to the flow in _reversa_sdd>
+#   target_architecture: <reference to the component in target_architecture.md>
+#   target_paradigm: <from paradigm_decision.md>
 
-Funcionalidade: <Nome do fluxo>
-  Como <ator>
-  Quero <ação>
-  Para <objetivo>
+Feature: <Flow name>
+  As a <actor>
+  I want <action>
+  So that <goal>
 
-  # Critério geral de paridade aplicado a este cenário.
-  # Quando o paradigma alvo é event-driven, expressar tolerância de consistência eventual aqui.
-  @paridade @critico
-  Cenário: <descrição>
-    Dado <pré-condição observável>
-    E <pré-condição secundária>
-    Quando <ação executada via API / comando / evento de entrada>
-    Então <efeito observável no sistema novo>
-    E <efeito observável persiste após <janela de propagação>>
+  # General parity criterion applied to this scenario.
+  # When the target paradigm is event-driven, express eventual-consistency tolerance here.
+  @parity @critical
+  Scenario: <description>
+    Given <observable precondition>
+    And <secondary precondition>
+    When <action performed via API / command / input event>
+    Then <observable effect in the new system>
+    And <observable effect persists after <propagation window>>
 
-  # Cenário específico para validar idempotência (event-driven, retry seguro).
-  @paridade @idempotencia
-  Cenário: Reprocessamento não duplica efeito
-    Dado <pré-condição>
-    Quando <ação> é processada uma vez
-    E <ação> é reentregue por retry
-    Então o efeito observável é idêntico ao da primeira entrega
+  # Specific scenario to validate idempotency (event-driven, safe retry).
+  @parity @idempotency
+  Scenario: Reprocessing does not duplicate the effect
+    Given <precondition>
+    When <action> is processed once
+    And <action> is redelivered by retry
+    Then the observable effect is identical to the first delivery
 
-  # Cenário específico para validar ordem em paradigma event-driven.
-  @paridade @ordem
-  Cenário: Ordem de eventos é respeitada por chave
-    Dado <chave de particionamento>
-    Quando <evento A> é publicado antes de <evento B> com a mesma chave
-    Então <efeito observável> reflete a ordem A → B
+  # Specific scenario to validate ordering in an event-driven paradigm.
+  @parity @ordering
+  Scenario: Event order is respected per key
+    Given <partition key>
+    When <event A> is published before <event B> with the same key
+    Then <observable effect> reflects the A → B order

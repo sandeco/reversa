@@ -1,18 +1,18 @@
 ---
 name: reversa-arquitetura-3d
 description: >
-  Cria visualizações 3D interativas de arquitetura de software usando Three.js, gerando
-  HTML standalone com cenas navegáveis por câmera livre. Use esta skill sempre que o
-  usuário pedir para visualizar arquitetura, módulos, dependências, camadas ou hierarquia
-  de chamadas em 3D. Deve ser ativada quando o usuário mencionar termos como "code city",
-  "cidade de código", "arquitetura 3D", "dependency graph 3D", "module map 3D", "layer
-  stack 3D", "call graph 3D", "architecture tour", "tour pela arquitetura", "visualizar
-  software em 3D", "Three.js" no contexto de software, ou pedir para explorar a estrutura
-  de um sistema com câmera 3D. Funciona com JSON de módulos (nome, pasta, LOC, complexidade)
-  e dependências (grafo orientado). Sempre gera HTML standalone completo. Quando rodada
-  pelo Time Reversa Docs, usa Three.js servido localmente em assets/vendor/ (offline-first).
+  Creates interactive 3D visualizations of software architecture using Three.js, generating
+  standalone HTML with freely navigable camera scenes. Use this skill whenever the user
+  asks to visualize architecture, modules, dependencies, layers, or call hierarchy
+  in 3D. It should be activated when the user mentions terms like "code city",
+  "code city", "3D architecture", "3D dependency graph", "3D module map", "3D layer
+  stack", "3D call graph", "architecture tour", "architecture tour", "visualize
+  software in 3D", "Three.js" in the context of software, or asks to explore a system's
+  structure with a 3D camera. Works with module JSON (name, folder, LOC, complexity)
+  and dependencies (directed graph). Always generates complete standalone HTML. When run
+  by the Reversa Docs Team, uses Three.js served locally from assets/vendor/ (offline-first).
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
+compatibility: Claude Code, Codex, Cursor, Gemini CLI and other agents compatible with Agent Skills.
 metadata:
   author: sandeco
   version: "1.0.0"
@@ -21,33 +21,33 @@ metadata:
   role: 3d-renderer
 ---
 
-# Arquitetura 3D
+# 3D Architecture
 
-Cria visualizações 3D de **arquitetura de software** usando Three.js. Gera sempre **HTML standalone** (arquivo único, self-contained) com cena 3D interativa, controles de câmera (mouse, touch, teclado), sidebar de parâmetros e botão de exportar a viewport como PNG.
+Creates 3D visualizations of **software architecture** using Three.js. Always generates **standalone HTML** (single, self-contained file) with an interactive 3D scene, camera controls (mouse, touch, keyboard), parameter sidebar, and a button to export the viewport as PNG.
 
-A skill cobre cinco modos visuais consagrados em visualização de software, cada um com referência dedicada em `references/`:
+This skill covers five established visual modes in software visualization, each with a dedicated reference in `references/`:
 
-| Modo | Quando usar | Referência |
+| Mode | When to use | Reference |
 |------|-------------|------------|
-| **Code City** | Visão geral de tamanho/complexidade de cada arquivo, padrão "cidade de código" | `references/CODE_CITY.md` |
-| **Dependency Graph 3D** | Grafo de dependências com força repulsiva, nós em 3D | `references/DEPENDENCY_GRAPH_3D.md` |
-| **Layer Stack** | Camadas arquiteturais (UI / Domain / Infra) empilhadas com setas de fluxo | `references/LAYER_STACK.md` |
-| **Call Graph 3D** | Árvore de chamadas explorável em profundidade | `references/CALL_GRAPH_3D.md` |
-| **Architecture Tour** | Câmera animada percorrendo a cena com overlay narrativo | `references/ARCH_TOUR.md` |
+| **Code City** | Overview of each file's size/complexity, default "code city" view | `references/CODE_CITY.md` |
+| **Dependency Graph 3D** | Dependency graph with repulsive force, nodes in 3D | `references/DEPENDENCY_GRAPH_3D.md` |
+| **Layer Stack** | Architectural layers (UI / Domain / Infra) stacked with flow arrows | `references/LAYER_STACK.md` |
+| **Call Graph 3D** | Depth-exploreable call tree | `references/CALL_GRAPH_3D.md` |
+| **Architecture Tour** | Animated camera traversing the scene with narrative overlay | `references/ARCH_TOUR.md` |
 
-Padrões compartilhados de Three.js, lighting, controles e performance vivem em `references/THREE_PATTERNS.md`. Cenários de erro e tratamento em `references/ERRORS.md`.
+Shared Three.js patterns, lighting, controls, and performance live in `references/THREE_PATTERNS.md`. Error scenarios and handling in `references/ERRORS.md`.
 
-## Fluxo de Trabalho
+## Workflow
 
-### 1. Receber os dados
+### 1. Receive the data
 
-Os dados podem vir de:
+Data can come from:
 
-- **JSON inline**: usuário fornece `modules.json` (lista de módulos) e/ou `deps.json` (grafo de dependências).
-- **Caminho de arquivo**: usuário aponta para JSONs em `.reversa/documentation/assets/data/` (gerados pelo agente `/reversa-documentation`).
-- **Solicitado ao usuário**: se a skill é invocada sem dados, perguntar caminho ou pedir colagem inline.
+- **Inline JSON**: user provides `modules.json` (list of modules) and/or `deps.json` (dependency graph).
+- **File path**: user points to JSONs in `.reversa/documentation/assets/data/` (generated by the `/reversa-documentation` agent).
+- **Asked of the user**: if the skill is invoked without data, ask for a path or request inline paste.
 
-**Schema esperado de `modules.json`**:
+**Expected schema for `modules.json`**:
 
 ```json
 [
@@ -61,7 +61,7 @@ Os dados podem vir de:
 ]
 ```
 
-**Schema esperado de `deps.json`** (orientado):
+**Expected schema for `deps.json`** (directed):
 
 ```json
 {
@@ -70,45 +70,45 @@ Os dados podem vir de:
 }
 ```
 
-### 2. Escolher o modo
+### 2. Choose the mode
 
-Se o usuário especificou o modo, usar aquele. Se não, **sugerir 2 ou 3 opções** com base nos dados:
+If the user specified a mode, use that one. Otherwise, **suggest 2 or 3 options** based on the data:
 
-| Tipo de dado | Modos recomendados |
-|--------------|--------------------|
-| `modules.json` com LOC + complexidade | Code City (padrão), Layer Stack se houver pastas/camadas claras |
-| `deps.json` com muitas arestas | Dependency Graph 3D, Code City colorindo hot path |
-| Trace de execução ou call graph | Call Graph 3D |
-| Pedido explícito de apresentação | Architecture Tour combinando duas das anteriores |
+| Data type | Recommended modes |
+|-----------|-------------------|
+| `modules.json` with LOC + complexity | Code City (default), Layer Stack if there are clear folders/layers |
+| `deps.json` with many edges | Dependency Graph 3D, Code City coloring hot paths |
+| Execution trace or call graph | Call Graph 3D |
+| Explicit request for a presentation | Architecture Tour combining two of the above |
 
-Quando o número de nós ultrapassa **500**, aplicar **agrupamento por pasta** automaticamente e avisar o usuário (registrar a decisão no rodapé do HTML gerado).
+When the number of nodes exceeds **500**, apply **folder-based grouping** automatically and notify the user (log the decision in the footer of the generated HTML).
 
-### 3. Gerar o código
+### 3. Generate the code
 
-Consultar `references/THREE_PATTERNS.md` para setup base (renderer, cena, câmera, iluminação, OrbitControls). Consultar a referência específica do modo escolhido para o algoritmo de layout e materiais.
+Consult `references/THREE_PATTERNS.md` for base setup (renderer, scene, camera, lighting, OrbitControls). Consult the specific reference for the chosen mode for the layout algorithm and materials.
 
-**Regras fundamentais**:
+**Fundamental rules**:
 
-1. **HTML standalone**: arquivo único `.html` com tudo embutido (CSS, JS, dados inline em `<script id="data">`). Quando rodada pelo Time Reversa Docs, os dados vêm de `window.RV_DATA.modules` e `window.RV_DATA.deps` (carregados pelo `assets/js/data.js` que o Publisher gera) e o `<script id="data">` fica vazio ou ausente. Páginas finais **nunca** fazem `fetch()` para arquivos locais (quebra via `file://`).
-2. **Three.js local**: usar `<script src="assets/vendor/three.min.js"></script>` apontando para o arquivo baixado pelo Publisher (versão pinada em `agents/reversa-docs-publisher/references/vendor-pins.yaml`, hoje `three@0.147.0` IIFE). Em modo invocação isolada fora do time Docs, aceite CDN como fallback (`https://unpkg.com/three@0.147.0/build/three.min.js`), mas **nunca** misture versões.
-3. **OrbitControls local**: usar `<script src="assets/vendor/OrbitControls.js"></script>` (também IIFE, compatível com `three@0.147`). Não use `examples/jsm/...` enquanto a skill não migrar para importmap + ESM.
-4. **Renderer**: WebGLRenderer com antialiasing, pixelRatio do device.
-5. **Iluminação**: HemisphereLight + DirectionalLight com sombras suaves. Para Code City, AmbientLight extra para preencher.
-6. **Câmera**: PerspectiveCamera, posição inicial olhando o centro da cena de cima e levemente angulada. Distância derivada do tamanho da cena.
-7. **Performance**: usar `InstancedMesh` quando há mais de 200 elementos do mesmo tipo. Limite máximo de 5.000 prédios no Code City sem agrupamento.
-8. **Responsividade**: handler de resize redimensiona renderer e ajusta aspect ratio da câmera.
-9. **Sidebar**: lado direito, controles sliders/checkboxes/botões em layout vertical. Cada controle tem ID estável para `localStorage`.
-10. **Exportar PNG**: botão captura o canvas via `renderer.domElement.toBlob()`.
+1. **Standalone HTML**: single `.html` file with everything embedded (CSS, JS, inline data in `<script id="data">`). When run by the Reversa Docs Team, data comes from `window.RV_DATA.modules` and `window.RV_DATA.deps` (loaded by `assets/js/data.js` which the Publisher generates) and the `<script id="data">` is empty or absent. Final pages **never** make `fetch()` calls to local files (breaks via `file://`).
+2. **Local Three.js**: use `<script src="assets/vendor/three.min.js"></script>` pointing to the file downloaded by the Publisher (version pinned in `agents/reversa-docs-publisher/references/vendor-pins.yaml`, currently `three@0.147.0` IIFE). In standalone invocation mode outside the Docs team, accept CDN as fallback (`https://unpkg.com/three@0.147.0/build/three.min.js`), but **never** mix versions.
+3. **Local OrbitControls**: use `<script src="assets/vendor/OrbitControls.js"></script>` (also IIFE, compatible with `three@0.147`). Do not use `examples/jsm/...` until the skill migrates to importmap + ESM.
+4. **Renderer**: WebGLRenderer with antialiasing, device pixelRatio.
+5. **Lighting**: HemisphereLight + DirectionalLight with soft shadows. For Code City, extra AmbientLight to fill in.
+6. **Camera**: PerspectiveCamera, initial position looking at the center of the scene from above and slightly angled. Distance derived from scene size.
+7. **Performance**: use `InstancedMesh` when there are more than 200 elements of the same type. Maximum of 5,000 buildings in Code City without grouping.
+8. **Responsiveness**: resize handler resizes renderer and adjusts camera aspect ratio.
+9. **Sidebar**: right side, slider/checkbox/button controls in vertical layout. Each control has a stable ID for `localStorage`.
+10. **Export PNG**: button captures the canvas via `renderer.domElement.toBlob()`.
 
-### 4. Estrutura do HTML gerado
+### 4. Structure of the generated HTML
 
 ```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquitetura 3D | <!-- PROJECT_NAME --></title>
+    <title>3D Architecture | <!-- PROJECT_NAME --></title>
     <script src="assets/vendor/three.min.js"></script>
     <script src="assets/vendor/OrbitControls.js"></script>
     <script src="assets/js/data.js"></script>
@@ -117,56 +117,56 @@ Consultar `references/THREE_PATTERNS.md` para setup base (renderer, cena, câmer
         #scene { position: fixed; inset: 0; }
         #sidebar { position: fixed; top: 0; right: 0; width: 280px; height: 100vh; padding: 16px; background: rgba(15,15,20,0.85); color: #eaeaea; overflow-y: auto; }
         #loader { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; background: #0a0a10; color: #eaeaea; }
-        /* Estilo Reversa: variantes derivam de data-style do <body> via CSS externo do agente */
+        /* Reversa style: variants derive from data-style on <body> via external CSS from the agent */
     </style>
 </head>
 <body data-style="exploratory">
-    <div id="loader">Carregando cena 3D...</div>
+    <div id="loader">Loading 3D scene...</div>
     <canvas id="scene"></canvas>
     <aside id="sidebar">
-        <h3>Controles</h3>
+        <h3>Controls</h3>
         <!-- SIDEBAR_CONTROLS -->
         <button id="reset">Reset</button>
-        <button id="export-png">Exportar PNG</button>
+        <button id="export-png">Export PNG</button>
     </aside>
     <script id="data" type="application/json"><!-- DATA_JSON --></script>
     <script>
-        // OrbitControls IIFE expõe THREE.OrbitControls globalmente.
-        // 1. Carregar dados de window.RV_DATA quando rodando no time Docs,
-        //    ou do <script id="data"> em modo standalone.
-        // 2. Configurar cena, câmera, renderer, iluminação
-        // 3. Construir geometria conforme o modo (Code City, Dep Graph, etc)
-        // 4. Conectar sidebar aos parâmetros da cena
-        // 5. Loop de renderização e tratamento de eventos
+        // OrbitControls IIFE exposes THREE.OrbitControls globally.
+        // 1. Load data from window.RV_DATA when running in the Docs team,
+        //    or from <script id="data"> in standalone mode.
+        // 2. Configure scene, camera, renderer, lighting
+        // 3. Build geometry according to the mode (Code City, Dep Graph, etc)
+        // 4. Connect sidebar to scene parameters
+        // 5. Render loop and event handling
     </script>
 </body>
 </html>
 ```
 
-### 5. Salvar e entregar
+### 5. Save and deliver
 
-O output é sempre HTML standalone. Salvar no caminho indicado pelo agente orquestrador (geralmente `.reversa/documentation/arquitetura.html`).
+The output is always standalone HTML. Save to the path indicated by the orchestrating agent (usually `.reversa/documentation/arquitetura.html`).
 
-Quando invocada fora do contexto do `/reversa-documentation`, perguntar caminho de destino ou usar `<modo>-<timestamp>.html` no diretório atual.
+When invoked outside the `/reversa-documentation` context, ask for the destination path or use `<mode>-<timestamp>.html` in the current directory.
 
-## Diretrizes de qualidade
+## Quality guidelines
 
-- **Câmera intuitiva**: posição inicial mostra a cena inteira; OrbitControls com damping para movimento suave.
-- **Materiais coesos**: paleta limitada (5 a 8 cores no máximo); cores carregadas indicam atributo (ex: vermelho para hot path, azul para módulos leves).
-- **Labels legíveis**: usar CSS2DRenderer ou sprites; labels só aparecem em hover ou zoom acima de um threshold para não poluir.
-- **Loader visível**: cena começa com overlay "Carregando cena 3D..." que some quando o `requestAnimationFrame` da primeira frame termina.
-- **Fallback gracioso**: se Three.js não carregar (sem internet), mostrar mensagem "Esta visualização requer carregar a biblioteca Three.js. Conecte-se à internet e recarregue."
-- **Acessibilidade básica**: navegação por teclado nos botões da sidebar; foco visível.
-- **Idioma**: comentários e textos visíveis em pt-br. Sem travessão.
+- **Intuitive camera**: initial position shows the entire scene; OrbitControls with damping for smooth movement.
+- **Cohesive materials**: limited palette (5 to 8 colors max); colored indicators show attributes (e.g., red for hot path, blue for lightweight modules).
+- **Readable labels**: use CSS2DRenderer or sprites; labels only appear on hover or zoom above a threshold to avoid clutter.
+- **Visible loader**: scene starts with a "Loading 3D scene..." overlay that disappears when the first frame's `requestAnimationFrame` completes.
+- **Graceful fallback**: if Three.js fails to load (no internet), show the message "This visualization requires loading the Three.js library. Connect to the internet and reload."
+- **Basic accessibility**: keyboard navigation on sidebar buttons; visible focus.
+- **Language**: comments and visible texts in en. No hyphenation.
 
-## Diretrizes de código
+## Code guidelines
 
-- **Modularidade**: separar criação da cena, construção da geometria e gerenciamento de interação em funções com nomes claros.
-- **Sem dependências além de Three.js e OrbitControls (locais em `assets/vendor/`)**: não importar GSAP, dat.GUI, ou qualquer outra lib sem necessidade clara.
-- **Constantes nomeadas no topo**: cores, sizes, thresholds em um bloco de configuração visível.
-- **Dispose**: ao trocar de modo ou regenerar, chamar `geometry.dispose()` e `material.dispose()` para evitar vazamento.
-- **Performance check**: antes de renderizar, contar nós; se > 5.000 sem instanced mesh, abortar e mostrar aviso.
+- **Modularity**: separate scene creation, geometry construction, and interaction management into functions with clear names.
+- **No dependencies beyond Three.js and OrbitControls (local in `assets/vendor/`)**: do not import GSAP, dat.GUI, or any other library without a clear need.
+- **Named constants at the top**: colors, sizes, thresholds in a visible configuration block.
+- **Dispose**: when switching modes or regenerating, call `geometry.dispose()` and `material.dispose()` to avoid leaks.
+- **Performance check**: before rendering, count nodes; if > 5,000 without instanced mesh, abort and show a warning.
 
-## Tratamento de erros
+## Error handling
 
-Consultar `references/ERRORS.md` para cenários comuns (CDN inacessível, JSON malformado, projeto vazio, WebGL não suportado, etc).
+Consult `references/ERRORS.md` for common scenarios (unreachable CDN, malformed JSON, empty project, unsupported WebGL, etc).

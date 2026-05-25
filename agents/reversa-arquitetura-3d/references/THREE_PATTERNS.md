@@ -1,10 +1,10 @@
-# Padrões Three.js para Visualização de Arquitetura
+# Three.js Patterns for Architecture Visualization
 
-Referência rápida de setup, materiais e técnicas comuns a todos os modos da skill. Three.js v0.158+, ESM via CDN.
+Quick reference for setup, materials, and techniques common to all skill modes. Three.js v0.158+, ESM via CDN.
 
 ---
 
-## Setup base da cena
+## Base scene setup
 
 ```javascript
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
@@ -14,12 +14,12 @@ const container = document.getElementById("scene-container");
 const width = container.clientWidth;
 const height = container.clientHeight;
 
-// Cena
+// Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0a0a14);
 scene.fog = new THREE.Fog(0x0a0a14, 100, 800);
 
-// Câmera
+// Camera
 const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 2000);
 camera.position.set(150, 200, 300);
 camera.lookAt(0, 0, 0);
@@ -32,7 +32,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 container.appendChild(renderer.domElement);
 
-// Controles
+// Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
@@ -40,19 +40,19 @@ controls.minDistance = 20;
 controls.maxDistance = 1500;
 ```
 
-## Iluminação padrão
+## Default lighting
 
 ```javascript
-// Luz ambiente leve para não ter sombras totalmente pretas
+// Light ambient light so shadows are not completely black
 const ambient = new THREE.AmbientLight(0xffffff, 0.35);
 scene.add(ambient);
 
-// Hemisfério: céu vs chão, dá profundidade natural
+// Hemisphere: sky vs ground, gives natural depth
 const hemi = new THREE.HemisphereLight(0xddeeff, 0x202028, 0.5);
 hemi.position.set(0, 200, 0);
 scene.add(hemi);
 
-// Direcional: simula sol, projeta sombras
+// Directional: simulates sun, casts shadows
 const dir = new THREE.DirectionalLight(0xffffff, 0.85);
 dir.position.set(80, 200, 100);
 dir.castShadow = true;
@@ -64,7 +64,7 @@ dir.shadow.camera.bottom = -400;
 scene.add(dir);
 ```
 
-## Loop de renderização
+## Rendering loop
 
 ```javascript
 function tick() {
@@ -75,7 +75,7 @@ function tick() {
 tick();
 ```
 
-## Handler de resize
+## Resize handler
 
 ```javascript
 window.addEventListener("resize", () => {
@@ -87,9 +87,9 @@ window.addEventListener("resize", () => {
 });
 ```
 
-## InstancedMesh para grandes volumes
+## InstancedMesh for large volumes
 
-Quando há mais de 200 elementos do mesmo tipo (prédios do Code City, nós do dep graph), usar `InstancedMesh` em vez de loop com `add()`.
+When there are more than 200 elements of the same type (Code City buildings, dep graph nodes), use `InstancedMesh` instead of a loop with `add()`.
 
 ```javascript
 const boxGeo = new THREE.BoxGeometry(1, 1, 1);
@@ -112,7 +112,7 @@ if (instanced.instanceColor) instanced.instanceColor.needsUpdate = true;
 scene.add(instanced);
 ```
 
-## Labels em CSS2D (legíveis sempre)
+## Labels in CSS2D (always readable)
 
 ```javascript
 import { CSS2DRenderer, CSS2DObject } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/renderers/CSS2DRenderer.js";
@@ -134,11 +134,11 @@ function addLabel(text, position) {
 }
 ```
 
-No `tick()`, chamar `labelRenderer.render(scene, camera)` junto com o renderer principal.
+In `tick()`, call `labelRenderer.render(scene, camera)` together with the main renderer.
 
-**Regra**: mostrar labels apenas quando o nó está próximo da câmera (distância < threshold) ou em hover, para evitar poluição.
+**Rule**: show labels only when the node is close to the camera (distance < threshold) or on hover, to avoid clutter.
 
-## Raycaster para hover e clique
+## Raycaster for hover and click
 
 ```javascript
 const raycaster = new THREE.Raycaster();
@@ -159,7 +159,7 @@ renderer.domElement.addEventListener("pointermove", (e) => {
 });
 ```
 
-## Sidebar reativa
+## Reactive sidebar
 
 ```javascript
 const sliders = document.querySelectorAll("aside input[type=range]");
@@ -167,7 +167,7 @@ sliders.forEach((slider) => {
     slider.addEventListener("input", (e) => {
         const param = e.target.dataset.param;
         const value = parseFloat(e.target.value);
-        applyParam(param, value); // função específica do modo
+        applyParam(param, value); // mode-specific function
         localStorage.setItem(`arq3d.${param}`, value);
     });
     // restore
@@ -179,11 +179,11 @@ sliders.forEach((slider) => {
 });
 ```
 
-## Exportar PNG
+## Export PNG
 
 ```javascript
 document.getElementById("export-png").addEventListener("click", () => {
-    renderer.render(scene, camera); // garantir frame atual
+    renderer.render(scene, camera); // ensure current frame
     renderer.domElement.toBlob((blob) => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -195,7 +195,7 @@ document.getElementById("export-png").addEventListener("click", () => {
 });
 ```
 
-## Dispose ao trocar de modo
+## Dispose when switching modes
 
 ```javascript
 function clearScene() {
@@ -210,12 +210,12 @@ function clearScene() {
 }
 ```
 
-## Performance: limites práticos
+## Performance: practical limits
 
-| Cenário | Limite seguro | Acima disso |
+| Scenario | Safe limit | Above that |
 |---|---|---|
-| BoxGeometry independentes | 200 | Migrar para InstancedMesh |
-| InstancedMesh de cubos | 5.000 | Aplicar agrupamento por pasta |
-| Linhas (LineSegments) | 10.000 segmentos | Usar Line2 (fat lines) ou agrupar |
-| Sprites/labels CSS2D | 100 visíveis | Mostrar só sob hover ou proximidade |
-| Polígonos texturizados | 50.000 tris | Reduzir LOD ou desativar sombras |
+| Independent BoxGeometry | 200 | Migrate to InstancedMesh |
+| Cube InstancedMesh | 5,000 | Apply grouping by folder |
+| Lines (LineSegments) | 10,000 segments | Use Line2 (fat lines) or group |
+| Sprites/CSS2D labels | 100 visible | Show only on hover or proximity |
+| Textured polygons | 50,000 tris | Reduce LOD or disable shadows |

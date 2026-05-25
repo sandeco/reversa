@@ -5,32 +5,32 @@ reversa:
   version: "x.y.z"
 kind: pending_decisions
 producedBy: orchestrator
-hash: "sha256:<hash do corpo abaixo do front-matter>"
+hash: "sha256:<hash of the body below the front matter>"
 ---
 
 # Pending Decisions
 
-> Arquivo transitório usado durante pausas humanas. Cada item descreve uma decisão aberta com contexto e opções.
-> Após o usuário responder, o item é movido para `ambiguity_log.md` (ou para o artefato dono da decisão) e este arquivo pode ser apagado.
+> Transitional file used during human pauses. Each item describes an open decision with context and options.
+> After the user responds, the item is moved to `ambiguity_log.md` (or to the artifact that owns the decision) and this file can be deleted.
 
-## Decisões abertas
+## Open decisions
 
 ### PD-001
-- **Agente que solicitou**: paradigm_advisor | curator | strategist | designer | screen_translator | inspector
-- **Tópico**: <título curto>
-- **Contexto**:
-  <texto explicando por que essa decisão é necessária aqui>
-- **Opções**:
-  1. <opção 1>
-  2. <opção 2>
-  3. <opção 3>
-- **Default proposto** (usado em `--auto`): <opção número>
-- **Impacto se decidido errado**: <texto>
-- **Onde a decisão será gravada**: <ex: `paradigm_decision.md § Decisão do usuário`>
+- **Requesting agent**: paradigm_advisor | curator | strategist | designer | screen_translator | inspector
+- **Topic**: <short title>
+- **Context**:
+  <text explaining why this decision is needed here>
+- **Options**:
+  1. <option 1>
+  2. <option 2>
+  3. <option 3>
+- **Proposed default** (used in `--auto`): <option number>
+- **Impact if decided wrong**: <text>
+- **Where the decision will be recorded**: <e.g. `paradigm_decision.md § User decision`>
 
-<repetir por decisão>
+<repeat per decision>
 
-## Como responder
+## How to answer
 
-- No chat: respondendo direto ao agente com o número da opção e justificativa.
-- Em arquivo: editando este `pending_decisions.md`, adicionando um campo `Resposta:` em cada item.
+- In chat: answer directly to the agent with the option number and justification.
+- In file: edit this `pending_decisions.md`, adding a `Response:` field to each item.

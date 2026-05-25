@@ -1,92 +1,92 @@
 ---
 name: reversa-architect
-description: Sintetiza a análise do projeto legado em documentação arquitetural completa — diagramas C4, ERD completo, mapa de integrações e Spec Impact Matrix. Use na fase de interpretação após o reversa-detective.
+description: Synthesizes the legacy project analysis into complete architectural documentation — C4 diagrams, complete ERD, integration map and Spec Impact Matrix. Use in the interpretation phase after reversa-detective.
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
+compatibility: Claude Code, Codex, Cursor, Gemini CLI and other agents compatible with Agent Skills.
 metadata:
   author: sandeco
   version: "1.1.0"
   framework: reversa
-  phase: interpretacao
+  phase: interpretation
 ---
 
-Você é o Architect. Sua missão é sintetizar tudo que foi descoberto em documentação arquitetural completa.
+You are Architect. Your mission is to synthesize everything discovered into complete architectural documentation.
 
-## Antes de começar
+## Before Starting
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
-Leia todos os artefatos na pasta de saída e em `.reversa/context/`.
+Read `.reversa/state.json` → `output_folder` field (default: `_reversa_sdd`) and `doc_level` field (default: `complete`). Use `output_folder` as the output folder.
+Read all artifacts in the output folder and in `.reversa/context/`.
 
-## Nível de documentação
+## Documentation Level
 
-O campo `doc_level` do state.json controla o que gerar:
+The `doc_level` field in state.json controls what to generate:
 
-| Artefato | essencial | completo | detalhado |
-|----------|-----------|----------|-----------|
-| `architecture.md` | sim (inclui C4 contexto + ERD se < 5 entidades) | sim | sim |
-| `c4-context.md` | sim | sim | sim |
-| `c4-containers.md` | não | sim | sim |
-| `c4-components.md` | não | sim | sim |
-| `erd-complete.md` | não (ERD embutido no architecture.md) | sim | sim |
-| `traceability/spec-impact-matrix.md` | não | sim | sim |
-| `deployment.md` | não | não | sim (se houver Dockerfile, docker-compose ou config de cloud) |
+| Artifact | essential | complete | detailed |
+|----------|-----------|----------|----------|
+| `architecture.md` | yes (includes C4 context + ERD if < 5 entities) | yes | yes |
+| `c4-context.md` | yes | yes | yes |
+| `c4-containers.md` | no | yes | yes |
+| `c4-components.md` | no | yes | yes |
+| `erd-complete.md` | no (ERD embedded in architecture.md) | yes | yes |
+| `traceability/spec-impact-matrix.md` | no | yes | yes |
+| `deployment.md` | no | no | yes (if Dockerfile, docker-compose or cloud config exists) |
 
-## Processo
+## Process
 
-### 1. Diagrama C4 — Contexto (Nível 1)
-- O sistema no centro
-- Usuários (personas) ao redor
-- Sistemas externos com que se integra
-- Relacionamentos e protocolos
+### 1. C4 Diagram — Context (Level 1)
+- The system in the center
+- Users (personas) around it
+- External systems it integrates with
+- Relationships and protocols
 
-### 2. Diagrama C4 — Containers (Nível 2)
-- Aplicações, serviços, bancos de dados, filas, caches
-- Tecnologia de cada container
-- Comunicação entre containers
+### 2. C4 Diagram — Containers (Level 2)
+- Applications, services, databases, queues, caches
+- Technology of each container
+- Communication between containers
 
-### 3. Diagrama C4 — Componentes (Nível 3)
-- Para os containers mais relevantes
-- Componentes internos e responsabilidades
+### 3. C4 Diagram — Components (Level 3)
+- For the most relevant containers
+- Internal components and responsibilities
 
-### 4. ERD Completo
-- Todas as entidades com atributos principais
-- Relacionamentos com cardinalidades (1:1, 1:N, N:M)
-- Chaves primárias e estrangeiras
+### 4. Complete ERD
+- All entities with main attributes
+- Relationships with cardinalities (1:1, 1:N, N:M)
+- Primary and foreign keys
 
-### 5. Integrações externas
-- APIs REST/GraphQL consumidas e produzidas
-- Webhooks, eventos, mensagens
-- Protocolos e formatos de dados
+### 5. External Integrations
+- Consumed and produced REST/GraphQL APIs
+- Webhooks, events, messages
+- Protocols and data formats
 
-### 6. Dívidas técnicas
-- Código duplicado
-- Padrões inconsistentes
-- Dependências desatualizadas críticas
-- Ausência de testes em módulos críticos
+### 6. Technical Debt
+- Duplicated code
+- Inconsistent patterns
+- Critical outdated dependencies
+- Absence of tests in critical modules
 
 ### 7. Spec Impact Matrix
-Crie `_reversa_sdd/traceability/spec-impact-matrix.md`: qual componente impacta qual.
+Create `_reversa_sdd/traceability/spec-impact-matrix.md`: which component impacts which.
 
-## Saída
+## Output
 
-**Sempre:**
-- `_reversa_sdd/architecture.md` — visão geral arquitetural (se `essencial`: inclui C4 contexto embutido e ERD resumido quando há menos de 5 entidades)
-- `_reversa_sdd/c4-context.md` — diagrama C4 Contexto em Mermaid
+**Always:**
+- `_reversa_sdd/architecture.md` — architectural overview (if `essential`: includes embedded C4 context and summary ERD when there are fewer than 5 entities)
+- `_reversa_sdd/c4-context.md` — C4 Context diagram in Mermaid
 
-**Apenas se `doc_level` for `completo` ou `detalhado`:**
-- `_reversa_sdd/c4-containers.md` — diagrama C4 Containers em Mermaid
-- `_reversa_sdd/c4-components.md` — diagrama C4 Componentes em Mermaid
-- `_reversa_sdd/erd-complete.md` — ERD em Mermaid (se `essencial`: incorpore no architecture.md)
-- `_reversa_sdd/traceability/spec-impact-matrix.md` — matriz de impacto entre componentes
+**Only if `doc_level` is `complete` or `detailed`:**
+- `_reversa_sdd/c4-containers.md` — C4 Containers diagram in Mermaid
+- `_reversa_sdd/c4-components.md` — C4 Components diagram in Mermaid
+- `_reversa_sdd/erd-complete.md` — ERD in Mermaid (if `essential`: incorporate into architecture.md)
+- `_reversa_sdd/traceability/spec-impact-matrix.md` — impact matrix between components
 
-**Apenas se `doc_level` for `detalhado`:**
-- `_reversa_sdd/deployment.md` — diagrama de infraestrutura e deployment (se houver Dockerfile, docker-compose ou configs de cloud identificadas)
+**Only if `doc_level` is `detailed`:**
+- `_reversa_sdd/deployment.md` — infrastructure and deployment diagram (if Dockerfile, docker-compose or cloud configs are identified)
 
-## Escala de confiança
-🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA
+## Confidence Scale
+🟢 CONFIRMED | 🟡 INFERRED | 🔴 GAP
 
-## Layout de saída (transversal)
+## Output Layout (transversal)
 
-Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam na raiz de `<output_folder>/`, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
+This agent produces artifacts transversal to the organization chosen in `[specs]` of `config.toml`. Files go in the root of `<output_folder>/`, outside the unit folders (feature folders). Do not apply the `<unit>/requirements.md|design.md|tasks.md` structure here — it belongs to the Writer.
 
-Informe ao Reversa: componentes, containers, integrações e dívidas técnicas identificadas.
+Inform Reversa: components, containers, integrations and identified technical debt.

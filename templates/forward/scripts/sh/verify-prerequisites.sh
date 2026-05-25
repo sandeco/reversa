@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 #
 # verify-prerequisites.sh
-# Helper genérico de pré-condições, chamado pelos skills forward do Reversa.
+# Generic precondition helper, called by Reversa forward skills.
 #
-# Saída padrão JSON em uma única linha. O agente lê e age conforme os campos.
-# Sem dependências externas além de bash, jq opcional.
+# Standard output is one-line JSON. The agent reads it and acts according to the fields.
+# No external dependencies besides bash, jq optional.
 #
-# Uso:
-#   verify-prerequisites.sh [--json] [--require <campo>] [--require <campo>] ...
+# Usage:
+#   verify-prerequisites.sh [--json] [--require <field>] [--require <field>] ...
 #
-# Campos suportados em --require:
-#   active-requirements   Exige que .reversa/active-requirements.json exista.
-#   feature-dir           Exige que a pasta apontada por active-requirements exista.
-#   requirements          Exige feature-dir/requirements.md.
-#   roadmap               Exige feature-dir/roadmap.md.
-#   actions               Exige feature-dir/actions.md.
-#   sdd                   Exige _reversa_sdd/ presente.
-#   principles            Exige .reversa/principles.md.
+# Fields supported in --require:
+#   active-requirements   Requires .reversa/active-requirements.json to exist.
+#   feature-dir           Requires the folder pointed to by active-requirements to exist.
+#   requirements          Requires feature-dir/requirements.md.
+#   roadmap               Requires feature-dir/roadmap.md.
+#   actions               Requires feature-dir/actions.md.
+#   sdd                   Requires _reversa_sdd/ to be present.
+#   principles            Requires .reversa/principles.md.
 #
-# Códigos de saída:
-#   0 = todos os requisitos batem
-#   1 = pelo menos um requisito faltou (detalhes no JSON)
-#   2 = uso inválido
+# Exit codes:
+#   0 = all requirements matched
+#   1 = at least one requirement missing (details in JSON)
+#   2 = invalid usage
 
 set -u
 
@@ -39,7 +39,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --json) JSON_MODE=1; shift ;;
     --require) shift; REQUIRES+=("${1:-}"); shift ;;
-    *) echo "uso invalido: $1" >&2; exit 2 ;;
+    *) echo "invalid usage: $1" >&2; exit 2 ;;
   esac
 done
 
@@ -80,7 +80,7 @@ check_one() {
       [ -f "$REVERSA_DIR/principles.md" ] || missing+=("principles")
       ;;
     *)
-      missing+=("desconhecido:$name")
+      missing+=("unknown:$name")
       ;;
   esac
 }
@@ -114,7 +114,7 @@ else
   if [ ${#missing[@]} -eq 0 ]; then
     echo "ok"
   else
-    echo "faltando: ${missing[*]}"
+    echo "missing: ${missing[*]}"
   fi
 fi
 

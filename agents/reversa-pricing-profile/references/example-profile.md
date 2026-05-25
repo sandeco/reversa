@@ -1,46 +1,46 @@
-# Perfil de Cobranca
+# Billing Profile
 
-**Criado em:** 2026-05-06 14:32 UTC
-**Versao do schema:** 1.1
+**Created at:** 2026-05-06 14:32 UTC
+**Schema version:** 1.1
 
-## Identificacao
+## Identification
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Pais | Brasil (BR) |
-| Moeda local | Real Brasileiro (BRL) |
-| Senioridade | senior |
+| Country | Brazil (BR) |
+| Local currency | Brazilian Real (BRL) |
+| Seniority | senior |
 
-## Custo direto
+## Direct cost
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Modo de taxa hora | Derivado |
-| Renda mensal liquida desejada | 12.000,00 BRL |
-| Horas faturaveis por mes | 120 |
-| Taxa hora calculada | 100,00 BRL/h |
+| Hourly-rate mode | Derived |
+| Desired net monthly income | 12.000,00 BRL |
+| Billable hours per month | 120 |
+| Calculated hourly rate | 100,00 BRL/h |
 
-## Markup e impostos
+## Markup and taxes
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Markup de projeto | 35% |
-| Regime tributario | Simples Nacional, servicos de TI |
-| Fator aproximado | 15% |
-| Tipo do fator | effective_reserve_estimate |
-| Fonte do fator | Receita Federal, Simples Nacional, anexos e fator R |
-| Inclui imposto destacado | Sim |
-| Aviso de repasse | Sim |
-| Confianca no regime | Alta, escolha explicita |
+| Project markup | 35% |
+| Tax regime | Simples Nacional, IT services |
+| Approximate factor | 15% |
+| Factor type | effective_reserve_estimate |
+| Factor source | Receita Federal, Simples Nacional, annexes and factor R |
+| Includes pass-through tax | Yes |
+| Pass-through warning | Yes |
+| Regime confidence | High, explicit choice |
 
-## Modelo comercial
+## Commercial model
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| Modelos de cobranca | escopo_fechado, time_and_materials |
-| Perfil de cliente | pequena_empresa |
-| Cobranca em moeda estrangeira | Nao |
+| Billing models | escopo_fechado, time_and_materials |
+| Client profile | pequena_empresa |
+| Billing in foreign currency | No |
 
 ## Disclaimer
 
-O fator de imposto registrado e uma reserva aproximada para orcamento, nao uma aliquota legal exata. Validacao tributaria real e responsabilidade do contador do usuario. Este arquivo contem dados financeiros sensiveis. Recomenda-se adicionar `_reversa_sdd/_pricing/profile.json` e `_reversa_sdd/_pricing/profile.md` ao `.gitignore` antes de commitar.
+The recorded tax factor is an approximate reserve for budgeting, not an exact legal rate. Real tax validation is the responsibility of the user's accountant. This file contains sensitive financial data. It is recommended to add `_reversa_sdd/_pricing/profile.json` and `_reversa_sdd/_pricing/profile.md` to `.gitignore` before committing.

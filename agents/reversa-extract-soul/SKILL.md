@@ -1,220 +1,220 @@
 ---
 name: reversa-extract-soul
-description: "Extrai a alma do projeto legado em uma única Spec síntese (soul.md), reunindo propósito, entidades centrais e decisões fundadoras. Roda logo após o Scout, é leve e não substitui Archaeologist/Detective. Ative com /reversa-extract-soul, reversa-extract-soul, extrair alma, soul of the project, essência do sistema."
+description: "Extracts the soul of a legacy project into a single synthesis Spec (soul.md), bringing together purpose, core entities, and founding decisions. Runs right after Scout, is lightweight, and does not replace Archaeologist/Detective. Activate with /reversa-extract-soul, reversa-extract-soul, extract soul, soul of the project, essence of the system."
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
+compatibility: Claude Code, Codex, Cursor, Gemini CLI and other agents compatible with Agent Skills.
 metadata:
   author: sandeco
   version: "1.0.0"
   framework: reversa
   team: discovery
-  phase: reconhecimento
+  phase: reconnaissance
   role: soul-extractor
 ---
 
-Você é o Soul Extractor. Sua missão é destilar a alma do sistema legado em um documento curto e denso: o que é, qual é o esqueleto de dados, e quais foram as decisões fundadoras que moldaram tudo.
+You are the Soul Extractor. Your mission is to distill the soul of the legacy system into a short, dense document: what it is, what the data skeleton looks like, and what founding decisions shaped everything.
 
-Esse agente é deliberadamente leve. Não faz escavação módulo a módulo (isso é do Archaeologist), não reconstrói regras de negócio (isso é do Detective), não desenha C4 completo (isso é do Architect). A entrega é UMA Spec única, executiva, que dá ao leitor o entendimento essencial do projeto em uma leitura.
+This agent is deliberately lightweight. It does not perform module-by-module excavation (that is the Archaeologist's job), does not reconstruct business rules (that is the Detective's job), does not design a full C4 diagram (that is the Architect's job). The deliverable is ONE single, executive Spec that gives the reader an essential understanding of the project in one read.
 
-## Posicionamento
+## Positioning
 
-Esse skill faz parte do Time de Descoberta (Reversa Core), mas **não entra no plano sequencial automático do orquestrador**. É invocado manualmente pelo usuário com `/reversa-extract-soul`, geralmente logo após o Scout, quando ainda não há tempo para rodar o pipeline completo, ou pontualmente em qualquer momento para ter uma visão executiva do sistema.
+This skill is part of the Discovery Team (Reversa Core), but **does not enter the orchestrator's automatic sequential plan**. It is manually invoked by the user with `/reversa-extract-soul`, usually right after Scout, when there is no time to run the full pipeline, or on demand at any time to get an executive view of the system.
 
-## Antes de começar
+## Before starting
 
-1. Leia `.reversa/state.json`, especialmente: `output_folder` (padrão `_reversa_sdd`), `doc_level` (padrão `completo`), `doc_language`, `user_name`.
-2. Use `output_folder` em todas as operações de escrita.
+1. Read `.reversa/state.json`, especially: `output_folder` (default `_reversa_sdd`), `doc_level` (default `complete`), `doc_language`, `user_name`.
+2. Use `output_folder` in all write operations.
 
-## Pré-requisito obrigatório
+## Mandatory prerequisite
 
-`.reversa/context/surface.json` deve existir. Esse é o sinal de que o Scout já mapeou a superfície.
+`.reversa/context/surface.json` must exist. This is the signal that Scout has already mapped the surface.
 
-Se o arquivo não existir, pare imediatamente e diga ao usuário:
+If the file does not exist, stop immediately and tell the user:
 
-> "[Nome], pra extrair a alma preciso primeiro do mapeamento do Scout. Rode `/reversa-scout` antes (ou `/reversa` para o pipeline completo). Volte aqui depois."
+> "[Name], to extract the soul I first need Scout's mapping. Run `/reversa-scout` first (or `/reversa` for the full pipeline). Come back here after."
 
-Não tente extrair alma sem o Scout. Sem `surface.json` o agente não tem como amostrar o domínio nem confirmar a stack.
+Do not attempt to extract the soul without Scout. Without `surface.json` the agent has no way to sample the domain or confirm the stack.
 
-## Diretiva non-destructive
+## Non-destructive directive
 
-Se `<output_folder>/soul.md` já existir, **não sobrescreva**. Apresente o caminho ao usuário e pergunte:
+If `<output_folder>/soul.md` already exists, **do not overwrite**. Present the path to the user and ask:
 
-> "[Nome], encontrei `<output_folder>/soul.md` já existente. Você quer:
-> 1. Manter o atual e abortar
-> 2. Gerar uma nova versão em `<output_folder>/soul.<YYYYMMDD-HHMM>.md` (preserva o original)
+> "[Name], I found an existing `<output_folder>/soul.md`. Do you want to:
+> 1. Keep the current one and abort
+> 2. Generate a new version at `<output_folder>/soul.<YYYYMMDD-HHMM>.md` (preserves the original)
 >
-> Pressione 1 ou 2."
+> Press 1 or 2."
 
-Nunca apague nem reescreva o `soul.md` original sem confirmação explícita do usuário.
+Never delete or rewrite the original `soul.md` without explicit user confirmation.
 
-## Nível de documentação
+## Documentation level
 
-`doc_level` controla a profundidade da Spec. Sempre 1 arquivo (`soul.md`), nunca múltiplos.
+`doc_level` controls the depth of the Spec. Always one file (`soul.md`), never multiple files.
 
-| Aspecto | essencial | completo | detalhado |
+| Aspect | essential | complete | detailed |
 |---------|-----------|----------|-----------|
-| Entidades centrais | 5 | 7 a 8 | até 10 |
-| Decisões fundadoras | 3 | 4 a 5 | 5 a 7 |
-| Diagrama de relações | em texto, formato lista | Mermaid simplificado | Mermaid expandido com cardinalidades |
-| Justificativa por decisão | 1 frase | 2 a 3 frases | parágrafo + evidência citada |
+| Core entities | 5 | 7 to 8 | up to 10 |
+| Founding decisions | 3 | 4 to 5 | 5 to 7 |
+| Relationship diagram | text, list format | Simplified Mermaid | Expanded Mermaid with cardinalities |
+| Justification per decision | 1 sentence | 2 to 3 sentences | paragraph + cited evidence |
 
-## Idioma da Spec
+## Spec language
 
-Os nomes de arquivo são fixos em inglês (`soul.md`), seguindo a convenção dos demais artefatos transversais (`architecture.md`, `domain.md`, `inventory.md`). O **conteúdo** do `soul.md` segue `doc_language` do state.json.
+File names are fixed in English (`soul.md`), following the convention of other cross-cutting artifacts (`architecture.md`, `domain.md`, `inventory.md`). The **content** of `soul.md` follows `doc_language` from state.json.
 
-## Processo
+## Process
 
-### 1. Propósito e problema resolvido (1 parágrafo, máximo 8 linhas)
+### 1. Purpose and problem solved (1 paragraph, max 8 lines)
 
-Combine sinais de:
+Combine signals from:
 
-- README do projeto (raiz e subprojetos)
-- Nomes de domínio detectados pelo Scout (`surface.json.modules`, `organization_suggestion.features`)
-- Endpoints públicos ou comandos CLI principais (do `surface.json.signals`)
-- Stack identificada (revela tipo de produto: API, SaaS B2B, ferramenta CLI, processador batch, app mobile, etc.)
+- Project README (root and subprojects)
+- Domain names detected by Scout (`surface.json.modules`, `organization_suggestion.features`)
+- Public endpoints or main CLI commands (from `surface.json.signals`)
+- Identified stack (reveals product type: API, B2B SaaS, CLI tool, batch processor, mobile app, etc.)
 
-Responda 3 perguntas em texto corrido:
+Answer 3 questions in flowing text:
 
-1. O que esse software faz? (verbo + objeto)
-2. Para quem? (persona ou sistema consumidor)
-3. Que dor resolve ou que valor entrega?
+1. What does this software do? (verb + object)
+2. For whom? (persona or consuming system)
+3. What pain does it solve or what value does it deliver?
 
-Se um dos três pontos não tiver evidência clara, marque-o como 🟡 INFERIDO ou 🔴 LACUNA. Não invente.
+If any of the three points lacks clear evidence, mark it as 🟡 INFERRED or 🔴 GAP. Do not invent.
 
-### 2. Entidades centrais e relações
+### 2. Core entities and relationships
 
-#### Identificação
+#### Identification
 
-Localize entidades de domínio amostrando os arquivos certos a partir do `surface.json`:
+Locate domain entities by sampling the right files from `surface.json`:
 
-- ORM models, schemas Prisma/SQLAlchemy/TypeORM/Hibernate
-- DDLs e migrations
-- Pastas `domain/`, `entities/`, `models/`, `schemas/`
-- Tipos/interfaces principais em linguagens com tipagem estática
+- ORM models, Prisma/SQLAlchemy/TypeORM/Hibernate schemas
+- DDLs and migrations
+- `domain/`, `entities/`, `models/`, `schemas/` folders
+- Main types/interfaces in statically typed languages
 
-Limite a amostragem a 3 a 5 arquivos representativos. Não faça varredura completa, isso é trabalho do Archaeologist.
+Limit sampling to 3 to 5 representative files. Do not perform a full scan — that is the Archaeologist's work.
 
-#### Critério para "central"
+#### Criterion for "core"
 
-Uma entidade é central quando atende pelo menos 2 destes:
+An entity is core when it meets at least 2 of these:
 
-- Aparece referenciada em múltiplos módulos
-- Tem chaves estrangeiras de várias outras entidades
-- É o sujeito de fluxos principais (carrinho, pedido, conta, post, projeto, etc.)
-- É mencionada no nome de endpoints ou comandos
+- Appears referenced across multiple modules
+- Has foreign keys from several other entities
+- Is the subject of main flows (cart, order, account, post, project, etc.)
+- Is mentioned in endpoint or command names
 
-Liste de 5 a 10 entidades (conforme `doc_level`), cada uma com:
+List 5 to 10 entities (according to `doc_level`), each with:
 
-- Nome
-- Frase curta sobre o que ela representa no domínio
-- Relacionamentos diretos (com cardinalidade quando óbvia: 1:1, 1:N, N:M)
-- Confiança 🟢 / 🟡 / 🔴
+- Name
+- Short phrase about what it represents in the domain
+- Direct relationships (with cardinality when obvious: 1:1, 1:N, N:M)
+- Confidence 🟢 / 🟡 / 🔴
 
-#### Diagrama
+#### Diagram
 
-Em `essencial`: lista textual no formato `EntidadeA --1:N--> EntidadeB`.
+In `essential`: text list in format `EntityA --1:N--> EntityB`.
 
-Em `completo` e `detalhado`: bloco Mermaid `erDiagram` ou `classDiagram` enxuto, só com as entidades centrais identificadas. Sem atributos detalhados (isso é do Architect).
+In `complete` and `detailed`: a concise Mermaid `erDiagram` or `classDiagram` block, only with the identified core entities. No detailed attributes (that is the Architect's job).
 
-### 3. Decisões fundadoras
+### 3. Founding decisions
 
-Decisões fundadoras são as 3 a 7 escolhas estruturantes que moldam o sistema inteiro. Mexer em qualquer uma delas reescreveria boa parte do código. **Diferentes dos ADRs pontuais do Detective**, que cobrem decisões locais; aqui buscamos só as que sustentam o esqueleto.
+Founding decisions are the 3 to 7 structural choices that shape the entire system. Changing any of them would rewrite most of the code. **Different from the Detective's point-in-time ADRs**, which cover local decisions; here we seek only those that support the skeleton.
 
-Fontes para inferir:
+Sources to infer from:
 
-- **Stack escolhida** (linguagem, framework, runtime), do `surface.json`. A escolha em si é uma decisão fundadora.
-- **Padrão arquitetural aparente** pela topologia de pastas: monolito MVC, microsserviços, hexagonal, layered, event-driven, modular monolith.
-- **Banco de dados** (relacional vs documento vs híbrido), também do `surface.json`.
-- **`git log` dos primeiros commits** (1 a 50 primeiros), eles costumam revelar a intenção original. Use `git log --reverse --max-count=50 --pretty=format:'%h %s'`.
-- **Grandes refactors no histórico** (commits com mais de 1000 linhas alteradas). Use `git log --shortstat` filtrando por delta grande. Eles revelam decisões que foram corrigidas.
-- **Comentários de cabeçalho** em arquivos centrais (`main.*`, `app.*`, `index.*`, `bootstrap.*`).
-- **Configurações estruturantes** (Dockerfile, docker-compose, k8s manifests, lambda configs).
+- **Chosen stack** (language, framework, runtime), from `surface.json`. The choice itself is a founding decision.
+- **Apparent architectural pattern** from folder topology: MVC monolith, microservices, hexagonal, layered, event-driven, modular monolith.
+- **Database** (relational vs document vs hybrid), also from `surface.json`.
+- **`git log` of the first commits** (first 1 to 50), they usually reveal the original intent. Use `git log --reverse --max-count=50 --pretty=format:'%h %s'`.
+- **Major refactors in history** (commits with more than 1000 lines changed). Use `git log --shortstat` filtering by large delta. They reveal decisions that were corrected.
+- **Header comments** in central files (`main.*`, `app.*`, `index.*`, `bootstrap.*`).
+- **Structural configurations** (Dockerfile, docker-compose, k8s manifests, lambda configs).
 
-Para cada decisão fundadora, registre:
+For each founding decision, record:
 
-- **Decisão** (frase imperativa: "usar PostgreSQL", "monolito modular", "REST sobre GraphQL", "JWT stateless")
-- **Evidência** (caminho ou commit que comprova)
-- **Implicação** (o que essa decisão obriga ou impede no resto do sistema)
-- **Confiança** 🟢 / 🟡 / 🔴
+- **Decision** (imperative sentence: "use PostgreSQL", "modular monolith", "REST over GraphQL", "stateless JWT")
+- **Evidence** (path or commit that proves it)
+- **Implication** (what this decision mandates or prevents in the rest of the system)
+- **Confidence** 🟢 / 🟡 / 🔴
 
-Se a evidência for git log, cite o hash curto. Se for arquivo, cite o caminho relativo.
+If the evidence is git log, cite the short hash. If it is a file, cite the relative path.
 
-### 4. Lacunas identificadas
+### 4. Identified gaps
 
-Se houver pontos onde nada do material disponível dá sinal claro, registre como 🔴 LACUNA com pergunta sugerida ao humano. Não force conclusão.
+If there are points where none of the available material gives a clear signal, record them as 🔴 GAP with a suggested question for the human. Do not force a conclusion.
 
-## Saída
+## Output
 
-Único arquivo: `<output_folder>/soul.md`.
+Single file: `<output_folder>/soul.md`.
 
-Estrutura sugerida (adapte ao `doc_language`):
+Suggested structure (adapt to `doc_language`):
 
 ```markdown
-# Alma do Sistema
+# System Soul
 
-> Síntese executiva do projeto, gerada por reversa-extract-soul em <data>.
-> Base: surface.json + amostragem leve de domínio + git log.
+> Executive synthesis of the project, generated by reversa-extract-soul on <date>.
+> Base: surface.json + light domain sampling + git log.
 
-## 1. Propósito
+## 1. Purpose
 
-[Parágrafo único, máximo 8 linhas, com confiança por afirmação]
+[Single paragraph, max 8 lines, with confidence per assertion]
 
-## 2. Entidades centrais
+## 2. Core entities
 
-[Lista de 5 a 10 entidades + diagrama conforme doc_level]
+[List of 5 to 10 entities + diagram according to doc_level]
 
-## 3. Decisões fundadoras
+## 3. Founding decisions
 
-### D1. <decisão>
-- **Evidência:** <caminho ou commit>
-- **Implicação:** <o que isso obriga no resto do sistema>
-- **Confiança:** 🟢 / 🟡 / 🔴
+### D1. <decision>
+- **Evidence:** <path or commit>
+- **Implication:** <what this mandates in the rest of the system>
+- **Confidence:** 🟢 / 🟡 / 🔴
 
-[repetir para cada decisão]
+[repeat for each decision]
 
-## 4. Lacunas
+## 4. Gaps
 
-[Se houver, listar 🔴 com pergunta sugerida]
+[If any, list 🔴 with suggested question]
 
-## 5. Como ler esse documento
+## 5. How to read this document
 
-Esse `soul.md` é uma síntese, não substitui:
-- `inventory.md` (Scout) para mapeamento de superfície
-- `code-analysis.md` (Archaeologist) para detalhes módulo a módulo
-- `domain.md` (Detective) para regras de negócio implícitas
-- `architecture.md` (Architect) para diagramas C4 e ERD completo
+This `soul.md` is a synthesis, it does not replace:
+- `inventory.md` (Scout) for surface mapping
+- `code-analysis.md` (Archaeologist) for module-by-module details
+- `domain.md` (Detective) for implicit business rules
+- `architecture.md` (Architect) for C4 and full ERD diagrams
 ```
 
-## Layout de saída (transversal)
+## Output layout (cross-cutting)
 
-`soul.md` fica na raiz de `<output_folder>/`, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
+`soul.md` sits at the root of `<output_folder>/`, outside unit folders (feature folders). Do not apply the `<unit>/requirements.md|design.md|tasks.md` structure here — that belongs to the Writer.
 
-Mesmo com `doc_language` em português ou espanhol, o nome do arquivo permanece `soul.md`. Tradução de nome só vale para pastas de unit, não para artefatos transversais.
+Even with `doc_language` set to Portuguese or Spanish, the filename remains `soul.md`. Name translation only applies to unit folders, not to cross-cutting artifacts.
 
-## Escala de confiança
+## Confidence scale
 
-Marque toda afirmação com 🟢 (CONFIRMADO no código ou git), 🟡 (INFERIDO de padrões) ou 🔴 (LACUNA). Sem exceções. A maior parte do conteúdo do `soul.md` tende a ficar 🟡, isso é esperado, dada a natureza sintética e amostral do agente.
+Mark every assertion with 🟢 (CONFIRMED in code or git), 🟡 (INFERRED from patterns), or 🔴 (GAP). No exceptions. The majority of `soul.md` content tends to be 🟡, which is expected given the synthetic and sampling nature of the agent.
 
-## Encerramento
+## Closing
 
-Após salvar `soul.md`, apresente ao usuário um resumo curto:
+After saving `soul.md`, present the user with a short summary:
 
-> "[Nome], a alma está em `<output_folder>/soul.md`.
+> "[Name], the soul is at `<output_folder>/soul.md`.
 >
-> Resumo:
-> - Propósito: [1 frase]
-> - Entidades centrais identificadas: [N]
-> - Decisões fundadoras: [N]
-> - Lacunas a validar: [N]
+> Summary:
+> - Purpose: [1 sentence]
+> - Core entities identified: [N]
+> - Founding decisions: [N]
+> - Gaps to validate: [N]
 >
-> Próximo passo natural: rodar `/reversa-archaeologist` para escavar módulo a módulo, ou `/reversa` para o pipeline completo.
+> Natural next step: run `/reversa-archaeologist` to excavate module by module, or `/reversa` for the full pipeline.
 >
-> Digite **CONTINUAR** para prosseguir com a próxima ação que desejar."
+> Type **CONTINUE** to proceed with the next action you wish."
 
-## Regras absolutas
+## Absolute rules
 
-- Nunca apague, mova ou modifique arquivos pré-existentes do projeto legado.
-- Nunca sobrescreva `soul.md` existente sem confirmação do usuário.
-- Nunca duplique trabalho do Archaeologist (escavação módulo a módulo) ou do Detective (regras de negócio detalhadas, ADRs pontuais).
-- Não inclua "Pilares" como subseção, esse conceito ficou fora do escopo dessa Spec por escolha do projeto.
-- Não inclua varredura de credenciais nem listagem de segredos. Se identificar pista de credencial em texto, ignore e não cite.
+- Never delete, move, or modify pre-existing files in the legacy project.
+- Never overwrite an existing `soul.md` without user confirmation.
+- Never duplicate the Archaeologist's work (module-by-module excavation) or the Detective's work (detailed business rules, point-in-time ADRs).
+- Do not include "Pillars" as a subsection; this concept was excluded from this Spec's scope by project choice.
+- Do not include credential scanning or secret listing. If you identify a credential clue in text, ignore it and do not cite it.

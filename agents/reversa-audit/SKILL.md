@@ -1,8 +1,8 @@
 ---
 name: reversa-audit
-description: Auditoria leitora estrita. Compara requirements, roadmap e actions, reporta inconsistências com severidade CRITICAL, HIGH, MEDIUM, LOW. JAMAIS altera os artefatos analisados. Use quando o usuário digitar "/reversa-audit", "reversa-audit" ou pedir para fazer cross-check entre os três documentos da feature ativa. Etapa opcional do ciclo forward.
+description: Strict read-only auditor. Compares requirements, roadmap, and actions, reporting inconsistencies with severity levels CRITICAL, HIGH, MEDIUM, LOW. NEVER modifies the analyzed artifacts. Use when the user types "/reversa-audit", "reversa-audit", or requests a cross-check among the three documents of the active feature. Optional step in the forward cycle.
 license: MIT
-compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
+compatibility: Claude Code, Codex, Cursor, Gemini CLI, and other agents compatible with Agent Skills.
 metadata:
   author: sandeco
   version: "1.0.0"
@@ -11,87 +11,87 @@ metadata:
   stage: audit
 ---
 
-Você é o auditor. Esse skill é estritamente leitor. Sua missão é encontrar contradições e lacunas entre `requirements.md`, `roadmap.md` e `actions.md`, e produzir um relatório para o humano resolver.
+You are the auditor. This skill is strictly read-only. Your mission is to find contradictions and gaps between `requirements.md`, `roadmap.md`, and `actions.md`, and produce a report for the human to resolve.
 
-## Regra inegociável
+## Non-negotiable rule
 
-Esse skill NUNCA altera `requirements.md`, `roadmap.md`, `actions.md`, `data-delta.md`, `interfaces/`, `investigation.md` ou `onboarding.md`. Em hipótese alguma, mesmo que o usuário peça. Se o usuário pedir correção, oriente-o a usar `/reversa-clarify` ou edição manual.
+This skill NEVER modifies `requirements.md`, `roadmap.md`, `actions.md`, `data-delta.md`, `interfaces/`, `investigation.md`, or `onboarding.md`. Under no circumstances, even if the user requests it. If the user asks for a fix, direct them to use `/reversa-clarify` or manual editing.
 
-A única escrita permitida é `feature-dir/audit/cross-check.md`.
+The only allowed write operation is to `feature-dir/audit/cross-check.md`.
 
-## Antes de começar
+## Before starting
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Read `.reversa/state.json` to resolve `output_folder` and `forward_folder`
+2. Use the actual values wherever the text mentions `_reversa_sdd/` or `_reversa_forward/`
 
-## Verificações Iniciais
+## Initial checks
 
-1. Leia `.reversa/active-requirements.json`
-   1.1. Se ausente, aborte
-2. Verifique existência dos três artefatos: `requirements.md`, `roadmap.md`, `actions.md`
-   2.1. Se algum estiver ausente, aborte com mensagem listando o que falta e qual skill gera
-3. Aplique `before-audit` da forma padrão
+1. Read `.reversa/active-requirements.json`
+   1.1. If absent, abort
+2. Verify existence of the three artifacts: `requirements.md`, `roadmap.md`, `actions.md`
+   2.1. If any is missing, abort with a message listing what is missing and which skill generates it
+3. Apply `before-audit` in the standard way
 
-## Eixos de comparação
+## Comparison axes
 
-Verifique cada par de artefatos quanto a:
+Check each pair of artifacts for:
 
-1. Cobertura
-   1.1. Todo requisito funcional virou pelo menos uma decisão no roadmap
-   1.2. Toda decisão no roadmap virou pelo menos uma ação no actions
-   1.3. Todo cenário Gherkin do requirements está coberto por alguma ação ou decisão
-2. Consistência
-   2.1. Termos usam o mesmo nome ao longo dos três documentos (não apareça "fatura" em um e "boleto" em outro)
-   2.2. Identificadores citados existem (RF-12 referenciado no roadmap precisa existir no requirements)
-   2.3. Contratos descritos em `interfaces/` aparecem no roadmap
-3. Coerência com o legado
-   3.1. Decisões do roadmap não contradizem regras 🟢 do `_reversa_sdd/domain.md`
-   3.2. Componentes do `_reversa_sdd/architecture.md` citados existem mesmo
-4. Sanidade do actions
-   4.1. Dependências apontam para IDs existentes
-   4.2. Tarefas marcadas `[//]` não compartilham arquivo alvo
-   4.3. Não há ciclo de dependência
+1. Coverage
+   1.1. Every functional requirement became at least one decision in the roadmap
+   1.2. Every decision in the roadmap became at least one action in actions
+   1.3. Every Gherkin scenario in requirements is covered by some action or decision
+2. Consistency
+   2.1. Terms use the same name across all three documents (e.g., do not see "invoice" in one and "bill" in another)
+   2.2. Referenced identifiers exist (RF-12 referenced in the roadmap must exist in requirements)
+   2.3. Contracts described in `interfaces/` appear in the roadmap
+3. Coherence with the legacy system
+   3.1. Roadmap decisions do not contradict 🟢 rules from `_reversa_sdd/domain.md`
+   3.2. Components cited from `_reversa_sdd/architecture.md` actually exist
+4. Sanity of actions
+   4.1. Dependencies point to existing IDs
+   4.2. Tasks marked `[//]` do not share the same target file
+   4.3. No dependency cycle exists
 
-## Severidade
+## Severity
 
-| Severidade | Quando aplicar |
+| Severity | When to apply |
 |------------|----------------|
-| CRITICAL | Conflito direto com regra 🟢 do legado, contrato externo quebrado, ciclo de dependência |
-| HIGH | Requisito sem cobertura no roadmap, decisão sem ação correspondente, identificador fantasma |
-| MEDIUM | Inconsistência terminológica entre dois documentos, dependência apontando para fora da lista |
-| LOW | Cosmético, ortografia em ID, paralelismo subutilizado |
+| CRITICAL | Direct conflict with a 🟢 rule from the legacy system, broken external contract, dependency cycle |
+| HIGH | Requirement without coverage in the roadmap, decision without a corresponding action, phantom identifier |
+| MEDIUM | Terminological inconsistency between two documents, dependency pointing outside the list |
+| LOW | Cosmetic, spelling in ID, underutilized parallelism |
 
-## Construção do relatório
+## Building the report
 
-Grave em `feature-dir/audit/cross-check.md`:
+Write to `feature-dir/audit/cross-check.md`:
 
-1. Cabeçalho com data, identificador da feature e link para os três artefatos analisados
-2. Resumo: contagem de findings por severidade
-3. Tabela `ID | Severidade | Eixo | Descrição | Onde está`
-4. Para cada finding CRITICAL ou HIGH, parágrafo explicando o impacto e sugestão de skill para o humano corrigir (NUNCA prometa que esse skill faz a correção, apenas indique a direção)
-5. Lista de itens verificados que passaram, agrupados por eixo (para o humano enxergar o que está OK)
+1. Header with date, feature identifier, and links to the three analyzed artifacts
+2. Summary: count of findings by severity
+3. Table `ID | Severity | Axis | Description | Location`
+4. For each CRITICAL or HIGH finding, a paragraph explaining the impact and a suggested skill for the human to fix (NEVER promise that this skill performs the fix, only indicate the direction)
+5. List of checked items that passed, grouped by axis (so the human can see what is OK)
 
-Use IDs no formato `A001`, `A002`, ... estáveis dentro do relatório, mas NÃO compartilhados com IDs de outros documentos.
+Use IDs in the format `A001`, `A002`, ... stable within the report, but NOT shared with IDs from other documents.
 
-## Persistência
+## Persistence
 
-- Crie `feature-dir/audit/` se não existir
-- Grave `cross-check.md` com escrita atômica
-- Sempre rewrite completo, jamais append
+- Create `feature-dir/audit/` if it does not exist
+- Write `cross-check.md` with atomic write
+- Always full rewrite, never append
 
-## Ganchos Pós-execução
+## Post-execution hooks
 
-Aplique `after-audit` da forma padrão.
+Apply `after-audit` in the standard way.
 
-## Relatório final ao usuário
+## Final report to the user
 
-1. Caminho absoluto do `cross-check.md`
-2. Contagem de findings por severidade (CRITICAL, HIGH, MEDIUM, LOW)
-3. Aviso explícito: nenhum dos três artefatos foi alterado
-4. Sugestão de próximo passo:
-   4.1. Se houver CRITICAL ou HIGH, sugerir revisão manual antes de seguir
-   4.2. Caso contrário, sugerir `/reversa-coding`
+1. Absolute path of `cross-check.md`
+2. Count of findings by severity (CRITICAL, HIGH, MEDIUM, LOW)
+3. Explicit notice: none of the three artifacts was modified
+4. Suggested next step:
+   4.1. If there are CRITICAL or HIGH findings, suggest manual review before proceeding
+   4.2. Otherwise, suggest `/reversa-coding`
 
-Termine com:
+End with:
 
-> Digite **CONTINUAR** para prosseguir conforme a sugestão acima.
+> Type **CONTINUAR** to proceed as suggested above.

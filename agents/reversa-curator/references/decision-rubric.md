@@ -1,52 +1,52 @@
-# Decision Rubric do Curator
+# Decision Rubric for the Curator
 
-Tabela de referência rápida para aplicar a política de decisão.
+Quick reference table for applying the decision policy.
 
-## Tabela de decisão
+## Decision Table
 
-| Sinal observado na regra | Decisão default | Notas |
+| Signal observed in the rule | Default decision | Notes |
 |---|---|---|
-| 🟢 CONFIRMADA, compatível com paradigma alvo, sem pain point | MIGRAR | sem ressalva |
-| 🟡 INFERIDA, compatível com paradigma alvo | MIGRAR | adicionar nota "validar no agente de codificação" |
-| 🔴 LACUNA | DECISÃO HUMANA | recomendação opcional |
-| ⚠️ AMBÍGUA | DECISÃO HUMANA | obrigatório listar interpretações |
-| Regra citada como pain point | DECISÃO HUMANA | recomendação default: substituir por X no novo |
-| Regra incompatível com brief (fora de escopo) | DESCARTAR | justificativa: "fora de escopo declarado em migration_brief.md" |
-| Regra incompatível com brief (técnica) | DESCARTAR | justificativa: "restrição técnica do brief impede" |
-| Regra é mecanismo do paradigma legado, paradigma mudou | DESCARTAR (vinculado a paradigma) | indicar substituto no paradigma alvo |
-| Regra é mecanismo do paradigma legado, paradigma é o mesmo | MIGRAR | sem ressalva |
+| 🟢 CONFIRMED, compatible with target paradigm, no pain point | MIGRATE | no caveats |
+| 🟡 INFERRed, compatible with target paradigm | MIGRATE | add note "validate with coding agent" |
+| 🔴 GAP | HUMAN DECISION | optional recommendation |
+| ⚠️ AMBIGUOUS | HUMAN DECISION | must list interpretations |
+| Rule cited as pain point | HUMAN DECISION | default recommendation: replace with X in the new |
+| Rule incompatible with brief (out of scope) | DISCARD | justification: "out of declared scope in migration_brief.md" |
+| Rule incompatible with brief (technical) | DISCARD | justification: "brief technical constraint prevents" |
+| Rule is legacy paradigm mechanism, paradigm changed | DISCARD (tied to paradigm) | indicate substitute in target paradigm |
+| Rule is legacy paradigm mechanism, paradigm is the same | MIGRATE | no caveats |
 
-## Lista de mecanismos típicos do paradigma (descartáveis quando paradigma muda)
+## List of typical paradigm mechanisms (discardable when paradigm changes)
 
 ### Procedural → event-driven
-- Lock pessimista (`SELECT ... FOR UPDATE`)
-- Transação ACID inteira em torno do fluxo
-- Resposta síncrona ao usuário com side effect inline
-- Retry implementado como `for` no controller
+- Pessimistic locking (`SELECT ... FOR UPDATE`)
+- Full ACID transaction around the flow
+- Synchronous response to user with inline side effect
+- Retry implemented as `for` loop in controller
 
-### OO clássico → OO com DI
-- Active Record que mistura persistência e domínio
-- Herança usada para reuso de comportamento (preferir composição)
-- Singleton manual (preferir scoped DI)
+### Classic OO → OO with DI
+- Active Record mixing persistence and domain
+- Inheritance used for behavior reuse (prefer composition)
+- Manual singleton (prefer scoped DI)
 
-### OO clássico → funcional
-- Encapsulamento mutável (preferir tipos imutáveis)
-- Métodos void com side effect (preferir retorno + função pura)
+### Classic OO → functional
+- Mutable encapsulation (prefer immutable types)
+- Void methods with side effect (prefer return + pure function)
 
-### OO com DI → event-driven
-- Comandos síncronos com retorno imediato (preferir evento + ack)
-- Orquestração centralizada (preferir coreografia)
-- 2PC / transação distribuída (preferir saga)
+### OO with DI → event-driven
+- Synchronous commands with immediate return (prefer event + ack)
+- Centralized orchestration (prefer choreography)
+- 2PC / distributed transaction (prefer saga)
 
-### Síncrono → assíncrono em geral
-- Timeout configurado em controller (vai para retry policy do consumer)
-- Tratamento de erro como exceção propagada (vira DLQ)
+### Synchronous → asynchronous in general
+- Timeout configured in controller (moves to consumer's retry policy)
+- Error handling as propagated exception (becomes DLQ)
 
-## O que NUNCA descartar por paradigma
+## What to NEVER discard based on paradigm
 
-- Regras de negócio puras (cálculos, condições, derivações).
-- Regras regulatórias.
-- Invariantes de domínio.
-- Direitos / permissões.
+- Pure business rules (calculations, conditions, derivations).
+- Regulatory rules.
+- Domain invariants.
+- Rights / permissions.
 
-Essas regras mudam de **lugar** no paradigma novo, mas não somem.
+These rules change **location** in the new paradigm, but they don't disappear.

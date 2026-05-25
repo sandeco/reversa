@@ -1,22 +1,22 @@
-# Padrões Highcharts.js
+# Highcharts.js Patterns
 
-Referência de padrões de código testados para gerar gráficos Highcharts profissionais.
+Reference of proven code patterns for generating professional Highcharts charts.
 
 ---
 
-## Template HTML Completo
+## Complete HTML Template
 
 ```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Título do Gráfico]</title>
+    <title>[Chart Title]</title>
     
-    <!-- Highcharts Core (obrigatório) -->
+    <!-- Highcharts Core (required) -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <!-- Módulos extras conforme necessidade (ver tabela no SKILL.md) -->
+    <!-- Extra modules as needed (see table in SKILL.md) -->
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -36,7 +36,7 @@ Referência de padrões de código testados para gerar gráficos Highcharts prof
             box-shadow: 0 2px 20px rgba(0,0,0,0.08);
             padding: 10px;
         }
-        /* Para múltiplos gráficos (dashboard) */
+        /* For multiple charts (dashboard) */
         .chart-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -56,68 +56,68 @@ Referência de padrões de código testados para gerar gráficos Highcharts prof
     <div id="container"></div>
     <script>
         Highcharts.chart('container', {
-            // Opções do gráfico aqui
+            // Chart options here
         });
     </script>
 </body>
 </html>
 ```
 
-## Opções Globais Recomendadas
+## Recommended Global Options
 
-Aplicar antes de criar qualquer gráfico:
+Apply before creating any chart:
 
 ```javascript
 Highcharts.setOptions({
     lang: {
-        months: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
-                 'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-        shortMonths: ['Jan','Fev','Mar','Abr','Mai','Jun',
-                      'Jul','Ago','Set','Out','Nov','Dez'],
-        weekdays: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-        decimalPoint: ',',
-        thousandsSep: '.',
-        loading: 'Carregando...',
-        noData: 'Sem dados para exibir',
-        downloadPNG: 'Baixar como PNG',
-        downloadJPEG: 'Baixar como JPEG',
-        downloadPDF: 'Baixar como PDF',
-        downloadSVG: 'Baixar como SVG',
-        downloadCSV: 'Baixar como CSV',
-        downloadXLS: 'Baixar como XLS',
-        viewData: 'Ver tabela de dados',
-        printChart: 'Imprimir gráfico',
-        viewFullscreen: 'Tela cheia',
-        exitFullscreen: 'Sair da tela cheia',
-        contextButtonTitle: 'Menu do gráfico'
+        months: ['January','February','March','April','May','June',
+                 'July','August','September','October','November','December'],
+        shortMonths: ['Jan','Feb','Mar','Apr','May','Jun',
+                      'Jul','Aug','Sep','Oct','Nov','Dec'],
+        weekdays: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        decimalPoint: '.',
+        thousandsSep: ',',
+        loading: 'Loading...',
+        noData: 'No data to display',
+        downloadPNG: 'Download as PNG',
+        downloadJPEG: 'Download as JPEG',
+        downloadPDF: 'Download as PDF',
+        downloadSVG: 'Download as SVG',
+        downloadCSV: 'Download as CSV',
+        downloadXLS: 'Download as XLS',
+        viewData: 'View data table',
+        printChart: 'Print chart',
+        viewFullscreen: 'Fullscreen',
+        exitFullscreen: 'Exit fullscreen',
+        contextButtonTitle: 'Chart menu'
     }
 });
 ```
 
-## Paletas de Cores Profissionais
+## Professional Color Palettes
 
 ```javascript
-// Paleta padrão Highcharts (boa para maioria dos casos)
-// É a padrão, não precisa definir
+// Default Highcharts palette (good for most cases)
+// It is the default, no need to define it
 
-// Paleta Corporate Blue
+// Corporate Blue palette
 colors: ['#2f7ed8','#0d233a','#8bbc21','#910000','#1aadce',
          '#492970','#f28f43','#77a1e5','#c42525','#a6c96a']
 
-// Paleta Vibrante Moderna
+// Modern Vibrant palette
 colors: ['#6366f1','#8b5cf6','#ec4899','#f43f5e','#f97316',
          '#eab308','#22c55e','#06b6d4','#3b82f6','#a855f7']
 
-// Paleta Dark Mode
+// Dark Mode palette
 colors: ['#7cb5ec','#90ed7d','#f7a35c','#8085e9','#f15c80',
          '#e4d354','#2b908f','#f45b5b','#91e8e1','#b2e87e']
 
-// Paleta Earth Tones
+// Earth Tones palette
 colors: ['#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf',
          '#d62728','#1f77b4','#ff7f0e','#2ca02c','#9467bd']
 ```
 
-## Tema Dark Mode Completo
+## Full Dark Mode Theme
 
 ```javascript
 const darkTheme = {
@@ -156,38 +156,38 @@ const darkTheme = {
     credits: { style: { color: '#555' } }
 };
 
-// Aplicar tema globalmente
+// Apply theme globally
 Highcharts.setOptions(darkTheme);
 ```
 
-## Tooltip Formatado (Padrões Úteis)
+## Formatted Tooltip (Useful Patterns)
 
 ```javascript
-// Tooltip com moeda brasileira
+// Tooltip with Brazilian currency
 tooltip: {
     pointFormat: '{series.name}: <b>R$ {point.y:,.2f}</b><br/>',
     shared: true,
     useHTML: true
 }
 
-// Tooltip com percentual
+// Tooltip with percentage
 tooltip: {
     pointFormat: '{series.name}: <b>{point.y:.1f}%</b><br/>'
 }
 
-// Tooltip customizado com HTML
+// Custom tooltip with HTML
 tooltip: {
     useHTML: true,
     formatter: function() {
         return `<div style="padding:8px">
             <b style="font-size:14px">${this.key}</b><br/>
             <span style="color:${this.color}">●</span>
-            ${this.series.name}: <b>${Highcharts.numberFormat(this.y, 0, ',', '.')}</b>
+            ${this.series.name}: <b>${Highcharts.numberFormat(this.y, 0, '.', ',')}</b>
         </div>`;
     }
 }
 
-// Tooltip compartilhado (múltiplas séries)
+// Shared tooltip (multiple series)
 tooltip: {
     shared: true,
     crosshairs: true,
@@ -196,20 +196,20 @@ tooltip: {
 }
 ```
 
-## Formatação de Eixos
+## Axis Formatting
 
 ```javascript
-// Eixo Y com moeda
+// Y axis with currency
 yAxis: {
-    title: { text: 'Receita' },
+    title: { text: 'Revenue' },
     labels: {
         formatter: function() {
-            return 'R$ ' + Highcharts.numberFormat(this.value, 0, ',', '.');
+            return 'R$ ' + Highcharts.numberFormat(this.value, 0, '.', ',');
         }
     }
 }
 
-// Eixo X temporal
+// Time-based X axis
 xAxis: {
     type: 'datetime',
     dateTimeLabelFormats: {
@@ -218,17 +218,17 @@ xAxis: {
     }
 }
 
-// Eixo com categorias rotacionadas
+// Axis with rotated categories
 xAxis: {
     categories: [...],
     labels: { rotation: -45, style: { fontSize: '11px' } }
 }
 ```
 
-## Animações
+## Animations
 
 ```javascript
-// Animação de entrada
+// Entry animation
 plotOptions: {
     series: {
         animation: {
@@ -238,17 +238,17 @@ plotOptions: {
     }
 }
 
-// Animação staggered (cada série com delay)
+// Staggered animation (each series delayed)
 plotOptions: {
     series: {
         animation: { duration: 1000 },
-        // cada ponto aparece com delay
+        // each point appears with delay
         dataSorting: { enabled: true }
     }
 }
 ```
 
-## Responsividade
+## Responsiveness
 
 ```javascript
 responsive: {
@@ -263,7 +263,7 @@ responsive: {
 }
 ```
 
-## Dashboard com Múltiplos Gráficos
+## Dashboard with Multiple Charts
 
 ```html
 <div class="chart-grid">
@@ -273,39 +273,39 @@ responsive: {
     <div class="chart-card" id="chart4"></div>
 </div>
 <script>
-    // KPI cards + gráficos em grid
-    Highcharts.chart('chart1', { /* opções */ });
-    Highcharts.chart('chart2', { /* opções */ });
-    Highcharts.chart('chart3', { /* opções */ });
-    Highcharts.chart('chart4', { /* opções */ });
+    // KPI cards + charts in grid
+    Highcharts.chart('chart1', { /* options */ });
+    Highcharts.chart('chart2', { /* options */ });
+    Highcharts.chart('chart3', { /* options */ });
+    Highcharts.chart('chart4', { /* options */ });
 </script>
 ```
 
-## Dados Grandes (Boost Module)
+## Large Data (Boost Module)
 
 ```javascript
-// Para séries com >10.000 pontos
-// Incluir: <script src="https://code.highcharts.com/modules/boost.js"></script>
+// For series with >10,000 points
+// Include: <script src="https://code.highcharts.com/modules/boost.js"></script>
 {
     boost: { useGPUTranslations: true },
     series: [{
-        boostThreshold: 5000, // ativar boost acima de 5k pontos
+        boostThreshold: 5000, // enable boost above 5k points
         data: massiveDataArray
     }]
 }
 ```
 
-## Eventos Úteis
+## Useful Events
 
 ```javascript
 chart: {
     events: {
         load: function() {
-            // Executar após gráfico renderizar
-            console.log('Gráfico carregado');
+            // Run after chart renders
+            console.log('Chart loaded');
         },
         redraw: function() {
-            // Após resize ou update
+            // After resize or update
         }
     }
 },
@@ -327,14 +327,14 @@ plotOptions: {
 }
 ```
 
-## Anotações
+## Annotations
 
 ```javascript
-// Requer: modules/annotations.js
+// Requires: modules/annotations.js
 annotations: [{
     labels: [{
         point: { x: 3, y: 150, xAxis: 0, yAxis: 0 },
-        text: 'Ponto importante!',
+        text: 'Important point!',
         backgroundColor: 'rgba(255,255,255,0.9)',
         borderColor: '#666',
         shape: 'callout'

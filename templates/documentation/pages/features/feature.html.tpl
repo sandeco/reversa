@@ -1,16 +1,16 @@
 <!--
   Template: features/<spec-id>.html
-  Produtor: reversa-docs-storyteller
+  Producer: reversa-docs-storyteller
   Page ID: feature-<id>
-  Categoria reversa: diagram
-  Dados consumidos: _reversa_sdd/<spec>/requirements.md + design.md + tasks.md
+  Reversa category: diagram
+  Data consumed: _reversa_sdd/<spec>/requirements.md + design.md + tasks.md
 
-  Padrão: "How a Feature Works" (TL;DR + accordion + snippets em abas).
+  Pattern: "How a Feature Works" (TL;DR + accordion + snippets in tabs).
 
-  Marcadores:
-  - FEATURE_TLDR: 2 a 4 linhas resumindo o que a feature faz
-  - FEATURE_ACCORDION: seções colapsáveis (Requisitos, Design, Tasks, Code Snippets)
-  - FEATURE_TABS: abas com trechos de código relevantes
+  Markers:
+  - FEATURE_TLDR: 2 to 4 lines summarizing what the feature does
+  - FEATURE_ACCORDION: collapsible sections (Requirements, Design, Tasks, Code Snippets)
+  - FEATURE_TABS: tabs with relevant code excerpts
 -->
 
 <!-- PAYLOAD_START -->
@@ -23,7 +23,7 @@
     <section class="reversa-doc-feature-accordion">
         <!-- FEATURE_ACCORDION -->
         <details open>
-            <summary>Requisitos</summary>
+            <summary>Requirements</summary>
             <div data-section="requirements"><!-- FEATURE_REQUIREMENTS --></div>
         </details>
         <details>
@@ -37,7 +37,7 @@
     </section>
 
     <section class="reversa-doc-feature-tabs" hidden>
-        <h2>Snippets relevantes</h2>
+        <h2>Relevant snippets</h2>
         <!-- FEATURE_TABS -->
     </section>
 </article>

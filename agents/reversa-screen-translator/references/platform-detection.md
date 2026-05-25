@@ -1,73 +1,73 @@
 # Platform Detection
 
-Heurísticas que o `reversa-screen-translator` usa para classificar a plataforma origem do legado a partir do conteúdo de `_reversa_sdd/inventory.md` e do código fonte. Use junto com `references/adapter-pairs.md` para escolher o adapter.
+Heuristics that `reversa-screen-translator` uses to classify the source platform of legacy code from the content of `_reversa_sdd/inventory.md` and the source code itself. Use together with `references/adapter-pairs.md` to choose the adapter.
 
-A escala de confiança aplicada por classificação:
+The confidence scale applied by classification:
 
-- 🟢 **CONFIRMADO**: pelo menos uma assinatura forte (header, namespace, marcador único) está presente.
-- 🟡 **INFERIDO**: extensão e padrão geral batem, mas não há assinatura única.
-- 🔴 **LACUNA**: artefato de código fonte ausente; classifica só pelo `inventory.md`.
-- ⚠️ **AMBÍGUO**: duas plataformas plausíveis empatadas (ex: ASP clássico vs ASP.NET WebForms em projetos antigos).
+- 🟢 **CONFIRMED**: at least one strong signature (header, namespace, unique marker) is present.
+- 🟡 **INFERRED**: extension and general pattern match, but no unique signature.
+- 🔴 **GAP**: source code artifact missing; classification based only on `inventory.md`.
+- ⚠️ **AMBIGUOUS**: two plausible platforms tied (e.g., Classic ASP vs ASP.NET WebForms in older projects).
 
-## Tabela de assinaturas
+## Signature Table
 
-| Slug origem | Extensão típica | Assinatura forte | Assinatura fraca |
+| Source Slug | Typical Extension | Strong Signature | Weak Signature |
 |---|---|---|---|
-| `cobol-ansi-tui` | `.cob`, `.cbl`, `.cpy` | `PROCEDURE DIVISION.` + `DISPLAY`/`ACCEPT` + sequências `\x1B[`, box-drawing Unicode (`╔ ╗ ┌ ┐`) | só `PROCEDURE DIVISION` (sem ANSI = COBOL batch) |
-| `cobol-screen-section` | `.cob`, `.cbl` | `SCREEN SECTION` + atributos `LINE`, `COLUMN`, `FOREGROUND-COLOR` | `SCREEN SECTION` sem detalhes |
-| `ncurses-c` | `.c`, `.h` | `#include <ncurses.h>` ou `<curses.h>` + `WINDOW *`, `wprintw`, `mvwaddstr` | `printf` + `\033[` (TUI artesanal) |
-| `delphi-vcl` | `.pas`, `.dfm`, `.dpr` | `unit `, `interface`, `TForm`, `TPanel`, `TButton` em `.dfm` | `.pas` puro sem `.dfm` (provável CLI) |
-| `delphi-firemonkey` | `.pas`, `.fmx` | `TForm` em arquivo `.fmx` (FireMonkey) | só `.pas` |
-| `vb6` | `.frm`, `.bas`, `.cls`, `.vbp` | `VERSION 5.00` no header, `Begin VB.Form`, `Begin VB.CommandButton` | `.bas` puro (módulo sem UI) |
-| `vbnet-winforms` | `.vb` + `Designer.vb` | `Inherits System.Windows.Forms.Form` | só `Module ... Sub Main` (CLI) |
-| `csharp-winforms` | `.cs`, `.designer.cs` | `using System.Windows.Forms;` + `partial class ... : Form` | só `using System;` |
-| `csharp-wpf` | `.xaml`, `.cs` | `xmlns="http://schemas.microsoft.com/winfx/..."` + `<Window>`, `<Grid>` | só `.cs` sem `.xaml` |
-| `win32-mfc` | `.cpp`, `.h`, `.rc` | `BEGIN_MESSAGE_MAP`, `CDialog`, `WinMain`, `IDD_*` em `.rc` | `WinMain` solto |
-| `win32-raw` | `.cpp`, `.h` | `WinMain` + `RegisterClass`, `CreateWindow`, `WM_*` mensagens | só `WinMain` |
-| `asp-classic` | `.asp`, `.inc` | `<%@ Language=VBScript %>` ou `<%@ Language=JScript %>` + `Response.Write` | `.asp` sem `<%@` |
-| `aspnet-webforms` | `.aspx`, `.aspx.cs`, `.aspx.vb` | `<%@ Page Language="C#"`, `runat="server"`, `<asp:` controls | só `.aspx` simples |
-| `jsp` | `.jsp`, `.jspf` | `<%@ page language="java" %>`, `<jsp:`, `<%! %>` | `.jsp` com só HTML |
-| `php-server-rendered` | `.php` | `<?php ... ?>` + HTML inline + `mysql_*` ou `mysqli_*` | só `.php` em pasta `api/` (provavelmente API REST, não UI) |
-| `html-legacy-jquery` | `.html`, `.htm`, `.js` | `jQuery`/`$.ajax` + form submits server-side, sem framework SPA | HTML estático (sem JS dinâmico) |
-| `android-xml-java` | `res/layout/*.xml`, `*.java` | `<LinearLayout>`/`<RelativeLayout>`/`<ConstraintLayout>` + `Activity extends`, `setContentView(R.layout...)` | só Java sem `res/layout/` |
-| `android-xml-kotlin` | `res/layout/*.xml`, `*.kt` | mesmo acima + `Activity()` Kotlin + `setContentView(R.layout...)` | só Kotlin sem `res/layout/` |
-| `android-compose` | `*.kt` | `@Composable`, `setContent { ... }` | sem `setContent` |
-| `ios-xib-objc` | `.xib`, `.m`, `.h`, `.storyboard` | `UIViewController` + `*.xib` ou `*.storyboard` referenciados | só `*.m` sem XIB |
-| `ios-xib-swift` | `.xib`, `.swift`, `.storyboard` | `UIViewController` Swift + XIB/Storyboard | só `*.swift` sem XIB |
-| `ios-swiftui` | `*.swift` | `View` + `var body: some View`, `App` lifecycle | sem `var body` |
-| `flutter` | `*.dart`, `pubspec.yaml` | `import 'package:flutter/material.dart'` + `StatelessWidget`/`StatefulWidget` | sem `material.dart` |
-| `react-class` | `*.jsx`, `*.tsx` | `class ... extends React.Component` + `render()` | só `*.tsx` (provavelmente moderno) |
-| `react-hooks` | `*.jsx`, `*.tsx` | `function ... ({...}) { return <...>; }` + `useState`, `useEffect` | (não é legado, é alvo) |
+| `cobol-ansi-tui` | `.cob`, `.cbl`, `.cpy` | `PROCEDURE DIVISION.` + `DISPLAY`/`ACCEPT` + `\x1B[` sequences, box-drawing Unicode (`╔ ╗ ┌ ┐`) | only `PROCEDURE DIVISION` (no ANSI = COBOL batch) |
+| `cobol-screen-section` | `.cob`, `.cbl` | `SCREEN SECTION` + `LINE`, `COLUMN`, `FOREGROUND-COLOR` attributes | `SCREEN SECTION` without details |
+| `ncurses-c` | `.c`, `.h` | `#include <ncurses.h>` or `<curses.h>` + `WINDOW *`, `wprintw`, `mvwaddstr` | `printf` + `\033[` (hand-crafted TUI) |
+| `delphi-vcl` | `.pas`, `.dfm`, `.dpr` | `unit `, `interface`, `TForm`, `TPanel`, `TButton` in `.dfm` | plain `.pas` without `.dfm` (likely CLI) |
+| `delphi-firemonkey` | `.pas`, `.fmx` | `TForm` in `.fmx` file (FireMonkey) | only `.pas` |
+| `vb6` | `.frm`, `.bas`, `.cls`, `.vbp` | `VERSION 5.00` in header, `Begin VB.Form`, `Begin VB.CommandButton` | plain `.bas` (module without UI) |
+| `vbnet-winforms` | `.vb` + `Designer.vb` | `Inherits System.Windows.Forms.Form` | only `Module ... Sub Main` (CLI) |
+| `csharp-winforms` | `.cs`, `.designer.cs` | `using System.Windows.Forms;` + `partial class ... : Form` | only `using System;` |
+| `csharp-wpf` | `.xaml`, `.cs` | `xmlns="http://schemas.microsoft.com/winfx/..."` + `<Window>`, `<Grid>` | only `.cs` without `.xaml` |
+| `win32-mfc` | `.cpp`, `.h`, `.rc` | `BEGIN_MESSAGE_MAP`, `CDialog`, `WinMain`, `IDD_*` in `.rc` | standalone `WinMain` |
+| `win32-raw` | `.cpp`, `.h` | `WinMain` + `RegisterClass`, `CreateWindow`, `WM_*` messages | only `WinMain` |
+| `asp-classic` | `.asp`, `.inc` | `<%@ Language=VBScript %>` or `<%@ Language=JScript %>` + `Response.Write` | `.asp` without `<%@` |
+| `aspnet-webforms` | `.aspx`, `.aspx.cs`, `.aspx.vb` | `<%@ Page Language="C#"`, `runat="server"`, `<asp:` controls | plain `.aspx` |
+| `jsp` | `.jsp`, `.jspf` | `<%@ page language="java" %>`, `<jsp:`, `<%! %>` | `.jsp` with only HTML |
+| `php-server-rendered` | `.php` | `<?php ... ?>` + inline HTML + `mysql_*` or `mysqli_*` | only `.php` in `api/` folder (likely REST API, not UI) |
+| `html-legacy-jquery` | `.html`, `.htm`, `.js` | `jQuery`/`$.ajax` + server-side form submits, no SPA framework | static HTML (no dynamic JS) |
+| `android-xml-java` | `res/layout/*.xml`, `*.java` | `<LinearLayout>`/`<RelativeLayout>`/`<ConstraintLayout>` + `Activity extends`, `setContentView(R.layout...)` | only Java without `res/layout/` |
+| `android-xml-kotlin` | `res/layout/*.xml`, `*.kt` | same as above + Kotlin `Activity()` + `setContentView(R.layout...)` | only Kotlin without `res/layout/` |
+| `android-compose` | `*.kt` | `@Composable`, `setContent { ... }` | without `setContent` |
+| `ios-xib-objc` | `.xib`, `.m`, `.h`, `.storyboard` | `UIViewController` + `*.xib` or `*.storyboard` referenced | only `*.m` without XIB |
+| `ios-xib-swift` | `.xib`, `.swift`, `.storyboard` | Swift `UIViewController` + XIB/Storyboard | only `*.swift` without XIB |
+| `ios-swiftui` | `*.swift` | `View` + `var body: some View`, `App` lifecycle | without `var body` |
+| `flutter` | `*.dart`, `pubspec.yaml` | `import 'package:flutter/material.dart'` + `StatelessWidget`/`StatefulWidget` | without `material.dart` |
+| `react-class` | `*.jsx`, `*.tsx` | `class ... extends React.Component` + `render()` | only `*.tsx` (likely modern) |
+| `react-hooks` | `*.jsx`, `*.tsx` | `function ... ({...}) { return <...>; }` + `useState`, `useEffect` | (not legacy, it's a target) |
 
-## Indicadores adicionais
+## Additional Indicators
 
-- **Estrutura de diretórios**:
+- **Directory structure**:
   - `forms/`, `Forms/` → Delphi, VB6, .NET WinForms.
   - `views/`, `templates/` → MVC server-side (ASP, JSP, PHP).
   - `app/src/main/res/layout/` → Android.
-  - `Storyboard.storyboard` ou `*.xib` na raiz → iOS legado.
-  - `Pages/` em projeto Razor → ASP.NET.
+  - `Storyboard.storyboard` or `*.xib` in root → legacy iOS.
+  - `Pages/` in Razor project → ASP.NET.
 - **Build files**:
   - `*.dpr` (Delphi), `*.vbp` (VB6), `*.csproj` (.NET), `pom.xml`/`build.gradle` (Java/Android), `Podfile` (iOS), `pubspec.yaml` (Flutter).
-- **Strings de versão em comentários ou headers**: VB6 marca `VERSION 5.00`; Delphi 7 marca `{$OBJECT}`; .NET com `<TargetFramework>net48</TargetFramework>` indica WinForms legado.
+- **Version strings in comments or headers**: VB6 marks `VERSION 5.00`; Delphi 7 marks `{$OBJECT}`; .NET with `<TargetFramework>net48</TargetFramework>` indicates legacy WinForms.
 
-## Quando duas plataformas empatam
+## When Two Platforms Tie
 
-- **ASP clássico vs ASP.NET WebForms**: arquivos `.asp` sem `.aspx` → clássico. `.aspx` + `.asp` no mesmo projeto → projeto migrando, marcar ⚠️ AMBÍGUO e perguntar.
+- **Classic ASP vs ASP.NET WebForms**: `.asp` files without `.aspx` → Classic. `.aspx` + `.asp` in the same project → migrating project, mark ⚠️ AMBIGUOUS and ask.
 - **VB6 vs VB.NET**: `.frm` + `.vbp` → VB6. `.vb` + `.designer.vb` + `.vbproj` → VB.NET WinForms.
-- **Delphi VCL vs FireMonkey**: `.dfm` → VCL. `.fmx` → FireMonkey. Ambos no projeto → marcar ⚠️ AMBÍGUO.
-- **Android Java vs Kotlin**: `.java` + `.kt` no mesmo projeto → projeto em migração; classificar por arquivo individual.
-- **iOS Storyboard vs XIB**: ambos suportados; tratar como uma classe (`ios-xib-*`). Diferença vai no detalhe de captura.
+- **Delphi VCL vs FireMonkey**: `.dfm` → VCL. `.fmx` → FireMonkey. Both in project → mark ⚠️ AMBIGUOUS.
+- **Android Java vs Kotlin**: `.java` + `.kt` in the same project → project in migration; classify per file.
+- **iOS Storyboard vs XIB**: both supported; treat as one class (`ios-xib-*`). Difference goes into capture detail.
 
-## Quando nada bate
+## When Nothing Matches
 
-Registre `EC-01` (plataforma origem desconhecida) e ofereça ao usuário um template "raw" onde ele descreve a tela em prosa estruturada, com seções obrigatórias:
+Record `EC-01` (unknown source platform) and offer the user a "raw" template where they describe the screen in structured prose, with mandatory sections:
 
-- Identidade.
-- Layout em ASCII art ou screenshot.
-- Lista de campos / componentes.
-- Mensagens / labels literais.
-- Eventos e transições.
-- Validações.
+- Identity.
+- Layout in ASCII art or screenshot.
+- List of fields / components.
+- Messages / literal labels.
+- Events and transitions.
+- Validations.
 
-O agente então gera `target_screens.md` com `spec.kind: raw-prose` e marca em `screen_deviation_log.md` que a tela não passou pelo adapter.
+The agent then generates `target_screens.md` with `spec.kind: raw-prose` and marks in `screen_deviation_log.md` that the screen did not pass through the adapter.
