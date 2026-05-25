@@ -1,15 +1,15 @@
 <!--
   Template: index.html
-  Produtor: reversa-docs-publisher
-  Skill invocada: reversa-selo-generativo
+  Producer: reversa-docs-publisher
+  Invoked skill: reversa-selo-generativo
   Page ID: index
-  Categoria reversa: index
+  Reversa category: index
 
-  Marcadores específicos:
-  - HERO_SEAL_SVG: selo grande do projeto
-  - PROJECT_TAGLINE: 1 linha sintetizando o sistema
-  - PAGE_CARDS: cards linkando para todas as páginas existentes
-  - AUXILIARY_SECTIONS: seções de HTMLs auxiliares descobertos
+  Specific markers:
+  - HERO_SEAL_SVG: large project seal
+  - PROJECT_TAGLINE: 1 line summarizing the system
+  - PAGE_CARDS: cards linking to all existing pages
+  - AUXILIARY_SECTIONS: sections from discovered auxiliary HTML files
 -->
 
 <!-- PAYLOAD_START -->
@@ -22,7 +22,7 @@
 </section>
 
 <section class="reversa-doc-summary">
-    <h2>Páginas do mini-site</h2>
+    <h2>Mini-site pages</h2>
     <div class="reversa-doc-cards">
         <!-- PAGE_CARDS -->
     </div>
