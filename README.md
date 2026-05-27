@@ -355,22 +355,42 @@ gain automatic fallback and unlock premium models — point any supported
 engine to a local [OmniRoute](https://github.com/diegosouzapw/OmniRoute)
 instance.
 
-**OmniRoute** is an open-source unified AI gateway that exposes a **single
-local endpoint** routing to **177 providers**, with **50+ free tiers** and
-**11 free forever, no credit card**:
+**OmniRoute** is a battle-tested open-source AI gateway (**⭐ 5.3k+ stars on
+GitHub**) that exposes a **single local endpoint** routing to
+**177 providers**. The killer feature for Reversa users:
+**50+ providers with a free tier — 11 of them free forever, no credit card**.
 
-| Free provider | Models | Limit |
+### 🆓 50+ free providers — frontier models for $0
+
+| Free provider | Frontier models you unlock | Limit |
 |---|---|---|
-| **Kiro** | Claude **Sonnet 4.5**, **Haiku 4.5**, **Opus 4.6** | 50 credits/month |
-| **Qoder AI** | **Kimi K2 Thinking**, **DeepSeek R1**, Qwen3-Coder-Plus | ♾️ Unlimited |
-| **Pollinations** | **GPT-5**, Claude, Gemini, Llama 4 | No key needed 🤯 |
-| **LongCat** | LongCat Flash-Lite | 50M tokens/day 🔥 |
+| **Kiro** | Claude **Opus 4.6**, **Sonnet 4.5**, **Haiku 4.5** | 50 credits/month |
+| **Qoder AI** | **Kimi K2 Thinking**, **DeepSeek R1**, Qwen3-Coder-Plus | ♾️ **Unlimited** |
+| **Pollinations** | **GPT-5**, Claude, Gemini, Llama 4 | 🔓 **No API key required** |
+| **LongCat** | LongCat Flash-Lite | 🔥 **50M tokens/day** |
 | **Gemini CLI** | Gemini 3 Flash | 180K/month |
 | **AgentRouter** | GPT-5, Claude, Gemini | US$100 free credits |
-| **Cloudflare**, **OpenCode Free**, **Z.ai**, **Together**, **Groq**… | — | Free tier |
+| **Cloudflare Workers AI** | Llama 3, Mistral, Qwen | Generous free tier |
+| **Z.ai**, **Together**, **Groq**, **SambaNova**, **OpenCode Free** | Qwen 235B, Llama 3.3 70B, Mistral Large… | Free tier |
+| **+ 40 more** (Cerebras, Fireworks, Hyperbolic, Lambda, Nebius, OpenRouter, Ollama local, LM Studio local…) | Full catalog at `localhost:20128/dashboard/providers` | Mixed |
 
-Dirt-cheap paid models too: **GLM-5 at US$0.50/1M tokens**,
-**MiniMax M2.5 at US$0.30/1M**, DeepSeek V3, and dozens more.
+Dirt-cheap paid models when you need them: **GLM-5 at US$0.50/1M tokens**,
+**MiniMax M2.5 at US$0.30/1M**, DeepSeek V3 — pennies per million tokens.
+
+### 🗜️ Context compression: 15–95% fewer tokens per call
+
+OmniRoute's flagship **RTK + Caveman stacked compression** automatically
+shrinks every prompt before it leaves your machine, with **~89% average
+savings on tool-heavy sessions** like the Reversa *Archaeologist* and
+*Coding* phases. Two effects matter for Reversa:
+
+- **Pay less** (or fit inside free-tier quotas you'd otherwise blow on
+  large legacies).
+- **Fit more context per call** — the *Archaeologist* can keep more
+  modules in scope at once without hitting the model's context window.
+
+The compression is transparent to your CLI: it sees the original prompt,
+OmniRoute sees the compressed wire format.
 
 ### Why it matters for Reversa
 
@@ -382,7 +402,6 @@ OmniRoute in front of your CLI you get:
 |---|---|
 | **Combos with 14 strategies** (priority, weighted, P2C, least-used, cost-optimized, context-relay, auto-combo, fill-first, round-robin, random, strict-random, reset-aware, lkgp, context-optimized) | Long Archaeologist sweeps stay responsive — load is auto-spread across providers |
 | **3-layer resilience** (provider circuit breaker → connection cooldown → per-model lockout) | A single rate-limited key never blocks an in-flight Reversa session |
-| **RTK + Caveman compression (15–95% tokens)** | Drastic cost cut on Archaeologist/Coding sessions (~89% avg on tool-heavy runs) |
 | **Unified key vault** | Stop pasting API keys into every CLI — manage them once in a dashboard |
 | **Format translation** OpenAI ↔ Claude ↔ Gemini ↔ Responses API | Claude Code can talk to OpenAI models; Codex can talk to Anthropic; etc. |
 | **Real-time cost & quota dashboard** | See exactly what each Reversa phase (Scout / Detective / Writer / Reviewer) is costing |

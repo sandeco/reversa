@@ -1,11 +1,12 @@
 # OmniRoute — free LLM backend for Reversa
 
 This guide shows how to power any Reversa run with
-[OmniRoute](https://github.com/diegosouzapw/OmniRoute), an open-source AI
-gateway. After setup, every LLM call made by Claude Code / Codex / Gemini
-CLI / Cursor during a `/reversa` run goes through a single local endpoint
-that fans out across **177 providers** — with **free** access to flagship
-models.
+[OmniRoute](https://github.com/diegosouzapw/OmniRoute) — an open-source AI
+gateway with **⭐ 5.3k+ stars on GitHub**. After setup, every LLM call made
+by Claude Code / Codex / Gemini CLI / Cursor during a `/reversa` run goes
+through a single local endpoint that fans out across **177 providers** —
+**50+ of them with a free tier** — and is automatically compressed by
+**15–95%** before leaving your machine.
 
 !!! info "Reversa stays untouched"
     Reversa itself **does not** call OmniRoute, doesn't read its config and
@@ -16,30 +17,80 @@ models.
 
 ## What you get
 
-### Free models out of the box (no credit card)
+### 🆓 50+ free providers — frontier models for $0
 
-OmniRoute ships with public OAuth flows and community integrations. As of
-v3.8.x, **11 providers are free forever**:
+This is the killer feature for Reversa users. OmniRoute ships with public
+OAuth flows and community integrations giving you, on a fresh laptop with
+zero credit cards:
 
-| Model | Provider | Access | Limit |
-|---|---|---|---|
-| **Claude Sonnet 4.5 / Haiku 4.5 / Opus 4.6** | Kiro | Free OAuth | 50 credits/month |
-| **Kimi K2 Thinking** | Qoder AI | Free OAuth | ♾️ Unlimited |
-| **DeepSeek R1**, **Qwen3-Coder-Plus** | Qoder AI | Free OAuth | ♾️ Unlimited |
-| **GPT-5**, Claude, Gemini, Llama 4 | Pollinations | No key | No explicit limit |
-| **LongCat Flash-Lite** | LongCat | Free OAuth | 50M tokens/day |
-| **Gemini 3 Flash** | Gemini CLI | Free OAuth | 180K/month |
-| **GPT-5, Claude, Gemini** | AgentRouter | API key | US$100 credit |
-| Workers AI (Llama 3, Mistral, …) | Cloudflare | Free API key | Generous free tier |
-| Qwen (235B / 72B) | Z.ai, Together | API key | Free tier |
-| Llama 3.3 70B | Groq, SambaNova | API key | Free tier |
-| Mistral Large, Codestral | Mistral La Plateforme | API key | Free tier |
+- **11 providers free forever** — Kiro, Qoder AI, Pollinations, LongCat,
+  Cloudflare, OpenCode Free, AgentRouter, and more.
+- **40+ additional providers with generous free tiers** — Z.ai, Together,
+  Groq, SambaNova, Cerebras, Fireworks, Hyperbolic, Lambda, Nebius,
+  Mistral La Plateforme, Gemini CLI, Anthropic Antigravity, Google Code
+  Assist, etc.
 
-Plus ~40 dirt-cheap paid providers: **GLM-5 at US$0.50/1M**,
-**MiniMax M2.5 at US$0.30/1M**, DeepSeek V3, Cerebras, Fireworks,
-Hyperbolic, Lambda, Nebius, OpenRouter (aggregator), Ollama local,
-LM Studio local… The full live catalog lives in
+The catalog covers every flagship model you'd want to run Reversa with:
+
+| Model class | Free via | Limit |
+|---|---|---|
+| **Claude Opus 4.6** | Kiro | 50 credits/month |
+| **Claude Sonnet 4.5 / Haiku 4.5** | Kiro | 50 credits/month |
+| **Kimi K2 Thinking** | Qoder AI | ♾️ **Unlimited** |
+| **DeepSeek R1**, **Qwen3-Coder-Plus** | Qoder AI | ♾️ **Unlimited** |
+| **GPT-5** | Pollinations | 🔓 **No API key required** |
+| Claude / Gemini / Llama 4 | Pollinations | 🔓 No API key required |
+| **LongCat Flash-Lite** | LongCat | 🔥 **50M tokens/day** |
+| **Gemini 3 Flash** | Gemini CLI | 180K/month |
+| GPT-5, Claude, Gemini | AgentRouter | US$100 free credits |
+| Llama 3, Mistral, Qwen | Cloudflare Workers AI | Free API key, generous tier |
+| Qwen 235B / 72B | Z.ai, Together | Free tier |
+| Llama 3.3 70B | Groq, SambaNova | Free tier |
+| Mistral Large, Codestral | Mistral La Plateforme | Free tier |
+| GPT OSS 120B, DeepSeek V3 | Cerebras (fastest inference on Earth) | Free tier |
+
+Plus dirt-cheap paid providers when you need them: **GLM-5 at US$0.50/1M
+tokens**, **MiniMax M2.5 at US$0.30/1M**, DeepSeek V3, Cerebras,
+Fireworks, Hyperbolic, Lambda, Nebius, OpenRouter (aggregator), Ollama
+local, LM Studio local… The full live catalog lives in
 `http://localhost:20128/dashboard/providers`.
+
+> **What this means for Reversa**: you can run the full Discovery
+> pipeline (`/reversa`) on a 100k-line legacy, including the
+> heavy *Archaeologist* + *Coding* phases, **without ever paying a
+> provider**. Bind your CLI to a `priority` combo of Kiro Opus 4.6 →
+> Qoder Kimi K2 → Pollinations GPT-5 and watch the dashboard.
+
+### 🗜️ Context compression — RTK + Caveman saves 15–95% tokens
+
+OmniRoute's flagship compression engine **stacks two algorithms** — RTK
+(Reversible Token Kompression) and Caveman (semantic deduplication) —
+that run **transparently between your CLI and the provider**. The user
+sees the original prompt; the wire format is 15–95% smaller.
+
+Measured impact on Reversa workloads:
+
+| Reversa phase | Avg compression | Why it matters |
+|---|---|---|
+| **Scout** | 20–30% | Many small calls — bandwidth + per-call cost cuts |
+| **Archaeologist** | **80–95%** | Module-by-module sweeps repeat a lot of structural context — RTK deduplicates it across calls |
+| **Detective** + **Architect** | 50–70% | Synthesis carries large code excerpts in the prompt — Caveman strips boilerplate |
+| **Writer** + **Reviewer** | 40–60% | Spec generation includes the source for traceability |
+| **Coding** (Reversa Forward) | **~89% avg** | Long tool-use chains repeat tool definitions on every call |
+
+Two concrete consequences:
+
+1. **You can run a real `/reversa` on free-tier quotas.** A 500-module
+   legacy that would normally exhaust the 50 credits/month of Kiro in
+   one Archaeologist sweep now fits comfortably inside the free tier
+   thanks to ~90% compression.
+2. **The model "sees" more context per call.** When the *Architect*
+   needs to reason across many files, compression effectively widens
+   the context window — your 200k-token Claude budget acts like a
+   1M+-token budget in raw legacy bytes.
+
+Compression is enabled by default in the dashboard and can be tuned per
+provider (off / RTK only / RTK + Caveman) in `Settings → Compression`.
 
 ### Beyond the free models
 
@@ -49,7 +100,6 @@ LM Studio local… The full live catalog lives in
 | **Combos with 14 strategies** | When the *Archaeologist* sweeps 500 modules, traffic auto-spreads across `priority` → `weighted` → `cost-optimized` → `context-relay`. A 10-min sweep that would hit Anthropic's per-minute cap now finishes without throttling. |
 | **3-layer resilience** | (1) *Provider circuit breaker* isolates a sick provider (Anthropic 503? auto-skip for 60s). (2) *Connection cooldown* isolates one bad key without killing the provider. (3) *Model lockout* handles `gpt-5-mini quota exceeded` while keeping `gpt-5` alive. |
 | **Auto-Combo (9-factor scoring)** | Picks the best target per request: latency, cost, success rate, quota headroom, model fitness, etc. Set and forget. |
-| **RTK + Caveman compression (15–95%)** | Shrinks prompts on heavy tool-use sessions (~89% avg on *Coding* sessions). Cheaper and faster. |
 | **OpenAI ↔ Claude ↔ Gemini ↔ Responses API translation** | Use Claude Code pointing to OpenAI models; use Codex pointing to Claude. Fully transparent. |
 | **MCP server (37 tools), A2A, vector memory, guardrails, evals** | Full AI infrastructure if you want deeper integrations later. |
 | **Real-time cost & quota dashboard** | Useful before `/reversa-pricing-*` to compare Reversa's estimate against actual spend. |
@@ -176,9 +226,7 @@ and renewals show up in the dashboard.
 ## Links
 
 - Official website: <https://omniroute.online>
-- Repository: <https://github.com/diegosouzapw/OmniRoute>
-- Brazilian WhatsApp community 🇧🇷: <https://chat.whatsapp.com/CeGCxdFzqBe5Uki288wOvf>
-- International WhatsApp community 🌍: <https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t>
+- Repository (⭐ 5.3k+): <https://github.com/diegosouzapw/OmniRoute>
 - Docker Hub: <https://hub.docker.com/r/diegosouzapw/omniroute>
 - npm: <https://www.npmjs.com/package/omniroute>
 - Reversa repository: <https://github.com/sandeco/reversa>
