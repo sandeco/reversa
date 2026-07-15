@@ -162,7 +162,8 @@ Antes de escrever o requirements, leia, na ordem (pulando o que não existir):
 2. `_reversa_sdd/domain.md` (regras de negócio confirmadas)
 3. `_reversa_sdd/inventory.md` (superfície do código)
 4. `_reversa_sdd/code-analysis.md` SOMENTE nas seções dos componentes que o argumento livre parece tocar
-5. `.reversa/principles.md` (princípios do projeto, se existir)
+5. `_reversa_sdd/addenda/*.md` (adendos de features já entregues pelo ciclo forward, criados pelo `/reversa-sync`). Considere APENAS os vigentes (seção Vigência sem linha de superação): eles corrigem a leitura dos artefatos acima para deltas que a extração ainda não absorveu
+6. `.reversa/principles.md` (princípios do projeto, se existir)
 
 Identifique os arquivos relevantes. Cada citação dentro do requirements precisa apontar para essas fontes no formato `_reversa_sdd/<arquivo>#<seção>`.
 

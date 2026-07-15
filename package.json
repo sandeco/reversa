@@ -1,6 +1,6 @@
 {
   "name": "reversa",
-  "version": "1.2.50",
+  "version": "1.2.51",
   "description": "Transform legacy systems into executable specifications for AI coding agents",
   "bin": {
     "reversa": "bin/reversa.js"

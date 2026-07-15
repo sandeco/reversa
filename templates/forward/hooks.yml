@@ -43,6 +43,10 @@ after-quality: []
 before-coding: []
 after-coding: []
 
+# Ganchos do /reversa-sync
+before-sync: []
+after-sync: []
+
 # Ganchos do /reversa-principles
 before-principles: []
 after-principles: []

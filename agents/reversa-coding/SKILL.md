@@ -140,11 +140,11 @@ Aplique `after-coding` da forma padrão.
 2. Quantas falharam (se houver)
 3. Caminho absoluto de `actions.md`, `progress.jsonl`, `legacy-impact.md`, `regression-watch.md`
 4. Quantos watch items foram criados nessa rodada
-5. Aviso explícito: para fechar o ciclo, rode `/reversa` (extração reversa) novamente em algum momento futuro
+5. Aviso explícito: rode `/reversa-sync` para converger a entrega em `_reversa_sdd/addenda/` e mantenha no radar rodar `/reversa` (re-extração) novamente em algum momento futuro para fechar o ciclo
 6. Se a execução foi parcial, indique a próxima fase ou ação pendente
 
 NUNCA dispare a re-extração sozinho, isso é decisão do usuário.
 
 Termine com:
 
-> Digite **CONTINUAR** para prosseguir com `/reversa` (re-extração) ou outra ação que o usuário quiser.
+> Digite **CONTINUAR** para prosseguir com `/reversa-sync` (convergência da entrega na extração) ou outra ação que o usuário quiser.

@@ -1,6 +1,6 @@
 # Passo 4, verificação de regressão semântica
 
-> Este passo só roda em **re-extrações**, ou seja, quando uma pipeline reversa é executada num projeto que já passou por pelo menos um ciclo `/reversa-coding`. Em projetos sem `_reversa_forward/` ou sem `regression-watch.md`, este passo é silenciosamente pulado.
+> Este passo só roda em **re-extrações**, ou seja, quando uma pipeline reversa é executada num projeto que já passou por pelo menos um ciclo `/reversa-coding`. Em projetos sem `_reversa_forward/` ou sem `regression-watch.md`, a verificação de regressão é silenciosamente pulada (a "Reconciliação de adendos" ao final ainda é verificada).
 
 ## Por que existe
 
@@ -10,9 +10,9 @@ O Reversa não é só extração one-shot. Cada `/reversa-coding` deixa em `_rev
 
 Após o **último agente do plano** concluir, antes da mensagem final de "extração concluída". O gatilho é posição (último item de `.reversa/plan.md`), não nome de agente, porque o último agente varia conforme os opcionais selecionados no install (Reviewer pode estar ausente, por exemplo). Faça os checks na ordem:
 
-1. Verifique se `_reversa_forward/` existe na raiz do projeto. Se não existir, encerre este passo silenciosamente.
+1. Verifique se `_reversa_forward/` existe na raiz do projeto. Se não existir, pule direto para a seção "Reconciliação de adendos".
 2. Liste todas as subpastas de `_reversa_forward/` que contêm `regression-watch.md`.
-3. Se a lista estiver vazia, encerre.
+3. Se a lista estiver vazia, pule direto para a seção "Reconciliação de adendos".
 4. Caso contrário, prossiga com o procedimento abaixo, uma feature por vez.
 
 ## Procedimento por feature
@@ -68,6 +68,22 @@ Se houver pelo menos um vermelho, apresente um aviso destacado:
 > 🔴 **Atenção**, foram detectadas **N regressões semânticas** em features previamente codadas. Revise antes de seguir.
 
 Se a `setup.json#watch.block-on-red` for `true`, sugira ao usuário **não** prosseguir com novos `/reversa-requirements` até que cada vermelho seja triado. O Reversa apenas alerta, jamais bloqueia automaticamente o fluxo do usuário.
+
+## Reconciliação de adendos
+
+Depois de percorrer as features (ou mesmo se nenhuma tiver `regression-watch.md`), verifique se existe `_reversa_sdd/addenda/` com arquivos `.md` criados pelo `/reversa-sync`. Se existir:
+
+1. Para cada adendo cuja seção `## Vigência` NÃO contém linha `Superado pela re-extração de ...`, acrescente ao final dessa seção a linha:
+
+   ```
+   Superado pela re-extração de YYYY-MM-DD.
+   ```
+
+2. Jamais apague o adendo, jamais reescreva as linhas anteriores da seção Vigência, jamais toque nas demais seções. Append-only, escrita atômica.
+3. Adendos já superados em re-extrações anteriores ficam como estão (são histórico).
+4. Inclua no relatório ao usuário quantos adendos foram marcados como superados nesta re-extração.
+
+A razão: os adendos são pontes entre uma entrega forward e a re-extração. Com a extração regenerada a partir do código atual, os deltas descritos nos adendos já estão absorvidos nos artefatos principais, e os consumidores (por exemplo `/reversa-requirements` e `/reversa-plan`) só devem considerar adendos vigentes.
 
 ## Caso especial, sem `_reversa_sdd/`
 
