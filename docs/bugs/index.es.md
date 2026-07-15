@@ -4,7 +4,7 @@ El Equipo **Bug Agents** convierte el manejo de defectos en una **memoria causal
 
 La regla fundacional: **documentar un bug y corregir un bug son actos estrictamente separados.**
 
-Premarcado en el instalador.
+Siempre instalado, como grupo único fijo junto al Reversa Agents Core.
 
 ---
 

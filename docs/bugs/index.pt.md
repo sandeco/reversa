@@ -4,7 +4,7 @@ O Time **Bug Agents** transforma o tratamento de defeitos numa **memória causal
 
 A regra fundadora: **documentar bug e corrigir bug são atos estritamente separados.**
 
-Pré-marcado no instalador.
+Sempre instalado, como grupo único fixo ao lado do Reversa Agents Core.
 
 ---
 

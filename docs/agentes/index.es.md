@@ -14,7 +14,7 @@ Reversa coordina **8 Teams especializados** de agentes. Cada agente hace una cos
 | **Migration Agents** | Convierten las specs del legado en un plan de reconstrucción en un stack moderno. Ver [Migración](../migracao/index.md). | Marcado por defecto |
 | **Pricing and Size Agents** | Estiman esfuerzo, tamaño y precio sobre las specs. Ver [Pricing](../pricing/index.md). | Marcado por defecto |
 | **Documentation Team** | Renderiza el conocimiento extraído como mini-sitio HTML autocontenido. Ver [Equipo de Documentación](../documentation/index.md). | Marcado por defecto |
-| **Bug Agents** | Rastrea, debate y corrige defectos con trazabilidad causal hasta las specs. Ver [Bug Agents](../bugs/index.md). | Marcado por defecto |
+| **Bug Agents** | Rastrea, debate y corrige defectos con trazabilidad causal hasta las specs. Ver [Bug Agents](../bugs/index.md). | Siempre instalado |
 | **Translators N8N->Specs->Python** | Adaptadores que transforman artefactos estructurados (p. ej. un workflow N8N) en specs. Ver [N8N Translator](n8n.md). | Desmarcado |
 
 Las tablas siguientes detallan los agentes que componen el Team **Reversa Agents Core**.

@@ -16,7 +16,7 @@ O orquestrador central (o próprio Reversa) coordena quem entra quando, em que o
 | **Migration Agents** | Transformam as specs do legado em um plano de reconstrução em stack moderna. Veja [Migração](../migracao/index.md). | Marcado por padrão |
 | **Pricing and Size Agents** | Estimam esforço, tamanho e precificação a partir das specs. Veja [Pricing](../pricing/index.md). | Marcado por padrão |
 | **Documentation Team** | Renderiza o conhecimento extraído como mini-site HTML autocontido. Veja [Time de Documentação](../documentation/index.md). | Marcado por padrão |
-| **Bug Agents** | Rastreia, debate e corrige defeitos com rastreabilidade causal até as specs. Veja [Bug Agents](../bugs/index.md). | Marcado por padrão |
+| **Bug Agents** | Rastreia, debate e corrige defeitos com rastreabilidade causal até as specs. Veja [Bug Agents](../bugs/index.md). | Sempre instalado |
 | **Translators N8N->Specs->Python** | Adaptadores que transformam artefatos estruturados (ex.: workflow N8N) em specs. Veja [N8N Translator](n8n.md). | Desmarcado |
 
 As tabelas abaixo detalham os agentes que compõem o Team **Reversa Agents Core**.

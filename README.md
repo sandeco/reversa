@@ -138,7 +138,7 @@ For a **greenfield** project (no legacy to extract), start with `/reversa-new` i
 
 ## Agents
 
-Reversa organizes its agents in **eight specialized Teams**. The Discovery Team (Reversa Agents Core) is always installed; six Teams are pre-checked in the installer and Translators are opt-in.
+Reversa organizes its agents in **eight specialized Teams**. The Discovery Team (Reversa Agents Core) and the Bug Agents are always installed; five Teams are pre-checked in the installer and Translators are opt-in.
 
 | Team | Purpose | Entry command |
 |------|---------|---------------|

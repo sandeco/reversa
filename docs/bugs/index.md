@@ -4,7 +4,7 @@ The **Bug Agents** Team turns defect handling into a repository-native **causal 
 
 The founding rule: **documenting a bug and fixing a bug are strictly separate acts.**
 
-Pre-checked in the installer.
+Always installed, as a single fixed group alongside the Reversa Agents Core.
 
 ---
 
