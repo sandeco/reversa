@@ -20,6 +20,41 @@ Após instalar, abra o projeto no seu agente de IA e ative o Reversa:
 
 ---
 
+## Escolhendo o comando de entrada
+
+O `/reversa` é o ponto de entrada para analisar um sistema existente, mas não é o único fluxo:
+
+| Objetivo | Comando |
+|----------|---------|
+| Analisar um legado existente e produzir specs | `/reversa` |
+| A mesma análise, de ponta a ponta, sem paradas intermediárias | `/reversa-autonomous` |
+| Começar um projeto novo a partir de uma ideia em uma linha | `/reversa-new` (com `expresso` vai até o código) |
+| Evoluir o sistema uma feature por vez, da spec ao código | `/reversa-forward` |
+| Convergir uma feature entregue de volta na extração | `/reversa-sync` |
+| Reconstruir o legado em uma stack moderna | `/reversa-migrate` |
+| Renderizar o conhecimento extraído como mini-site HTML | `/reversa-docs` |
+| Registrar e corrigir defeitos com rastreabilidade causal | `/reversa-debugger`, `/reversa-debugger-fix` |
+| Estimar esforço, tamanho e preço a partir das specs | `/reversa-pricing-profile`, `/reversa-pricing-size`, `/reversa-pricing-estimate` |
+
+---
+
+## Modo sem supervisão
+
+Se você quer que a análise rode sem você na frente do terminal:
+
+```
+/reversa-autonomous
+```
+
+Ele executa exatamente os mesmos agentes e fases do `/reversa`, mas concentra todas as perguntas em uma **entrevista única no início** (dados de instalação, nível de documentação, organização das specs) e pula o que já estiver respondido no `.reversa/state.json`. Depois da entrevista, vai até o fim, parando apenas diante da lista fechada de situações que realmente exigem um humano.
+
+A mesma ideia existe do lado greenfield: `/reversa-new expresso "<sua ideia>"` vai da ideia ao código implementado sem parar, emendando no ciclo forward assim que as specs ficam prontas.
+
+!!! warning "Feito para sessões com aprovação automática"
+    Esses modos são para ambientes onde as ferramentas são aprovadas automaticamente (modo YOLO do Claude Code ou equivalente). Como ninguém está aprovando cada ação, as travas são mais rígidas: a escrita fica restrita a `.reversa/` e às pastas de saída, e nenhum comando destrutivo ou de efeito externo (apagar, `git push`, publicar, instalar dependências) é executado por conta própria. Ainda assim, faça backup do projeto antes de começar, como recomendado na [página inicial](index.md).
+
+---
+
 ## O que acontece quando você ativa
 
 O Reversa verifica se existe uma análise em andamento:

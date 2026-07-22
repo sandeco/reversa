@@ -121,3 +121,16 @@ Esses agentes não pertencem a uma fase específica e podem ser acionados a qual
 | **Visor** | Quando você tiver screenshots do sistema disponíveis |
 | **Data Master** | Quando houver DDL, migrations ou modelos ORM para analisar |
 | **Design System** | Quando houver arquivos CSS, temas ou screenshots de interface |
+| **Soul Extractor** | Logo após o Scout, para uma Spec executiva única (`soul.md`) com propósito, entidades centrais e decisões fundadoras |
+
+---
+
+## Rodar o pipeline sem paradas
+
+O `/reversa-autonomous` executa essas mesmas 5 fases, com os mesmos agentes, os mesmos checkpoints e a mesma escala de confiança. A diferença está em *quando* ele pergunta.
+
+O fluxo normal distribui as perguntas pelo caminho: dados de instalação no começo, nível de documentação depois do Scout, organização das specs antes do Writer. O modo autônomo concentra todas elas em uma **entrevista única no início**, pulando o que já estiver respondido em `.reversa/state.json` ou `.reversa/config.toml`. Depois dessa entrevista, ele roda até o fim, parando apenas diante de uma lista fechada de situações que realmente exigem um humano.
+
+Foi desenhado para sessões sem supervisão, com aprovação automática de ferramentas (modo YOLO do Claude Code ou equivalente), então as travas são mais rígidas que o usual: a escrita fica restrita a `.reversa/` e à pasta de saída, e nenhum comando destrutivo ou de efeito externo (apagar, `git push`, publicar, instalar dependências) é executado por conta própria. O que for ambíguo fora das pastas do Reversa fica intocado e é reportado no resumo final.
+
+Os checkpoints são salvos exatamente como no fluxo normal, então uma execução autônoma interrompida pode ser retomada tanto com `/reversa` quanto com `/reversa-autonomous`.

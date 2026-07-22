@@ -20,6 +20,41 @@ That's it. Reversa takes control and coordinates the entire analysis from there.
 
 ---
 
+## Choosing the entry command
+
+`/reversa` is the entry point for analyzing an existing system, but it is not the only workflow:
+
+| Goal | Command |
+|------|---------|
+| Analyze an existing legacy and produce specs | `/reversa` |
+| Same analysis, end to end, with no intermediate stops | `/reversa-autonomous` |
+| Start a brand new project from a one-line idea | `/reversa-new` (add `expresso` to go all the way to code) |
+| Evolve the system one feature at a time, spec to code | `/reversa-forward` |
+| Converge a delivered feature back into the extraction | `/reversa-sync` |
+| Rebuild the legacy on a modern stack | `/reversa-migrate` |
+| Render the extracted knowledge as an HTML mini-site | `/reversa-docs` |
+| Register and fix defects with causal traceability | `/reversa-debugger`, `/reversa-debugger-fix` |
+| Estimate effort, size and price from the specs | `/reversa-pricing-profile`, `/reversa-pricing-size`, `/reversa-pricing-estimate` |
+
+---
+
+## Unattended mode
+
+If you want the analysis to run without you in front of the terminal:
+
+```
+/reversa-autonomous
+```
+
+It runs the exact same agents and phases as `/reversa`, but concentrates every question in a **single interview at the start** (installation data, documentation level, spec organization) and skips whatever is already answered in `.reversa/state.json`. After the interview it goes to the end, pausing only for the closed list of situations that genuinely require a human.
+
+The same idea exists on the greenfield side: `/reversa-new expresso "<your idea>"` goes from the idea to implemented code without stopping, chaining into the forward cycle once the specs are done.
+
+!!! warning "Made for sessions with automatic approval"
+    These modes are meant for environments where tools are auto-approved (Claude Code YOLO mode or equivalent). Since nobody is approving each action, the guardrails are stricter: writes stay inside `.reversa/` and the output folders, and no destructive or outward-facing command (delete, `git push`, publish, install dependencies) is ever run on its own. Even so, back up your project before starting, as recommended on the [home page](index.md).
+
+---
+
 ## What happens when you activate
 
 Reversa checks whether an analysis is already in progress:

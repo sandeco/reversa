@@ -19,7 +19,7 @@ npx reversa install
 El instalador hace todo esto por ti:
 
 1. Detecta los motores de IA presentes en el entorno (Claude Code, Codex, Cursor, Gemini CLI, Windsurf)
-2. Pregunta qué **Teams** de agentes instalar. `Reversa Agents Core` siempre está incluido; `Migration Agents`, `Code Forward Agents` y `Pricing and Size Agents` vienen marcados; `Translators N8N->Specs->Python` queda desmarcado por defecto. El CLI expande cada Team elegido en sus agentes
+2. Pregunta qué **Teams** de agentes instalar. `Reversa Agents Core` y `Bug Agents` siempre están incluidos, no entran en la selección; `Migration Agents`, `Code Forward Agents`, `Code New Project Agents`, `Documentation Agents` y `Pricing and Size Agents` vienen marcados; `Translators N8N->Specs->Python` queda desmarcado por defecto. El CLI expande cada Team elegido en sus agentes y resuelve por sí solo las dependencias entre Teams (elegir `Code New Project Agents` trae también `Code Forward Agents`, donde sus specs continúan)
 3. Recopila el nombre del proyecto, idioma y preferencias
 4. Copia los agentes a `.agents/skills/` y `.claude/skills/` (para Claude Code)
 5. Crea el archivo de entrada del motor (`CLAUDE.md`, `AGENTS.md`, etc.)

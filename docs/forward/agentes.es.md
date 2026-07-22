@@ -1,6 +1,6 @@
 # Los agentes del Forward
 
-Diez agentes forman el equipo **Code Forward Agents**. El orquestador (`/reversa-forward`) detecta el estado físico de la feature activa y sugiere el siguiente skill. Los otros nueve cubren el ciclo de vida desde una idea en texto libre hasta el código en ejecución.
+Once agentes forman el equipo **Code Forward Agents**. El orquestador (`/reversa-forward`) detecta el estado físico de la feature activa y sugiere el siguiente skill. Los otros diez cubren el ciclo de vida desde una idea en texto libre hasta el código en ejecución, y de ahí de vuelta a la extracción.
 
 El orquestador corre en **dos escenarios**: evolución de legado con `_reversa_sdd/` poblado, o greenfield, sin extracción todavía. En ambos casos prepara las carpetas y nunca bloquea el pipeline.
 
@@ -12,8 +12,8 @@ El orquestador corre en **dos escenarios**: evolución de legado con `_reversa_s
 Reversa Forward (orquestador, punto de entrada opcional)
         │
         ▼
-Requirements → Clarify → Quality → Plan → To-Do → Audit → Coding
-                (opcional)  (opcional)             (opcional)
+Requirements → Clarify → Quality → Plan → To-Do → Audit → Coding → Sync
+                (opcional)  (opcional)             (opcional)          (opcional)
 
 Principles y Resume corren fuera de este flujo lineal.
 ```
@@ -109,7 +109,23 @@ El ejecutor. Recorre `actions.md` fase por fase, respeta el paralelismo `[//]` y
 
 ---
 
-## 9. Principles
+## 9. Sync
+
+**Comando:** `/reversa-sync`
+
+El paso de convergencia. Entre una entrega del ciclo forward y la siguiente re-extracción completa de `/reversa`, `_reversa_sdd/` queda desfasado: el código ya cambió, pero `architecture.md` y `domain.md` siguen describiendo el sistema anterior. Sync cierra ese intervalo destilando la feature entregada en un **adenda**, para que quien lea la extracción después — humano o agente — vea el sistema tal como está hoy.
+
+Lee `legacy-impact.md` (obligatorio, fuente principal del delta), `regression-watch.md`, `requirements.md` y `progress.jsonl`, y detecta el escenario automáticamente: legado (`architecture.md` + `domain.md` presentes) o greenfield (`prd.md` + specs en `sdd/`). Si `actions.md` todavía tiene acciones `[ ]` abiertas, no decide solo: presenta un menú (sincronizar parcial ahora, o esperar a que `/reversa-coding` cierre todo).
+
+La adenda lleva una sección `## Vigência` (vigencia) y apunta a las secciones de la extracción que quedaron desfasadas, sin editarlas nunca. La siguiente re-extracción completa la marca como superada.
+
+**Produce:** `_reversa_sdd/addenda/<feature-id>-<short-name>.md`. Los artefactos originales de la extracción quedan intactos.
+
+**Requiere:** una feature activa en `.reversa/active-requirements.json` y un `legacy-impact.md` generado por `/reversa-coding`.
+
+---
+
+## 10. Principles
 
 **Comando:** `/reversa-principles`
 
@@ -119,7 +135,7 @@ Gestiona reglas duraderas del proyecto en `.reversa/principles.md`, separadas de
 
 ---
 
-## 10. Resume
+## 11. Resume
 
 **Comando:** `/reversa-resume`
 
@@ -142,6 +158,7 @@ Intercambia la feature activa con una de `paused-features`. Detecta la etapa fí
 /reversa-to-do                   # acciones atómicas desde roadmap.md
 /reversa-audit                   # cross-check entre los tres docs (read-only)
 /reversa-coding                  # ejecuta actions.md
+/reversa-sync                    # converge la feature entregada en _reversa_sdd/addenda/
 /reversa-principles              # gestiona reglas duraderas
 /reversa-resume                  # cambia a una feature pausada
 ```

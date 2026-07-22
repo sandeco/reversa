@@ -48,6 +48,20 @@ Instalados por padrão, mas podem ser acionados de forma independente em qualque
 | [Visor](visor.md) | O ilustrador forense | Quando tiver screenshots do sistema disponíveis |
 | [Data Master](data-master.md) | O geólogo | Quando houver DDL, migrations ou modelos ORM para analisar |
 | [Design System](design-system.md) | O estilista | Quando houver arquivos CSS, temas ou screenshots de interface |
+| [Soul Extractor](extract-soul.md) | O ensaísta | Logo após o Scout, para uma Spec executiva única (`soul.md`) com propósito, entidades centrais e decisões fundadoras |
+| [Agents Help](agents-help.md) | O guia turístico | Quando quiser cada agente do Reversa explicado com analogias |
+| [Reconstructor](reconstructor.md) | O pedreiro | Quando quiser reconstruir o software de baixo para cima a partir das specs geradas, uma tarefa por vez |
+| **Autonomous** | O turno da noite | Quando ninguém vai acompanhar: executa toda a sequência do `/reversa` de ponta a ponta, com uma entrevista única no início |
+
+---
+
+## Modo autônomo
+
+O `/reversa-autonomous` herda o orquestrador `reversa`: mesmo plano, mesma sequência de agentes, mesmos checkpoints e mesma escala de confiança. A diferença está em *quando* ele pergunta. Toda decisão que o fluxo normal distribui pelo caminho (dados de instalação, nível de documentação, organização das specs) é concentrada em uma **entrevista única no início**; perguntas já respondidas no `state.json` ou no `config.toml` não são refeitas.
+
+Foi desenhado para sessões com aprovação automática de ferramentas (modo YOLO do Claude Code ou equivalente). Como não há um humano aprovando cada ação, as travas são mais rígidas: a escrita fica restrita a `.reversa/` e à pasta de saída, nenhum comando destrutivo ou de efeito externo (apagar, `git push`, publicar, instalar) é executado por conta própria, e o que for ambíguo fora das pastas do Reversa é deixado intacto e reportado no fim.
+
+Depois da entrevista, ele só para diante de uma **parada legítima**: uma lista fechada de situações que realmente exigem um humano. O resto roda até o fim.
 
 ---
 
@@ -64,7 +78,8 @@ Use quando o "código" legado não for código-fonte, e sim um artefato estrutur
 ## Sequência recomendada
 
 ```
-/reversa → orquestra tudo automaticamente
+/reversa             → orquestra tudo automaticamente, pausando entre agentes
+/reversa-autonomous  → mesma sequência, entrevista única no início, sem paradas intermediárias
 
 Ou manualmente, se preferir controlar cada passo:
 

@@ -72,3 +72,16 @@ El Reviewer intenta romper las specs: busca contradicciones internas, conflictos
 | **Visor** | Cuando tengas screenshots del sistema disponibles |
 | **Data Master** | Cuando haya DDL, migrations o modelos ORM disponibles |
 | **Design System** | Cuando haya archivos CSS, temas o screenshots de interfaz |
+| **Soul Extractor** | Justo después del Scout, para una Spec ejecutiva única (`soul.md`) con propósito, entidades centrales y decisiones fundadoras |
+
+---
+
+## Correr el pipeline sin paradas
+
+`/reversa-autonomous` ejecuta esas mismas 5 fases, con los mismos agentes, los mismos checkpoints y la misma escala de confianza. La diferencia está en *cuándo* pregunta.
+
+El flujo normal reparte las preguntas por el camino: datos de instalación al inicio, nivel de documentación después del Scout, organización de las specs antes del Writer. El modo autónomo concentra todas en una **entrevista única al comienzo**, saltando lo que ya esté respondido en `.reversa/state.json` o `.reversa/config.toml`. Tras esa entrevista corre hasta el final, deteniéndose solo ante una lista cerrada de situaciones que realmente requieren un humano.
+
+Fue diseñado para sesiones sin supervisión, con aprobación automática de herramientas (modo YOLO de Claude Code o equivalente), así que las barreras son más estrictas de lo habitual: la escritura queda restringida a `.reversa/` y la carpeta de salida, y ningún comando destructivo o de efecto externo (borrar, `git push`, publicar, instalar dependencias) se ejecuta por cuenta propia. Lo ambiguo fuera de las carpetas de Reversa queda intacto y se reporta en el resumen final.
+
+Los checkpoints se guardan igual que en el flujo normal, así que una ejecución autónoma interrumpida puede retomarse tanto con `/reversa` como con `/reversa-autonomous`.

@@ -67,10 +67,28 @@ _reversa_sdd/
 │   ├── tokens.md
 │   └── design-system.md
 │
+├── addenda/                  # Post-delivery addenda (reversa-sync)
+│   └── [NNN]-[feature].md    # One per feature delivered by /reversa-coding
+│
 └── traceability/
     ├── spec-impact-matrix.md # Which spec impacts which — complete+
-    └── code-spec-matrix.md   # Code file to corresponding spec — complete+
+    ├── code-spec-matrix.md   # Code file to corresponding spec — complete+
+    └── bugs.md               # BUG ↔ SPEC matrix (reversa-debugger-graph)
 ```
+
+---
+
+## Addenda: keeping the extraction current
+
+An extraction is a photograph of the system at a given moment. As soon as a forward feature is delivered, the code moves on and `architecture.md` and `domain.md` start describing a system that no longer exists.
+
+`/reversa-sync` closes that gap without touching the original artifacts. It distills the delivered feature into an addendum under `addenda/`, one file per feature, carrying:
+
+- a **validity** section, saying the addendum holds until the next full re-extraction
+- the delta introduced by the feature, drawn from `legacy-impact.md` and `regression-watch.md`
+- pointers to the extraction sections that drifted, so whoever reads them knows to read the addendum too
+
+The next full `/reversa` run absorbs the change and marks the addendum as superseded. Nothing in the extraction is ever rewritten in place.
 
 ---
 

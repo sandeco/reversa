@@ -25,8 +25,11 @@ npx reversa install
 Then open the project in your favorite AI agent and choose the workflow:
 
 ```
-/reversa       # discover and specify an existing system
-/reversa-new   # turn a new product idea into PRD and SDD specs
+/reversa              # discover and specify an existing system
+/reversa-autonomous   # same discovery, end to end, with no intermediate stops
+/reversa-new          # turn a new product idea into PRD and SDD specs
+/reversa-forward      # evolve the system from specs to code, one feature at a time
+/reversa-debugger     # register and trace a defect back to the specs
 ```
 
 That's it. Reversa takes the wheel and guides you to the end.
@@ -57,7 +60,7 @@ That's it. Reversa takes the wheel and guides you to the end.
 
 - **Agents**
 
-    7 specialized Teams: Core, New Project, Code Forward, Migration, Documentation, Pricing and Translators.
+    8 specialized Teams: Core, New Project, Code Forward, Migration, Documentation, Pricing, Bug Agents and Translators.
 
     [:octicons-arrow-right-24: See agents](agentes/index.md)
 

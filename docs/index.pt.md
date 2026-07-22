@@ -25,8 +25,11 @@ npx reversa install
 Depois, abra o projeto no seu agente de IA favorito e escolha o fluxo:
 
 ```
-/reversa       # descobrir e especificar um sistema existente
-/reversa-new   # transformar uma ideia nova em PRD e specs SDD
+/reversa              # descobrir e especificar um sistema existente
+/reversa-autonomous   # a mesma descoberta, de ponta a ponta, sem paradas intermediárias
+/reversa-new          # transformar uma ideia nova em PRD e specs SDD
+/reversa-forward      # evoluir o sistema da spec ao código, uma feature por vez
+/reversa-debugger     # registrar e rastrear um defeito até as specs
 ```
 
 Pronto. O Reversa assume o volante e guia você até o fim.
@@ -57,7 +60,7 @@ Pronto. O Reversa assume o volante e guia você até o fim.
 
 - **Agentes**
 
-    7 Teams especializados: Core, New Project, Code Forward, Migration, Documentation, Pricing e Translators.
+    8 Teams especializados: Core, New Project, Code Forward, Migration, Documentation, Pricing, Bug Agents e Translators.
 
     [:octicons-arrow-right-24: Ver agentes](agentes/index.md)
 

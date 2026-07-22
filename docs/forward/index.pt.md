@@ -29,6 +29,9 @@ Marcado por padrão no instalador.
         │
         ▼
 /reversa-coding          (executa actions.md em código)
+        │
+        ▼
+/reversa-sync            (opcional, converge a entrega em _reversa_sdd/addenda/)
 ```
 
 `/reversa-forward` é o ponto de entrada opcional do ciclo: olha o estado atual e diz qual o próximo skill. Útil quando você não lembra onde parou.
@@ -49,6 +52,7 @@ Marcado por padrão no instalador.
 | `reversa-audit` | audit | Auditor estritamente leitor: contradições e lacunas entre requirements, roadmap e actions, severidade reportada. |
 | `reversa-quality` | quality | Revisa a clareza da escrita do `requirements.md`. Não verifica testes de implementação. |
 | `reversa-coding` | coding | Executa `actions.md` em código real, atualiza checkboxes e deixa `legacy-impact.md` e `regression-watch.md`. |
+| `reversa-sync` | sync | Opcional, depois do coding. Destila a feature entregue em um adendo em `_reversa_sdd/addenda/`, mantendo a extração representativa até a próxima re-extração. Não edita os artefatos originais. |
 | `reversa-principles` | principles | Cria e mantém princípios duradouros do projeto, separados dos requisitos de cada feature. |
 | `reversa-resume` | resume | Retoma uma feature pausada listada em `paused-features` de `active-requirements.json`. |
 
@@ -58,4 +62,6 @@ Marcado por padrão no instalador.
 
 Cada feature mora em sua própria pasta sob `_reversa_forward/`. O caminho exato sai do campo `forward_folder` em `.reversa/state.json`.
 
-Os Code Forward Agents jamais tocam no código legado nem nos artefatos do Discovery Team. Consomem as saídas de Discovery e escrevem apenas dentro da pasta forward.
+Os Code Forward Agents jamais tocam no código legado sem supervisão, nem editam os artefatos do Discovery Team. Consomem as saídas de Discovery e escrevem dentro da pasta forward.
+
+A única exceção é o `/reversa-sync`, que escreve em `_reversa_sdd/addenda/` — uma pasta nova, criada só para os adendos pós-entrega. Os artefatos originais da extração (`architecture.md`, `domain.md`, specs) continuam intocados; o adendo apenas aponta para as seções que ficaram defasadas.

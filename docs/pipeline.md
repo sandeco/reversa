@@ -121,3 +121,16 @@ These agents don't belong to a specific phase and can be triggered at any time:
 | **Visor** | When you have screenshots of the system available |
 | **Data Master** | When DDL, migrations, or ORM models are available |
 | **Design System** | When CSS files, themes, or interface screenshots are available |
+| **Soul Extractor** | Right after the Scout, for a single executive Spec (`soul.md`) with purpose, core entities and founding decisions |
+
+---
+
+## Running the pipeline without stops
+
+`/reversa-autonomous` runs these same 5 phases, with the same agents, the same checkpoints and the same confidence scale. The difference is *when* it asks you things.
+
+The normal flow spreads its questions along the way: installation data at the start, documentation level after the Scout, spec organization before the Writer. The autonomous mode concentrates all of them in a **single interview at the beginning**, skipping anything already answered in `.reversa/state.json` or `.reversa/config.toml`. After that interview it runs to the end, stopping only for a closed list of situations that genuinely need a human.
+
+It was designed for unattended sessions with automatic tool approval (Claude Code YOLO mode or equivalent), so the guardrails are stricter than usual: writes stay inside `.reversa/` and the output folder, and no destructive or outward-facing command (delete, `git push`, publish, install dependencies) is ever run on its own. Anything ambiguous outside the Reversa folders is left alone and reported in the final summary.
+
+Checkpoints are saved exactly as in the normal flow, so an interrupted autonomous run can be resumed with either `/reversa` or `/reversa-autonomous`.

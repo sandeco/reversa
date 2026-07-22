@@ -40,10 +40,28 @@ _reversa_sdd/
 ├── ui/                       # Specs de interfaz (Visor)
 ├── database/                 # Specs de base de datos (Data Master)
 ├── design-system/            # Tokens de diseño (Design System)
+├── addenda/                  # Adendas post-entrega (reversa-sync)
+│   └── [NNN]-[feature].md    # Una por feature entregada por /reversa-coding
+│
 └── traceability/
     ├── spec-impact-matrix.md # Qué spec impacta a cuál — completo+
-    └── code-spec-matrix.md   # Archivo de código a spec correspondiente — completo+
+    ├── code-spec-matrix.md   # Archivo de código a spec correspondiente — completo+
+    └── bugs.md               # Matriz BUG ↔ SPEC (reversa-debugger-graph)
 ```
+
+---
+
+## Adendas: mantener la extracción al día
+
+Una extracción es una fotografía del sistema en un momento dado. En cuanto se entrega una feature del forward, el código sigue adelante y `architecture.md` y `domain.md` pasan a describir un sistema que ya no existe.
+
+`/reversa-sync` cierra ese intervalo sin tocar los artefactos originales. Destila la feature entregada en una adenda dentro de `addenda/`, un archivo por feature, que contiene:
+
+- una sección de **vigencia**, indicando que la adenda vale hasta la siguiente re-extracción completa
+- el delta introducido por la feature, tomado de `legacy-impact.md` y `regression-watch.md`
+- punteros a las secciones de la extracción que quedaron desfasadas, para que quien las lea sepa que también debe leer la adenda
+
+La siguiente ejecución completa de `/reversa` absorbe el cambio y marca la adenda como superada. Nada de la extracción se reescribe en su lugar.
 
 ---
 

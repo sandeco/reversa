@@ -48,6 +48,20 @@ Installed by default, but can be triggered independently at any time.
 | [Visor](visor.md) | The forensic illustrator | When screenshots of the system are available |
 | [Data Master](data-master.md) | The geologist | When DDL, migrations, or ORM models are available |
 | [Design System](design-system.md) | The stylist | When CSS files, themes, or interface screenshots are available |
+| [Soul Extractor](extract-soul.md) | The essayist | Right after the Scout, for one executive Spec (`soul.md`) with purpose, core entities and founding decisions |
+| [Agents Help](agents-help.md) | The tour guide | When you want every Reversa agent explained with analogies |
+| [Reconstructor](reconstructor.md) | The bricklayer | When you want to rebuild the software bottom-up from the generated specs, one task at a time |
+| **Autonomous** | The night shift | When nobody will be watching: runs the whole `/reversa` sequence end to end, with a single interview at the start |
+
+---
+
+## Autonomous mode
+
+`/reversa-autonomous` inherits the `reversa` orchestrator: same plan, same agent sequence, same checkpoints and the same confidence scale. The one difference is *when* it asks. Every decision the normal flow spreads along the way (installation data, documentation level, spec organization) is concentrated in a **single interview at the start**; questions already answered in `state.json` or `config.toml` are never asked again.
+
+It was designed for sessions with automatic tool approval (Claude Code YOLO mode or equivalent). Because there is no human approving each action, the guardrails are stricter: writes stay inside `.reversa/` and the output folder, no destructive or outward-facing command (delete, `git push`, publish, install) is ever run on its own, and anything ambiguous outside the Reversa folders is left untouched and reported at the end.
+
+After the interview it only stops for a **legitimate stop**: a closed list of situations that genuinely require a human. Everything else runs to the end.
 
 ---
 
@@ -64,7 +78,8 @@ Use when the legacy "code" is not source code, but a structured artifact like a 
 ## Recommended sequence
 
 ```
-/reversa → orchestrates everything automatically
+/reversa             → orchestrates everything automatically, pausing between agents
+/reversa-autonomous  → same sequence, one interview at the start, no intermediate stops
 
 Or manually, if you prefer to control each step:
 

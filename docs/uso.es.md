@@ -20,6 +20,41 @@ Eso es todo. Reversa toma el control y coordina todo el análisis desde ahí.
 
 ---
 
+## Elegir el comando de entrada
+
+`/reversa` es el punto de entrada para analizar un sistema existente, pero no es el único flujo:
+
+| Objetivo | Comando |
+|----------|---------|
+| Analizar un legado existente y producir specs | `/reversa` |
+| El mismo análisis, de punta a punta, sin paradas intermedias | `/reversa-autonomous` |
+| Empezar un proyecto nuevo desde una idea en una línea | `/reversa-new` (con `expresso` llega hasta el código) |
+| Evolucionar el sistema una feature a la vez, de la spec al código | `/reversa-forward` |
+| Converger una feature entregada de vuelta en la extracción | `/reversa-sync` |
+| Reconstruir el legado en un stack moderno | `/reversa-migrate` |
+| Renderizar el conocimiento extraído como mini-sitio HTML | `/reversa-docs` |
+| Registrar y corregir defectos con trazabilidad causal | `/reversa-debugger`, `/reversa-debugger-fix` |
+| Estimar esfuerzo, tamaño y precio desde las specs | `/reversa-pricing-profile`, `/reversa-pricing-size`, `/reversa-pricing-estimate` |
+
+---
+
+## Modo sin supervisión
+
+Si quieres que el análisis corra sin ti frente a la terminal:
+
+```
+/reversa-autonomous
+```
+
+Ejecuta exactamente los mismos agentes y fases que `/reversa`, pero concentra todas las preguntas en una **entrevista única al inicio** (datos de instalación, nivel de documentación, organización de las specs) y salta lo que ya esté respondido en `.reversa/state.json`. Tras la entrevista va hasta el final, deteniéndose solo ante la lista cerrada de situaciones que realmente requieren un humano.
+
+La misma idea existe del lado greenfield: `/reversa-new expresso "<tu idea>"` va de la idea al código implementado sin parar, encadenando con el ciclo forward en cuanto las specs están listas.
+
+!!! warning "Hecho para sesiones con aprobación automática"
+    Estos modos son para entornos donde las herramientas se aprueban automáticamente (modo YOLO de Claude Code o equivalente). Como nadie está aprobando cada acción, las barreras son más estrictas: la escritura queda restringida a `.reversa/` y las carpetas de salida, y ningún comando destructivo o de efecto externo (borrar, `git push`, publicar, instalar dependencias) se ejecuta por cuenta propia. Aun así, haz backup del proyecto antes de empezar, como se recomienda en la [página inicial](index.md).
+
+---
+
 ## Qué ocurre al activarlo
 
 Reversa verifica si hay un análisis en curso:

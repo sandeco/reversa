@@ -29,6 +29,9 @@ Marcado por defecto en el instalador.
         │
         ▼
 /reversa-coding          (ejecuta actions.md como código)
+        │
+        ▼
+/reversa-sync            (opcional, converge la entrega en _reversa_sdd/addenda/)
 ```
 
 `/reversa-forward` es el punto de entrada opcional del ciclo: observa el estado actual y dice cuál es el próximo skill. Útil cuando no recuerdas dónde te detuviste.
@@ -49,6 +52,7 @@ Marcado por defecto en el instalador.
 | `reversa-audit` | audit | Auditor estrictamente lector: contradicciones y lagunas entre requirements, roadmap y actions, con severidad reportada. |
 | `reversa-quality` | quality | Revisa la claridad de la escritura del `requirements.md`. No verifica tests de implementación. |
 | `reversa-coding` | coding | Ejecuta `actions.md` como código real, actualiza checkboxes y deja `legacy-impact.md` y `regression-watch.md`. |
+| `reversa-sync` | sync | Opcional, después del coding. Destila la feature entregada en una adenda en `_reversa_sdd/addenda/`, manteniendo la extracción representativa hasta la siguiente re-extracción. No edita los artefactos originales. |
 | `reversa-principles` | principles | Crea y mantiene principios duraderos del proyecto, separados de los requisitos de cada feature. |
 | `reversa-resume` | resume | Retoma una feature pausada listada en `paused-features` de `active-requirements.json`. |
 
@@ -58,4 +62,6 @@ Marcado por defecto en el instalador.
 
 Cada feature vive en su propia carpeta bajo `_reversa_forward/`. La ruta exacta se lee del campo `forward_folder` en `.reversa/state.json`.
 
-Los Code Forward Agents nunca tocan el código legado ni los artefactos del Discovery Team. Consumen las salidas de Discovery y escriben solo dentro de la carpeta forward.
+Los Code Forward Agents nunca tocan el código legado sin supervisión, ni editan los artefactos del Discovery Team. Consumen las salidas de Discovery y escriben dentro de la carpeta forward.
+
+La única excepción es `/reversa-sync`, que escribe en `_reversa_sdd/addenda/` — una carpeta nueva, creada solo para las adendas post-entrega. Los artefactos originales de la extracción (`architecture.md`, `domain.md`, specs) quedan intactos; la adenda solo apunta a las secciones que quedaron desfasadas.
