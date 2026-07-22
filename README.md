@@ -359,6 +359,112 @@ Every statement in the specs is marked with:
 
 ---
 
+## ⚡ Powering Reversa with OmniRoute (optional)
+
+Reversa delegates all LLM intelligence to the coding agent already installed
+in your environment (Claude Code, Codex, Cursor, Gemini CLI, …). So the cost
+of running Reversa equals the cost of running those CLIs against their
+providers.
+
+If you want to **zero out that cost** — or just consolidate every API key,
+gain automatic fallback and unlock premium models — point any supported
+engine to a local [OmniRoute](https://github.com/diegosouzapw/OmniRoute)
+instance.
+
+**OmniRoute** is a battle-tested open-source AI gateway (**⭐ 5.3k+ stars on
+GitHub**) that exposes a **single local endpoint** routing to
+**177 providers**. The killer feature for Reversa users:
+**50+ providers with a free tier — 11 of them free forever, no credit card**.
+
+### 🆓 50+ free providers — frontier models for $0
+
+| Free provider | Frontier models you unlock | Limit |
+|---|---|---|
+| **Kiro** | Claude **Opus 4.6**, **Sonnet 4.5**, **Haiku 4.5** | 50 credits/month |
+| **Qoder AI** | **Kimi K2 Thinking**, **DeepSeek R1**, Qwen3-Coder-Plus | ♾️ **Unlimited** |
+| **Pollinations** | **GPT-5**, Claude, Gemini, Llama 4 | 🔓 **No API key required** |
+| **LongCat** | LongCat Flash-Lite | 🔥 **50M tokens/day** |
+| **Gemini CLI** | Gemini 3 Flash | 180K/month |
+| **AgentRouter** | GPT-5, Claude, Gemini | US$100 free credits |
+| **Cloudflare Workers AI** | Llama 3, Mistral, Qwen | Generous free tier |
+| **Z.ai**, **Together**, **Groq**, **SambaNova**, **OpenCode Free** | Qwen 235B, Llama 3.3 70B, Mistral Large… | Free tier |
+| **+ 40 more** (Cerebras, Fireworks, Hyperbolic, Lambda, Nebius, OpenRouter, Ollama local, LM Studio local…) | Full catalog at `localhost:20128/dashboard/providers` | Mixed |
+
+Dirt-cheap paid models when you need them: **GLM-5 at US$0.50/1M tokens**,
+**MiniMax M2.5 at US$0.30/1M**, DeepSeek V3 — pennies per million tokens.
+
+### 🗜️ Context compression: 15–95% fewer tokens per call
+
+OmniRoute's flagship **RTK + Caveman stacked compression** automatically
+shrinks every prompt before it leaves your machine, with **~89% average
+savings on tool-heavy sessions** like the Reversa *Archaeologist* and
+*Coding* phases. Two effects matter for Reversa:
+
+- **Pay less** (or fit inside free-tier quotas you'd otherwise blow on
+  large legacies).
+- **Fit more context per call** — the *Archaeologist* can keep more
+  modules in scope at once without hitting the model's context window.
+
+The compression is transparent to your CLI: it sees the original prompt,
+OmniRoute sees the compressed wire format.
+
+### Why it matters for Reversa
+
+The Discovery pipeline (`/reversa`), and especially the *Archaeologist* and
+*Coding* agents, fire **hundreds of LLM calls** on large legacies. With
+OmniRoute in front of your CLI you get:
+
+| Feature | Benefit during a `/reversa` run |
+|---|---|
+| **Combos with 14 strategies** (priority, weighted, P2C, least-used, cost-optimized, context-relay, auto-combo, fill-first, round-robin, random, strict-random, reset-aware, lkgp, context-optimized) | Long Archaeologist sweeps stay responsive — load is auto-spread across providers |
+| **3-layer resilience** (provider circuit breaker → connection cooldown → per-model lockout) | A single rate-limited key never blocks an in-flight Reversa session |
+| **Unified key vault** | Stop pasting API keys into every CLI — manage them once in a dashboard |
+| **Format translation** OpenAI ↔ Claude ↔ Gemini ↔ Responses API | Claude Code can talk to OpenAI models; Codex can talk to Anthropic; etc. |
+| **Real-time cost & quota dashboard** | See exactly what each Reversa phase (Scout / Detective / Writer / Reviewer) is costing |
+| **MCP server (37 tools) + A2A + vector memory + guardrails + evals** | Full AI infrastructure for the agents Reversa orchestrates |
+
+### Quick setup
+
+1. Install OmniRoute (one time):
+   ```bash
+   # npm global
+   npm install -g omniroute && omniroute
+
+   # or Docker (AMD64 + ARM64)
+   docker run -d --name omniroute --restart unless-stopped \
+     -p 20128:20128 -v omniroute-data:/app/data \
+     diegosouzapw/omniroute:latest
+
+   # or desktop app (macOS / Windows / Linux)
+   # https://github.com/diegosouzapw/OmniRoute/releases
+   ```
+
+2. Open `http://localhost:20128`, set an admin password, click
+   **Providers → Kiro** (unlimited free Claude) or
+   **Providers → Pollinations** (zero auth).
+
+3. Point your engine at OmniRoute **before** running `/reversa`:
+
+   | Engine | Environment variable |
+   |---|---|
+   | Claude Code | `export ANTHROPIC_BASE_URL=http://localhost:20128` |
+   | Codex | `export OPENAI_BASE_URL=http://localhost:20128/v1` |
+   | Gemini CLI | `export GEMINI_API_BASE=http://localhost:20128/v1beta` |
+   | Cursor / Windsurf / Cline / Roo / Antigravity / Copilot / Aider | *Custom OpenAI endpoint* → `http://localhost:20128/v1` |
+
+4. Run Reversa normally: `/reversa` (or `reversa` for Codex).
+
+Full walkthrough with screenshots and per-agent tuning:
+[docs/integrations/omniroute](https://sandeco.github.io/reversa/integrations/omniroute/).
+
+> [!NOTE]
+> OmniRoute runs **entirely on your machine** (`localhost:20128`). Reversa
+> itself still doesn't request, store or transmit any API keys — this
+> integration only changes **where your already-installed coding CLI**
+> sends its traffic. Reversa's zero-LLM-dependency guarantee is preserved.
+
+---
+
 ## CLI commands
 
 ```bash

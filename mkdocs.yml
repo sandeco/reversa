@@ -130,6 +130,8 @@ plugins:
             Reversa New: Reversa New
             Reversa Forward: Reversa Forward
             Reconstructor: Reconstructor
+            Integrations: Integrações
+            OmniRoute: OmniRoute
         - locale: es
           name: Español
           build: true
@@ -189,6 +191,8 @@ plugins:
             Reversa New: Reversa New
             Reversa Forward: Reversa Forward
             Reconstructor: Reconstructor
+            Integrations: Integraciones
+            OmniRoute: OmniRoute
 
 nav:
   - Home: index.md
@@ -239,4 +243,6 @@ nav:
       - N8N Translator: agentes/n8n.md
   - Generated outputs: saidas/index.md
   - Developing from specs: desenvolvendo-com-specs.md
+  - Integrations:
+    - OmniRoute: integrations/omniroute.md
   - Contributing: contribuindo.md
