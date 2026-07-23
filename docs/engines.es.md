@@ -21,6 +21,7 @@ Reversa funciona con los principales motores de IA del mercado. El instalador de
 | **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Aider** | `CONVENTIONS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | **Amazon Q Developer** | `.amazonq/rules/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Mistral Vibe** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 
 ---
 
@@ -87,6 +88,12 @@ Agente de codificación para terminal. El entry file `CONVENTIONS.md` en la raí
 ## Amazon Q Developer
 
 CLI de IA de AWS. Usa reglas en `.amazonq/rules/` para instruir al agente por proyecto. El instalador crea `.amazonq/rules/reversa.md` sin interferir con otras reglas que puedas tener en esa carpeta.
+
+---
+
+## Mistral Vibe
+
+Agente de codificación para terminal de Mistral AI. Lee `AGENTS.md` de forma nativa (el primero encontrado subiendo desde el directorio actual), misma convención que Codex y Opencode — si alguno de ellos ya está instalado, el `AGENTS.md` existente se reutiliza sin duplicación. Comando CLI: `vibe`. La activación es por nombre: `reversa`.
 
 ---
 
