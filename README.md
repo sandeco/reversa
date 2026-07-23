@@ -149,7 +149,7 @@ For a **greenfield** project (no legacy to extract), start with `/reversa-new` i
 
 ## Agents
 
-Reversa organizes its agents in **eight specialized Teams**. The Discovery Team (Reversa Agents Core) and the Bug Agents are always installed; five Teams are pre-checked in the installer and Translators are opt-in.
+Reversa organizes its agents in **nine specialized Teams**. The Discovery Team (Reversa Agents Core) and the Bug Agents are always installed; six Teams are pre-checked in the installer and Translators are opt-in.
 
 | Team | Purpose | Entry command |
 |------|---------|---------------|
@@ -160,6 +160,7 @@ Reversa organizes its agents in **eight specialized Teams**. The Discovery Team 
 | **Pricing and Size Agents** | Estimate effort, size and pricing on top of the specs | `/reversa-pricing-*` |
 | **Documentation Team** | Render the extracted knowledge as a self-contained HTML mini-site | `/reversa-docs` |
 | **Bug Agents** | Track, debate and fix defects with causal traceability to the specs | `/reversa-debugger` |
+| **Code Quality Agents** | Improve existing code without changing behavior: refactor, optimize, standardize, prune dead code | `/reversa-refactor` |
 
 ### Discovery Team, required
 
@@ -270,6 +271,21 @@ A repository-native causal defect memory, organized by **context** (the feature/
 | **Depth Inspection** | Deep sweep of a problematic feature through specialized lenses (spec conformance, data flow, contracts, error states, test coverage, concurrency). Diagnosis only; confirmed findings become registered bugs. Activated via `/reversa-depth-inspection` |
 | **Bug Graph** | Regenerates the derived views: index, compact catalog, sparse relation matrix, mermaid graph with clusters and impact score, and the BUG ↔ SPEC traceability matrix on both ends (`_reversa_bugs/generated/` and `_reversa_sdd/traceability/bugs.md`). Activated via `/reversa-debugger-graph` |
 
+### Code Quality Agents
+
+Perfective and preventive maintenance on code that already works: improve the internal structure **without changing observable behavior**, and prove that preservation before touching the code. Organized by **context** under `_reversa_refactor/<context>/`, with each transformation anchored to the soul (`soul.md`) and confirmed specs. The founding rule: proposing a transformation and applying it are separate acts, and nothing touches the legacy without proof of behavior preservation (a **safety net** of characterization tests, plus soul and regression checks). Project code changes only through an approved, reversible diff gate.
+
+| Agent | Role |
+|-------|------|
+| **Refactor** | Orchestrator: inventories improvement opportunities, prioritizes by real ROI (hotpath, not aesthetics), routes to the right specialist and runs the gates. Never applies a transformation. Activated via `/reversa-refactor` |
+| **Restructure** | Internal structure at method/class level via the Fowler catalog, in small reversible steps. Activated via `/reversa-restructure` |
+| **Modularize** | Splits a large piece into cohesive modules with well-defined responsibility, respecting the soul's boundaries. Activated via `/reversa-modularize` |
+| **Decouple** | Reduces direct dependencies (dependency inversion, Feathers seams, cycle breaking), coupling measured before and after. Activated via `/reversa-decouple` |
+| **Optimize** | Reduces time, memory and resource use, with a before/after measurement and preserved output. Activated via `/reversa-optimize` |
+| **Simplify** | Replaces complex logic with a simpler one, with a proof of output equivalence. Activated via `/reversa-simplify` |
+| **Standardize** | Applies naming, formatting and organization conventions from the project's dominant pattern, never changing semantics. Activated via `/reversa-standardize` |
+| **Prune** | Removes dead code, and only what it can prove is dead, telling dead code from a suspected orphan. Activated via `/reversa-prune` |
+
 ---
 
 ## What is generated
@@ -344,6 +360,8 @@ After `/reversa-coding`, the optional `/reversa-sync` distills the delivered fea
 The Documentation Team writes only inside `_reversa_docs/` (HTML mini-site, fully offline).
 
 Bug Agents write only inside `_reversa_bugs/` (one folder per bug, plus generated views), spec addenda in `_reversa_sdd/addenda/` and the generated mirror `_reversa_sdd/traceability/bugs.md`. Original specs are never edited; project code changes only through approval gates with explicit diffs.
+
+Code Quality Agents write only inside `_reversa_refactor/` (opportunities, plans and transformation records per context). Project code changes exclusively through an approved, reversible diff gate, and only after the safety net proves behavior is preserved.
 
 ### Confidence scale
 

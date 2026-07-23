@@ -1,10 +1,10 @@
 # Agentes
 
-Reversa coordina **8 Teams especializados** de agentes. Cada agente hace una cosa y la hace bien; cada Team agrupa a los agentes en torno a una fase del trabajo.
+Reversa coordina **9 Teams especializados** de agentes. Cada agente hace una cosa y la hace bien; cada Team agrupa a los agentes en torno a una fase del trabajo.
 
 ---
 
-## Los 8 Teams
+## Los 9 Teams
 
 | Team | Función | En el instalador |
 |------|---------|------------------|
@@ -15,6 +15,7 @@ Reversa coordina **8 Teams especializados** de agentes. Cada agente hace una cos
 | **Pricing and Size Agents** | Estiman esfuerzo, tamaño y precio sobre las specs. Ver [Pricing](../pricing/index.md). | Marcado por defecto |
 | **Documentation Team** | Renderiza el conocimiento extraído como mini-sitio HTML autocontenido. Ver [Equipo de Documentación](../documentation/index.md). | Marcado por defecto |
 | **Bug Agents** | Rastrea, debate y corrige defectos con trazabilidad causal hasta las specs. Ver [Bug Agents](../bugs/index.md). | Siempre instalado |
+| **Code Quality Agents** | Mejoran el código existente sin cambiar el comportamiento: refactorizan, modularizan, desacoplan, optimizan, simplifican, estandarizan, eliminan código muerto. Ver [Code Quality Agents](../refactor/index.md). | Marcado por defecto |
 | **Translators N8N->Specs->Python** | Adaptadores que transforman artefactos estructurados (p. ej. un workflow N8N) en specs. Ver [N8N Translator](n8n.md). | Desmarcado |
 
 Las tablas siguientes detallan los agentes que componen el Team **Reversa Agents Core**.

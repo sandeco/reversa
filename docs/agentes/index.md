@@ -1,12 +1,12 @@
 # Agents
 
-Reversa coordinates **8 specialized Teams** of agents. Each agent does one thing and does it well; each Team groups agents around a phase of the work.
+Reversa coordinates **9 specialized Teams** of agents. Each agent does one thing and does it well; each Team groups agents around a phase of the work.
 
 The central orchestrator (Reversa itself) coordinates who enters when, in what order, and at what pace. But you can also trigger any agent directly when you need to.
 
 ---
 
-## The 8 Teams
+## The 9 Teams
 
 | Team | Role | In the installer |
 |------|------|------------------|
@@ -17,6 +17,7 @@ The central orchestrator (Reversa itself) coordinates who enters when, in what o
 | **Pricing and Size Agents** | Estimate effort, size and pricing on top of the specs. See [Pricing](../pricing/index.md). | Pre-checked |
 | **Documentation Team** | Render the extracted knowledge as a self-contained HTML mini-site. See [Documentation Team](../documentation/index.md). | Pre-checked |
 | **Bug Agents** | Track, debate and fix defects with causal traceability to the specs. See [Bug Agents](../bugs/index.md). | Always installed |
+| **Code Quality Agents** | Improve existing code without changing behavior: refactor, modularize, decouple, optimize, simplify, standardize, prune dead code. See [Code Quality Agents](../refactor/index.md). | Pre-checked |
 | **Translators N8N->Specs->Python** | Adapters that turn structured artifacts (e.g. an N8N workflow) into specs. See [N8N Translator](n8n.md). | Unchecked |
 
 The tables below detail the agents that make up the **Reversa Agents Core** Team.

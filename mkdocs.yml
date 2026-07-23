@@ -235,6 +235,8 @@ nav:
       - The 4 visual agents: documentation/agentes.md
     - Bug Agents:
       - Overview: bugs/index.md
+    - Code Quality Agents:
+      - Overview: refactor/index.md
     - Translators N8N->Specs->Python:
       - N8N Translator: agentes/n8n.md
   - Generated outputs: saidas/index.md
