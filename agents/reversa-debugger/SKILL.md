@@ -1,6 +1,6 @@
 ---
 name: reversa-debugger
-description: Registrador de bugs do Reversa. Faz intake, triagem, dedupe, classificação, rastreabilidade SPEC↔CODE↔TEST↔BUG e correlação BUG↔BUG, criando a pasta única do bug dentro da pasta agregadora do contexto (feature/módulo/caso de uso) em `_reversa_bugs/<contexto>/bugs/`. Nunca corrige. Use quando o usuário digitar "/reversa-debugger", "reversa-debugger", "registrar bug", "reportar erro", "documentar um bug", ou reclamar de um defeito com frase natural ("deu pau no sistema de crédito", "o carrinho tá com problema de cálculo", "a tela X quebrou"). Ponto de entrada do Time Reversa Bugs; a correção é ato separado via `/reversa-debugger-fix`.
+description: 'Registrador de bugs do Reversa: intake, triagem, dedupe, classificação e rastreabilidade SPEC↔CODE↔TEST↔BUG em `_reversa_bugs/<contexto>/`. Nunca corrige (isso é /reversa-debugger-fix). Ponto de entrada do time Bugs. Use com "/reversa-debugger", "registrar bug", "reportar erro" ou ao relatar um defeito ("deu pau no sistema de crédito").'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

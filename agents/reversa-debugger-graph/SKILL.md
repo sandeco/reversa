@@ -1,6 +1,6 @@
 ---
 name: reversa-debugger-graph
-description: Gerador de views do Time Reversa Bugs. Varre os bug.md (source of truth), valida invariantes e regenera as projeções: índice por status/phase, catálogo compacto, matriz esparsa de relações BUG↔BUG, grafo mermaid com clusters e impact score, e a matriz de rastreabilidade BUG↔SPEC nas duas pontas (incluindo o espelho em `_reversa_sdd/traceability/bugs.md`). Use quando o usuário digitar "/reversa-debugger-graph", "reversa-debugger-graph", "panorama dos bugs", "grafo de bugs", "regenerar índice de bugs" ou pedir a matriz de rastreabilidade de bugs.
+description: 'Gerador de views do time Bugs: varre os bug.md, valida invariantes e regenera índice, catálogo, matriz de relações BUG↔BUG, grafo mermaid e matriz de rastreabilidade BUG↔SPEC. Use com "/reversa-debugger-graph", "panorama dos bugs", "grafo de bugs", "regenerar índice de bugs".'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

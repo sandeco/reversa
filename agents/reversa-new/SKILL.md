@@ -1,6 +1,6 @@
 ---
 name: reversa-new
-description: Orquestrador do time Code New Project Agents do Reversa. Conduz o pipeline greenfield, partindo de uma ideia em linguagem natural e produzindo brainstorm, personas, PRD e specs SDD em `_reversa_sdd/`. Tem dois modos: guiado (passo a passo com CONTINUAR, termina nas specs) e expresso (entrevista única no início e execução de ponta a ponta, emendando no ciclo forward até o código). Use quando o usuário digitar "/reversa-new", "/reversa-new expresso", "reversa-new", "começar projeto novo", "criar projeto do zero", "da ideia ao código" ou pedir para iniciar um produto greenfield.
+description: 'Orquestrador greenfield do Reversa: da ideia em linguagem natural a brainstorm, personas, PRD e specs SDD em `_reversa_sdd/`. Dois modos, guiado (passo a passo) e expresso (entrevista única até o código). Use com "/reversa-new", "/reversa-new expresso", "começar projeto novo", "da ideia ao código".'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

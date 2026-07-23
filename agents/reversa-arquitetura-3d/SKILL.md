@@ -1,16 +1,6 @@
 ---
 name: reversa-arquitetura-3d
-description: >
-  Cria visualizações 3D interativas de arquitetura de software usando Three.js, gerando
-  HTML standalone com cenas navegáveis por câmera livre. Use esta skill sempre que o
-  usuário pedir para visualizar arquitetura, módulos, dependências, camadas ou hierarquia
-  de chamadas em 3D. Deve ser ativada quando o usuário mencionar termos como "code city",
-  "cidade de código", "arquitetura 3D", "dependency graph 3D", "module map 3D", "layer
-  stack 3D", "call graph 3D", "architecture tour", "tour pela arquitetura", "visualizar
-  software em 3D", "Three.js" no contexto de software, ou pedir para explorar a estrutura
-  de um sistema com câmera 3D. Funciona com JSON de módulos (nome, pasta, LOC, complexidade)
-  e dependências (grafo orientado). Sempre gera HTML standalone completo. Quando rodada
-  pelo Time Reversa Docs, usa Three.js servido localmente em assets/vendor/ (offline-first).
+description: Cria visualizações 3D interativas de arquitetura de software com Three.js, gerando HTML standalone navegável por câmera livre a partir de JSON de módulos e dependências. Use com "arquitetura 3D", "code city", "cidade de código", "dependency graph 3D", "call graph 3D", "tour pela arquitetura".
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

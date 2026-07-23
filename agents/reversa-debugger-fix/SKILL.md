@@ -1,6 +1,6 @@
 ---
 name: reversa-debugger-fix
-description: Corretor de bugs do Reversa, orquestrador do ciclo de vida do defeito. Reproduz, investiga causa raiz com evidências, oferece debate multiagente opt-in, cria testes de reprodução e regressão, aplica o Correction Change Set com diffs aprovados em dois gates, dá o veredito de spec (com adendo versionado quando a spec muda) e fecha conforme a closure policy. Use quando o usuário digitar "/reversa-debugger-fix", "reversa-debugger-fix", "corrigir o bug", "consertar o BUG-XXX" ou pedir a correção de um bug registrado. Exige bug registrado via `/reversa-debugger`.
+description: 'Corretor de bugs do Reversa: reproduz, investiga causa raiz, oferece debate opt-in, cria testes de reprodução e regressão, aplica o change set em dois gates aprovados, dá o veredito de spec e fecha pela closure policy. Exige bug registrado via /reversa-debugger. Use com "/reversa-debugger-fix", "corrigir o bug", "consertar o BUG-XXX".'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

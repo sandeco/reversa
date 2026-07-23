@@ -1,6 +1,6 @@
 ---
 name: reversa-forward
-description: Orquestrador do pipeline de evolução do Reversa. Detecta o estágio físico da feature ativa em `_reversa_forward/` e sugere o próximo agente do ciclo forward (requirements, clarify, plan, to-do, audit, quality, coding, sync). Use quando o usuário digitar "/reversa-forward", "reversa-forward", "iniciar evolução", "iniciar pipeline forward" ou pedir para conduzir o ciclo de uma feature do zero ao código. Não escreve artefatos de feature por conta própria, apenas roteia.
+description: 'Orquestrador do ciclo forward do Reversa: detecta o estágio da feature ativa em `_reversa_forward/` e roteia para o próximo agente (requirements, clarify, plan, to-do, audit, quality, coding, sync). Só roteia, não escreve artefatos. Use com "/reversa-forward", "iniciar evolução", "iniciar pipeline forward".'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:

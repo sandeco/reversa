@@ -1,6 +1,6 @@
 ---
 name: reversa-debugger-debate
-description: Debate multiagente do Time Reversa Bugs, em épocas fixas com juiz isolado, para decidir diagnóstico, estratégia de correção ou veredito de spec de um bug registrado. N solvers independentes debatem por R rodadas com snapshot síncrono; um juiz que não participou sintetiza. Sempre opt-in, com custo estimado antes. Pode incluir outros harness (Codex, Gemini CLI, OpenCode) como debatedores, somente com aceite explícito do usuário. Use quando o usuário digitar "/reversa-debugger-debate", "reversa-debugger-debate", "abrir debate sobre o bug", "debater a correção" ou aceitar a oferta de debate do /reversa-debugger-fix.
+description: 'Debate multiagente do time Bugs: N solvers em R rodadas com juiz isolado, para decidir diagnóstico, correção ou veredito de spec de um bug registrado. Sempre opt-in, com custo estimado; pode incluir outros harness (Codex, Gemini CLI). Use com "/reversa-debugger-debate", "abrir debate sobre o bug", "debater a correção".'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
