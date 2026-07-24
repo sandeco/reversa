@@ -112,3 +112,18 @@ Removes Reversa from the project: deletes the files created by the installation 
 
 !!! info "Your files stay intact"
     `uninstall` removes **only** what Reversa created. No original project file is touched. Specifications generated in `_reversa_sdd/` are also preserved by default.
+
+---
+
+## Orchestrator chat commands (not CLI)
+
+After activating `/reversa` in the engine chat, these shortcuts update documentation without going through `npx reversa`:
+
+| Command | Action |
+|---------|--------|
+| `indice` | Build/refresh `_reversa_sdd/README.md` |
+| `atualizar` | Update specs from commits since the last baseline |
+| `atualizar [unit]` | Same flow, scoped to one unit |
+| `atualizar --baseline` | Record HEAD as the initial baseline in `.reversa/doc-sync.json` |
+
+The doc↔code baseline lives in `.reversa/doc-sync.json` and in the append-only **Sincronização doc ↔ código** table of the index README — not in every spec file.
