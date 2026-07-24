@@ -16,6 +16,7 @@ El conjunto de artefactos generados depende del **nivel de documentación** eleg
 
 ```
 _reversa_sdd/
+├── README.md                 # Índice + tabla Sincronização doc ↔ código — todos
 ├── inventory.md              # Inventario del proyecto — todos
 ├── dependencies.md           # Dependencias con versiones — todos
 ├── code-analysis.md          # Análisis técnico por módulo — todos

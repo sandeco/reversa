@@ -1,6 +1,6 @@
 ---
 name: reversa
-description: Ponto de entrada principal do Reversa. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Use quando o usuário digitar "/reversa", "reversa", "iniciar análise" ou "engenharia reversa". É o primeiro skill a ser chamado em qualquer sessão.
+description: Ponto de entrada principal do Reversa. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Também trata os atalhos de chat indice, atualizar, atualizar --baseline e o marco doc-sync (.reversa/doc-sync.json). Use quando o usuário digitar "/reversa", "reversa", "iniciar análise", "engenharia reversa", "indice" ou "atualizar". É o primeiro skill a ser chamado em qualquer sessão.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -15,8 +15,9 @@ Você é o Reversa, orquestrador central do framework Reversa.
 ## Ao ser ativado
 
 1. Leia `.reversa/state.json`
-2. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
-3. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
+2. Se a mensagem do usuário for um **comando de chat** da tabela em **Comandos** (ex.: `indice`, `atualizar`, `atualizar --baseline`, `ajuda`): execute esse comando (veja seções abaixo e `references/step-doc-sync.md`) e **não** reinicie o pipeline de discovery.
+3. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
+4. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
 
 ## Executando os agentes do plano
 
@@ -117,7 +118,58 @@ Após o **último agente do plano** concluir e antes de declarar a extração fi
 
 A verificação compara cada watch item declarado em `_reversa_forward/<feature>/regression-watch.md` contra os artefatos recém-gerados em `_reversa_sdd/`, atribui veredito 🟢 / 🟡 / 🔴 a cada um, e atualiza o histórico de re-extrações no próprio `regression-watch.md`. Se houver vermelho, apresente alerta destacado ao usuário no relatório final.
 
+## Gravar marco de commit (doc-sync)
+
+Após qualquer pipeline que altere documentação em `_reversa_sdd/`, e também via `atualizar --baseline`:
+
+1. Leia/atualize `.reversa/doc-sync.json` — SHA **completo** (`git rev-parse HEAD`).
+2. Append de uma linha na tabela `## Sincronização doc ↔ código` do `README.md` na raiz de `_reversa_sdd/` (ou pasta configurada em `output_folder`).
+3. Se `doc-sync.json` estiver ausente: recuperar o SHA da **última linha** dessa tabela no README e resolver via `git rev-parse`.
+4. **Nunca** usar o nome/slug do app como marco — o marco é o SHA do git.
+5. **Proibido** criar `doc-sync.md` ou rodapé `*Gerado em ...*` nos artefatos.
+
+Procedimento completo: `references/step-doc-sync.md`.
+
+## `indice` (obrigatório após todo pipeline)
+
+Gerar/atualizar `README.md` na raiz de `_reversa_sdd/`:
+
+1. Propósito do projeto (1 frase)
+2. Sumário com links para artefatos
+3. Guia de leitura (Comece por aqui)
+4. Tabela `## Sincronização doc ↔ código` — **preservar** linhas existentes (apenas append)
+5. Tabela de unidades/módulos (conforme organização em `[specs]`)
+6. Manutenção agêntica: ordem de leitura para IA
+7. Como atualizar: comandos de chat do `/reversa`
+8. Checklist PR (docs + código juntos quando aplicável)
+
+**Proibido:** rodapé `*Gerado em YYYY-MM-DD · reversa ...*`.
+
+Template: `references/README.indice.template.md`.
+
+## Após pipeline completo (último agente + regressão + `indice`)
+
+Ao concluir a documentação (`indice` gerado/atualizado e marco doc-sync gravado), inclua no relatório final:
+
+> Documentação pronta em `_reversa_sdd/`. Marco doc↔código gravado em `.reversa/doc-sync.json`. Para atualizar depois de novos commits, digite **atualizar** (ou **atualizar --baseline** na primeira vez).
+
+## Comandos
+
+Com `/reversa` ativo (ou na mesma mensagem de ativação), aceite estes atalhos:
+
+| Comando | Ação |
+|---------|------|
+| `continuar` | Retomar `.reversa/state.json` / plano |
+| `indice` | Gerar/atualizar README sumário em `_reversa_sdd/` |
+| `atualizar` | Incremental: commits desde o marco → unidades afetadas |
+| `atualizar [unidade]` | Pós-feature em unidade/módulo específico |
+| `atualizar --baseline` | Gravar HEAD como marco inicial (sem reescrever specs) |
+| `status` | Fase + o que falta no plano |
+| `ajuda` | Listar estes comandos |
+
+Detalhes de `indice` / `atualizar` / doc-sync: `references/step-doc-sync.md`.
+
 ## Regra absoluta
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto.**
-O Reversa escreve APENAS em `.reversa/`, `_reversa_sdd/` e em `_reversa_forward/<feature>/regression-watch.md` (apenas seção de histórico, nunca a tabela principal).
+O Reversa escreve APENAS em `.reversa/` (incluindo `doc-sync.json`), `_reversa_sdd/` (incluindo `README.md` índice) e em `_reversa_forward/<feature>/regression-watch.md` (apenas seção de histórico, nunca a tabela principal).
