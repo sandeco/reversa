@@ -21,6 +21,7 @@ Reversa works with the leading AI engines on the market. The installer automatic
 | **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Aider** | `CONVENTIONS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | **Amazon Q Developer** | `.amazonq/rules/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Mistral Vibe** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 
 ---
 
@@ -87,6 +88,12 @@ Coding agent for the terminal. The entry file `CONVENTIONS.md` at the root is pa
 ## Amazon Q Developer
 
 AWS AI CLI. Uses rules in `.amazonq/rules/` to instruct the agent per project. The installer creates `.amazonq/rules/reversa.md` without interfering with other rules you may already have in that folder.
+
+---
+
+## Mistral Vibe
+
+Mistral AI's coding agent for the terminal. Reads `AGENTS.md` natively (first one found walking up from the current directory), same convention as Codex and Opencode — if one of them is already installed, the existing `AGENTS.md` is reused without duplication. CLI command: `vibe`. Activation is by agent name: `reversa`.
 
 ---
 
