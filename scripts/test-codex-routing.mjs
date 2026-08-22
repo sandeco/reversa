@@ -18,6 +18,7 @@ import { buildManifest, loadManifest, saveManifest } from '../lib/installer/mani
 import { Writer } from '../lib/installer/writer.js';
 import { buildUninstallPlan, removeManagedArtifacts } from '../lib/commands/uninstall.js';
 import modelsCommand from '../lib/commands/models.js';
+import { parse } from 'smol-toml';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
@@ -98,7 +99,17 @@ try {
   firstWriter.saveManifest();
 
   assert.equal(first.enabled, true);
-  assert.equal(first.profiles.length, 71);
+  assert.equal(
+    Object.keys(loadManifest(fixture)).some((path) => path.includes('\\')),
+    false,
+    'managed manifest keys must be platform-neutral',
+  );
+  assert.equal(first.profiles.length, 126);
+  for (const profile of first.profiles.filter(({ status }) => status !== 'user-owned')) {
+    const document = parse(readFileSync(join(fixture, profile.relativePath), 'utf8'));
+    assert.equal(document.name, profile.id);
+    assert.equal(typeof document.developer_instructions, 'string');
+  }
   assert.equal(first.profiles.find((profile) => profile.id === 'reversa-architect').status, 'user-owned');
   assert.equal(readFileSync(configPath, 'utf8'), existingConfig, '.codex/config.toml must remain byte-for-byte');
   assert.equal(readFileSync(customAgentPath, 'utf8'), customAgent, 'custom agents must remain byte-for-byte');
@@ -119,6 +130,21 @@ try {
   }
 
   const managedProfilePath = join(fixture, '.codex', 'agents', 'reversa-scout.toml');
+  const escalatedScoutPath = join(fixture, '.codex', 'agents', 'reversa-scout-t1.toml');
+  const baselineScout = readFileSync(managedProfilePath, 'utf8');
+  const escalatedScout = readFileSync(escalatedScoutPath, 'utf8');
+  assert.match(baselineScout, /recommended_profile: reversa-scout-t1/);
+  assert.match(baselineScout, /This session is already delegated/);
+  assert.match(escalatedScout, /name = "reversa-scout-t1"/);
+  assert.match(escalatedScout, /model = "gpt-5\.6-terra"/);
+  assert.match(escalatedScout, /model_reasoning_effort = "medium"/);
+  assert.match(escalatedScout, /\.agents\/skills\/reversa-scout\/SKILL\.md/);
+  assert.doesNotMatch(escalatedScout, /compute_escalation:/);
+  assert.equal(
+    existsSync(join(fixture, '.codex', 'agents', 'reversa-architect-t4.toml')),
+    false,
+    'T3 agents must not receive an automatic escalation profile',
+  );
   const beforeSecondInstall = readFileSync(managedProfilePath, 'utf8');
   const secondWriter = new Writer(fixture);
   installCodexProfiles(secondWriter, allAgents, loadManifest(fixture));
@@ -178,7 +204,10 @@ try {
   assert.equal(codexDiagnostics.profile_generation_enabled, true);
   assert.equal(modelDiagnostics.runtime_verification, 'unavailable');
   assert.equal(codexDiagnostics.capabilities.model_override, false);
-  assert.equal(codexDiagnostics.agents.length, 71);
+  assert.equal(codexDiagnostics.agents.length, 126);
+  const escalatedDiagnostic = codexDiagnostics.agents.find((agent) => agent.agent === 'reversa-scout-t1');
+  assert.equal(escalatedDiagnostic.skill, 'reversa-scout');
+  assert.equal(escalatedDiagnostic.escalated_from, 'T0');
 
   const humanModelOutput = [];
   try {
@@ -193,7 +222,25 @@ try {
   assert.match(humanModelOutput.join('\n'), /runtime verification unavailable/i);
   const agentsContract = readFileSync(join(repoRoot, 'templates', 'engines', 'AGENTS.md'), 'utf8');
   assert.match(agentsContract, /custom agents .* (disponíveis|ignored|falharem)/i);
-  assert.match(agentsContract, /no máximo uma vez por tarefa lógica/i);
+  assert.match(agentsContract, /uma única vez por tarefa lógica/i);
+  assert.match(agentsContract, /recommended_profile/);
+  const routingContract = readFileSync(
+    join(repoRoot, 'agents', 'reversa', 'references', 'codex-routing.md'),
+    'utf8',
+  );
+  assert.match(routingContract, /exact custom-agent name/);
+  assert.match(routingContract, /one logical task at a time/);
+  assert.match(routingContract, /Entrypoint bootstrap/);
+  assert.match(routingContract, /whole flow once/);
+  const orchestratorSkills = allAgents.filter((agentId) => {
+    const skill = readFileSync(join(repoRoot, 'agents', agentId, 'SKILL.md'), 'utf8');
+    return /^\s*role:\s*orchestrator\s*$/m.test(skill);
+  });
+  assert.equal(orchestratorSkills.length, 9);
+  for (const agentId of orchestratorSkills) {
+    const skill = readFileSync(join(repoRoot, 'agents', agentId, 'SKILL.md'), 'utf8');
+    assert.match(skill, /reversa\/references\/codex-routing\.md|references\/codex-routing\.md/);
+  }
 
   writeFileSync(userConfigPath, '[codex.capabilities]\ncustom_agents = false\n', 'utf8');
   const noCustomAgents = loadRoutingPolicy(fixture, allAgents);
@@ -204,6 +251,7 @@ try {
   assert.equal(noCustomAgentProfiles.enabled, true);
   assert.equal(noCustomAgentProfiles.profileGenerationEnabled, false);
   assert.equal(existsSync(managedProfilePath), false, 'managed profiles should be removed when custom agents are disabled');
+  assert.equal(existsSync(escalatedScoutPath), false, 'managed escalation profiles should also be removed');
   const capabilityLock = JSON.parse(readFileSync(join(fixture, '.reversa', '_config', 'codex-routing.lock.json'), 'utf8'));
   assert.equal(capabilityLock.profile_generation_enabled, false);
   assert.equal(capabilityLock.capabilities.custom_agents, false);

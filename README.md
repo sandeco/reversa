@@ -435,7 +435,7 @@ effort = "high"
 
 `config.user.toml` is never replaced during updates. A modified managed profile is also preserved. Reversa never writes or merges `.codex/config.toml` or `.claude/settings*.json`, never owns either agents directory, and uninstall removes only individually tracked Reversa files. User-defined custom agents remain untouched.
 
-Generated Codex TOML and Claude Markdown profiles contain engine configuration plus a reference to the installed skill; the skill remains the single source of behavioral instructions. Read-only permissions are applied only to roles proven not to create Reversa artifacts.
+Generated Codex TOML and Claude Markdown profiles contain engine configuration plus a reference to the installed skill; the skill remains the single source of behavioral instructions. Codex also receives one generated next-class alias for every T0, T1, and T2 agent. Read-only permissions are applied only to roles proven not to create Reversa artifacts.
 
 Agents can recommend a one-step escalation with this contract:
 
@@ -443,15 +443,16 @@ Agents can recommend a one-step escalation with this contract:
 compute_escalation:
   required: true
   recommended_class: T2
+  recommended_profile: reversa-detective-t2
   reason: "Cross-module implicit state transition discovered"
   max_auto_escalations_for_task: 1
 ```
 
-The orchestrator may automatically escalate at most once per logical task. Reversa never selects `max` effort automatically and prevents recursive escalation loops.
+The orchestrator dispatches each child skill to its exact custom-agent name and waits for it before advancing. It may retry once through the generated `recommended_profile`, which points only to the next Compute Class for the same skill. Reversa never selects `max` effort automatically and prevents recursive escalation loops.
 
 Reversa targets project-scoped `.codex/agents/*.toml` and `.claude/agents/*.md` profiles. Each engine has independent capability flags, so unsupported model, effort, permission, or skill-preload fields can be disabled without patching individual skills. If custom agents are unavailable entirely, `AGENTS.md` or `CLAUDE.md` runs the same installed skill in the current agent.
 
-Run `npx reversa models` (or `npx reversa models --json`) to inspect every installed agent's configured class, emitted profile fields, capability flags, override count, and managed profile status. The command deliberately reports **Runtime verification unavailable**; it does not claim that a running Codex session actually used the configured model.
+Run `npx reversa models` (or `npx reversa models --json`) to inspect every generated profile's configured class, source skill, escalation origin, emitted fields, capability flags, override count, and managed status. The command deliberately reports **Runtime verification unavailable**; it does not claim that a running Codex session actually used the configured model.
 
 To disable generated profiles while keeping all Reversa skills available:
 

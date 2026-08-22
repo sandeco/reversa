@@ -1,18 +1,17 @@
 #!/usr/bin/env node
-// Smoke test do transporte de marcas pelo installer.
+// Smoke test for invocation metadata copied by the installer.
 //
-// O installer (lib/installer/writer.js) instala cada skill com
-// cpSync(src, dest, { recursive: true }). Este teste exercita esse mesmo
-// mecanismo numa pasta temporária e confirma que as DUAS marcas do eixo de
-// invocação sobrevivem à cópia — a flag disable-model-invocation no SKILL.md
-// e o policy.allow_implicit_invocation no agents/openai.yaml. É o que garante
-// que a economia de contexto vale também na máquina do usuário, não só na fonte.
+// The installer uses cpSync(src, dest, { recursive: true }) for each skill.
+// This test exercises the same transport in a temporary directory and verifies
+// that both invocation controls survive: disable-model-invocation in SKILL.md
+// and policy.allow_implicit_invocation in agents/openai.yaml.
 import { cpSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = new URL('..', import.meta.url).pathname;
-const SKILL = 'reversa-scout'; // user-invoked representativo
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const SKILL = 'reversa-scout';
 const src = join(ROOT, 'agents', SKILL);
 
 const tmp = mkdtempSync(join(tmpdir(), 'reversa-transport-'));

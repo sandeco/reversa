@@ -47,6 +47,7 @@ try {
 
   const modifiedPath = join(fixture, '.codex', 'agents', 'reversa-writer.toml');
   const missingPath = join(fixture, '.codex', 'agents', 'reversa-scout.toml');
+  const escalationPath = join(fixture, '.codex', 'agents', 'reversa-scout-t1.toml');
   const modifiedBytes = `${readFileSync(modifiedPath, 'utf8')}# user modification\n`;
   writeFileSync(modifiedPath, modifiedBytes, 'utf8');
   unlinkSync(missingPath);
@@ -61,6 +62,7 @@ try {
 
   assert.equal(readFileSync(modifiedPath, 'utf8'), modifiedBytes, 'update preserves modified managed profile');
   assert.equal(existsSync(missingPath), true, 'update restores missing managed profile');
+  assert.equal(existsSync(escalationPath), true, 'update preserves generated next-class profiles');
   assert.equal(readFileSync(configPath, 'utf8'), configBytes, 'update preserves .codex/config.toml byte-for-byte');
   assert.equal(readFileSync(customAgentPath, 'utf8'), customAgentBytes, 'update preserves custom Codex agent');
   assert.equal(readFileSync(otherEnginePath, 'utf8'), otherEngineBytes, 'Codex update leaves other engines untouched');
