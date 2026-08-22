@@ -448,7 +448,9 @@ compute_escalation:
   max_auto_escalations_for_task: 1
 ```
 
-The orchestrator dispatches each child skill to its exact custom-agent name and waits for it before advancing. It may retry once through the generated `recommended_profile`, which points only to the next Compute Class for the same skill. Reversa never selects `max` effort automatically and prevents recursive escalation loops.
+The orchestrator prefers an engine's native exact custom-agent selector and waits for the child before advancing. In Codex runtimes that expose `spawn_agent` model/reasoning overrides but no project-profile selector, the installed routing contract reads the generated TOML and reproduces that profile with `fork_turns: "none"`. It reuses an existing matching agent through `followup_task`, never starts a nested standalone `codex exec`, and falls back to the installed skill locally if dispatch is unavailable or fails. A partially completed result is inspected before local replay to avoid duplicate side effects.
+
+The orchestrator may retry once through the generated `recommended_profile`, which points only to the next Compute Class for the same skill. Portable dispatch uses the escalated profile's own model, reasoning effort, and normalized task name. Reversa never selects `max` effort automatically and prevents recursive escalation loops.
 
 Reversa targets project-scoped `.codex/agents/*.toml` and `.claude/agents/*.md` profiles. Each engine has independent capability flags, so unsupported model, effort, permission, or skill-preload fields can be disabled without patching individual skills. If custom agents are unavailable entirely, `AGENTS.md` or `CLAUDE.md` runs the same installed skill in the current agent.
 

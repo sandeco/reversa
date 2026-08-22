@@ -221,14 +221,23 @@ try {
   assert.match(humanModelOutput.join('\n'), /configured/i);
   assert.match(humanModelOutput.join('\n'), /runtime verification unavailable/i);
   const agentsContract = readFileSync(join(repoRoot, 'templates', 'engines', 'AGENTS.md'), 'utf8');
-  assert.match(agentsContract, /custom agents .* (disponíveis|ignored|falharem)/i);
+  assert.match(agentsContract, /portable profile dispatch/i);
+  assert.match(agentsContract, /spawn_agent/);
+  assert.match(agentsContract, /fork_turns: "none"/);
+  assert.match(agentsContract, /não inicie um `codex exec` aninhado/i);
   assert.match(agentsContract, /uma única vez por tarefa lógica/i);
   assert.match(agentsContract, /recommended_profile/);
   const routingContract = readFileSync(
     join(repoRoot, 'agents', 'reversa', 'references', 'codex-routing.md'),
     'utf8',
   );
-  assert.match(routingContract, /exact custom-agent name/);
+  assert.match(routingContract, /Native project custom agent/);
+  assert.match(routingContract, /Portable profile dispatch/);
+  assert.match(routingContract, /spawn_agent/);
+  assert.match(routingContract, /fork_turns: "none"/);
+  assert.match(routingContract, /followup_task/);
+  assert.match(routingContract, /Do not start a nested standalone `codex exec`/);
+  assert.match(routingContract, /no thread with id/);
   assert.match(routingContract, /one logical task at a time/);
   assert.match(routingContract, /Entrypoint bootstrap/);
   assert.match(routingContract, /whole flow once/);
