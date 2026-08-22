@@ -395,6 +395,86 @@ Every statement in the specs is marked with:
 
 ---
 
+## Adaptive Model Routing
+
+When Codex or Claude Code is selected, Reversa installs project-scoped custom agents and assigns each Reversa agent a semantic **Compute Class**. Model names are configurable per-engine policy, not part of an individual skill's behavior.
+
+| Compute | Workload | Codex | Claude Code | Effort |
+| ------- | -------- | ----- | ----------- | ------ |
+| ROOT | Reversa orchestrators | `gpt-5.6-sol` | `opus` | `high` |
+| T0 | mechanical search, mapping, deterministic checks | `gpt-5.6-luna` | `haiku` | `low` |
+| T1 | implementation, writing, structured generation | `gpt-5.6-terra` | `sonnet` | `medium` |
+| T2 | deep analysis, debugging, review | `gpt-5.6-sol` | `opus` | `high` |
+| T3 | architecture, debate, critical decisions | `gpt-5.6-sol` | `opus` | `xhigh` |
+
+The centralized project policy is `.reversa/model-routing.toml`. Reversa resolves settings in this order:
+
+```text
+built-in defaults
+< project .reversa/model-routing.toml
+< .reversa/config.user.toml
+< explicit [<engine>.agents.<agent>] override
+```
+
+For example:
+
+```toml
+[codex.compute.T0]
+reasoning = "medium"
+
+[codex.agents.reversa-coding]
+compute_class = "T2"
+model = "gpt-5.6-sol"
+reasoning = "high"
+
+[claude.agents.reversa-coding]
+compute_class = "T2"
+model = "opus"
+effort = "high"
+```
+
+`config.user.toml` is never replaced during updates. A modified managed profile is also preserved. Reversa never writes or merges `.codex/config.toml` or `.claude/settings*.json`, never owns either agents directory, and uninstall removes only individually tracked Reversa files. User-defined custom agents remain untouched.
+
+Generated Codex TOML and Claude Markdown profiles contain engine configuration plus a reference to the installed skill; the skill remains the single source of behavioral instructions. Read-only permissions are applied only to roles proven not to create Reversa artifacts.
+
+Agents can recommend a one-step escalation with this contract:
+
+```yaml
+compute_escalation:
+  required: true
+  recommended_class: T2
+  reason: "Cross-module implicit state transition discovered"
+  max_auto_escalations_for_task: 1
+```
+
+The orchestrator may automatically escalate at most once per logical task. Reversa never selects `max` effort automatically and prevents recursive escalation loops.
+
+Reversa targets project-scoped `.codex/agents/*.toml` and `.claude/agents/*.md` profiles. Each engine has independent capability flags, so unsupported model, effort, permission, or skill-preload fields can be disabled without patching individual skills. If custom agents are unavailable entirely, `AGENTS.md` or `CLAUDE.md` runs the same installed skill in the current agent.
+
+Run `npx reversa models` (or `npx reversa models --json`) to inspect every installed agent's configured class, emitted profile fields, capability flags, override count, and managed profile status. The command deliberately reports **Runtime verification unavailable**; it does not claim that a running Codex session actually used the configured model.
+
+To disable generated profiles while keeping all Reversa skills available:
+
+```toml
+[codex]
+enabled = false
+
+[claude]
+enabled = false
+```
+
+To keep custom agents but force model and effort inheritance from the current session:
+
+```toml
+[codex.capabilities]
+model_override = false
+reasoning_override = false
+
+[claude.capabilities]
+model_override = false
+effort_override = false
+```
+
 ## Supported engines
 
 | Engine | File created | Skills path | Activation |
@@ -420,6 +500,7 @@ Every statement in the specs is marked with:
 ```bash
 npx reversa install      # Install Reversa in the project
 npx reversa status       # Show current analysis state
+npx reversa models       # Show configured model routing and profile ownership status
 npx reversa update       # Update agents to the latest version
 npx reversa add-agent    # Add an agent to the project
 npx reversa add-engine   # Add support for a new engine

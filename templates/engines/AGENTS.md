@@ -17,8 +17,15 @@ Use o fluxo adequado no chat:
 
 Quando o usuário digitar `reversa` sozinho em uma mensagem:
 
-1. Ative o skill `reversa` disponível em `.agents/skills/reversa/SKILL.md`
-2. Leia o SKILL.md na íntegra e siga exatamente as instruções do Reversa
+1. Se existir um custom agent de projeto com o mesmo nome do fluxo, delegue o fluxo a ele uma única vez; o perfil aplica o Compute Class configurado.
+2. Se custom agents não estiverem disponíveis, forem ignorados ou falharem, ative diretamente o skill correspondente em `.agents/skills/<fluxo>/SKILL.md`.
+3. Leia o SKILL.md na íntegra e siga exatamente as instruções do Reversa.
+
+## Codex Compute Routing
+
+Os perfis em `.codex/agents/reversa-*.toml` são configuração derivada. O comportamento continua definido pelos `SKILL.md` instalados.
+
+Se um agente retornar `compute_escalation`, o orchestrator pode subir apenas um nível e no máximo uma vez por tarefa lógica. Nunca selecione `max` automaticamente e nunca crie um loop de escalonamento. Se o runtime não suportar custom agents ou overrides de modelo, continue o fluxo pelo skill atual sem falhar a execução do Reversa.
 
 ## Regra não-negociável
 
