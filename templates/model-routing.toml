@@ -28,6 +28,11 @@ reasoning = "medium"
 model = "gpt-5.6-sol"
 reasoning = "high"
 
+[codex.agents.reversa-debugger-fix]
+compute_class = "T2"
+model = "gpt-5.6-terra"
+reasoning = "high"
+
 [codex.compute.T3]
 model = "gpt-5.6-sol"
 reasoning = "xhigh"

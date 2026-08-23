@@ -27,7 +27,7 @@ const allAgents = readdirSync(join(repoRoot, 'agents'), { withFileTypes: true })
   .map((entry) => entry.name)
   .sort();
 
-assert.equal(allAgents.length, 71, 'expected the complete Reversa agent inventory');
+assert.equal(allAgents.length, 72, 'expected the complete Reversa agent inventory');
 assertCompleteCatalog(allAgents);
 assert.deepEqual(Object.keys(AGENT_CATALOG).sort(), allAgents, 'catalog must classify every agent exactly once');
 
@@ -51,7 +51,7 @@ const expectedClassGroups = {
   ],
   T2: [
     'reversa-archaeologist', 'reversa-audit', 'reversa-curator', 'reversa-data-master',
-    'reversa-decouple', 'reversa-design-system', 'reversa-detective', 'reversa-docs-analyst',
+    'reversa-decouple', 'reversa-design-system', 'reversa-detective', 'reversa-debugger-review', 'reversa-docs-analyst',
     'reversa-extract-soul', 'reversa-framer', 'reversa-inspector', 'reversa-modularize',
     'reversa-optimize', 'reversa-paradigm-advisor', 'reversa-quality', 'reversa-researcher',
     'reversa-reviewer', 'reversa-restructure', 'reversa-screen-translator', 'reversa-strategist',
@@ -67,7 +67,7 @@ const expectedClassByAgent = Object.fromEntries(
 assert.deepEqual(
   Object.fromEntries(Object.entries(AGENT_CATALOG).map(([id, metadata]) => [id, metadata.computeClass])),
   expectedClassByAgent,
-  'the complete 71-agent default classification is an explicit compatibility contract',
+  'the complete 72-agent default classification is an explicit compatibility contract',
 );
 
 const fixture = mkdtempSync(join(tmpdir(), 'reversa-codex-routing-'));
@@ -104,7 +104,7 @@ try {
     false,
     'managed manifest keys must be platform-neutral',
   );
-  assert.equal(first.profiles.length, 126);
+  assert.equal(first.profiles.length, 128);
   for (const profile of first.profiles.filter(({ status }) => status !== 'user-owned')) {
     const document = parse(readFileSync(join(fixture, profile.relativePath), 'utf8'));
     assert.equal(document.name, profile.id);
@@ -121,6 +121,7 @@ try {
     'reversa-scout': ['T0', 'gpt-5.6-luna', 'low'],
     'reversa-coding': ['T1', 'gpt-5.6-terra', 'medium'],
     'reversa-detective': ['T2', 'gpt-5.6-sol', 'high'],
+    'reversa-debugger-review': ['T2', 'gpt-5.6-sol', 'high'],
     'reversa-architect': ['T3', 'gpt-5.6-sol', 'xhigh'],
   };
   const defaultRouting = loadRoutingPolicy(fixture, allAgents);
@@ -144,6 +145,13 @@ try {
     existsSync(join(fixture, '.codex', 'agents', 'reversa-architect-t4.toml')),
     false,
     'T3 agents must not receive an automatic escalation profile',
+  );
+  const reviewProfilePath = join(fixture, '.codex', 'agents', 'reversa-debugger-review.toml');
+  assert.match(readFileSync(reviewProfilePath, 'utf8'), /sandbox_mode = "read-only"/);
+  assert.equal(
+    existsSync(join(fixture, '.codex', 'agents', 'reversa-debugger-review-t3.toml')),
+    false,
+    'the independent reviewer must not receive an automatic escalation profile',
   );
   const beforeSecondInstall = readFileSync(managedProfilePath, 'utf8');
   const secondWriter = new Writer(fixture);
@@ -204,7 +212,7 @@ try {
   assert.equal(codexDiagnostics.profile_generation_enabled, true);
   assert.equal(modelDiagnostics.runtime_verification, 'unavailable');
   assert.equal(codexDiagnostics.capabilities.model_override, false);
-  assert.equal(codexDiagnostics.agents.length, 126);
+  assert.equal(codexDiagnostics.agents.length, 128);
   const escalatedDiagnostic = codexDiagnostics.agents.find((agent) => agent.agent === 'reversa-scout-t1');
   assert.equal(escalatedDiagnostic.skill, 'reversa-scout');
   assert.equal(escalatedDiagnostic.escalated_from, 'T0');
@@ -328,7 +336,7 @@ try {
   assert.equal(readFileSync(userProfile, 'utf8'), customAgent, 'user profile survives uninstall');
   assert.equal(readFileSync(userCodexConfig, 'utf8'), existingConfig, 'Codex config survives uninstall');
 
-  console.log('Codex routing: 71 agents classified; routing, overrides, idempotency, fallback, and ownership checks passed.');
+console.log('Codex routing: 72 agents classified; routing, overrides, idempotency, fallback, and ownership checks passed.');
 } finally {
   rmSync(fixture, { recursive: true, force: true });
 }

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Reversa Debugger Review"
+  short_description: "Independent read-only review after Gate 2"
+  default_prompt: "Use $reversa-debugger-review to review the approved Gate 2 change set."
+policy:
+  allow_implicit_invocation: false

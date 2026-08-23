@@ -67,7 +67,11 @@ Mitigação aplicada é registrada em `mitigation:` (kind, applied_at, temporary
 ### 4. Risco da mudança e estratégia
 
 1. Avalie `change_risk` (baixa/média/alta) com motivos: blast radius, contrato externo, dados, concorrência, reversibilidade
-2. Apresente o menu de estratégia:
+2. When running through a baseline profile, first make the task evaluable: clarify the acceptance criteria, narrow the scope where possible, and separate infrastructure failures from reasoning failures. Do not increase compute for missing access, unavailable dependencies, transient tool errors, or other environment problems.
+3. Request the one permitted higher-compute retry from the parent orchestrator only when current-task evidence shows that the task materially exceeds the baseline: a high-risk change with potentially irreversible impact, unresolved competing causal explanations without a safe discriminating check, a baseline result that fails explicit acceptance criteria, or a broad change whose interactions cannot be safely assessed with the available evidence.
+   Report only the evidence-backed `compute_escalation` contract supplied by the profile, including the failed baseline evidence or risk basis. Do not start the retry yourself, do not escalate more than once, and do not escalate routine administrative, documentation, or closure work.
+4. If none of the conditions applies, keep the entire task on the baseline profile.
+5. Apresente o menu de estratégia:
 
 ```
 Causa raiz: <resumo> (estado: <state>). Risco da mudança: <classificação> (<motivos>).
@@ -112,6 +116,12 @@ Apresente o caminho do `plan.html`, peça para o usuário abrir e **aguarde a ap
 2. **Impacto em dados**: código curado não é sistema curado. Se há estado histórico corrompido (registros, cache, mensagens publicadas), o reparo entra no change set como `data-repair` com dry-run, backup verificado e rollback disponível
 3. Mostre TODOS os diffs (um por item CHG-NNN), aguarde aprovação, aplique e **demonstre que os testes passam** (cole a saída). Salve os diffs em `fix/CHG-NNN.diff`
 4. Respeite os Agent Notes do bug (restrições de quem registrou). Alterações cirúrgicas: nada de refatoração ampla junto da correção.
+
+### 6.1 Independent review after Gate 2
+
+After Gate 2 has been approved, applied, and demonstrated green, invoke `reversa-debugger-review` sequentially when the change is high risk or materially broad. The reviewer is read-only: it may inspect the diff, affected code, and test evidence but must not modify source, tests, specs, bug records, or Reversa artifacts.
+
+Its response is either `approve` or `reject`. A rejection must name the concrete file or artifact, the evidence, and the required follow-up. Do not proceed to the spec verdict until a triggered review approves or the user explicitly decides how to handle the rejection.
 
 ### 7. Veredito de spec (obrigatório)
 
