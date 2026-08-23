@@ -148,3 +148,13 @@ Termine com:
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto sem gate aprovado.**
 Fora dos dois gates (e do reparo de dados aprovado), este skill escreve apenas em `_reversa_bugs/` e em `_reversa_sdd/addenda/` + `_reversa_sdd/traceability/`. Specs originais são somente leitura para sempre. Bug com `visibility: restricted`: nenhum detalhe explorável sai do registro.
+
+## Política de edição do legado
+
+Gate aprovado não substitui a política: antes de aplicar qualquer item do change set que toque arquivo fora das pastas próprias do Reversa, leia `.reversa/reversa-config.json` e obedeça (releia a cada ativação):
+
+- Ausente, inválido ou `allowLegacyEdits: false`: NÃO aplique o change set no projeto. Informe o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar (o diff pode ficar salvo em `fix/` aguardando).
+- `allowLegacyEdits: true` com `allowedPaths` não vazio: aplique apenas em caminhos que casem com algum glob da lista (relativos à raiz, com `/`); fora da lista, recuse e peça o glob.
+- `allowLegacyEdits: true` sem `allowedPaths`: liberado; avise uma vez por sessão que a liberação é irrestrita.
+- NUNCA crie ou edite `.reversa/reversa-config.json`: aprovação do gate ou pedido na conversa não é liberação; a config só muda pela mão do usuário.
+- Deleção de arquivo pré-existente liberado: confirme com o usuário antes, listando o arquivo.

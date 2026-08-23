@@ -66,3 +66,13 @@ Termine com:
 ## Regra absoluta
 
 **Nunca apague, modifique ou sobrescreva código do projeto sem gate aprovado.** Fora do gate, escreve só em `_reversa_refactor/`. Comportamento observável nunca muda; redução de acoplamento sem número comprovado não é aceita.
+
+## Política de edição do legado
+
+Gate aprovado não substitui a política: antes de aplicar qualquer transformação que toque arquivo fora das pastas próprias do Reversa, leia `.reversa/reversa-config.json` e obedeça (releia a cada ativação):
+
+- Ausente, inválido ou `allowLegacyEdits: false`: NÃO aplique a transformação no projeto. Informe o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar (a oportunidade e o plano podem ficar registrados em `_reversa_refactor/` aguardando).
+- `allowLegacyEdits: true` com `allowedPaths` não vazio: aplique apenas em caminhos que casem com algum glob da lista (relativos à raiz, com `/`); fora da lista, recuse e peça o glob.
+- `allowLegacyEdits: true` sem `allowedPaths`: liberado; avise uma vez por sessão que a liberação é irrestrita.
+- NUNCA crie ou edite `.reversa/reversa-config.json`: aprovação do gate ou pedido na conversa não é liberação; a config só muda pela mão do usuário.
+- Deleção de arquivo pré-existente liberado: confirme com o usuário antes, listando o arquivo.

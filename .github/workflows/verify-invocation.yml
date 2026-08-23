@@ -11,12 +11,14 @@ on:
       - 'agents/**'
       - 'scripts/verify-invocation.py'
       - 'scripts/test-installer-transport.mjs'
+      - 'scripts/test-code-express-compat.mjs'
       - '.github/workflows/verify-invocation.yml'
   pull_request:
     paths:
       - 'agents/**'
       - 'scripts/verify-invocation.py'
       - 'scripts/test-installer-transport.mjs'
+      - 'scripts/test-code-express-compat.mjs'
   workflow_dispatch:
 
 jobs:
@@ -34,3 +36,5 @@ jobs:
         run: python3 scripts/verify-invocation.py
       - name: Smoke test de transporte do installer
         run: node scripts/test-installer-transport.mjs
+      - name: Compatibilidade do /reversa-code-express
+        run: node scripts/test-code-express-compat.mjs

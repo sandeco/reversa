@@ -234,6 +234,16 @@ Este agente faz parte do Time de Migração e escreve exclusivamente em `_revers
 - Modo padrão é interativo. `--auto` é explícito e exibe os defaults antes de aplicar.
 - Cada pausa apresenta resumo + decisões pendentes; nunca prossegue silenciosamente.
 
+## Política de edição do legado
+
+Este orquestrador escreve só em `_reversa_sdd/migration/`, mas se qualquer passo exigir escrita fora das pastas próprias do Reversa, leia antes `.reversa/reversa-config.json` e obedeça (releia a cada ativação):
+
+- Ausente, inválido ou `allowLegacyEdits: false`: recuse a escrita informando o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar.
+- `allowLegacyEdits: true` com `allowedPaths` não vazio: escreva apenas em caminhos que casem com algum glob da lista (relativos à raiz, com `/`); fora da lista, recuse e peça o glob.
+- `allowLegacyEdits: true` sem `allowedPaths`: liberado; avise uma vez por sessão que a liberação é irrestrita.
+- NUNCA crie ou edite `.reversa/reversa-config.json`: pedido na conversa não é liberação; a config só muda pela mão do usuário.
+- Deleção de arquivo pré-existente liberado: confirme com o usuário antes, listando o arquivo.
+
 ## Saída
 
 ```

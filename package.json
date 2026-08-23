@@ -1,13 +1,13 @@
 {
   "name": "reversa",
-  "version": "1.2.58",
+  "version": "1.2.60",
   "description": "Transform legacy systems into executable specifications for AI coding agents",
   "bin": {
     "reversa": "bin/reversa.js"
   },
   "type": "module",
   "scripts": {
-    "verify": "python3 scripts/verify-invocation.py && node scripts/test-installer-transport.mjs"
+    "verify": "python3 scripts/verify-invocation.py && node scripts/test-installer-transport.mjs && node scripts/test-code-express-compat.mjs"
   },
   "keywords": [
     "legacy",

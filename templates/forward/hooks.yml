@@ -43,6 +43,10 @@ after-quality: []
 before-coding: []
 after-coding: []
 
+# Ganchos do /reversa-code-express
+before-code-express: []
+after-code-express: []
+
 # Ganchos do /reversa-add
 before-add: []
 after-add: []

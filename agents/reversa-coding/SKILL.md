@@ -50,7 +50,28 @@ A verificação continua estrita quando NENHUMA âncora existe: o skill aborta c
 
    3.4. No caso do passo 3.3, NÃO crie `legacy-impact.md`, NÃO crie `regression-watch.md`, NÃO toque em `actions.md`, NÃO escreva `progress.jsonl`. Apenas relate e encerre.
 
-4. Aplique `before-coding` da forma padrão
+4. Verifique a política de edição do legado (seção abaixo). Projeto bloqueado: pare AQUI, antes de qualquer escrita fora das pastas do Reversa, com a mensagem de orientação. Não execute nenhuma ação do `actions.md` que toque o projeto.
+5. Aplique `before-coding` da forma padrão
+
+## Política de edição do legado
+
+Executar `actions.md` quase sempre exige criar ou editar arquivos do projeto. Antes da PRIMEIRA escrita fora das pastas próprias do Reversa (`.reversa/`, `<output_folder>/`, `_reversa_docs/`, `<forward_folder>/`), leia `.reversa/reversa-config.json` e obedeça:
+
+1. **Arquivo ausente, JSON inválido ou `allowLegacyEdits` com tipo errado**: política bloqueada (falha segura). Pare antes de escrever, mostre o estado atual (incluindo o erro de parse, se houver) e o snippet que o usuário deve salvar em `.reversa/reversa-config.json` para liberar, já preenchido com os globs dos caminhos que o plano precisa tocar:
+
+   ```json
+   {"version": 1, "allowLegacyEdits": true, "allowedPaths": ["<globs da feature>"]}
+   ```
+
+2. **`allowLegacyEdits: false`**: recuse, mesmo com `allowedPaths` preenchido.
+3. **`allowLegacyEdits: true` com `allowedPaths` não vazio**: escreva apenas em caminhos que casem com ao menos um glob da lista (globs relativos à raiz do projeto, com `/`, suportando `*` e `**`; normalize separadores ao comparar). Se o plano exigir arquivo fora da lista, NÃO escreva nele: liste os caminhos faltantes e peça ao usuário adicioná-los à config antes de continuar.
+4. **`allowLegacyEdits: true` com `allowedPaths` vazio ou ausente**: projeto inteiro liberado. Avise, uma vez por sessão, que a liberação é irrestrita.
+5. Ignore padrões com `..` ou caminho absoluto em `allowedPaths`, avisando o usuário. Nunca libere caminho fora da raiz do projeto.
+6. Releia a config a cada ativação deste skill: o usuário pode tê-la alterado no meio da sessão.
+7. Toda recusa informa três coisas: o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar.
+8. **NUNCA crie nem edite `.reversa/reversa-config.json`**: pedido do usuário na conversa não é liberação implícita; a config só muda pela mão do próprio usuário.
+9. Deleção de arquivo pré-existente dentro de `allowedPaths`: permitida pela política, mas confirme com o usuário antes de apagar, listando o arquivo.
+10. As pastas próprias do Reversa continuam sempre graváveis, independentemente da política.
 
 ## Escopo da rodada
 
@@ -90,7 +111,7 @@ Após executar (mesmo que parcialmente):
 
 Estrutura do arquivo:
 
-1. Cabeçalho com data e identificador da feature
+1. Cabeçalho com data, identificador da feature e o estado da política de edição do legado no momento da execução (`allowLegacyEdits` e os caminhos que `allowedPaths` liberou)
 2. Tabela `Arquivo afetado | Componente | Tipo | Severidade | Justificativa`
 3. Diff conceitual por componente, em prosa
 4. Seção "Preservadas"

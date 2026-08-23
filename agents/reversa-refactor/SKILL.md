@@ -98,3 +98,15 @@ Termine com:
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto.**
 Este skill escreve APENAS em `_reversa_refactor/`. Código do projeto, specs e alma são somente leitura aqui. Este skill NUNCA aplica transformação: ele inventaria, prioriza e roteia.
+
+## Política de edição do legado
+
+A transformação que o especialista vai aplicar toca código do projeto, e gate aprovado não substitui a política. Antes de qualquer escrita fora das pastas próprias do Reversa (sua ou de um especialista roteado por você), leia `.reversa/reversa-config.json` e obedeça (releia a cada ativação):
+
+- Ausente, inválido ou `allowLegacyEdits: false`: recuse a escrita informando o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar.
+- `allowLegacyEdits: true` com `allowedPaths` não vazio: escreva apenas em caminhos que casem com algum glob da lista (relativos à raiz, com `/`); fora da lista, recuse e peça o glob.
+- `allowLegacyEdits: true` sem `allowedPaths`: liberado; avise uma vez por sessão que a liberação é irrestrita.
+- NUNCA crie ou edite `.reversa/reversa-config.json`: pedido na conversa não é liberação; a config só muda pela mão do usuário.
+- Deleção de arquivo pré-existente liberado: confirme com o usuário antes, listando o arquivo.
+
+Ao rotear uma oportunidade cujo alvo está fora dos caminhos liberados, avise o usuário no menu: o especialista vai travar no gate até a config liberar o caminho.
