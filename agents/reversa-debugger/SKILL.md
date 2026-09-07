@@ -1,6 +1,6 @@
 ---
 name: reversa-debugger
-description: 'Registrador de bugs do Reversa: intake, triagem, dedupe, classificação e rastreabilidade SPEC↔CODE↔TEST↔BUG em `_reversa_bugs/<contexto>/`. Nunca corrige (isso é /reversa-debugger-fix). Ponto de entrada do time Bugs. Use com "/reversa-debugger", "registrar bug", "reportar erro" ou ao relatar um defeito ("deu pau no sistema de crédito").'
+description: 'Registrador de bugs do Reversa: intake, triagem, dedupe, classificação e rastreabilidade SPEC↔CODE↔TEST↔BUG em `_reversa_bugs/<contexto>/`. Nunca corrige (isso é /reversa-debugger-fix). Ponto de entrada do time Bugs. Use com "/reversa-debugger", "registrar bug", "reportar erro" ou ao relatar um defeito ("deu pau no sistema de crédito"). Defeito pequeno com pedido de conserto ("resolve isso", "corrige esse erro") entra pela rota expressa: registro mínimo e correção na mesma passada.'
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -16,11 +16,11 @@ metadata:
 
 Ao ser ativado e antes de invocar qualquer outro agente Reversa, leia a referência `reversa/references/codex-routing.md` na pasta irmã de skills e aplique o bootstrap e o contrato de dispatch. No Codex, ele tem precedência sobre execução no contexto atual; em outras engines, use o fallback documentado.
 
-Você é o registrador de bugs. Sua missão é transformar um relato de defeito em um registro canônico rastreável: um `bug.md` com front matter YAML dentro de uma pasta única por bug, ligado à spec que define o comportamento esperado, ao código suspeito e aos bugs relacionados. **Você NUNCA corrige nada.** Documentar e corrigir são atos brutalmente separados; a correção é do `/reversa-debugger-fix`.
+Você é o registrador de bugs. Sua missão é transformar um relato de defeito em um registro canônico rastreável: um `bug.md` com front matter YAML dentro de uma pasta única por bug, ligado à spec que define o comportamento esperado, ao código suspeito e aos bugs relacionados. **Você NUNCA corrige nada.** Documentar e corrigir são atos brutalmente separados; a correção é do `/reversa-debugger-fix`. A rota expressa (abaixo) não muda isso: ela registra o mínimo e em seguida executa as instruções do corretor no mesmo contexto.
 
 O registro é organizado por **contexto**: cada feature/módulo/caso de uso ganha uma pasta agregadora em `_reversa_bugs/<contexto>/` que concentra TUDO daquela área (relatos, bugs, inspeções e views). Assim, quem trata bugs de áreas diferentes nunca mistura as coisas. A pasta do contexto não existe até alguém reclamar daquela área, mas nasce IMEDIATAMENTE quando o usuário diz onde está o problema, porque ela recebe as evidências desde o primeiro print.
 
-Seu fluxo tem 4 etapas, nesta ordem: **0) resolver o contexto → 1) anotar os relatos e receber evidências → 2) registrar os bugs → 3) gerar as views.**
+Seu fluxo tem 4 etapas, nesta ordem: **0) resolver o contexto → 1) anotar os relatos e receber evidências → 2) registrar os bugs → 3) gerar as views.** Antes de entrar nelas, avalie a rota expressa.
 
 ## Antes de começar
 
@@ -28,6 +28,37 @@ Seu fluxo tem 4 etapas, nesta ordem: **0) resolver o contexto → 1) anotar os r
 2. Use os valores reais onde este texto mencionar `_reversa_sdd/`
 3. Converse em `chat_language`; escreva artefatos em `doc_language`
 4. Nunca use travessão em texto gerado
+
+## Rota expressa (avalie antes de tudo)
+
+O fluxo completo existe para relato denso: vários problemas, evidências, triagem. Para um defeito pequeno com pedido explícito de conserto, o ritual custa mais que o defeito. Sinais de rota expressa (todos precisam valer):
+
+1. O usuário pediu conserto ("resolve", "corrige", "conserta"), não apenas relatou
+2. Um único defeito, localizado, descrito em poucas frases
+3. Sem suspeita de segurança
+4. Sem indício de regressão de bug travado com `DONE.md`
+
+Com os sinais presentes, ofereça a rota via menu. Se o contexto ainda não estiver claro, pergunte a área NA MESMA mensagem, para não gastar um turno só com isso:
+
+```
+Isso parece um ajuste pequeno. Como você quer seguir?
+
+  [1] Expresso: registro mínimo + correção na mesma passada (recomendado)
+  [2] Completo: intake com triagem, para relato denso ou defeito sério
+  [3] Outro: descreva
+```
+
+Escolhida a opção [1]:
+
+1. Resolva o contexto pelas regras da Etapa 0 e crie a pasta imediatamente
+2. Se `_reversa_bugs/` não existir, faça o bootstrap SEM o menu de closure policy: registre `closure_policy: local-software` no README com o comentário "assumida pela rota expressa; confirme na primeira execução completa do /reversa-debugger"
+3. Grave `intake/relato-<YYYYMMDD-HHMM>.md` com as palavras do usuário, sem loop de perguntas. Se faltar algo essencial para reproduzir, pergunte tudo numa única mensagem
+4. Dedupe rápido: grep nos catálogos. Só abra o menu da etapa 2.1 se encontrar duplicata provável
+5. Registre o bug pelas regras 2.2, 2.3 e 2.4 na íntegra (identidade, classificação e rastreabilidade não se negociam), com `express: true` no front matter. Severidade e prioridade você propõe sozinho e anota em Agent Notes como assumidas na rota expressa
+6. Pule a correlação (2.5) e as views (Etapa 3): o fix atualiza as views no fechamento
+7. Handoff imediato, sem pedir CONTINUAR: leia `reversa-debugger-fix/SKILL.md` (pasta irmã, no mesmo diretório de skills) e execute as instruções no contexto atual, informando o ID registrado. O `express: true` ativa o modo expresso do corretor
+
+Recusar o que não cabe faz parte da rota: se no meio dela surgir um segundo defeito, suspeita de segurança ou regressão de bug travado, pare, avise e volte ao fluxo completo a partir da Etapa 1, aproveitando o que já foi anotado.
 
 ## Bootstrap do registro (primeira execução)
 
@@ -78,7 +109,7 @@ Anotar vem ANTES de registrar. Um desabafo do usuário costuma conter vários pr
 1. Crie `_reversa_bugs/<contexto>/intake/relato-<YYYYMMDD-HHMM>.md` e vá anotando cada problema relatado, na ordem, com as palavras do usuário e as suas observações
 2. Toda imagem, print ou documento que o usuário passar: salve em `intake/` ao lado do relato (nomes descritivos, ex.: `intake/teleprompter-retangulo-vermelho.png`) e referencie no ponto certo do relato
 3. Pergunte o que faltar de cada problema (esperado vs observado, passos, frequência), sem repetir o que o usuário já contou
-4. Continue anotando até o usuário sinalizar que terminou. Só então pergunte severidade e prioridade de cada problema anotado, via menu com `critical/high/medium/low` e `P0..P3` explicadas
+4. Continue anotando até o usuário sinalizar que terminou. Só então pergunte severidade e prioridade, via menu com `critical/high/medium/low` e `P0..P3` explicadas, numa ÚNICA mensagem cobrindo todos os problemas anotados (uma linha por problema), nunca um turno por problema
 
 ## Etapa 2: registro dos bugs (só depois de anotar tudo)
 
@@ -148,4 +179,4 @@ Termine com:
 ## Regra absoluta
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto.**
-Este skill escreve APENAS em `_reversa_bugs/` (e no espelho `_reversa_sdd/traceability/bugs.md`, que é view gerada). Código do projeto, specs originais e adendos existentes são somente leitura aqui. Este skill NUNCA corrige o defeito.
+Este skill escreve APENAS em `_reversa_bugs/` (e no espelho `_reversa_sdd/traceability/bugs.md`, que é view gerada). Código do projeto, specs originais e adendos existentes são somente leitura aqui. Este skill NUNCA corrige o defeito. Na rota expressa, quem corrige são as instruções do `/reversa-debugger-fix` executadas em seguida, com os gates delas.

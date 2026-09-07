@@ -85,7 +85,8 @@ resolution_kind: null        # fixed | duplicate | invalid | cannot-reproduce | 
 ---
 ```
 
-Blocos opcionais (só quando o contexto existe): `mitigation` (kind, applied_at, temporary),
+Blocos opcionais (só quando o contexto existe): `express: true` (bug registrado pela rota
+expressa do `/reversa-debugger`; ativa o modo expresso do fix), `mitigation` (kind, applied_at, temporary),
 `data_impact` / `data_repair` (código curado não é sistema curado), `regression_analysis`
 (last_known_good, first_known_bad, bisect, culprit_commit), `versions` / `backports`,
 `ownership` (inferido de CODEOWNERS, nunca inventado; sem evidência use unclassified),

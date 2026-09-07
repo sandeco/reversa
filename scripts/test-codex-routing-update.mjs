@@ -60,6 +60,9 @@ try {
   };
   await updateProject([], dependencies);
 
+  assert.equal(existsSync(join(fixture, '.codex', 'agents', 'reversa-code-express.toml')), true, 'update creates routing profiles for newly added agents');
+  assert.equal(JSON.parse(readFileSync(join(fixture, '.reversa', 'state.json'), 'utf8')).agents.includes('reversa-code-express'), true, 'update records newly installed agents');
+  assert.equal(JSON.parse(readFileSync(join(fixture, '.reversa', 'reversa-config.json'), 'utf8')).allowLegacyEdits, false, 'update installs the safe legacy policy default');
   assert.equal(readFileSync(modifiedPath, 'utf8'), modifiedBytes, 'update preserves modified managed profile');
   assert.equal(existsSync(missingPath), true, 'update restores missing managed profile');
   assert.equal(existsSync(escalationPath), true, 'update preserves generated next-class profiles');

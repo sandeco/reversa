@@ -1,0 +1,5 @@
+interface:
+  display_name: "Reversa Code Express"
+  short_description: "Passagem única do ciclo forward: entrevista curta, spec fina…"
+policy:
+  allow_implicit_invocation: false

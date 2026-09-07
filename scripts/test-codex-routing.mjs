@@ -27,7 +27,7 @@ const allAgents = readdirSync(join(repoRoot, 'agents'), { withFileTypes: true })
   .map((entry) => entry.name)
   .sort();
 
-assert.equal(allAgents.length, 72, 'expected the complete Reversa agent inventory');
+assert.equal(allAgents.length, 73, 'expected the complete Reversa agent inventory');
 assertCompleteCatalog(allAgents);
 assert.deepEqual(Object.keys(AGENT_CATALOG).sort(), allAgents, 'catalog must classify every agent exactly once');
 
@@ -42,6 +42,7 @@ const expectedClassGroups = {
   ],
   T1: [
     'reversa-add', 'reversa-arquitetura-3d', 'reversa-coding', 'reversa-docs-mapper',
+    'reversa-code-express',
     'reversa-docs-publisher', 'reversa-docs-storyteller', 'reversa-drafter',
     'reversa-especialista-d3', 'reversa-highcharts-visualizer', 'reversa-ideator', 'reversa-n8n',
     'reversa-plan', 'reversa-pre-spec', 'reversa-pricing-estimate', 'reversa-pricing-profile',
@@ -67,7 +68,7 @@ const expectedClassByAgent = Object.fromEntries(
 assert.deepEqual(
   Object.fromEntries(Object.entries(AGENT_CATALOG).map(([id, metadata]) => [id, metadata.computeClass])),
   expectedClassByAgent,
-  'the complete 72-agent default classification is an explicit compatibility contract',
+  'the complete 73-agent default classification is an explicit compatibility contract',
 );
 
 const fixture = mkdtempSync(join(tmpdir(), 'reversa-codex-routing-'));
@@ -104,7 +105,7 @@ try {
     false,
     'managed manifest keys must be platform-neutral',
   );
-  assert.equal(first.profiles.length, 128);
+  assert.equal(first.profiles.length, 130);
   for (const profile of first.profiles.filter(({ status }) => status !== 'user-owned')) {
     const document = parse(readFileSync(join(fixture, profile.relativePath), 'utf8'));
     assert.equal(document.name, profile.id);
@@ -212,7 +213,7 @@ try {
   assert.equal(codexDiagnostics.profile_generation_enabled, true);
   assert.equal(modelDiagnostics.runtime_verification, 'unavailable');
   assert.equal(codexDiagnostics.capabilities.model_override, false);
-  assert.equal(codexDiagnostics.agents.length, 128);
+  assert.equal(codexDiagnostics.agents.length, 130);
   const escalatedDiagnostic = codexDiagnostics.agents.find((agent) => agent.agent === 'reversa-scout-t1');
   assert.equal(escalatedDiagnostic.skill, 'reversa-scout');
   assert.equal(escalatedDiagnostic.escalated_from, 'T0');
@@ -354,7 +355,7 @@ try {
   assert.equal(readFileSync(userProfile, 'utf8'), customAgent, 'user profile survives uninstall');
   assert.equal(readFileSync(userCodexConfig, 'utf8'), existingConfig, 'Codex config survives uninstall');
 
-console.log('Codex routing: 72 agents classified; routing, overrides, idempotency, fallback, and ownership checks passed.');
+console.log('Codex routing: 73 agents classified; routing, overrides, idempotency, fallback, and ownership checks passed.');
 } finally {
   rmSync(fixture, { recursive: true, force: true });
 }

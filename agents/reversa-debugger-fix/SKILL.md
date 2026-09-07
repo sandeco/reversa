@@ -33,6 +33,16 @@ Você é o corretor. Sua missão é levar um bug registrado da triagem até o fe
 
 Siga o `control_mode` do README (`gated` por padrão): leitura, reprodução isolada e diagnóstico fluem sem aprovação; TODO passo que altera o projeto passa por gate com diff. Em qualquer modo, têm gate obrigatório: alterar spec efetiva, enviar material a harness externo, operação destrutiva, reparo de dados.
 
+## Modo expresso
+
+Ativado quando o bug tem `express: true` no front matter (registrado pela rota expressa do `/reversa-debugger`). O ciclo é o mesmo, comprimido para defeito pequeno de risco baixo:
+
+1. Sem oferta de debate: siga com a correção direta e mencione o `/reversa-debugger-debate` em uma linha, sem menu
+2. `fix/plan.html` dispensado: apresente o plano como resumo curto no chat (causa raiz, estratégia, arquivos, testes) e aguarde o OK
+3. Gates 1 e 2 numa única aprovação: mostre juntos o diff dos testes e o diff da correção. A prova continua em duas pernas: aplique os testes e demonstre o vermelho, aplique a correção e demonstre o verde
+4. Nada mais é dispensado: reprodução, causa raiz com estado epistemológico, veredito de spec, closure policy, `DONE.md` e atualização das views seguem o ciclo normal
+5. O modo só vale enquanto `change_risk` for baixa. Se a investigação revelar risco médio ou alto, impacto em dados ou causa que exige investigação profunda, avise e siga o ciclo completo a partir da etapa 4, incluindo o `fix/plan.html`
+
 ## Etapas do ciclo
 
 Atualize `phase` no front matter a cada transição e `updated` a cada escrita.
@@ -158,3 +168,13 @@ Termine com:
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto sem gate aprovado.**
 Fora dos dois gates (e do reparo de dados aprovado), este skill escreve apenas em `_reversa_bugs/` e em `_reversa_sdd/addenda/` + `_reversa_sdd/traceability/`. Specs originais são somente leitura para sempre. Bug com `visibility: restricted`: nenhum detalhe explorável sai do registro.
+
+## Política de edição do legado
+
+Gate aprovado não substitui a política: antes de aplicar qualquer item do change set que toque arquivo fora das pastas próprias do Reversa, leia `.reversa/reversa-config.json` e obedeça (releia a cada ativação):
+
+- Ausente, inválido ou `allowLegacyEdits: false`: NÃO aplique o change set no projeto. Informe o caminho recusado, o estado atual da config e o que o usuário deve editar para liberar (o diff pode ficar salvo em `fix/` aguardando).
+- `allowLegacyEdits: true` com `allowedPaths` não vazio: aplique apenas em caminhos que casem com algum glob da lista (relativos à raiz, com `/`); fora da lista, recuse e peça o glob.
+- `allowLegacyEdits: true` sem `allowedPaths`: liberado; avise uma vez por sessão que a liberação é irrestrita.
+- NUNCA crie ou edite `.reversa/reversa-config.json`: aprovação do gate ou pedido na conversa não é liberação; a config só muda pela mão do usuário.
+- Deleção de arquivo pré-existente liberado: confirme com o usuário antes, listando o arquivo.

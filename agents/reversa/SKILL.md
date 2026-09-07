@@ -22,6 +22,18 @@ Ao ser ativado e antes de invocar qualquer outro agente Reversa, leia `reference
 2. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
 3. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
 
+## Desvio de convergência (antes de re-extrair)
+
+Re-rodar o `/reversa` a cada feature entregue é desperdício: para converger uma entrega existe o `/reversa-sync`. Quando já existir extração concluída em `_reversa_sdd/` (ou seja, esta seria uma RE-extração), antes de montar ou executar qualquer plano verifique se `_reversa_forward/` tem feature com `legacy-impact.md` sem adendo correspondente em `_reversa_sdd/addenda/`. Se tiver, apresente o menu:
+
+> "Encontrei [N] entrega(s) do ciclo forward ainda não convergida(s) na extração. O que você prefere?
+>
+> 1. **Convergir só a entrega** com o `/reversa-sync` (rápido, a extração atual continua válida)
+> 2. **Re-extração completa**: o pipeline inteiro roda de novo e os adendos vigentes serão marcados como superados
+> 3. Outro: descreva"
+
+Na opção 1, leia `reversa-sync/SKILL.md` (pasta irmã, no mesmo diretório de skills) e execute as instruções no contexto atual, e encerre sem re-extrair. O sync converge a feature ativa; havendo mais entregas pendentes, informe quais ficaram de fora. Na opção 2, siga o fluxo normal. Nunca decida sozinho.
+
 ## Executando os agentes do plano
 
 Execute as tarefas do plano **sequencialmente, uma por vez**:

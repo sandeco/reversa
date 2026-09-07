@@ -501,11 +501,10 @@ effort_override = false
 ## CLI commands
 
 ```bash
-npx reversa install      # Install Reversa in the project
+npx reversa install      # Install Reversa in the project (all agents)
 npx reversa status       # Show current analysis state
 npx reversa models       # Show configured model routing and profile ownership status
-npx reversa update       # Update agents to the latest version
-npx reversa add-agent    # Add an agent to the project
+npx reversa update       # Update everything to the latest version (all agents)
 npx reversa add-engine   # Add support for a new engine
 npx reversa uninstall    # Remove Reversa from the project
 ```

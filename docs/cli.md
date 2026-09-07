@@ -46,15 +46,7 @@ After the user confirms a multi-select question, the CLI must not print every se
 - Do not render the full selection and continue to the next question.
 - Render a short summary, one line per team.
 
-The agents menu lists teams, not individual agents. The user picks at the team level; the installer expands each selected team into its agents:
-
-1. `Reversa Agents Core` (rendered in gray as a separator, always installed)
-2. `Migration Agents`
-3. `Code Forward Agents`
-4. `Pricing and Size Agents`
-5. `Translators N8N->Specs->Python` (unchecked by default)
-
-`Reversa Agents Core` is rendered as a gray, non-selectable separator that visually shows `(*)` as if it were a checked-and-disabled item: the user sees it, knows it is included, and the cursor skips over it. It contains all discovery agents (Reversa, Scout, Soul Extractor, Archaeologist, Detective, Architect, Writer, Reviewer, Visor, Data Master, Design System, Agents Help, Reconstructor), so the previous "Discovery Add-ons" group no longer exists as a separate concept. Even though the menu hides the agent-level detail, the final installation summary still breaks the count down by team (Discovery, Migration, Code Forward, New Project, Documentation, Translators and Pricing).
+There is no agent selection: the installer always installs **all** agents shipped with the package. The final installation summary breaks the count down by team (Discovery, Migration, Code Forward, New Project, Documentation, Translators and Pricing).
 
 ---
 
@@ -76,19 +68,9 @@ Useful for a quick overview before resuming a session.
 npx reversa update
 ```
 
-Updates agents to the latest version of Reversa.
+Updates everything to the latest version of Reversa: all agents shipped with the package are reinstalled, including agents that didn't exist when you first installed.
 
 The command is smart: it checks the SHA-256 manifest of each file and never overwrites files you've customized. If you made adjustments to any agent, they stay intact.
-
----
-
-### `add-agent`
-
-```bash
-npx reversa add-agent
-```
-
-Adds a specific agent to the project. Useful if you didn't install all agents during the initial installation and now want to include, for example, Data Master or Design System.
 
 ---
 

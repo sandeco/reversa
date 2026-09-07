@@ -46,15 +46,7 @@ Después de que el usuario confirma una pregunta de selección múltiple, el CLI
 - No renderizar la selección completa y avanzar a la siguiente pregunta.
 - Renderizar un resumen corto, una línea por equipo.
 
-El menú de agentes lista equipos, no agentes individuales. El usuario elige a nivel de equipo; el instalador expande cada equipo seleccionado en sus agentes:
-
-1. `Reversa Agents Core` (renderizado en gris como separator, siempre instalado)
-2. `Migration Agents`
-3. `Code Forward Agents`
-4. `Pricing and Size Agents`
-5. `Translators N8N->Specs->Python` (desmarcado por defecto)
-
-`Reversa Agents Core` se renderiza como un separator gris no seleccionable que visualmente muestra `(*)` como si fuera un ítem marcado y deshabilitado: el usuario lo ve, sabe que está incluido, y el cursor lo salta. Contiene todos los agentes de descubrimiento (Reversa, Scout, Soul Extractor, Archaeologist, Detective, Architect, Writer, Reviewer, Visor, Data Master, Design System, Agents Help, Reconstructor), por lo que el antiguo grupo "Discovery Add-ons" ya no existe como concepto separado. Aunque el menú oculta el detalle por agente, el resumen final de la instalación sigue desglosando el conteo por equipo (Discovery, Migration, Code Forward, New Project, Documentation, Translators y Pricing).
+No existe selección de agentes: el instalador siempre instala **todos** los agentes incluidos en el paquete. El resumen final de la instalación desglosa el conteo por equipo (Discovery, Migration, Code Forward, New Project, Documentation, Translators y Pricing).
 
 ---
 
@@ -76,19 +68,9 @@ Muestra el estado actual del análisis: qué fase está en curso, qué agentes y
 npx reversa update
 ```
 
-Actualiza los agentes a la versión más reciente de Reversa.
+Actualiza todo a la versión más reciente de Reversa: todos los agentes del paquete se reinstalan, incluyendo agentes que no existían cuando instalaste.
 
 El comando es inteligente: verifica el manifiesto SHA-256 de cada archivo y nunca sobreescribe archivos que hayas personalizado.
-
----
-
-### `add-agent`
-
-```bash
-npx reversa add-agent
-```
-
-Agrega un agente específico al proyecto. Útil si no instalaste todos los agentes en la instalación inicial y ahora quieres incluir, por ejemplo, el Data Master o el Design System.
 
 ---
 
