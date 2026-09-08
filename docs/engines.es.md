@@ -16,6 +16,7 @@ Reversa funciona con los principales motores de IA del mercado. El instalador de
 | **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Kiro** | (ninguno) | `.kiro/skills/reversa-*/` y `.agents/skills/reversa-*/` | `/reversa` |
 | **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| **Hermes** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | **Cline** | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Roo Code** | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
@@ -63,6 +64,14 @@ IDE agéntico de Amazon. Kiro descubre skills nativamente en `.kiro/skills/`, si
 ## Opencode
 
 Agente de codificación open source para terminal (SST). Lee `AGENTS.md` nativamente, misma convención de Codex. Comando CLI: `opencode`. Como Codex, la activación es por el nombre del agente: `reversa`.
+
+---
+
+## Hermes
+
+Agente personal para terminal (Python). Lee `AGENTS.md` nativamente, el mismo archivo de Codex. Comando CLI: `hermes`. La activación es por el nombre del agente: `reversa`.
+
+Hermes solo descubre skills en su propia casa (`~/.hermes/skills/`), nunca en el proyecto, así que llega a los agentes de Reversa por la ruta citada en `AGENTS.md` (`.agents/skills/reversa/SKILL.md`), no por descubrimiento automático. Para tenerlos como slash commands nativos (`/reversa`), agregue el `.agents/skills` del proyecto en `skills.external_dirs` del `config.yaml` de Hermes, con ruta **absoluta** (las entradas relativas se resuelven contra `HERMES_HOME`, no contra el proyecto). El instalador no toca ese archivo.
 
 ---
 

@@ -490,6 +490,7 @@ effort_override = false
 | Antigravity | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | Kiro | (none) | `.kiro/skills/reversa-*/` and `.agents/skills/reversa-*/` | `/reversa` |
 | Opencode | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| Hermes | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | Cline | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
 | Roo Code | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |
 | GitHub Copilot | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
