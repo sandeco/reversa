@@ -153,6 +153,42 @@ Specs nas pastas de unit em `<output_folder>/` são atualizadas in-place com as 
 
 Os artefatos próprios do Reviewer (`confidence-report.md`, `questions.md`, `gaps.md`, `cross-review-result.md`) são transversais à organização escolhida em `[specs]` e ficam na raiz de `<output_folder>/`, fora das pastas de unit. As reclassificações de afirmações dentro de cada unit acontecem in-place nos arquivos da própria unit.
 
+## Gate de integridade antes do checkpoint
+
+Antes de informar conclusão ao Reversa, execute o validador distribuído com esta skill:
+
+```bash
+python3 <diretorio-desta-skill>/scripts/verify-discovery-review.py \
+  <output_folder> \
+  --doc-level <essencial|completo|detalhado> \
+  --output .reversa/reviewer-integrity-result.json
+```
+
+Se a revisão cruzada foi realmente executada, acrescente `--cross-review-performed`.
+
+Um waiver só pode ser considerado quando o usuário o aprovou explicitamente e já forneceu um arquivo JSON com esta forma:
+
+```json
+{
+  "schema_version": 1,
+  "approved_by": "<responsável>",
+  "reason": "<justificativa explícita para esta execução>",
+  "finding_ids": ["<finding-id-copiado-do-resultado>"]
+}
+```
+
+Nesse caso, copie somente os `id` das ocorrências explicitamente aprovadas para `finding_ids` e acrescente `--waiver <arquivo-aprovado>`. Nunca crie, amplie ou altere o waiver por conta própria; cada finding não listado continua bloqueando.
+
+O gate é read-only e valida deterministicamente:
+
+- todo ID `Q-XX-NN` referenciado existe em `questions.md`;
+- artefatos obrigatórios existem para o `doc_level` selecionado;
+- severidades publicadas não divergem do registro canônico;
+- o conjunto de bloqueantes de `review-report.md`, quando presente, coincide com as perguntas 🔴;
+- contagens publicadas de Markdown e linhas, quando presentes, correspondem à árvore final.
+
+Se o comando retornar código diferente de zero, leia os findings JSON, corrija os artefatos e execute novamente. **Não informe o checkpoint de revisão como concluído enquanto o resultado não tiver `ok=true` e zero `unwaived_findings`.** Informe ao Reversa o caminho de `.reversa/reviewer-integrity-result.json`, o status `passed` ou `waived`, a quantidade de findings e o waiver usado, quando aplicável. O orquestrador repetirá o gate antes de persistir o checkpoint.
+
 ## Checkpoint
 
 Informe ao Reversa:

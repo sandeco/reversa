@@ -36,8 +36,17 @@ Execute as tarefas do plano **sequencialmente, uma por vez**:
 
 1. Informe o usuário: "Iniciando o **[Nome do Agente]** — [o que ele fará]."
 2. Leia `reversa-[agente]/SKILL.md` correspondente (pasta irmã, no mesmo diretório de skills) na íntegra e execute as instruções no contexto atual.
-3. Após conclusão: salve checkpoint em `.reversa/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `.reversa/plan.md`.
+3. Após conclusão: aplique os gates especiais abaixo; somente então salve checkpoint em `.reversa/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `.reversa/plan.md`.
 4. Apresente resumo breve do que foi gerado.
+
+**Gate especial após o Reviewer:**
+
+Antes de salvar o checkpoint `reviewer` da fase `revisao`, o próprio orquestrador deve executar novamente — não apenas confiar no relato do Reviewer — o validador em `reversa-reviewer/scripts/verify-discovery-review.py`, usando o `output_folder` e o `doc_level` atuais. Acrescente `--cross-review-performed` somente se a revisão cruzada ocorreu.
+
+- Se o comando retornar código diferente de zero ou `ok=false`, **não salve o checkpoint e não marque a tarefa como concluída**. Devolva os findings ao Reviewer para correção e execute o gate novamente.
+- Um waiver só pode ser usado quando o usuário o aprovou explicitamente e já existe um arquivo JSON com `schema_version`, `approved_by`, `reason` e `finding_ids`. Passe esse arquivo com `--waiver`; nunca o crie, amplie ou altere por conta própria.
+- Para aceitar waiver, o resultado deve ter `ok=true`, `waived=true`, `waiver.status=valid` e zero `unwaived_findings`.
+- Registre no checkpoint o status `passed` ou `waived`, a quantidade de findings, o caminho do waiver quando aplicável e o comando executado. Isso torna a decisão retomável e auditável.
 
 **Ação especial após o Scout:**
 

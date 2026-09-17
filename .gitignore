@@ -7,3 +7,5 @@ site/
 .npm-cache/
 .tmp-mkdocs-site/
 specs/
+__pycache__/
+*.py[cod]

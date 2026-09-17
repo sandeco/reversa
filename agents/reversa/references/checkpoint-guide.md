@@ -34,6 +34,34 @@ O Reversa é o único agente que **escreve** no state.json. Os demais agentes ap
 }
 ```
 
+### Ao concluir o Reviewer
+
+O checkpoint `reviewer` só pode ser salvo depois do gate especial descrito em `reversa/SKILL.md`. Persista o recibo sem remover os campos já existentes:
+
+```json
+{
+  "checkpoints": {
+    "reviewer": {
+      "completed_at": "2026-04-26T12:00:00Z",
+      "files": [
+        "_reversa_sdd/confidence-report.md",
+        "_reversa_sdd/questions.md"
+      ],
+      "integrity": {
+        "status": "passed",
+        "command": "python3 <skill>/scripts/verify-discovery-review.py _reversa_sdd --doc-level completo",
+        "result_path": ".reversa/reviewer-integrity-result.json",
+        "findings": 0,
+        "unwaived_findings": 0,
+        "waiver_path": null
+      }
+    }
+  }
+}
+```
+
+Use `status: "waived"` e preencha `waiver_path` somente quando o resultado do gate confirmar `waived=true`, `waiver.status=valid` e zero `unwaived_findings`.
+
 ### Ao concluir uma fase inteira
 ```json
 {
