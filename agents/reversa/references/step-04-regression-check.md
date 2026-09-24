@@ -85,6 +85,14 @@ Depois de percorrer as features (ou mesmo se nenhuma tiver `regression-watch.md`
 
 A razão: os adendos são pontes entre uma entrega forward e a re-extração. Com a extração regenerada a partir do código atual, os deltas descritos nos adendos já estão absorvidos nos artefatos principais, e os consumidores (por exemplo `/reversa-requirements` e `/reversa-plan`) só devem considerar adendos vigentes.
 
+## Após este passo: `indice` + marco doc-sync
+
+Quando este passo terminar (ou for pulado por ausência de watches), e a mensagem final de "extração concluída" estiver prestes a ser emitida:
+
+1. Execute o procedimento `indice` (`references/step-doc-sync.md`) — gerar/atualizar `_reversa_sdd/README.md` preservando a tabela de sync.
+2. Grave o marco de commit (`.reversa/doc-sync.json` + append na tabela).
+3. Só então declare a extração finalizada, mencionando o marco.
+
 ## Caso especial, sem `_reversa_sdd/`
 
 Se durante o procedimento o `_reversa_sdd/` não tiver os arquivos esperados (porque a re-extração foi parcial ou o nível de documentação foi reduzido), registre veredito 🟡 amarelo com observação `evidência ausente, _reversa_sdd/<arquivo> não foi gerado nesta extração` e siga em frente.
