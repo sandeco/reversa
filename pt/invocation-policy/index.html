@@ -2143,13 +2143,14 @@ Verificada por <code>scripts/verify-invocation.py</code> (gate de CI). Escreva a
 <p><em>O modelo teria motivo para alcançar esta skill sozinho, a partir de uma frase em linguagem natural,
 sem o usuário digitar o comando?</em></p>
 </blockquote>
-<p>No Reversa a resposta é <strong>sim apenas para os 9 pontos de entrada de fluxo</strong>: os 8 orquestradores
+<p>No Reversa a resposta é <strong>sim apenas para os 10 pontos de entrada de fluxo</strong>: os 9 orquestradores
 (<code>role: orchestrator</code>) mais <code>reversa-agents-help</code>. Todos os agentes de fase — Scout, Architect,
 Reviewer, os <code>pricing-*</code>, os <code>debugger-*</code>, os <code>docs-*</code>, os especialistas de refactor e os
 renderizadores — são alcançados pelo <strong>orquestrador lendo o <code>SKILL.md</code></strong>, nunca pelo modelo adivinhando.
 Logo, são user-invoked.</p>
-<p><strong>As 9 model-invoked:</strong> <code>reversa</code>, <code>reversa-new</code>, <code>reversa-forward</code>, <code>reversa-migrate</code>,
-<code>reversa-autonomous</code>, <code>reversa-refactor</code>, <code>reversa-debugger</code>, <code>reversa-docs</code>, <code>reversa-agents-help</code>.</p>
+<p><strong>As 10 model-invoked:</strong> <code>reversa</code>, <code>reversa-new</code>, <code>reversa-forward</code>, <code>reversa-forward-autonomous</code>,
+<code>reversa-migrate</code>, <code>reversa-autonomous</code>, <code>reversa-refactor</code>, <code>reversa-debugger</code>, <code>reversa-docs</code>,
+<code>reversa-agents-help</code>.</p>
 <h2 id="as-duas-marcas-em-lockstep">As duas marcas, em lockstep<a class="headerlink" href="#as-duas-marcas-em-lockstep" title="Permanent link">&para;</a></h2>
 <p>Uma skill é user-invoked <strong>nos dois harnesses ou em nenhum</strong>:</p>
 <table>

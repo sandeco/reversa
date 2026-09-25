@@ -2340,6 +2340,10 @@
 <td><code>/reversa-forward</code></td>
 </tr>
 <tr>
+<td>Implementar uma fila de features (ex. features 10 a 20) de ponta a ponta, sem paradas</td>
+<td><code>/reversa-forward-autonomous</code></td>
+</tr>
+<tr>
 <td>Emendar um ajuste curto na feature recém-entregue</td>
 <td><code>/reversa-add</code></td>
 </tr>
@@ -2376,9 +2380,10 @@
 </code></pre></div>
 <p>Ele executa exatamente os mesmos agentes e fases do <code>/reversa</code>, mas concentra todas as perguntas em uma <strong>entrevista única no início</strong> (dados de instalação, nível de documentação, organização das specs) e pula o que já estiver respondido no <code>.reversa/state.json</code>. Depois da entrevista, vai até o fim, parando apenas diante da lista fechada de situações que realmente exigem um humano.</p>
 <p>A mesma ideia existe do lado greenfield: <code>/reversa-new expresso "&lt;sua ideia&gt;"</code> vai da ideia ao código implementado sem parar, emendando no ciclo forward assim que as specs ficam prontas.</p>
+<p>Para evoluir um sistema que já tem specs, <code>/reversa-forward-autonomous</code> roda o ciclo forward sobre uma fila de features (ex. "features 10 a 20"), da requirements ao sync, uma depois da outra. É o comando para usar com <code>/goal</code>, por exemplo <code>/goal rode o /reversa-forward-autonomous nas features 10 a 20, use os padrões</code>. Ele escreve código do projeto apenas na fase coding e só onde <code>.reversa/reversa-config.json</code> permitir; com a política bloqueada, ele para antes de começar.</p>
 <div class="admonition warning">
 <p class="admonition-title">Feito para sessões com aprovação automática</p>
-<p>Esses modos são para ambientes onde as ferramentas são aprovadas automaticamente (modo YOLO do Claude Code ou equivalente). Como ninguém está aprovando cada ação, as travas são mais rígidas: a escrita fica restrita a <code>.reversa/</code> e às pastas de saída, e nenhum comando destrutivo ou de efeito externo (apagar, <code>git push</code>, publicar, instalar dependências) é executado por conta própria. Ainda assim, faça backup do projeto antes de começar, como recomendado na <a href="../">página inicial</a>.</p>
+<p>Esses modos são para ambientes onde as ferramentas são aprovadas automaticamente (modo YOLO do Claude Code ou equivalente). Como ninguém está aprovando cada ação, as travas são mais rígidas: a escrita fica restrita a <code>.reversa/</code> e às pastas de saída, e nenhum comando destrutivo ou de efeito externo (apagar, <code>git push</code>, publicar, instalar dependências) é executado por conta própria. Ainda assim, faça backup do projeto antes de começar, como recomendado na <a href="../">página inicial</a>. O <code>/reversa-forward-autonomous</code> é a exceção: a fase coding dele edita código do projeto, só onde <code>.reversa/reversa-config.json</code> permitir, e roda os builds, testes e instalações que o <code>actions.md</code> pedir explicitamente.</p>
 </div>
 <hr />
 <h2 id="o-que-acontece-quando-voce-ativa">O que acontece quando você ativa<a class="headerlink" href="#o-que-acontece-quando-voce-ativa" title="Permanent link">&para;</a></h2>
