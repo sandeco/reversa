@@ -29,6 +29,22 @@ Without it, each agent would play its part without connecting to the others. Wit
 - Presents a brief summary of what was generated at each step
 - Warns when context is running out and saves state before stopping
 - Checks whether a new version is available and notifies discreetly
+- After the pipeline (or via chat shortcuts), builds `_reversa_sdd/README.md` and records the **doc↔code baseline** in `.reversa/doc-sync.json`
+
+---
+
+## Chat commands (with `/reversa` active)
+
+| Command | Action |
+|---------|--------|
+| `indice` | Build/refresh the summary README under `_reversa_sdd/` |
+| `atualizar` | Incremental update from commits since the last baseline |
+| `atualizar [unit]` | Same flow, scoped to one unit |
+| `atualizar --baseline` | Record current HEAD as the initial baseline (does not rewrite specs) |
+| `status` | Current phase and remaining plan items |
+| `ajuda` | List commands |
+
+The baseline is **not** stamped into every documentation file: it lives in `.reversa/doc-sync.json`, with an append-only history in the `## Sincronização doc ↔ código` table of the index README.
 
 ---
 

@@ -29,6 +29,22 @@ Sin él, cada agente tocaría su parte sin conectarse con los demás. Con él, t
 - Presenta un resumen breve de lo generado en cada etapa
 - Avisa cuando el contexto se está agotando y guarda el estado antes de parar
 - Verifica si hay una nueva versión disponible y avisa discretamente
+- Tras el pipeline (o vía atajos), genera el índice `_reversa_sdd/README.md` y graba el **marco doc↔código** en `.reversa/doc-sync.json`
+
+---
+
+## Comandos de chat (con `/reversa` activo)
+
+| Comando | Acción |
+|---------|--------|
+| `indice` | Genera/actualiza el README resumen en `_reversa_sdd/` |
+| `atualizar` | Actualización incremental desde los commits del último marco |
+| `atualizar [unidad]` | Mismo flujo, acotado a una unidad |
+| `atualizar --baseline` | Graba el HEAD actual como marco inicial (sin reescribir specs) |
+| `status` | Fase actual y lo que falta en el plan |
+| `ajuda` | Lista los comandos |
+
+El marco **no** se escribe en cada archivo de documentación: queda centralizado en `.reversa/doc-sync.json`, con historial append-only en la tabla `## Sincronização doc ↔ código` del README índice.
 
 ---
 
