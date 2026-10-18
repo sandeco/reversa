@@ -1595,6 +1595,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#if-you-have-never-priced-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you have never priced software
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-you-already-know-your-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you already know your numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agents" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1606,10 +1628,43 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#product-track-break-even-not-forecast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product track: break-even, not forecast
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web research
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-artifacts-land" class="md-nav__link">
     <span class="md-ellipsis">
       
         Where artifacts land
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-values-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where values come from
       
     </span>
   </a>
@@ -2127,6 +2182,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#if-you-have-never-priced-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you have never priced software
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-you-already-know-your-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If you already know your numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agents" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2138,10 +2215,43 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#product-track-break-even-not-forecast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product track: break-even, not forecast
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web research
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-artifacts-land" class="md-nav__link">
     <span class="md-ellipsis">
       
         Where artifacts land
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-values-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where values come from
       
     </span>
   </a>
@@ -2169,19 +2279,39 @@
 
 
 <h1 id="pricing-and-size-agents">Pricing and Size Agents<a class="headerlink" href="#pricing-and-size-agents" title="Permanent link">&para;</a></h1>
-<p>The <strong>Pricing and Size Agents</strong> Team estimates effort, size and price for each feature, on top of the artifacts produced by the Code Forward pipeline.</p>
+<p>The <strong>Pricing and Size Agents</strong> Team answers two different questions. The first is how much to charge a client to build or evolve a feature (service, per feature). The second is how much to charge the people who use the software (product: perpetual license, rental, subscription or app store). It works for people who have never priced software, with a guided path and web research, and for people who already know their numbers and want to go straight to the calculation.</p>
 <p>Pre-checked in the installer.</p>
 <hr />
 <h2 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/reversa-pricing-profile        (one-time setup: billing profile)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/reversa-pricing                 orchestrator (entry point, model-invoked, only routes)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        │
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        ▼
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>/reversa-pricing-size           (per feature: structural T-shirt sizing)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>/reversa-pricing-advisor         required on the orchestrated path: sale model, writes advisor.json
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        │
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ▼
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/reversa-pricing-estimate       (per feature: 3 scenarios side by side)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/reversa-pricing-profile         billing profile; research mode calls research for the hourly rate
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        ├── PRODUCT track ──▶ /reversa-pricing-product    break-even calculator
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        └── SERVICE track ──▶ /reversa-pricing-size ──▶ /reversa-pricing-estimate   (per feature)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>/reversa-pricing-research        web research (the only one with internet), called by profile and product, or directly
 </code></pre></div>
-<p><code>profile</code> runs once and is reused. <code>size</code> and <code>estimate</code> run for each feature, after <code>/reversa-to-do</code>.</p>
+<p><code>advisor</code> and <code>profile</code> run once per project and are reused. <code>product</code> runs once per project when the advisor marked the product track. <code>size</code> and <code>estimate</code> run for each feature, after the feature has been planned by <code>/reversa-forward</code>.</p>
+<hr />
+<h2 id="if-you-have-never-priced-software">If you have never priced software<a class="headerlink" href="#if-you-have-never-priced-software" title="Permanent link">&para;</a></h2>
+<p>Type <code>/reversa-pricing</code>. The orchestrator reads what already exists in <code>_pricing/</code>, tells you where you stopped and suggests the next agent. It never writes anything by itself.</p>
+<p>The order is simple:</p>
+<ol>
+<li>The <strong>advisor</strong> asks six questions about the software (type, who ordered it, who pays, who hosts it, monthly cost, income preference) and explains which sale models fit, with reasons and risks. You can pick more than one.</li>
+<li>The <strong>profile</strong> asks whether you know your billing numbers or prefer research. In research mode it calls the <strong>research</strong> agent to find an hourly rate range for your country, seniority and region, with sources and date. You confirm the value before it is saved.</li>
+<li>On the product track, the <strong>product</strong> agent builds a price ladder (researched or typed by you) and shows, for each price, how many paying customers cover the cost and how many reach your income goal.</li>
+<li>On the service track, <strong>size</strong> measures the planned feature and <strong>estimate</strong> turns it into three scenarios side by side.</li>
+</ol>
+<p>Each agent asks one question at a time, in plain language, and ends by suggesting the next step.</p>
+<hr />
+<h2 id="if-you-already-know-your-numbers">If you already know your numbers<a class="headerlink" href="#if-you-already-know-your-numbers" title="Permanent link">&para;</a></h2>
+<p>Pick "I know" mode in the profile and type your hourly rate, markup and tax regime directly. You can also call any agent directly, skipping the orchestrator: <code>/reversa-pricing-profile</code>, <code>/reversa-pricing-size</code>, <code>/reversa-pricing-estimate</code>, <code>/reversa-pricing-product</code> or <code>/reversa-pricing-research</code> with the research kind as argument. The orchestrator exists so a beginner can type a single command; it is not mandatory.</p>
 <hr />
 <h2 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h2>
 <table>
@@ -2194,9 +2324,24 @@
 </thead>
 <tbody>
 <tr>
+<td><code>reversa-pricing</code></td>
+<td>orchestrator</td>
+<td>Entry point. Detects the stage from the artifacts in <code>_pricing/</code> and routes to the next agent (advisor, profile, product, size, estimate or research). Only routes, writes nothing.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-advisor</code></td>
+<td>advisor</td>
+<td>Six-question interview about the software and how it will be sold. Applies deterministic viability rules and writes <code>advisor.json</code> with the ordered list of sale models (custom service, perpetual license, rental, subscription, app store), with reason and risks for each. Runs before the profile.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-research</code></td>
+<td>research</td>
+<td>The only agent with internet access. Searches for hourly rates by seniority and region, prices of comparable products and app store commissions. Tries city, then state, then country, records sources and date, and never fills the profile or the product by itself.</td>
+</tr>
+<tr>
 <td><code>reversa-pricing-profile</code></td>
 <td>profile</td>
-<td>Guided interview (up to ten questions) that produces the user's billing profile: country, currency, normalized seniority, hourly rate, project markup, tax regime, billing model, client profile.</td>
+<td>Guided interview that produces the billing profile: country, currency, seniority, hourly rate, markup, tax regime, billing model, client profile. Has an "I know" mode and a "research for me" mode. Every field records its origin.</td>
 </tr>
 <tr>
 <td><code>reversa-pricing-size</code></td>
@@ -2206,22 +2351,50 @@
 <tr>
 <td><code>reversa-pricing-estimate</code></td>
 <td>estimate</td>
-<td>Combines <code>profile.json</code> and <code>size.json</code> of the active feature to produce three educational scenarios side by side: Effort, Value, Market Range. Never delivers a single number as the final answer.</td>
+<td>Combines <code>profile.json</code> and <code>size.json</code> of the active feature to produce three educational scenarios side by side: Effort, Value, Market Range. Warns when profile values were researched or defaulted. Never delivers a single number as the final answer.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-product</code></td>
+<td>product</td>
+<td>Break-even calculator for selling the software as a product. Reads <code>advisor.json</code> and <code>profile.json</code>, asks for monthly cost, income goal and investment to recover, builds a price ladder and shows, per model and per price, how many paying customers cover the cost and how many reach the goal.</td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h2 id="product-track-break-even-not-forecast">Product track: break-even, not forecast<a class="headerlink" href="#product-track-break-even-not-forecast" title="Permanent link">&para;</a></h2>
+<p>The product agent computes, for each price on the ladder, the net amount per customer after store commission and tax reserve, then divides the monthly cost (plus the investment spread over the recovery horizon, plus the income goal) by that net amount. The result is a count of paying customers or licenses, always rounded up.</p>
+<p>It does not model churn, conversion rate, payment gateway fees, discounts, trials, product-specific taxes or exchange rates. It tells you what each price demands; it does not tell you how many customers you will get. The ladder always has three to five prices, and the agent never picks one for you.</p>
+<hr />
+<h2 id="web-research">Web research<a class="headerlink" href="#web-research" title="Permanent link">&para;</a></h2>
+<p>Only <code>reversa-pricing-research</code> touches the web. All other agents work offline.</p>
+<ul>
+<li>Accepted sources: salary portals, freelance platforms, official statistics, official app store documentation and product pricing pages. Forums without numbers, undated pages and sources in a different currency are skipped and listed with the reason.</li>
+<li>For hourly rates the search goes city, then state, then country, and the result says which level was used. City data is scarce; country is usually the level that works.</li>
+<li>Confidence is high, medium or low depending on how much the sources disagree. Fewer than two sources marks the result as weak.</li>
+<li>The result is a range with sources and date. Nothing enters the profile or the product until you confirm it in the calling agent.</li>
+<li>If the engine has no web search tool, research reports that and the calling agent falls back to asking you for the value.</li>
+</ul>
+<hr />
 <h2 id="where-artifacts-land">Where artifacts land<a class="headerlink" href="#where-artifacts-land" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>_reversa_sdd/_pricing/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── profile.json               (one-time, from /reversa-pricing-profile)
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── profile.md
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└── &lt;feature&gt;/
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    ├── size.json              (per feature, from /reversa-pricing-size)
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── size.md
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── estimate.json          (per feature, from /reversa-pricing-estimate)
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    └── estimate.md
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── advisor.json / advisor.md              (once per project, /reversa-pricing-advisor)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── profile.json / profile.md              (once, /reversa-pricing-profile)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── research/
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   ├── hourly_rate.json / .md             (/reversa-pricing-research, called by profile in research mode)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│   ├── comparables.json / .md             (called by product)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│   └── store_commission.json / .md        (optional, when the static table is old)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>├── product/
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   └── product.json / product.md          (/reversa-pricing-product)
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└── &lt;feature&gt;/
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    ├── size.json / size.md                (/reversa-pricing-size)
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    └── estimate.json / estimate.md        (/reversa-pricing-estimate)
 </code></pre></div>
+<p>When an artifact already exists, the agent shows a summary and asks before recalculating. The old file is kept as a <code>.bak</code> copy.</p>
+<hr />
+<h2 id="where-values-come-from">Where values come from<a class="headerlink" href="#where-values-come-from" title="Permanent link">&para;</a></h2>
+<p>Every billing field in the profile records its origin: <code>digitado</code> (typed, you informed it), <code>pesquisado</code> (researched, from the research agent, with source and date) or <code>padrao</code> (default, the framework's suggestion, such as the 35% markup or the country's default tax regime). The estimate lists every field that was not typed and warns that researched or default values reduce confidence, so you review hourly rate, markup and tax regime before sending a proposal.</p>
 <p>The Pricing and Size Agents never modify legacy code, Discovery artifacts or Forward artifacts. They only read those and write inside <code>_pricing/</code>.</p>
+<p>These agents offer educational references and calculations, not financial, legal or tax advice. Validate numbers with your accountant before deciding.</p>
 
 
 

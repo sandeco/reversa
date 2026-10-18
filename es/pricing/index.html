@@ -1595,6 +1595,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#para-quien-nunca-puso-precio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para quien nunca puso precio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-quien-ya-sabe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para quien ya sabe
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agentes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1606,10 +1628,43 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pista-de-producto-punto-de-equilibrio-no-pronostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pista de producto: punto de equilibrio, no pronóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#investigacion-en-la-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Investigación en la web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#donde-caen-los-artefactos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Dónde caen los artefactos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#origen-de-los-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Origen de los valores
       
     </span>
   </a>
@@ -2127,6 +2182,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#para-quien-nunca-puso-precio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para quien nunca puso precio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-quien-ya-sabe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para quien ya sabe
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agentes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2138,10 +2215,43 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pista-de-producto-punto-de-equilibrio-no-pronostico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pista de producto: punto de equilibrio, no pronóstico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#investigacion-en-la-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Investigación en la web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#donde-caen-los-artefactos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Dónde caen los artefactos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#origen-de-los-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Origen de los valores
       
     </span>
   </a>
@@ -2169,19 +2279,39 @@
 
 
 <h1 id="pricing-and-size-agents">Pricing and Size Agents<a class="headerlink" href="#pricing-and-size-agents" title="Permanent link">&para;</a></h1>
-<p>El Team <strong>Pricing and Size Agents</strong> estima esfuerzo, tamaño y precio de cada feature, sobre los artefactos producidos por el pipeline Code Forward.</p>
+<p>El Team <strong>Pricing and Size Agents</strong> responde dos preguntas distintas. La primera es cuánto cobrar a un cliente por construir o evolucionar una feature (servicio, por feature). La segunda es cuánto cobrar a quien usa el software (producto: licencia perpetua, alquiler, suscripción o tienda de apps). Sirve para quien nunca puso precio a un software, con un camino guiado e investigación en la web, y para quien ya conoce sus números y quiere ir directo al cálculo.</p>
 <p>Marcado por defecto en el instalador.</p>
 <hr />
 <h2 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/reversa-pricing-profile        (una vez: perfil de cobranza)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/reversa-pricing                 orquestador (puerta de entrada, model-invoked, solo enruta)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        │
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        ▼
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>/reversa-pricing-size           (por feature: T-shirt sizing estructural)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>/reversa-pricing-advisor         obligatorio en el camino orquestado: modelo de venta, graba advisor.json
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        │
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ▼
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/reversa-pricing-estimate       (por feature: 3 escenarios lado a lado)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/reversa-pricing-profile         perfil de cobranza; el modo investigar llama al research para la tarifa por hora
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        ├── vía PRODUCTO ──▶ /reversa-pricing-product    calculadora de punto de equilibrio
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        └── vía SERVICIO ──▶ /reversa-pricing-size ──▶ /reversa-pricing-estimate   (por feature)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>/reversa-pricing-research        investigación en la web (el único con internet), llamado por profile y product, o directo
 </code></pre></div>
-<p>El <code>profile</code> corre una sola vez y se reutiliza. El <code>size</code> y el <code>estimate</code> corren por feature, después de <code>/reversa-to-do</code>.</p>
+<p>El <code>advisor</code> y el <code>profile</code> corren una vez por proyecto y se reutilizan. El <code>product</code> corre una vez por proyecto cuando el advisor marcó la vía de producto. El <code>size</code> y el <code>estimate</code> corren por feature, después de que la feature fue planificada por <code>/reversa-forward</code>.</p>
+<hr />
+<h2 id="para-quien-nunca-puso-precio">Para quien nunca puso precio<a class="headerlink" href="#para-quien-nunca-puso-precio" title="Permanent link">&para;</a></h2>
+<p>Escribe <code>/reversa-pricing</code>. El orquestador lee lo que ya existe en <code>_pricing/</code>, te dice dónde te quedaste y sugiere el próximo agente. Nunca escribe nada por sí mismo.</p>
+<p>El orden es simple:</p>
+<ol>
+<li>El <strong>advisor</strong> hace seis preguntas sobre el software (tipo, quién lo encargó, quién paga, quién lo hospeda, costo mensual, preferencia de ingreso) y explica qué modelos de venta encajan, con motivo y riesgos. Puedes elegir más de uno.</li>
+<li>El <strong>profile</strong> pregunta si conoces tus valores de cobranza o prefieres investigar. En modo investigar llama al <strong>research</strong> para encontrar un rango de tarifa por hora para tu país, seniority y región, con fuentes y fecha. Tú confirmas el valor antes de que se grabe.</li>
+<li>En la vía de producto, el <strong>product</strong> arma una escalera de precios (investigada o escrita por ti) y muestra, para cada precio, cuántos clientes pagantes cubren el costo y cuántos alcanzan tu meta de ingreso.</li>
+<li>En la vía de servicio, el <strong>size</strong> mide la feature planificada y el <strong>estimate</strong> la convierte en tres escenarios lado a lado.</li>
+</ol>
+<p>Cada agente hace una pregunta a la vez, en lenguaje sencillo, y termina sugiriendo el próximo paso.</p>
+<hr />
+<h2 id="para-quien-ya-sabe">Para quien ya sabe<a class="headerlink" href="#para-quien-ya-sabe" title="Permanent link">&para;</a></h2>
+<p>Elige el modo "ya sé mis valores" (en el chat aparece como "sei informar") en el profile y escribe tarifa por hora, markup y régimen tributario directamente. También puedes llamar a cualquier agente directo, saltando el orquestador: <code>/reversa-pricing-profile</code>, <code>/reversa-pricing-size</code>, <code>/reversa-pricing-estimate</code>, <code>/reversa-pricing-product</code> o <code>/reversa-pricing-research</code> con el tipo de investigación como argumento. El orquestador existe para que un principiante escriba un único comando; no es obligatorio.</p>
 <hr />
 <h2 id="agentes">Agentes<a class="headerlink" href="#agentes" title="Permanent link">&para;</a></h2>
 <table>
@@ -2194,9 +2324,24 @@
 </thead>
 <tbody>
 <tr>
+<td><code>reversa-pricing</code></td>
+<td>orchestrator</td>
+<td>Puerta de entrada. Detecta la etapa por los artefactos en <code>_pricing/</code> y enruta al próximo agente (advisor, profile, product, size, estimate o research). Solo enruta, no escribe nada.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-advisor</code></td>
+<td>advisor</td>
+<td>Entrevista de seis preguntas sobre el software y la forma de venderlo. Aplica reglas determinísticas de viabilidad y graba <code>advisor.json</code> con la lista ordenada de modelos de venta (servicio a medida, licencia perpetua, alquiler, suscripción, tienda de apps), con motivo y riesgos de cada uno. Corre antes del profile.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-research</code></td>
+<td>research</td>
+<td>El único agente con acceso a internet. Investiga tarifa por hora por seniority y región, precios de productos comparables y comisiones de tiendas de apps. Prueba ciudad, luego estado, luego país, registra fuentes y fecha y nunca completa el profile ni el product por sí mismo.</td>
+</tr>
+<tr>
 <td><code>reversa-pricing-profile</code></td>
 <td>profile</td>
-<td>Entrevista guiada (hasta diez preguntas) que produce el perfil de cobranza del usuario: país, moneda, seniority normalizada, tarifa por hora, markup de proyecto, régimen tributario, modelo de cobranza, perfil de cliente.</td>
+<td>Entrevista guiada que produce el perfil de cobranza: país, moneda, seniority, tarifa por hora, markup, régimen tributario, modelo de cobranza, perfil de cliente. Tiene modo "ya sé mis valores" (en el chat aparece como "sei informar") y modo "investigar". Cada campo registra su origen.</td>
 </tr>
 <tr>
 <td><code>reversa-pricing-size</code></td>
@@ -2206,22 +2351,50 @@
 <tr>
 <td><code>reversa-pricing-estimate</code></td>
 <td>estimate</td>
-<td>Cruza <code>profile.json</code> y <code>size.json</code> de la feature activa y produce tres escenarios educativos lado a lado: Esfuerzo, Valor, Rango de Mercado. Nunca entrega un número único como respuesta final.</td>
+<td>Cruza <code>profile.json</code> y <code>size.json</code> de la feature activa y produce tres escenarios educativos lado a lado: Esfuerzo, Valor, Rango de Mercado. Avisa cuando valores del profile fueron investigados o vinieron por defecto. Nunca entrega un número único como respuesta final.</td>
+</tr>
+<tr>
+<td><code>reversa-pricing-product</code></td>
+<td>product</td>
+<td>Calculadora de punto de equilibrio para vender el software como producto. Lee <code>advisor.json</code> y <code>profile.json</code>, pide costo mensual, ingreso deseado e inversión a recuperar, arma una escalera de precios y muestra, por modelo y por precio, cuántos pagantes cubren el costo y cuántos alcanzan la meta.</td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h2 id="pista-de-producto-punto-de-equilibrio-no-pronostico">Pista de producto: punto de equilibrio, no pronóstico<a class="headerlink" href="#pista-de-producto-punto-de-equilibrio-no-pronostico" title="Permanent link">&para;</a></h2>
+<p>El product calcula, para cada precio de la escalera, el neto por cliente después de la comisión de la tienda y la reserva de impuestos, y divide el costo mensual (más la inversión repartida en el horizonte de recuperación, más la meta de ingreso) por ese neto. El resultado es un conteo de pagantes o de licencias, siempre redondeado hacia arriba.</p>
+<p>No modela churn, conversión, comisiones de pasarela de pago, descuentos, trial, impuestos específicos de producto ni tipo de cambio. Dice lo que cada precio exige; no dice cuántos clientes vas a conseguir. La escalera siempre tiene de tres a cinco precios, y el agente nunca elige uno por ti.</p>
+<hr />
+<h2 id="investigacion-en-la-web">Investigación en la web<a class="headerlink" href="#investigacion-en-la-web" title="Permanent link">&para;</a></h2>
+<p>Solo el <code>reversa-pricing-research</code> accede a la web. Todos los demás agentes trabajan offline.</p>
+<ul>
+<li>Fuentes aceptadas: portales de salarios, plataformas freelance, estadística oficial, documentación oficial de las tiendas de apps y páginas de precios de productos. Foros sin números, páginas sin fecha y fuentes en otra moneda se descartan y se listan con el motivo.</li>
+<li>Para tarifa por hora la búsqueda va por ciudad, luego estado, luego país, y el resultado informa qué nivel se usó. El dato por ciudad es escaso; el país suele ser el nivel que funciona.</li>
+<li>La confianza es alta, media o baja según cuánto discrepan las fuentes. Menos de dos fuentes marca el resultado como débil.</li>
+<li>El resultado es un rango con fuentes y fecha. Nada entra en el profile ni en el product hasta que lo confirmes en el agente que llamó.</li>
+<li>Si el engine no tiene herramienta de búsqueda en la web, el research lo avisa y el agente que llamó vuelve a pedirte el valor.</li>
+</ul>
+<hr />
 <h2 id="donde-caen-los-artefactos">Dónde caen los artefactos<a class="headerlink" href="#donde-caen-los-artefactos" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>_reversa_sdd/_pricing/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── profile.json               (una vez, desde /reversa-pricing-profile)
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── profile.md
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└── &lt;feature&gt;/
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    ├── size.json              (por feature, desde /reversa-pricing-size)
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── size.md
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── estimate.json          (por feature, desde /reversa-pricing-estimate)
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    └── estimate.md
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── advisor.json / advisor.md              (una vez por proyecto, /reversa-pricing-advisor)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── profile.json / profile.md              (una vez, /reversa-pricing-profile)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── research/
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   ├── hourly_rate.json / .md             (/reversa-pricing-research, llamado por profile en modo investigar)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│   ├── comparables.json / .md             (llamado por product)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│   └── store_commission.json / .md        (opcional, cuando la tabla estática está vieja)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>├── product/
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   └── product.json / product.md          (/reversa-pricing-product)
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└── &lt;feature&gt;/
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    ├── size.json / size.md                (/reversa-pricing-size)
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    └── estimate.json / estimate.md        (/reversa-pricing-estimate)
 </code></pre></div>
+<p>Cuando un artefacto ya existe, el agente muestra un resumen y pregunta antes de recalcular. El archivo antiguo se conserva como copia <code>.bak</code>.</p>
+<hr />
+<h2 id="origen-de-los-valores">Origen de los valores<a class="headerlink" href="#origen-de-los-valores" title="Permanent link">&para;</a></h2>
+<p>Cada campo de cobranza del profile registra su origen: <code>digitado</code> (lo informaste tú), <code>pesquisado</code> (vino del research, con fuente y fecha) o <code>padrao</code> (sugerencia del framework, como el markup del 35% o el régimen tributario por defecto del país). El estimate lista cada campo que no fue informado por ti y avisa que los valores investigados o por defecto reducen la confianza, para que revises tarifa por hora, markup y régimen antes de enviar una propuesta.</p>
 <p>Los Pricing and Size Agents nunca modifican código legado, artefactos del Discovery ni del Forward. Solo los leen y escriben dentro de <code>_pricing/</code>.</p>
+<p>Estos agentes ofrecen referencias y cálculos educativos, no asesoría financiera, legal ni tributaria. Valida los números con tu contador antes de decidir.</p>
 
 
 

@@ -917,6 +917,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reversa-pricing-the-pricing-consultant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💰 Reversa Pricing: the pricing consultant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#recommended-sequence" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2392,6 +2403,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reversa-pricing-the-pricing-consultant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💰 Reversa Pricing: the pricing consultant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#recommended-sequence" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2464,13 +2486,18 @@
 <td>Documentation Agents</td>
 </tr>
 <tr>
+<td>Find out how to sell and how much to charge for the software or a feature</td>
+<td><code>/reversa-pricing</code></td>
+<td>Pricing and Size Agents</td>
+</tr>
+<tr>
 <td>Choose the right agent</td>
 <td><code>/reversa-agents-help</code></td>
 <td>Agent guide</td>
 </tr>
 </tbody>
 </table>
-<p>Pricing and Translators use specialized commands: <code>/reversa-pricing-profile</code>, <code>/reversa-pricing-size</code>, <code>/reversa-pricing-estimate</code> and <code>/reversa-n8n</code>.</p>
+<p>The Pricing team enters through <code>/reversa-pricing</code>. Translators use <code>/reversa-n8n</code>.</p>
 <hr />
 <h2 id="orchestrators-and-core-agents">Orchestrators and core agents<a class="headerlink" href="#orchestrators-and-core-agents" title="Permanent link">&para;</a></h2>
 <h3 id="reversa-new-the-product-founder">🆕 Reversa New: the product founder<a class="headerlink" href="#reversa-new-the-product-founder" title="Permanent link">&para;</a></h3>
@@ -2538,16 +2565,66 @@
 <p>Use Design System when CSS files, themes, or interface screenshots are available.</p>
 </blockquote>
 <hr />
+<h2 id="reversa-pricing-the-pricing-consultant">💰 Reversa Pricing: the pricing consultant<a class="headerlink" href="#reversa-pricing-the-pricing-consultant" title="Permanent link">&para;</a></h2>
+<p><strong>Command:</strong> <code>/reversa-pricing</code></p>
+<p>A good pricing consultant doesn't start with a number. First they ask how you want to sell: custom work for a client, a license, a rental, a subscription or an app store. Only after knowing the model do they call each specialist: the one who researches the market, the one who records how you charge, the one who measures the job, the one who builds the quote and the one who calculates how many customers pay the bill. In the end you never get a single number: you get ranges, scenarios and what each price demands.</p>
+<blockquote>
+<p>Use Reversa Pricing when you want to know how much to charge for the software or for a feature, whether you are a beginner or experienced. It detects where you stopped in <code>_pricing/</code> and drives <code>Advisor → Profile → Product</code> (product) or <code>Size → Estimate</code> (service, per feature). Research steps in when you would rather look it up than fill it in.</p>
+</blockquote>
+<p><strong>The six specialists:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Analogy</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Advisor</strong></td>
+<td>The consultant who asks how you want to sell before talking numbers</td>
+<td><code>/reversa-pricing-advisor</code></td>
+</tr>
+<tr>
+<td><strong>Research</strong></td>
+<td>The researcher who goes to the market and comes back with a range, a source and a date</td>
+<td><code>/reversa-pricing-research</code></td>
+</tr>
+<tr>
+<td><strong>Profile</strong></td>
+<td>The accountant who records how you charge, or researches it for you</td>
+<td><code>/reversa-pricing-profile</code></td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td>The engineer who measures the job from the blueprint, not brick by brick</td>
+<td><code>/reversa-pricing-size</code></td>
+</tr>
+<tr>
+<td><strong>Estimate</strong></td>
+<td>The estimator who delivers three scenarios, never a single number</td>
+<td><code>/reversa-pricing-estimate</code></td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td>The planner who tells you how many customers pay the bill at each price</td>
+<td><code>/reversa-pricing-product</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="recommended-sequence">Recommended sequence<a class="headerlink" href="#recommended-sequence" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Legacy project: /reversa → discovery and specifications
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>New project:    /reversa-new → PRD and specs → /reversa-forward
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Migration:      /reversa → /reversa-migrate → /reversa-forward
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Manual legacy pipeline:
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Scout → Archaeologist (N sessions) → Detective → Architect → Writer → Reviewer
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Optional at any phase:
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Visor · Data Master · Design System · Reversa Docs
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Pricing:        /reversa-pricing → advisor → profile → product | size → estimate
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Manual legacy pipeline:
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Scout → Archaeologist (N sessions) → Detective → Architect → Writer → Reviewer
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Optional at any phase:
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Visor · Data Master · Design System · Reversa Docs
 </code></pre></div>
 
 
