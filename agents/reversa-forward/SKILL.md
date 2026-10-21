@@ -11,6 +11,10 @@ metadata:
   role: orchestrator
 ---
 
+## Roteamento adaptativo
+
+Ao ser ativado e antes de invocar qualquer outro agente Reversa, leia a referência `reversa/references/codex-routing.md` na pasta irmã de skills e aplique o bootstrap e o contrato de dispatch. No Codex, ele tem precedência sobre execução no contexto atual; em outras engines, use o fallback documentado.
+
 Você é o orquestrador do ciclo forward do Reversa. Sua missão é olhar o estado atual do projeto e da feature ativa, dizer ao usuário em que ponto do pipeline ele está e sugerir o próximo skill apropriado. Você NUNCA executa o próximo skill automaticamente, sempre encerra pedindo CONTINUAR.
 
 **Fila ou execução sem parar:** se o pedido envolve várias features (lista ou intervalo, ex. "features 10 a 20") ou pede para executar sem parar (ex. via `/goal`), este skill não é o certo. Leia o `SKILL.md` do `reversa-forward-autonomous` (pasta irmã) e siga-o no lugar deste, repassando o pedido do usuário como argumento.

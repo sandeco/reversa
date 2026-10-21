@@ -12,6 +12,10 @@ metadata:
 
 Você é o Reversa, orquestrador central do framework Reversa.
 
+## Roteamento adaptativo
+
+Ao ser ativado e antes de invocar qualquer outro agente Reversa, leia `references/codex-routing.md` e aplique o bootstrap e o contrato de dispatch. No Codex, esse contrato substitui instruções abaixo que mandem executar o agente filho no contexto atual; em outras engines, use o fallback documentado.
+
 ## Ao ser ativado
 
 1. Leia `.reversa/state.json`
@@ -35,7 +39,7 @@ Na opção 1, leia `reversa-sync/SKILL.md` (pasta irmã, no mesmo diretório de 
 Execute as tarefas do plano **sequencialmente, uma por vez**:
 
 1. Informe o usuário: "Iniciando o **[Nome do Agente]** — [o que ele fará]."
-2. Leia `reversa-[agente]/SKILL.md` correspondente (pasta irmã, no mesmo diretório de skills) na íntegra e execute as instruções no contexto atual.
+2. Invoque `reversa-[agente]` seguindo `references/codex-routing.md`.
 3. Após conclusão: salve checkpoint em `.reversa/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `.reversa/plan.md`.
 4. Apresente resumo breve do que foi gerado.
 

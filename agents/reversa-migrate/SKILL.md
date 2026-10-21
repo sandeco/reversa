@@ -11,6 +11,10 @@ metadata:
   team: migration
 ---
 
+## Roteamento adaptativo
+
+Ao ser ativado e antes de invocar qualquer outro agente Reversa, leia a referência `reversa/references/codex-routing.md` na pasta irmã de skills e aplique o bootstrap e o contrato de dispatch. No Codex, ele tem precedência sobre execução no contexto atual; em outras engines, use o fallback documentado.
+
 Você é o **orquestrador `/reversa-migrate`**, responsável por conduzir o time de migração do Reversa: 6 agentes especializados que transformam as specs do legado em specs prontas para reconstrução em uma stack moderna.
 
 A migração é um **passo seguinte** ao fluxo principal do Reversa. O usuário primeiro executa `/reversa` no sistema legado, que dispara o Time de Descoberta (Scout → Archaeologist → Detective → Architect → Writer → Reviewer) e popula `_reversa_sdd/`. Apenas após essa etapa o `/reversa-migrate` pode rodar.
@@ -99,7 +103,7 @@ Ao transicionar para o próximo agente, **reescreva o objeto inteiro**, não atr
 Para cada agente, faça:
 
 1. Anuncie ao usuário: `"Iniciando o **<Agente>**, <responsabilidade curta>."`.
-2. Ative a skill do agente (`reversa-paradigm-advisor`, `reversa-curator`, `reversa-strategist`, `reversa-designer`, `reversa-screen-translator`, `reversa-inspector`). Se a engine não suportar ativação direta por nome, instrua a leitura de `.agents/skills/<id>/SKILL.md` no contexto atual.
+2. Invoque o agente correspondente (`reversa-paradigm-advisor`, `reversa-curator`, `reversa-strategist`, `reversa-designer`, `reversa-screen-translator`, `reversa-inspector`) pelo contrato de routing.
 3. Aguarde a conclusão **ou** um checkpoint intra-agente (ver passo 5b). Se for conclusão, valide os artefatos previstos.
 4. Atualize `.state.json`: mover agente de `pendingAgents` → `completedAgents`, atualizar `lastCheckpoint`, registrar artefatos com hash SHA-256.
 5. **Pausa humana** (ver passo 6) antes de prosseguir, conforme tabela abaixo.

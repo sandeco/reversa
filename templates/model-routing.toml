@@ -1,0 +1,68 @@
+version = 1
+
+[defaults]
+compute_class = "T1"
+
+[codex]
+enabled = true
+
+[codex.capabilities]
+custom_agents = true
+model_override = true
+reasoning_override = true
+sandbox_override = true
+
+[codex.orchestrator]
+model = "gpt-5.6-sol"
+reasoning = "high"
+
+[codex.compute.T0]
+model = "gpt-5.6-luna"
+reasoning = "low"
+
+[codex.compute.T1]
+model = "gpt-5.6-terra"
+reasoning = "medium"
+
+[codex.compute.T2]
+model = "gpt-5.6-sol"
+reasoning = "high"
+
+[codex.agents.reversa-debugger-fix]
+compute_class = "T2"
+model = "gpt-5.6-terra"
+reasoning = "high"
+
+[codex.compute.T3]
+model = "gpt-5.6-sol"
+reasoning = "xhigh"
+
+[claude]
+enabled = true
+
+[claude.capabilities]
+custom_agents = true
+model_override = true
+effort_override = true
+permission_override = true
+skill_preload = true
+
+[claude.orchestrator]
+model = "opus"
+effort = "high"
+
+[claude.compute.T0]
+model = "haiku"
+effort = "low"
+
+[claude.compute.T1]
+model = "sonnet"
+effort = "medium"
+
+[claude.compute.T2]
+model = "opus"
+effort = "high"
+
+[claude.compute.T3]
+model = "opus"
+effort = "xhigh"

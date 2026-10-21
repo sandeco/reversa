@@ -7,7 +7,8 @@
   },
   "type": "module",
   "scripts": {
-    "verify": "python3 scripts/verify-invocation.py && node scripts/test-installer-transport.mjs"
+    "test": "npm run verify",
+    "verify": "python3 scripts/verify-invocation.py && node scripts/test-installer-transport.mjs && node scripts/test-codex-routing.mjs && node scripts/test-claude-routing.mjs && node scripts/test-codex-routing-update.mjs"
   },
   "keywords": [
     "legacy",
@@ -45,6 +46,7 @@
     "chalk": "^5.3.0",
     "inquirer": "^9.2.0",
     "ora": "^7.0.1",
-    "semver": "^7.6.0"
+    "semver": "^7.6.0",
+    "smol-toml": "^1.8.0"
   }
 }

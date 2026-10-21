@@ -6,3 +6,46 @@
 # [user]
 # name = "Seu Nome"
 # chat_language = "pt-br"
+
+# Codex model routing overrides (opcional):
+# [codex.compute.T0]
+# model = "gpt-5.6-luna"
+# reasoning = "low"
+#
+# [codex.agents.reversa-coding]
+# compute_class = "T2"
+# model = "gpt-5.6-sol"
+# reasoning = "high"
+#
+# If your Codex runtime ignores or rejects some profile fields:
+# [codex.capabilities]
+# custom_agents = true
+# model_override = false
+# reasoning_override = false
+# sandbox_override = false
+#
+# Para desativar apenas os perfis Codex sem afetar os skills Reversa:
+# [codex]
+# enabled = false
+
+# Claude Code model routing overrides (opcional):
+# [claude.compute.T0]
+# model = "haiku"
+# effort = "low"
+#
+# [claude.agents.reversa-coding]
+# compute_class = "T2"
+# model = "opus"
+# effort = "high"
+#
+# If your Claude Code runtime ignores or rejects some profile fields:
+# [claude.capabilities]
+# custom_agents = true
+# model_override = false
+# effort_override = false
+# permission_override = false
+# skill_preload = false
+#
+# Para desativar apenas os perfis Claude sem afetar os skills Reversa:
+# [claude]
+# enabled = false
