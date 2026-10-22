@@ -6,10 +6,10 @@ Este arquivo é gerado pelo Revisor e preenchido pelo usuário.
 
 ## Como o Revisor cria este arquivo
 
-Para cada lacuna 🔴 que só o usuário pode resolver, crie uma entrada:
+Para cada lacuna 🔴 que só o usuário pode resolver, atribua um ID estável no formato `Q-<UNIT>-<NN>` e crie uma entrada. Use um código de unit em letras maiúsculas, numeração crescente com pelo menos dois dígitos e nunca recicle um ID removido:
 
 ```markdown
-## Pergunta [N]
+## Q-[UNIT]-[NN] 🔴 — Pergunta [N]
 
 **Contexto:** [Onde no sistema surgiu esta dúvida — módulo, função, linha]
 **Spec afetada:** [`_reversa_sdd/<unit>/{requirements|design|tasks}.md`]
@@ -52,7 +52,7 @@ Após receber aviso do usuário:
 
 ---
 
-## Pergunta 1
+## Q-AUTH-01 🔴 — Pergunta 1
 
 **Contexto:** Módulo `auth` — função `validateSession()` em `src/auth/session.ts:47`
 **Spec afetada:** [`_reversa_sdd/auth/requirements.md`]
@@ -63,7 +63,7 @@ Após receber aviso do usuário:
 
 ---
 
-## Pergunta 2
+## Q-ORDERS-01 🔴 — Pergunta 2
 
 **Contexto:** Módulo `orders` — constante `MAX_ITEMS_PER_ORDER = 50` em `src/orders/constants.ts:12`
 **Spec afetada:** [`_reversa_sdd/orders/requirements.md`]

@@ -7,7 +7,7 @@
   },
   "type": "module",
   "scripts": {
-    "verify": "python3 scripts/verify-invocation.py && node scripts/test-installer-transport.mjs"
+    "verify": "python3 scripts/verify-invocation.py && python3 scripts/test-reviewer-integrity.py && node scripts/test-installer-transport.mjs"
   },
   "keywords": [
     "legacy",

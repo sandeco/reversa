@@ -10,12 +10,14 @@ on:
     paths:
       - 'agents/**'
       - 'scripts/verify-invocation.py'
+      - 'scripts/test-reviewer-integrity.py'
       - 'scripts/test-installer-transport.mjs'
       - '.github/workflows/verify-invocation.yml'
   pull_request:
     paths:
       - 'agents/**'
       - 'scripts/verify-invocation.py'
+      - 'scripts/test-reviewer-integrity.py'
       - 'scripts/test-installer-transport.mjs'
   workflow_dispatch:
 
@@ -32,5 +34,7 @@ jobs:
           node-version: '20'
       - name: Verificar eixo de invocação
         run: python3 scripts/verify-invocation.py
+      - name: Testar gate determinístico do Reviewer
+        run: python3 scripts/test-reviewer-integrity.py
       - name: Smoke test de transporte do installer
         run: node scripts/test-installer-transport.mjs
