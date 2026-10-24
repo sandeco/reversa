@@ -10,7 +10,7 @@
   "noticeFile": "NOTICE.md",
   "homepage": "https://impeccable.style",
   "repository": "https://github.com/pbakaus/impeccable",
-  "syncedAt": "2026-10-21T00:46:46.141Z",
+  "syncedAt": "2026-10-24T11:07:03.465Z",
   "syncedBy": "scripts/sync-impeccable.mjs",
   "modifications": "none: upstream .claude/skills/impeccable copied verbatim, plus agents/ (Codex marker) from .agents/skills/impeccable, LICENSE and NOTICE.md"
 }
