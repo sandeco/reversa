@@ -16,6 +16,7 @@ The set of artifacts generated depends on the **documentation level** chosen at 
 
 ```
 _reversa_sdd/
+├── README.md                 # Index + doc↔code sync table — all levels
 ├── inventory.md              # Project inventory — all levels
 ├── dependencies.md           # Dependencies with versions — all levels
 ├── code-analysis.md          # Technical analysis per module — all levels

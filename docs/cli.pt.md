@@ -94,3 +94,18 @@ Remove o Reversa do projeto: apaga os arquivos criados pela instalação (`.reve
 
 !!! info "Seus arquivos continuam intactos"
     O `uninstall` remove **apenas** o que o Reversa criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `_reversa_sdd/` também são preservadas por padrão.
+
+---
+
+## Comandos de chat do orquestrador (não são CLI)
+
+Depois de ativar `/reversa` no chat da engine, estes atalhos atualizam a documentação sem passar pelo `npx reversa`:
+
+| Comando | Ação |
+|---------|------|
+| `indice` | Gera/atualiza `_reversa_sdd/README.md` |
+| `atualizar` | Atualiza specs a partir dos commits desde o último marco |
+| `atualizar [unidade]` | Mesmo fluxo, escopo em uma unidade |
+| `atualizar --baseline` | Grava o HEAD como marco inicial em `.reversa/doc-sync.json` |
+
+O marco doc↔código fica em `.reversa/doc-sync.json` e no histórico append-only da tabela **Sincronização doc ↔ código** do README índice — não em cada arquivo de spec.
