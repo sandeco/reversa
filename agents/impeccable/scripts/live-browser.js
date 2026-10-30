@@ -13,13 +13,17 @@
   'use strict';
   if (typeof window === 'undefined') return;
 
+  // Take the helper token out of the global before anything else, including
+  // on the double-init return below: each served copy re-prepends it.
+  const TOKEN = window.__IMPECCABLE_TOKEN__;
+  try { delete window.__IMPECCABLE_TOKEN__; } catch { /* non-configurable */ }
+
   // Guard against double-init. Bun's HTML loader may process the <script> tag
   // and create a bundled copy alongside the external load, or HMR may re-execute.
-  // Check BEFORE reading token/port to catch all cases.
+  // Check BEFORE reading port to catch all cases.
   if (window.__IMPECCABLE_LIVE_INIT__) return;
   window.__IMPECCABLE_LIVE_INIT__ = true;
 
-  const TOKEN = window.__IMPECCABLE_TOKEN__;
   const PORT = window.__IMPECCABLE_PORT__;
   const APP_ROOT = window.__IMPECCABLE_APP_ROOT__ || null;
   if (!TOKEN || !PORT) {
@@ -63,11 +67,13 @@
   const MANUAL_APPLY_STATE_TTL_MS = 15 * 60 * 1000;
   // No idFactory: the session helper's default works on plain-HTTP origins,
   // where the secure-context-only randomUUID does not exist (issue #1055).
+  let liveStorage = null;
+  try { liveStorage = window.localStorage; } catch { /* storage denied */ }
   let sessionState = null;
   try {
     sessionState = window.__IMPECCABLE_LIVE_SESSION__?.createLiveBrowserSessionState({
       prefix: PREFIX,
-      storage: localStorage,
+      storage: liveStorage,
     });
   } catch (err) {
     console.error('[impeccable] Live mode could not create its session state.', err);
@@ -2512,7 +2518,7 @@
     row.appendChild(buildConfigureTrailingCluster([action, count], voiceBtn, go));
     syncConfigureInputChrome();
 
-    if (!controlsLocked) setTimeout(() => input.focus(), 60);
+    if (!controlsLocked && !touchPrimary()) setTimeout(() => input.focus(), 60);
 
     return row;
   }
@@ -2616,7 +2622,7 @@
     row.appendChild(buildConfigureTrailingCluster([count], voiceBtn, create));
     syncInsertCreateButton(create, input);
     syncConfigureInputChrome();
-    if (!controlsLocked) setTimeout(() => input.focus(), 60);
+    if (!controlsLocked && !touchPrimary()) setTimeout(() => input.focus(), 60);
     return row;
   }
 
@@ -3124,6 +3130,11 @@
   let paramsPanelBody = null;   // grid holding the knob cells
   let paramsCurrentValues = {}; // {paramId: value} - mirror of the visible variant's live values
   let tuneOpen = false;         // whether the Tune popover is open right now
+  // Tune values a saved session carried across a reload: {sessionId, variant,
+  // values}. Cycling refreshes of that session and variant restore them (a
+  // resume refreshes more than once); a refresh for any other variant, or a
+  // knob edit, drops them.
+  let restoredParamValues = null;
 
   // Theme-aware Tune popover. Appears as a drawer that slides out from the
   // contextual bar's bar-facing edge (below if the bar sits below the
@@ -3260,6 +3271,54 @@
     }
   }
 
+  function rememberSavedParamValues(saved) {
+    const values = saved.paramValues;
+    if (!values || typeof values !== 'object' || Array.isArray(values)) return;
+    if (Object.keys(values).length === 0) return;
+    const variant = Number(saved.visible != null ? saved.visible : saved.visibleVariant) || 0;
+    restoredParamValues = { sessionId: saved.id || null, variant, values: { ...values } };
+  }
+
+  function restoredParamValuesForVisibleVariant() {
+    const restored = restoredParamValues;
+    if (!restored) return null;
+    if (restored.sessionId === currentSessionId && restored.variant === visibleVariant) return restored.values;
+    restoredParamValues = null;
+    return null;
+  }
+
+  // The local save is what a reload resumes from, so an edit is saved there
+  // as well as checkpointed to the server.
+  function noteParamEdited() {
+    restoredParamValues = null;
+    saveSession();
+    queueCheckpoint('param_changed');
+  }
+
+  // A saved value comes from storage the page does not own, and the variant
+  // may have been regenerated since, so it must still fit the param it names.
+  function isValidSavedParamValue(p, value) {
+    if (p.kind === 'range') {
+      if (typeof value !== 'number' || !Number.isFinite(value)) return false;
+      const min = p.min != null ? Number(p.min) : 0;
+      const max = p.max != null ? Number(p.max) : 1;
+      return value >= min && value <= max;
+    }
+    if (p.kind === 'toggle') return typeof value === 'boolean';
+    if (p.kind === 'steps') {
+      return (p.options || []).some(o => (o && typeof o === 'object' ? o.value : o) === value);
+    }
+    return false;
+  }
+
+  function applySavedParamValues(variantEl, params, saved) {
+    for (const p of params) {
+      if (!Object.hasOwn(saved, p.id) || !isValidSavedParamValue(p, saved[p.id])) continue;
+      paramsCurrentValues[p.id] = saved[p.id];
+      applyParamValue(variantEl, p, saved[p.id]);
+    }
+  }
+
   function formatRangeValue(input) {
     const max = parseFloat(input.max), min = parseFloat(input.min);
     const v = parseFloat(input.value);
@@ -3271,6 +3330,14 @@
     const P = paramsPanelPalette || barPaletteForTheme(detectPageTheme());
     paramsPanelBody.innerHTML = '';
     for (const p of params) {
+      // A knob the panel shows must be in the live values and on the variant,
+      // or accept drops it and the preview ignores it. Seed only missing keys
+      // so a reopen keeps edits.
+      if (!Object.hasOwn(paramsCurrentValues, p.id)) {
+        paramsCurrentValues[p.id] = p.default;
+        applyParamValue(variantEl, p, p.default);
+      }
+      const value = paramsCurrentValues[p.id];
       const row = el('div', { display: 'flex', flexDirection: 'column', gap: '6px' });
       const labelRow = el('div', {
         display: 'flex', justifyContent: 'space-between',
@@ -3295,7 +3362,7 @@
         input.min = String(p.min != null ? p.min : 0);
         input.max = String(p.max != null ? p.max : 1);
         input.step = String(p.step != null ? p.step : 0.05);
-        input.value = String(p.default);
+        input.value = String(value);
         Object.assign(input.style, {
           width: '100%', accentColor: C.brand, cursor: 'pointer',
         });
@@ -3306,11 +3373,11 @@
           paramsCurrentValues[p.id] = v;
           readout.textContent = formatRangeValue(input);
           applyParamValue(variantEl, p, v);
-          queueCheckpoint('param_changed');
+          noteParamEdited();
         });
         row.appendChild(input);
       } else if (p.kind === 'toggle') {
-        const initial = !!p.default;
+        const initial = !!value;
         readout.textContent = initial ? 'On' : 'Off';
         const track = el('button', {
           position: 'relative', width: '36px', height: '20px',
@@ -3337,15 +3404,15 @@
           knob.style.left = next ? '18px' : '2px';
           readout.textContent = next ? 'On' : 'Off';
           applyParamValue(variantEl, p, next);
-          queueCheckpoint('param_changed');
+          noteParamEdited();
         });
         row.appendChild(track);
       } else if (p.kind === 'steps') {
         const opts = (p.options || []).map(o =>
           typeof o === 'string' ? { value: o, label: o } : o
         );
-        const activeOpt = opts.find(o => o.value === p.default) || opts[0];
-        readout.textContent = activeOpt ? activeOpt.label : String(p.default);
+        const activeOpt = opts.find(o => o.value === value) || opts[0];
+        readout.textContent = activeOpt ? activeOpt.label : String(value);
         const segRow = el('div', {
           display: 'grid',
           gridTemplateColumns: 'repeat(' + opts.length + ', 1fr)',
@@ -3354,7 +3421,7 @@
         });
         const segBtns = [];
         opts.forEach(o => {
-          const active = o.value === p.default;
+          const active = o.value === value;
           const b = el('button', {
             padding: '5px 4px', border: 'none', borderRadius: '3px',
             background: active ? C.brand : 'transparent',
@@ -3374,7 +3441,7 @@
               btn.style.color = on ? C.ink : P.text;
             });
             applyParamValue(variantEl, p, o.value);
-            queueCheckpoint('param_changed');
+            noteParamEdited();
           });
           segRow.appendChild(b);
           segBtns.push({ btn: b, val: o.value });
@@ -4923,6 +4990,9 @@
     }
     const variantEl = getVisibleVariantEl();
     const params = parseVariantParams(variantEl);
+    // Values saved before a reload come back for the variant they were saved
+    // on; a switch to any other variant starts from its defaults.
+    const restored = restoredParamValuesForVisibleVariant();
     if (!variantEl || params.length === 0) {
       paramsCurrentValues = {};
       tuneOpen = false;
@@ -4931,6 +5001,7 @@
       return;
     }
     applyParamDefaults(variantEl, params);
+    if (restored) applySavedParamValues(variantEl, params, restored);
     buildParamsPanel(variantEl, params);
     if (tuneOpen) {
       // If already visible (variant cycled while open), refresh in place
@@ -4988,8 +5059,8 @@
     const variantEl = getVisibleVariantEl();
     const params = parseVariantParams(variantEl);
     if (!variantEl || params.length === 0) return;
-    // Build fresh to ensure the current variant's controls are shown.
-    applyParamDefaults(variantEl, params);
+    // Rebuild the controls from the current values. Defaults are applied
+    // when the variant is initialized, not when its Tune panel is reopened.
     buildParamsPanel(variantEl, params);
     tuneOpen = true;
     showParamsPanel();
@@ -9517,6 +9588,7 @@ void main() {
     if (saved.previewMode) currentPreviewMode = saved.previewMode;
     if (saved.paramValues && typeof saved.paramValues === 'object') {
       paramsCurrentValues = { ...saved.paramValues };
+      rememberSavedParamValues(saved);
     }
     if (saved.parameterState) parameterGenerationState = saved.parameterState;
     sessionOrigin = saved.origin === 'agent' ? 'agent' : null;
@@ -10148,10 +10220,9 @@ void main() {
       hideShaderOverlay();
       if (isInsert) finalizeInsertSession();
       disableInlineEdit();
-      // Build the params panel for the restored visible variant. Previously
-      // this was missed on page-reload resume: showVariantInDOM above fires
-      // refreshParamsPanel, but state was still IDLE at that moment so it
-      // hid. Now that state is CYCLING, re-fire.
+      // Build the params panel for the restored visible variant, with any
+      // Tune values saved before the reload (showVariantInDOM above may
+      // already have refreshed; a repeat for the same variant keeps them).
       refreshParamsPanel();
     }
     saveSession();
@@ -10592,6 +10663,11 @@ void main() {
     return true;
   }
 
+  // Programmatic focus raises the soft keyboard on touch devices (#1067).
+  function touchPrimary() {
+    return !!window.matchMedia?.('(pointer: coarse)').matches;
+  }
+
   function shouldSteerAutoFocus() {
     return shouldFocusSteerChat()
       && !steerFocusSuspended
@@ -10800,6 +10876,7 @@ void main() {
 
   function syncPageChatFocus(reason) {
     steerFocusLog('syncPageChatFocus', { reason });
+    if (touchPrimary()) return;
     if (state === 'CONFIGURING') focusConfigureInput(reason);
     else if (shouldSteerAutoFocus()) focusSteerChat(reason);
   }
@@ -10987,7 +11064,8 @@ void main() {
         file: opts?.file || '',
       });
     }
-    if (keepExpanded) focusPageChatInput('steer-error-restore');
+    if (keepExpanded && touchPrimary()) preparePageChatInputForTyping();
+    else if (keepExpanded) focusPageChatInput('steer-error-restore');
     else syncPageChatFocus('steer-unlock');
   }
 
@@ -13454,12 +13532,22 @@ void main() {
     // Code spans
     s = s.replace(/`([^`]+)`/g, (_, code) => `<code>${code}</code>`);
     // Links [text](url)
-    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, u) => `<a href="${u}" target="_blank" rel="noopener noreferrer">${t}</a>`);
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, u) => (
+      isSafeHref(u) ? `<a href="${u}" target="_blank" rel="noopener noreferrer">${t}</a>` : t
+    ));
     // Bold
     s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     // Italic (only single *…*, skip if inside bold already handled)
     s = s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
     return s;
+  }
+
+  function isSafeHref(url) {
+    // Browsers drop ASCII whitespace and C0 controls inside a scheme, so
+    // "java\tscript:" still runs; strip them before reading the scheme.
+    const probe = String(url).replace(/[\u0000-\u0020\u007f]/g, '');
+    const scheme = probe.match(/^([a-z][a-z0-9+.-]*):/i);
+    return !scheme || ['http', 'https', 'mailto'].includes(scheme[1].toLowerCase());
   }
 
   function highlightBold(text) {

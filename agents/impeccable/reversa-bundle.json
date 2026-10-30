@@ -1,16 +1,16 @@
 {
   "name": "impeccable",
   "displayName": "Impeccable",
-  "version": "4.7.0",
-  "tag": "skill-v4.7.0",
-  "commit": "aeeb3d8c30b5f95aeeb3e893b0f1a308af8fdb8f",
+  "version": "4.8.0",
+  "tag": "skill-v4.8.0",
+  "commit": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
   "author": "Paul Bakaus",
   "license": "Apache-2.0",
   "licenseFile": "LICENSE",
   "noticeFile": "NOTICE.md",
   "homepage": "https://impeccable.style",
   "repository": "https://github.com/pbakaus/impeccable",
-  "syncedAt": "2026-10-21T00:46:46.141Z",
+  "syncedAt": "2026-10-30T13:00:18.408Z",
   "syncedBy": "scripts/sync-impeccable.mjs",
   "modifications": "none: upstream .claude/skills/impeccable copied verbatim, plus agents/ (Codex marker) from .agents/skills/impeccable, LICENSE and NOTICE.md"
 }
