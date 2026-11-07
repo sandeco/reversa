@@ -158,14 +158,14 @@ Sources in priority order: DESIGN.md's visual system fields; CSS custom properti
 
 **Default:** compare each variant against the Phase A lock; palette, type voice, or rhetoric drift means it crossed into departure by accident: rework. Then confirm three different primary axes; three "tighter density" variants is failure. **Departure:** two passes, family before sentence. Family pass (non-negotiable): label each variant with a concrete family of your own choosing; shared or interchangeable labels mean rework. Sentence pass: three one-line descriptions side by side; two that rhyme mean rework. When the primary axis is color or theme, the trio must not share theme + dominant hue: three color worlds, not three shades.
 
-**Action-specific invocations** must vary along the action's dimension:
+**Action-specific invocations** must vary along the action's dimension; in default mode every variation stays within the available faces and existing tokens:
 
 - `bolder`: amplify a different dimension per variant (scale / saturation / structural change).
 - `quieter`: pull back a different dimension (color / ornament / spacing).
 - `distill`: remove a different class of excess (visual noise / redundant content / nested structure).
 - `polish`: a different refinement axis (rhythm / hierarchy / micro-details).
-- `typeset`: different pairing AND different scale ratio each.
-- `colorize`: different hue family each; vary chroma and contrast strategy.
+- `typeset`: departure varies the pairing AND the scale ratio each; default keeps the faces and varies scale ratio, case, and weight each.
+- `colorize`: departure gives each a different hue family and varies chroma and contrast strategy; default gives each a different existing palette role carrying the surface (Restrained / Committed / Full palette / Drenched) and a different contrast strategy.
 - `layout`: different structural arrangement, not spacing tweaks.
 - `adapt`: different target context per variant (mobile-first / tablet / desktop / print or low-data).
 - `animate`: different motion vocabulary (cascade stagger / clip wipe / scale-and-focus / morph / parallax).
