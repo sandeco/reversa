@@ -11,7 +11,7 @@ Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using the
 ### 1. Accessibility (A11y)
 
 **Check for**:
-- **Contrast issues**: Text contrast ratios < 4.5:1 (or 7:1 for AAA)
+- **Contrast issues**: Text contrast ratios < 4.5:1, or < 3:1 for large text (or 7:1 for AAA)
 - **Motion sensitivity**: `prefers-reduced-motion` needs an intentional alternative that preserves state change and hierarchy; flag a global `0.01ms` kill that destroys useful feedback, flashing above threshold, and motion that blocks focus, reading, or task completion
 - **Missing ARIA**: Interactive elements without proper roles, labels, or states
 - **Keyboard navigation**: Missing focus indicators, illogical tab order, keyboard traps
@@ -47,13 +47,20 @@ Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using the
 
 **Check for**:
 - **Fixed widths**: Hard-coded widths that break on mobile
-- **Touch targets**: Interactive elements < 44x44px
+- **Touch targets**: Interactive elements < 44x44px. WCAG AA (SC 2.5.8) requires at least 24x24 CSS px unless an exception applies: spacing, an equivalent control, inline text, user-agent styling, or an essential size. Spacing passes when a 24 CSS px circle centered on the target's bounding box overlaps no other target and no other undersized target's circle
 - **Broken touch interaction**: Custom sliders, drag surfaces, and scrollable control strips whose primary gesture fails under touch, that swallow page scroll or lose the drag to it, or that stay stuck after an interrupted gesture. Code tells: mouse-only handlers, no `touch-action` on a pointer-event drag surface, drag state that nothing clears on cancel, lost capture, or blur. Exercise the gesture when a browser tool can synthesize touch (a rendered viewport proves layout, not the gesture), then say what produced the evidence (emulated viewport, synthesized touch, which engine, physical device) and what stayed untested
 - **Horizontal scroll**: Content overflow on narrow viewports
 - **Text scaling**: Layouts that break when text size increases
 - **Missing breakpoints**: No mobile/tablet variants
 
-**Score 0-4**: 0=Desktop-only (breaks on mobile), 1=Major issues (some breakpoints, many failures), 2=Partial (works on mobile, rough edges), 3=Good (responsive, minor touch target or overflow issues), 4=Excellent (fluid, all viewports, proper touch targets, gestures work under touch)
+On RTL-declared pages, each of the following is a signal to verify the rendered result, not a defect in itself; flag only where the rendering is actually wrong:
+- **Physical directional properties**: `margin-left/right`, `padding-left/right`, `text-align: left/right`, `float: left/right`, `border-left/right` where logical equivalents (`margin-inline-start/end`, `padding-inline-start/end`, `text-align: start/end`, `float: inline-start/end`, `border-inline-start/end`) would be expected. A direction-scoped override like `[dir="rtl"] .x { margin-right:1rem }` is correct only when it also clears the conflicting base property (e.g. `margin-left: 0`); without that, both margins apply
+- **Physical positioning on positioned elements**: `left:` or `right:` instead of `inset-inline-start` / `inset-inline-end`. Note: `left:50%; transform:translateX(-50%)` is a direction-agnostic centering pattern that works correctly in both LTR and RTL; replacing `left` with `inset-inline-start` there breaks the centering because `translateX` is physical and does not mirror
+- **Directional icons and assets**: arrows, chevrons, and navigation icons that point the wrong direction for the reading order. An RTL-only page may ship assets already drawn correctly without a `[dir="rtl"]` flip; verify the rendered icon rather than assuming a missing `transform: scaleX(-1)` is a defect
+
+**RTL scope**: flag physical directional properties only on pages that declare `dir="rtl"` on the `<html>` or `<body>` element. A `lang` attribute alone does not set direction (browsers take direction from `dir`, never from `lang`), but treat an RTL-script `lang` (`ar`, `fa`, `ur`, `ps`, `ckb`, `he`, `yi`, `ug`, `sd`, `dv`) without an explicit `dir` as a signal worth noting.
+
+**Score 0-4**: 0=Desktop-only (breaks on mobile), 1=Major issues (some breakpoints, many failures), 2=Partial (works on mobile, rough edges), 3=Good (responsive, minor touch target or overflow issues), 4=Excellent (fluid, all viewports, proper touch targets, gestures work under touch). On RTL-declared pages, reduce by 1 for pervasive rendered RTL failures
 
 ### 5. Implementation Integrity (CRITICAL)
 
@@ -137,3 +144,7 @@ Keep P3s few: a long tail of minor issues buries the ones that matter.
 - Skip positive findings (celebrate what works)
 - Forget to prioritize (everything can't be P0)
 - Report false positives without verification
+
+## Save the Report
+
+After the report is delivered, save a copy so the findings outlive this conversation: write it, from the score table through Recommended Actions, to a temp file, then run `.claude/skills/impeccable/scripts/impeccable audit-storage write "<resolved target, or . for the whole project>" <temp-file>` and delete the temp file. The helper prints the path it wrote, which you mention in one line; `REPORTS OFF:` means the project opted out, and you mention nothing. Saving never replaces delivering: the user reads the report in chat first.
