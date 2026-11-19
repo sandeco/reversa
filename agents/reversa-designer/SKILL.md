@@ -195,7 +195,7 @@ Em `data_migration_plan.md`:
 > - Eventos de domínio: <N> (se aplicável)
 > - Decisões arquiteturais com rastreabilidade: <N>
 >
-> Próxima pausa: usuário aprova a arquitetura final. Se houver ajustes, Designer roda de novo. Próximo agente após aprovação: **Inspector**."
+> Próxima pausa: usuário aprova a arquitetura final. Se houver ajustes, Designer roda de novo.    Próximo agente após aprovação: Screen Translator (Inspector roda depois dele)."
 
 ## Casos de borda
 
