@@ -17,10 +17,10 @@ colors:
 typography:
   display:
     fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(2.5rem, 7vw, 4.5rem)"
+    fontSize: "4.5rem"
     fontWeight: 300
     lineHeight: 1
-    letterSpacing: "normal"
+    letterSpacing: "0em"
   body:
     # ...
 rounded:
@@ -68,7 +68,9 @@ Omit irrelevant sections rather than filling them with invented rules. Put respo
 - An existing `DESIGN.md` is stale (the design has drifted).
 - Before a large redesign, to capture the current state as a reference.
 
-If a `DESIGN.md` already exists, **do not silently overwrite it**. Show the user the existing file first. Ask with the AskUserQuestion tool and wait for the answer before continuing. The choice is refresh, overwrite, or merge.
+If a `DESIGN.md` already exists, **do not silently overwrite it**. Show the user the existing file first. Ask with the AskUserQuestion tool and wait for the answer before continuing. The choice is refresh, overwrite, or merge. The one exception is the first build on a seeded world (below): the choice is refresh, with no question.
+
+A DESIGN.md written by `impeccable world` carries a `world: "<id>"` line in its frontmatter, and its sidecar carries a `seededFrom` object. Both name the catalog world this system grew from, and both survive every choice: copy the `world:` line into the new frontmatter unchanged, and copy `seededFrom` into the regenerated sidecar. This provenance does not forbid an explicit request from the person for a redesign or a different world, which follows the redesign flow in [new-work.md](new-work.md). A world that replaced the seeded one (its direction roll passed `--replace-world`) is the one case where both are dropped, or every later roll settles on the old world again. They are the one frontmatter key and the one sidecar key kept outside the schemas below.
 
 ## Two paths
 
@@ -325,7 +327,7 @@ If the project has **no component library yet** (bare landing page, new project)
 
 #### Tonal ramps
 
-For each color token, generate an 8-step `tonalRamp` array: dark to light, same hue and chroma, stepped lightness from ~15% to ~95%. The panel renders this as a strip under the swatch. If the project already defines a tonal scale (Material `surface-container-low` family, Tailwind-style `blue-50..blue-900`), use those values. Otherwise synthesize in OKLCH.
+For each color token, generate an 8-step `tonalRamp` array: dark to light, same hue, chroma reduced near white and black, stepped lightness from ~15% to ~95%. The panel renders this as a strip under the swatch. If the project already defines a tonal scale (Material `surface-container-low` family, Tailwind-style `blue-50..blue-900`), use those values. Otherwise synthesize in OKLCH.
 
 #### Narrative mapping
 
