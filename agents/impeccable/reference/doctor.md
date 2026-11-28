@@ -6,7 +6,7 @@ This is maintenance, not design. Do not redesign anything, do not open files out
 
 Three kinds of drift travel under "out of date". Keep them apart:
 
-- **Tool version.** The installed skill is older than the published one. `impeccable context` reports that at boot as `UPDATE_AVAILABLE` and `npx impeccable update` fixes it. Not this command's job.
+- **Tool version.** The installed skill is older than the published one. `impeccable context` reports that at boot as `UPDATE_AVAILABLE` and `npx impeccable update` fixes it, or the harness's plugin manager for a plugin install. Not this command's job.
 - **Schema drift.** An artifact was written by an older Impeccable: fields nothing reads, fields now expected, files in retired locations. Mechanical, and this command repairs most of it.
 - **Truth drift.** The code moved on and the document no longer describes it. No file comparison settles this. `document` owns DESIGN.md, `init` owns PRODUCT.md, and this command's job is to hand them a specific gap rather than a vague suspicion.
 
@@ -38,9 +38,13 @@ A finding that reports a deprecated field (`## Register` is the current one) is 
 
 ## Step 4: Do not overclaim on truth drift
 
-`design-md-drift` counts commits to the visual source directories since DESIGN.md was last edited. A commit count is not a contradiction. Report the number, say what it measures, and if the user wants to know whether the document is actually wrong, read DESIGN.md against the current tokens and components and answer from that. Never assert that DESIGN.md is stale because the number is large.
+`design-md-dead-path` and `design-md-color-drift` are contradictions, not suspicions: a file DESIGN.md names is gone, or a colour it declares is in none of the token files it names. Report exactly what they name. Fixing them is `document`'s job, or the code's; don't rewrite DESIGN.md as a side effect. Whether the rest of DESIGN.md still describes the product is a separate question: answer it only when asked, by reading DESIGN.md against the current tokens and components.
 
 The same restraint applies to `workspace-context-inherited`. Inheritance is a designed behavior. Whether one product record truthfully describes several apps is a question for the user, not a defect to fix.
+
+## Step 5: Compact DESIGN.md only with consent
+
+On `design-md-sprawl`, run `.claude/skills/impeccable/scripts/impeccable design-compact` (with Step 1's `--target`) and show the person its proposal and saving. Add `--write` only once they agree here; the original moves to `.impeccable/design-full.md`. Never compact as a side effect.
 
 ## Monorepo notes
 
